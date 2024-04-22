@@ -5,19 +5,18 @@
         <IonBackButton></IonBackButton>
       </IonButtons>
       <IonTitle align="center">
-        <IonIcon :icon="trailSign" style="padding-right: 10px"/>
+        <IonIcon :icon="bookmark" style="padding-right: 10px"/>
         <IonLabel>Sign</IonLabel>
       </IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent>
-      <IonCard v-for="i in signImageCounts" :key="i">
-        <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
-        <IonIcon v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
-        <IonTitle align="center" style="padding-right: 0; padding-top: 10px">{{ i }}/{{ signImageCounts }}</IonTitle>
-        <IonImg :src="getImagePath('sign', handleZeroPad(i,3))"
+      <IonCard v-for="item in signBookmarkedItems" :key="item">
+        <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(item)"/>
+<!--        <IonTitle align="center" style="padding-right: 0; padding-top: 10px">{{ item }}/{{ signImageCounts }}</IonTitle>-->
+        <IonImg :src="getImagePath('sign', handleZeroPad(item,3))"
                 style="width: 50%; display: block; margin: 0 auto;"></IonImg>
-        <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'w')"
+        <IonImg :src="getImagePath('sign', handleZeroPad(item,3), 'w')"
                 style="width: 75%; display: block; margin: 0 auto;"></IonImg>
       </IonCard>
   </IonContent>
@@ -37,7 +36,7 @@ import {
   IonLabel,
   toastController,
 } from "@ionic/vue";
-import {trailSign, bookmark, bookmarkOutline} from "ionicons/icons";
+import {bookmark, trashBin} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
 
@@ -57,13 +56,9 @@ const onClickBackButton = () => {
   localStorage.setItem('signBookmarkedItems', signBookmarkedItems.toString());
 }
 
-const onClickBookmarkIcon = (n: number) => {
-  if (signBookmarkedItems.includes(n)) {
-    showToast('Removed From Bookmark');
-  } else {
-    showToast('Added To Bookmark');
-  }
+const onClickTrashBinIcon = (n: number) => {
   addOrRemoveFromArray(signBookmarkedItems,n);
+  showToast('Removed From Bookmark');
 }
 
 </script>
