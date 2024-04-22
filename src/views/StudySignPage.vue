@@ -15,9 +15,9 @@
         <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonTitle align="center" style="padding-right: 0; padding-top: 10px">{{ i }}/{{ signImageCounts }}</IonTitle>
-        <IonImg :src="getImagePath('sign', handleZeroPad(i,3))"
+        <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'Q')"
                 style="width: 50%; display: block; margin: 0 auto;"></IonImg>
-        <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'w')"
+        <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'A')"
                 style="width: 75%; display: block; margin: 0 auto;"></IonImg>
       </IonCard>
   </IonContent>

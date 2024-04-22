@@ -1,2 +1,18 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+/** my CSS Variables **/
+.center {
+    text-align: center;
+    margin: auto;
+    width: 85%;
+}
+
+.ion-item-border::part(native) {
+    border-width: 2px;
+    border-radius: 20px;
+}
+
+.ion-item-border::part(detail-icon) {
+    opacity: 1;
+    font-size: 20px;
+}

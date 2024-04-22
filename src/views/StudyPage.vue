@@ -16,19 +16,19 @@
         <IonLabel style="padding-left: 10px">Sign</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" :component="studyRulePage">
+    <IonNavLink routerDirection="forward" :component="studyRulePage" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="newspaper"/>
         <IonLabel style="padding-left: 10px">Rule</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" :component="signBookmarkPage">
+    <IonNavLink routerDirection="forward" :component="signBookmarkPage" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="bookmark"/>
         <IonLabel style="padding-left: 10px">Sign Bookmark</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" :component="ruleBookmarkPage">
+    <IonNavLink routerDirection="forward" :component="ruleBookmarkPage" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="bookmark"/>
         <IonLabel style="padding-left: 10px">Rule Bookmark</IonLabel>
