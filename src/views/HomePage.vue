@@ -1,43 +1,43 @@
 <template>
-  <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title align="center">Driving License</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <IonPage>
+    <IonHeader :translucent="true">
+      <IonToolbar>
+        <IonTitle align="center">Driving License</IonTitle>
+      </IonToolbar>
+    </IonHeader>
 
-    <ion-content :fullscreen="true">
-      <ion-img src="./public/images/main.png" style="width: 75%; display: block; margin: 20px auto;"></ion-img>
-      <ion-list lines="inset">
-        <ion-item style="display: flex">
-          <ion-card style="width: 75%; box-shadow: none">
-            <ion-card-header>
-              <ion-card-title>Study</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
+    <IonContent :fullscreen="true">
+      <IonImg src="./public/images/main.png" style="width: 75%; display: block; margin: 20px auto;"></IonImg>
+      <IonList lines="inset">
+        <IonItem style="display: flex">
+          <IonCard style="width: 75%; box-shadow: none">
+            <IonCardHeader>
+              <IonCardTitle>Study</IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
               Here's a best place you can study motorcycle rules.
-            </ion-card-content>
-          </ion-card>
-          <ion-nav-link router-direction="forward" :component="studyPage">
-            <ion-button shape="round" size="default" color="dark">Enter</ion-button>
-          </ion-nav-link>
-        </ion-item>
-        <ion-item>
-          <ion-card style="width: 75%; box-shadow: none">
-            <ion-card-header>
-              <ion-card-title>Mock Test</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
+            </IonCardContent>
+          </IonCard>
+          <IonNavLink router-direction="forward" :component="studyPage">
+            <IonButton shape="round" size="default" color="dark">Enter</IonButton>
+          </IonNavLink>
+        </IonItem>
+        <IonItem>
+          <IonCard style="width: 75%; box-shadow: none">
+            <IonCardHeader>
+              <IonCardTitle>Mock Test</IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
               Here's a best place you can do a quick test.
-            </ion-card-content>
-          </ion-card>
-          <ion-nav-link router-direction="forward" :component="mockTestPage">
-            <ion-button shape="round" size="default" color="dark">Enter</ion-button>
-          </ion-nav-link>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-page>
+            </IonCardContent>
+          </IonCard>
+          <IonNavLink router-direction="forward" :component="mockTestPage">
+            <IonButton shape="round" size="default" color="dark">Enter</IonButton>
+          </IonNavLink>
+        </IonItem>
+      </IonList>
+    </IonContent>
+  </IonPage>
 </template>
 
 <script setup lang="ts">
@@ -66,31 +66,5 @@ const mockTestPage = markRaw(MockTestPage)
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
 </style>
