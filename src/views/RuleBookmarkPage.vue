@@ -13,11 +13,15 @@
   <IonContent>
       <IonCard v-for="item in ruleBookmarkedItems" :key="item">
         <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(item)"/>
-<!--        <IonTitle align="center" style="padding-right: 0; padding-top: 10px">{{ item }}/{{ ruleImageCounts }}</IonTitle>-->
-        <IonImg :src="getImagePath('rule', handleZeroPad(item,3), 'Q')"
-                style="display: block; margin: 0 auto;"></IonImg>
-        <IonImg :src="getImagePath('rule', handleZeroPad(item,3), 'A')"
-                style="display: block; margin: 0 auto;"></IonImg>
+        <IonCardHeader>
+          <IonCardSubtitle align="center" style="padding-left: 40px"></IonCardSubtitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <IonImg :src="getImagePath('rule', handleZeroPad(item,3), 'Q')"
+                  style="display: block; margin: 0 auto;"></IonImg>
+          <IonImg :src="getImagePath('rule', handleZeroPad(item,3), 'A')"
+                  style="display: block; margin: 0 auto;"></IonImg>
+        </IonCardContent>
       </IonCard>
   </IonContent>
 </template>
@@ -31,6 +35,9 @@ import {
   IonIcon,
   IonContent,
   IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardContent,
   IonTitle,
   IonImg,
   IonLabel,

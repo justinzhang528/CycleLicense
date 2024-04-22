@@ -14,11 +14,15 @@
       <IonCard v-for="i in ruleImageCounts" :key="i">
         <IonIcon v-if="ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
-        <IonTitle align="center" style="padding-right: 0; padding-top: 10px">{{ i }}/{{ ruleImageCounts }}</IonTitle>
-        <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'Q')"
-                style="display: block; margin: 0 auto;"></IonImg>
-        <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'A')"
-                style="display: block; margin: 0 auto;"></IonImg>
+        <IonCardHeader>
+          <IonCardSubtitle align="center" style="padding-left: 40px">{{ i }}/{{ ruleImageCounts }}</IonCardSubtitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'Q')"
+                  style="display: block; margin: 0 auto;"></IonImg>
+          <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'A')"
+                  style="display: block; margin: 0 auto;"></IonImg>
+        </IonCardContent>
       </IonCard>
   </IonContent>
 </template>
@@ -32,6 +36,9 @@ import {
   IonIcon,
   IonContent,
   IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardContent,
   IonTitle,
   IonImg,
   IonLabel,

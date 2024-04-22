@@ -4,7 +4,7 @@ export default function () {
     const signImageCounts = imageCounts.signImageCounts
     const ruleImageCounts = imageCounts.ruleImageCounts
     const getImagePath = (type: string, fileName: string, postFix: string = "") => {
-        return "./public/images/" + type + "/" + fileName + postFix + ".png";
+        return "images/" + type + "/" + fileName + postFix + ".png";
     }
 
     const handleZeroPad = (num: number, places: number) => {
@@ -45,7 +45,7 @@ export default function () {
 
     const generateChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
-        const mainDir = "./public/images/";
+        const mainDir = "images/";
 
         for(let i = 1; i <= problemCounts; i++){
 

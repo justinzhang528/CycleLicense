@@ -21,25 +21,25 @@
         1.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice1Path" class="center round-border-img"
                               style="padding-right: 5px"/>
         <br>
-        <IonRadio style="float: right" value="1"></IonRadio>
+        <IonRadio style="float: right" mode="md" value="1"></IonRadio>
       </IonItem>
       <br>
       <IonItem color="transparent" class="center ion-item-border" lines="none">
         2.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice2Path" class="center round-border-img"
                               style="padding-right: 5px"/>
-        <IonRadio style="float: right" value="2"></IonRadio>
+        <IonRadio style="float: right" mode="md" value="2"></IonRadio>
       </IonItem>
       <br>
       <IonItem color="transparent" class="center ion-item-border" lines="none">
         3.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice3Path" class="center round-border-img"
                               style="padding-right: 5px"/>
-        <IonRadio style="float: right" value="3"></IonRadio>
+        <IonRadio style="float: right" mode="md" value="3"></IonRadio>
       </IonItem>
       <br>
       <IonItem color="transparent" class="center ion-item-border" lines="none">
         4.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice4Path" class="center round-border-img"
                               style="padding-right: 5px"/>
-        <IonRadio style="float: right" value="4"></IonRadio>
+        <IonRadio style="float: right" mode="md" value="4"></IonRadio>
       </IonItem>
     </IonRadioGroup>
     <br>
