@@ -64,6 +64,26 @@ export default function () {
         return result;
     }
 
+    const getProblems  = (type: string)=>{
+        return JSON.parse(localStorage.getItem(type) || '{}');
+    }
+
+    const getChooseAns = (type: string)=>{
+        return (localStorage.getItem(type)  || '{}').split(',').map(Number)
+    }
+
+    const getTotalScore = (problemType: string, chooseAnsType: string) => {
+        let score = 0;
+        let n = 0;
+        for (const problem of getProblems(problemType)) {
+            if(problem.ans === getChooseAns(chooseAnsType)[n]){
+                score += 1;
+            }
+            n += 1;
+        }
+        return score;
+    }
+
     return {
         signImageCounts,
         ruleImageCounts,
@@ -72,5 +92,8 @@ export default function () {
         addOrRemoveFromArray,
         getBookmarkedItems,
         generateChoiceProblems,
+        getProblems,
+        getChooseAns,
+        getTotalScore,
     }
 }

@@ -4,7 +4,7 @@
       <IonButtons slot="start" :onclick="onClickBackButton">
         <IonBackButton></IonBackButton>
       </IonButtons>
-      <IonTitle align="center">
+      <IonTitle class="center">
         <IonIcon :icon="bookmark" style="padding-right: 10px"/>
         <IonLabel>Rule</IonLabel>
       </IonTitle>

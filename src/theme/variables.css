@@ -4,7 +4,7 @@ http://ionicframework.com/docs/theming/ */
 .center {
     text-align: center;
     margin: auto;
-    width: 85%;
+    padding: 3px;
 }
 
 .ion-item-border::part(native) {

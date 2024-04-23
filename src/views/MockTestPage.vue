@@ -4,7 +4,7 @@
       <IonButtons slot="start">
         <IonBackButton></IonBackButton>
       </IonButtons>
-      <IonTitle align="center">
+      <IonTitle class="center">
         <IonLabel>Mock Test</IonLabel>
       </IonTitle>
     </IonToolbar>

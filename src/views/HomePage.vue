@@ -2,7 +2,7 @@
   <IonPage>
     <IonHeader :translucent="true">
       <IonToolbar>
-        <IonTitle align="center">Driving License</IonTitle>
+        <IonTitle class="center">Driving License</IonTitle>
       </IonToolbar>
     </IonHeader>
 
