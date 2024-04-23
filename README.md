@@ -1,0 +1,74 @@
+# DrivingLicense Mock Test
+- You can also follow [Ionic](https://ionicframework.com/) Website to setup environment
+
+## Environment Setting:
+
+- Install [node.js](https://nodejs.org/en/download/)
+- Verify the installation:
+  ```
+  node --version
+  npm --version
+  ```
+- Install the Ionic CLI with npm:
+  ```
+  npm i -g @ionic/cli
+  ```
+- Install packages:
+  ```
+  npm install
+  ```
+- Run th App:
+  ```
+  ionic serve
+  ```
+
+## Deployment for iOS:
+
+- Install Xcode from App Store
+- Go to project root directory and follow the steps
+- Adding the iOS Platform:
+  ```
+  npm install @capacitor/ios
+  ```
+- Then, add the iOS platform:
+  ```
+  npx cap add ios
+  ```
+- Run the build command with the --prod flag:
+  ```
+  ionic build --prod
+  ```
+- Sync and Copy:
+  ```
+  npx cap sync ios && npx cap copy ios
+  ```
+- Open the project in ```./ios/``` to start Xcode:
+  ```
+  npx cap open ios
+  ```
+
+## Deployment for Android:
+
+- Install [Android Studio](https://developer.android.com/studio)
+- Go to project root directory and follow the steps
+- Adding the android Platform:
+  ```
+  npm install @capacitor/android
+  ```
+- Then, add the iOS platform:
+  ```
+  npx cap add android
+  ```
+- Run the build command with the --prod flag:
+  ```
+  ionic build --prod
+  ```
+- Sync and Copy:
+  ```
+  npx cap copy && npx cap sync
+  ```
+- Open the project in ```./ios/``` to start Xcode:
+  ```
+  npx cap open android
+  ```
+
