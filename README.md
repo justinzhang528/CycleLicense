@@ -71,4 +71,11 @@
   ```
   npx cap open android
   ```
+  
+### Remark:
+- If encounter 'permission denied' when running script, please use "sudo" to install
+- And also give full permission to the project directory:
+  ```
+  chmod -R 777 PROJECT_DIR
+  ```
 
