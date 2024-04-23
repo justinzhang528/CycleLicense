@@ -13,7 +13,7 @@
   ```
   npm i -g @ionic/cli
   ```
-- Install packages:
+- Go to project root directory and install packages:
   ```
   npm install
   ```
