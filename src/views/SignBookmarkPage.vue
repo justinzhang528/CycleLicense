@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="bookmark" style="padding-right: 10px"/>
-        <IonLabel>Sign</IonLabel>
+        <IonLabel>{{$t('sign')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -14,7 +14,7 @@
       <IonCard v-for="item in signBookmarkedItems" :key="item">
         <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(item)"/>
         <IonCardHeader>
-          <IonCardSubtitle align="center" style="padding-left: 40px"></IonCardSubtitle>
+          <IonCardSubtitle class="center" style="padding-left: 40px"></IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <IonImg :src="getImagePath('sign', handleZeroPad(item,3),'Q')"

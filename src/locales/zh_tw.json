@@ -4,5 +4,22 @@
   "mockTest": "模擬考",
   "drivingLicense": "機車駕照",
   "studyDescription": "在這裏您可以學習機車駕照筆試題庫",
-  "mockTestDescription": "在這裏您可以進行機車駕照筆試的模擬考"
+  "mockTestDescription": "在這裏您可以進行機車駕照筆試的模擬考",
+  "sign": "標誌",
+  "rule": "路規",
+  "signBookmark": "標誌收藏夾",
+  "ruleBookmark": "路規收藏夾",
+  "pleaseChooseAnswer": "請選擇答案",
+  "testFinish": "測試結束",
+  "viewResult": "查看結果",
+  "multipleChoiceSign": "選擇題 - 標誌",
+  "multipleChoiceRule": "選擇題 - 路規",
+  "trueFalseSign": "是非題 - 標誌",
+  "trueFalseRule": "是非題 - 路規",
+  "result": "結果",
+  "totalScore": "總分",
+  "your": "您的",
+  "answer": "答案",
+  "true": "是",
+  "false": "非"
 }

@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="newspaper" style="padding-right: 10px"/>
-        <IonLabel>Rule</IonLabel>
+        <IonLabel>{{$t('rule')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -15,7 +15,7 @@
         <IonIcon v-if="ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
-          <IonCardSubtitle align="center" style="padding-left: 40px">{{ i }}/{{ ruleImageCounts }}</IonCardSubtitle>
+          <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ ruleImageCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'Q')"

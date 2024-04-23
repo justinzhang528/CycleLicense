@@ -6,12 +6,12 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="flask"></IonIcon>
-        Result
+        {{$t('result')}}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
-    <h5>Total Score: {{ totalScore }}</h5>
+    <h5>{{$t('totalScore')}}: {{ totalScore }}</h5>
     <IonCard v-for="(item,index) in problems" style="padding-bottom: 10px">
       <IonCardHeader>
         <IonCardSubtitle>{{ index + 1 }}/{{ problems.length }}</IonCardSubtitle>
@@ -24,8 +24,8 @@
           <IonImg :src="item.trueFalsePath" style="width: 90%"/>
         </IonItem>
         <IonLabel>
-          Answer: {{ item.ans === 1 ? 'True' : 'False' }}
-          ( Your Answer: {{ chooseAns[index] === 1 ? 'True' : 'False' }} )
+          {{$t('answer')}}: {{ item.ans === 1 ? $t('true') : $t('false') }}
+          ( {{$t('your')}}{{$t('answer')}}: {{ chooseAns[index] === 1 ? $t('true') : $t('false') }} )
           <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" style="color: green"></IonIcon>
           <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" style="color: red"></IonIcon>
         </IonLabel>

@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        Multiple Choice Sign
+        {{$t('multipleChoiceSign')}}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -68,8 +68,10 @@ import {
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useImageData from '@/hooks/useImageData'
+import {useI18n} from "vue-i18n";
 import MultipleChoiceSignResultPage from '@/views/MultipleChoiceSignResultPage.vue'
 
+const {t} = useI18n();
 const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 
 const showToast = async (msg: string) => {
@@ -123,12 +125,12 @@ const onRadioSelectedChange = (e: CustomEvent) => {
 
 const onClickNextButton = () => {
   if (currentSelectedValue.value === '') {
-    showToast('ကျေးဇူးပြု၍ အဖြေရွေးပါ');
+    showToast(t('pleaseChooseAnswer'));
     return;
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= problemCounts) {
-    showFinishAlert("Test Finish!", "", "", "View Result")
+    showFinishAlert(t('testFinish'), "", "", t("viewResult"))
     return;
   }
   currentSelectedValue.value = '';

@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        True/False Sign
+        {{$t('trueFalseSign')}}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -21,11 +21,11 @@
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <h5 class="center" style="width: 100%">မှန်</h5>
+          <h5 class="center" style="width: 100%">{{ $t('true') }}</h5>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <h5 class="center" style="width: 100%">မှား</h5>
+          <h5 class="center" style="width: 100%">{{ $t('false') }}</h5>
           <IonRadio mode="md" value="0"></IonRadio>
         </IonItem>
       </IonRadioGroup>
@@ -58,9 +58,11 @@ import {
 } from "@ionic/vue";
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
-import useImageData from '@/hooks/useImageData'
+import useImageData from '@/hooks/useImageData';
+import {useI18n} from "vue-i18n";
 import TrueFalseSignResultPage from '@/views/TrueFalseSignResultPage.vue'
 
+const {t} = useI18n();
 const trueFalseSignResultPage = markRaw(TrueFalseSignResultPage);
 
 const showToast = async (msg: string) => {
@@ -114,12 +116,12 @@ const onRadioSelectedChange = (e: CustomEvent) => {
 
 const onClickNextButton = () => {
   if (currentSelectedValue.value === '') {
-    showToast('ကျေးဇူးပြု၍ အဖြေရွေးပါ');
+    showToast(t('pleaseChooseAnswer'));
     return;
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= problemCounts) {
-    showFinishAlert("Test Finish!", "", "", "View Result")
+    showFinishAlert(t('testFinish'), "", "", t("viewResult"))
     return;
   }
   currentSelectedValue.value = '';

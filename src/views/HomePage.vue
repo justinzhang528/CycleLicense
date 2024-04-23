@@ -2,7 +2,7 @@
   <IonPage>
     <IonHeader :translucent="true">
       <IonToolbar>
-        <IonTitle class="center">{{t('drivingLicense')}}</IonTitle>
+        <IonTitle class="center">{{$t('drivingLicense')}}</IonTitle>
         <IonSelect aria-label="Language" interface="popover" placeholder="English" slot="end" value="en" @ionChange="onSelectedChange" style="padding-right: 5px">
           <IonSelectOption value="en">English</IonSelectOption>
           <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
@@ -17,23 +17,23 @@
         <IonItem style="display: flex">
           <IonCard style="width: 75%; box-shadow: none">
             <IonCardHeader>
-              <IonCardTitle>{{t('study')}}</IonCardTitle>
+              <IonCardTitle>{{$t('study')}}</IonCardTitle>
             </IonCardHeader>
-            <IonCardContent>{{t('studyDescription')}}</IonCardContent>
+            <IonCardContent>{{$t('studyDescription')}}</IonCardContent>
           </IonCard>
           <IonNavLink router-direction="forward" :component="studyPage">
-            <IonButton shape="round" size="default" color="dark">{{t('enter')}}</IonButton>
+            <IonButton shape="round" size="default" color="dark">{{$t('enter')}}</IonButton>
           </IonNavLink>
         </IonItem>
         <IonItem>
           <IonCard style="width: 75%; box-shadow: none">
             <IonCardHeader>
-              <IonCardTitle>{{t('mockTest')}}</IonCardTitle>
+              <IonCardTitle>{{$t('mockTest')}}</IonCardTitle>
             </IonCardHeader>
-            <IonCardContent>{{t('mockTestDescription')}}</IonCardContent>
+            <IonCardContent>{{$t('mockTestDescription')}}</IonCardContent>
           </IonCard>
           <IonNavLink router-direction="forward" :component="mockTestPage">
-            <IonButton shape="round" size="default" color="dark">{{t('enter')}}</IonButton>
+            <IonButton shape="round" size="default" color="dark">{{$t('enter')}}</IonButton>
           </IonNavLink>
         </IonItem>
       </IonList>
@@ -65,7 +65,7 @@ import {markRaw, ref} from "vue";
 import MockTestPage from "@/views/MockTestPage.vue";
 import {useI18n} from "vue-i18n";
 
-const {t, locale} = useI18n();
+const {locale} = useI18n();
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
 const currentSelectedValue = ref('en');

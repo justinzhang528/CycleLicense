@@ -4,5 +4,22 @@
   "mockTest": "စမ်းသပ်ခြင်း",
   "drivingLicense": "ယာဥ်မောင်းလိုင်စင်",
   "studyDescription": "မော်တော်ဆိုင်ကယ်ယာဥ်စည်းကမ်းများကို လေ့လာနိုင်သောနေရာ",
-  "mockTestDescription": "အမြန်စမ်းသပ်မှုပြုလုပ်နိုင်သည့် နေရာ"
+  "mockTestDescription": "အမြန်စမ်းသပ်မှုပြုလုပ်နိုင်သည့် နေရာ",
+  "sign": "ဆိုင်းဘုတ်",
+  "rule": "စည်းမျဉ်း",
+  "signBookmark": "ဆိုင်းဘုတ် Bookmark",
+  "ruleBookmark": "စည်းမျဉ်း Bookmark",
+  "pleaseChooseAnswer": "ကျေးဇူးပြု၍ အဖြေရွေးပါ",
+  "testFinish": "စမ်းသပ်မှုပြီးပါပြီ",
+  "viewResult": "ရလာဒ်ကိုကြည့်ရှုပါ",
+  "multipleChoiceSign": "Multiple Choice - ဆိုင်းဘုတ်",
+  "multipleChoiceRule": "Multiple Choice - စည်းမျဉ်း",
+  "trueFalseSign": "မှားမှန် - ဆိုင်းဘုတ်",
+  "trueFalseRule": "မှားမှန် - စည်းမျဉ်း",
+  "result": "ရလာဒ်",
+  "totalScore": "စုစု‌‌ပေါင်းရမှတ်",
+  "your": "သင့်",
+  "answer": "အဖြေ",
+  "true": "မှား",
+  "false": "မှန်"
 }

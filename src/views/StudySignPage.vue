@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="trailSign" style="padding-right: 10px"/>
-        <IonLabel>Sign</IonLabel>
+        <IonLabel>{{$t('sign')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
   </IonHeader>

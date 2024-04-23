@@ -4,5 +4,22 @@
   "mockTest": "Mock Test",
   "drivingLicense": "Driving License",
   "studyDescription": "Here's a best place you can study motorcycle rules.",
-  "mockTestDescription": "Here's a best place you can do a quick test."
+  "mockTestDescription": "Here's a best place you can do a quick test.",
+  "sign": "Sign",
+  "rule": "Rule",
+  "signBookmark": "Sign Bookmark",
+  "ruleBookmark": "Rule Bookmark",
+  "pleaseChooseAnswer": "Please Choose Answer",
+  "testFinish": "Test Finish",
+  "viewResult": "View Result",
+  "multipleChoiceSign": "Multiple Choice - Sign",
+  "multipleChoiceRule": "Multiple Choice - Rule",
+  "trueFalseSign": "True/False - Sign",
+  "trueFalseRule": "True/False - Rule",
+  "result": "Result",
+  "totalScore": "TotalScore",
+  "your": "Your",
+  "answer": "Answer",
+  "true": "True",
+  "false": "False"
 }

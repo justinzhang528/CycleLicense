@@ -5,7 +5,7 @@
         <IonBackButton></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonLabel>Mock Test</IonLabel>
+        <IonLabel>{{$t('mockTest')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -14,25 +14,25 @@
     <IonNavLink routerDirection="forward" :component="multiChoiceSign">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="listCircle"/>
-        <IonLabel style="padding-left: 10px">Multiple Choice - Sign</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('multipleChoiceSign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="listCircle"/>
-        <IonLabel style="padding-left: 10px">Multiple Choice - Rule</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('multipleChoiceRule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSign">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="checkmarkDone"/>
-        <IonLabel style="padding-left: 10px">True/False - Sign</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('trueFalseSign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="checkmarkDone"/>
-        <IonLabel style="padding-left: 10px">True/False - Rule</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('trueFalseRule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
   </IonContent>

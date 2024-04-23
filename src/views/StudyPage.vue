@@ -5,7 +5,7 @@
         <IonBackButton></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonLabel>Study</IonLabel>
+        <IonLabel>{{$t('study')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -14,25 +14,25 @@
     <IonNavLink routerDirection="forward" :component="studySignPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="trailSign"/>
-        <IonLabel style="padding-left: 10px">Sign</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('sign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" :component="studyRulePage" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="newspaper"/>
-        <IonLabel style="padding-left: 10px">Rule</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('rule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" :component="signBookmarkPage" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="bookmark"/>
-        <IonLabel style="padding-left: 10px">Sign Bookmark</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('signBookmark')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" :component="ruleBookmarkPage" style="padding: 50px">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="bookmark"/>
-        <IonLabel style="padding-left: 10px">Rule Bookmark</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('ruleBookmark')}}</IonLabel>
       </IonItem>
     </IonNavLink>
   </IonContent>
