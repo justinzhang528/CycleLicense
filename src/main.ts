@@ -33,11 +33,13 @@ import '@ionic/vue/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
 import en from '@/locales/en.json'
 import mm from '@/locales/mm.json'
 import zh_cn from '@/locales/zh_cn.json'
 import zh_tw from '@/locales/zh_tw.json'
 import {createI18n} from "vue-i18n";
+import {ScreenOrientation} from "@capacitor/screen-orientation";
 
 const app = createApp(App)
     .use(IonicVue)
@@ -50,6 +52,7 @@ router.isReady().then(() => {
         messages: {en, mm, zh_cn, zh_tw},
         legacy: false
     })
+    ScreenOrientation.lock({orientation: 'portrait'});
     app.use(i18n);
     app.mount('#app');
 });
