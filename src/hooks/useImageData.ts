@@ -30,9 +30,23 @@ export default function () {
         return (str || '{}').split(',').map(Number);
     }
 
+    // generate shuffle order numbers ranging from 1~range
+    const generateShuffleOrderNumbers = (range: number): number[] => {
+        // Initialize array with numbers from 1 to n
+        const numbers = Array.from({ length: range }, (_, index) => index + 1);
+
+        // Fisher-Yates shuffle algorithm
+        for (let i = numbers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        }
+
+        return numbers;
+    }
+
     // generate a random array of 4 numbers, ranging from 0 to 'count', 'exist' must exist in array
-    const generateRandomArray = (count: number, exist: number) => {
-        let array = Array.from({length: count}, (_, i) => i + 1);
+    const generateRandomNumbers = (totalCounts: number, exist: number, count: number) => {
+        let array = Array.from({length: totalCounts}, (_, i) => i + 1);
         const existIndex = array.indexOf(exist);
         array.splice(existIndex, 1);
         for (let i = array.length - 1; i > 0; i--) {
@@ -40,24 +54,44 @@ export default function () {
             [array[i], array[j]] = [array[j], array[i]];
         }
         array.splice(Math.floor(Math.random() * 3), 0, exist);
-        return array.slice(0, 4);
+        return array.slice(0, count);
     }
 
-    const generateChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
+    const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
         const mainDir = "images/";
+        const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
-        for(let i = 1; i <= problemCounts; i++){
+        for(const [index, element] of shuffleOrderNumbers.entries()){
 
-            let choiceArray = generateRandomArray(totalCounts, i);
+            let choiceArray = generateRandomNumbers(totalCounts, element, 4);
             const json = {
-                sn: i,
-                questionPath: mainDir + type + "/" + handleZeroPad(i, 3) + 'Q.png',
+                sn: index,
+                questionPath: mainDir + type + "/" + handleZeroPad(element, 3) + 'Q.png',
                 choice1Path: mainDir + type + "/" + handleZeroPad(choiceArray[0], 3) + 'A.png',
                 choice2Path: mainDir + type + "/" + handleZeroPad(choiceArray[1], 3) + 'A.png',
                 choice3Path: mainDir + type + "/" + handleZeroPad(choiceArray[2], 3) + 'A.png',
                 choice4Path: mainDir + type + "/" + handleZeroPad(choiceArray[3], 3) + 'A.png',
-                ans: choiceArray.indexOf(i) + 1
+                ans: choiceArray.indexOf(element) + 1
+            }
+            result.push(json);
+        }
+        return result;
+    }
+
+    const generateTrueFalseProblem = (problemCounts: number, totalCounts: number, type: string) => {
+        let result = [];
+        const mainDir = "images/";
+        const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
+
+        for(const [index, element] of shuffleOrderNumbers.entries()){
+
+            let choiceArray = generateRandomNumbers(totalCounts, element, 2);
+            const json = {
+                sn: index,
+                questionPath: mainDir + type + "/" + handleZeroPad(element, 3) + 'Q.png',
+                trueFalsePath: mainDir + type + "/" + handleZeroPad(choiceArray[0], 3) + 'A.png',
+                ans: choiceArray[0] === element ? 1 : 0
             }
             result.push(json);
         }
@@ -91,7 +125,8 @@ export default function () {
         handleZeroPad,
         addOrRemoveFromArray,
         getBookmarkedItems,
-        generateChoiceProblems,
+        generateMultipleChoiceProblems,
+        generateTrueFalseProblem,
         getProblems,
         getChooseAns,
         getTotalScore,

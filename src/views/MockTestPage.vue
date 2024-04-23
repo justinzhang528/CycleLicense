@@ -23,7 +23,7 @@
         <IonLabel style="padding-left: 10px">Multiple Choice - Rule</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px">
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSign">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="checkmarkDone"/>
         <IonLabel style="padding-left: 10px">True/False - Sign</IonLabel>
@@ -53,14 +53,14 @@ import {
 } from "@ionic/vue";
 import {listCircle, checkmarkDone} from "ionicons/icons";
 import {markRaw} from "vue";
-import MultiChoiceSign from "@/views/MultiChoiceSignPage.vue";
-// import MultiChoiceRule from "@/views/MultiChoiceSignPage.vue";
-// import TrueFalseSign from "@/views/MultiChoiceSignPage.vue";
-// import TrueFalseRule from "@/views/MultiChoiceSignPage.vue";
+import MultiChoiceSign from "@/views/MultipleChoiceSignPage.vue";
+// import MultiChoiceRule from "@/views/MultipleChoiceSignPage.vue";
+import TrueFalseSign from "@/views/TrueFalseSignPage.vue";
+// import TrueFalseRule from "@/views/MultipleChoiceSignPage.vue";
 
 const multiChoiceSign = markRaw(MultiChoiceSign);
 // const multiChoiceRule = markRaw(MultiChoiceRule);
-// const trueFalseSign = markRaw(TrueFalseSign);
+const trueFalseSign = markRaw(TrueFalseSign);
 // const trueFalseRule = markRaw(TrueFalseRule);
 </script>
 

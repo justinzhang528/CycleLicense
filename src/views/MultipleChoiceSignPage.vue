@@ -20,29 +20,29 @@
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           1.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice1Path" class="center round-border-img"
                                 style="padding-right: 5px"/>
-          <IonRadio style="float: right" mode="md" value="1"></IonRadio>
+          <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           2.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice2Path" class="center round-border-img"
                                 style="padding-right: 5px"/>
-          <IonRadio style="float: right" mode="md" value="2"></IonRadio>
+          <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           3.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice3Path" class="center round-border-img"
                                 style="padding-right: 5px"/>
-          <IonRadio style="float: right" mode="md" value="3"></IonRadio>
+          <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           4.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice4Path" class="center round-border-img"
                                 style="padding-right: 5px"/>
-          <IonRadio style="float: right" mode="md" value="4"></IonRadio>
+          <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
       </IonRadioGroup>
     </div>
     <IonButton :onClick="onClickNextButton" color="dark" shape="round">
       <IonIcon :icon="chevronForward"/>
     </IonButton>
-    <IonNavLink id='goToMultiChoiceSignResultPage' routerDirection="forward" :component="multiChoiceSignResultPage">
+    <IonNavLink id='goToMultipleChoiceSignResultPage' routerDirection="forward" :component="multipleChoiceSignResultPage">
     </IonNavLink>
   </IonContent>
 </template>
@@ -68,9 +68,9 @@ import {
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useImageData from '@/hooks/useImageData'
-import MultiChoiceSignResultPage from '@/views/MultiChoiceSignResultPage.vue'
+import MultipleChoiceSignResultPage from '@/views/MultipleChoiceSignResultPage.vue'
 
-const multiChoiceSignResultPage = markRaw(MultiChoiceSignResultPage);
+const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
@@ -93,10 +93,10 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
         handler: () => {
           currentSelectedValue.value = '';
           currentProblemNum.value = 1;
-          localStorage.setItem('choiceSignProblems',JSON.stringify(problems));
-          localStorage.setItem('userChoiceSignValues',chooseAns.toString());
+          localStorage.setItem('multipleChoiceSignProblems',JSON.stringify(problems));
+          localStorage.setItem('userMultipleChoiceSignValues',chooseAns.toString());
           chooseAns.splice(0);
-          const navLink = document.querySelector('#goToMultiChoiceSignResultPage');
+          const navLink = document.querySelector('#goToMultipleChoiceSignResultPage');
           (navLink as HTMLElement).click();
         },
       }
@@ -107,9 +107,9 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateChoiceProblems, signImageCounts} = useImageData()
+const {generateMultipleChoiceProblems, signImageCounts} = useImageData()
 const problemCounts = 2;
-const problems = generateChoiceProblems(problemCounts, signImageCounts, 'sign');
+const problems = generateMultipleChoiceProblems(problemCounts, signImageCounts, 'sign');
 
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
