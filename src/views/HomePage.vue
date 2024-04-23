@@ -64,7 +64,6 @@ import StudyPage from "@/views/StudyPage.vue";
 import {markRaw, ref} from "vue";
 import MockTestPage from "@/views/MockTestPage.vue";
 import {useI18n} from "vue-i18n";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 const {t, locale} = useI18n();
 const studyPage = markRaw(StudyPage)
