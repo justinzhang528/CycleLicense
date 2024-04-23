@@ -10,6 +10,7 @@
     </IonToolbar>
   </IonHeader>
   <IonContent class="ion-padding">
+    <IonImg src="images/study.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
     <IonNavLink routerDirection="forward" :component="studySignPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="trailSign"/>
@@ -48,7 +49,7 @@ import {
   IonIcon,
   IonLabel,
   IonNavLink,
-  IonItem
+  IonItem, IonImg
 } from "@ionic/vue";
 import {trailSign, newspaper, bookmark} from "ionicons/icons";
 import {markRaw} from "vue";

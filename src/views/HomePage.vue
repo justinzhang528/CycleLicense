@@ -7,7 +7,7 @@
     </IonHeader>
 
     <IonContent :fullscreen="true">
-      <IonImg src="images/main.png" style="width: 75%; display: block; margin: 20px auto;"></IonImg>
+      <IonImg src="images/main.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
       <IonList lines="inset">
         <IonItem style="display: flex">
           <IonCard style="width: 75%; box-shadow: none">

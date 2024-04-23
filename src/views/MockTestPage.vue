@@ -10,6 +10,7 @@
     </IonToolbar>
   </IonHeader>
   <IonContent class="ion-padding">
+    <IonImg src="images/mockTest.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
     <IonNavLink routerDirection="forward" :component="multiChoiceSign">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="listCircle"/>
@@ -48,7 +49,7 @@ import {
   IonIcon,
   IonLabel,
   IonNavLink,
-  IonItem
+  IonItem, IonImg
 } from "@ionic/vue";
 import {listCircle, checkmarkDone} from "ionicons/icons";
 import {markRaw} from "vue";

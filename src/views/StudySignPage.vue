@@ -15,7 +15,7 @@
         <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
-          <IonCardSubtitle align="center" style="padding-left: 40px">{{ i }}/{{ signImageCounts }}</IonCardSubtitle>
+          <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signImageCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'Q')"
