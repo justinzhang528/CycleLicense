@@ -107,8 +107,8 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateTrueFalseProblem, ruleCounts} = useImageData()
-const problemCounts = Number(localStorage.getItem('trueFalseRuleCount')) || 10;
+const {generateTrueFalseProblem, ruleCounts, DEFAULT_PROBLEM_COUNT} = useImageData()
+const problemCounts = Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT;
 const problems = generateTrueFalseProblem(problemCounts, ruleCounts);
 
 let currentSelectedValue = ref('');

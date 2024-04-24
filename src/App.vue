@@ -48,19 +48,19 @@
                 <h5>{{$t('setTheNumberOfQuestions')}}</h5>
                 <IonItem>
                   <IonLabel>{{$t('multipleChoiceSign')}}</IonLabel>
-                  <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" placeholder="1 ~ 100"></IonInput>
+                  <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" maxlength="2" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
                 </IonItem>
                 <IonItem>
                   <IonLabel>{{$t('multipleChoiceRule')}}</IonLabel>
-                  <IonInput style="width: 25%" ref="multipleChoiceRuleInput" type="number" placeholder="1 ~ 100"></IonInput>
+                  <IonInput style="width: 25%" ref="multipleChoiceRuleInput" type="number" :value="multipleChoiceRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
                 </IonItem>
                 <IonItem>
                   <IonLabel>{{$t('trueFalseSign')}}</IonLabel>
-                  <IonInput style="width: 25%" ref="trueFalseSignInput" type="number" placeholder="1 ~ 100"></IonInput>
+                  <IonInput style="width: 25%" ref="trueFalseSignInput" type="number" :value="trueFalseSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
                 </IonItem>
                 <IonItem>
                   <IonLabel>{{$t('trueFalseRule')}}</IonLabel>
-                  <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" placeholder="1 ~ 100"></IonInput>
+                  <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" :value="trueFalseRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
                 </IonItem>
               </IonContent>
             </IonModal>
@@ -99,9 +99,11 @@ import HomePage from "@/views/HomePage.vue";
 import {markRaw, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import {settings} from "ionicons/icons";
-
+import dataSource from "@/json/dataSource.json"
+import useImageData from '@/hooks/useImageData'
 
 const {locale} = useI18n();
+const {DEFAULT_PROBLEM_COUNT} = useImageData();
 
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 const onSelectedLanguageChange = (e: CustomEvent)=>{
@@ -120,32 +122,45 @@ const onSelectedLanguageChange = (e: CustomEvent)=>{
 const homePage = markRaw(HomePage)
 locale.value = localStorage.getItem("currentLanguage") || 'en';
 
-const message = ref('This modal example uses triggers to automatically open a modal when the button is clicked.');
-
 const modal = ref();
 const multipleChoiceSignInput = ref();
 const multipleChoiceRuleInput = ref();
 const trueFalseSignInput = ref();
 const trueFalseRuleInput = ref();
-const ageInput = ref();
+const multipleChoiceSignDefaultCount = ref(Number(localStorage.getItem('multipleChoiceSignCount')) || DEFAULT_PROBLEM_COUNT);
+const multipleChoiceRuleDefaultCount = ref(Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT);
+const trueFalseSignDefaultCount = ref(Number(localStorage.getItem('trueFalseSignCount')) || DEFAULT_PROBLEM_COUNT);
+const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT);
 const onCancelModal = () => modal.value.$el.dismiss(null, 'cancel');
 
 const onConfirmModal = () => {
-  const multipleChoiceSignCount = multipleChoiceSignInput.value.$el.value || '';
-  const multipleChoiceRuleCount = multipleChoiceRuleInput.value.$el.value || '';
-  const trueFalseSignCount = trueFalseSignInput.value.$el.value || '';
-  const trueFalseRuleCount = trueFalseRuleInput.value.$el.value || '';
+  let isValidCount: number = 0;
 
-  if(multipleChoiceSignCount != '')
-    localStorage.setItem('multipleChoiceSignCount', multipleChoiceSignCount);
-  if(multipleChoiceRuleCount != '')
-    localStorage.setItem('multipleChoiceRuleCount', multipleChoiceRuleCount);
-  if(trueFalseSignCount != '')
-    localStorage.setItem('trueFalseSignCount', trueFalseSignCount);
-  if(trueFalseRuleCount != '')
-    localStorage.setItem('trueFalseRuleCount', trueFalseRuleCount);
+  const multipleChoiceSignCount = multipleChoiceSignInput.value.$el.value;
+  const multipleChoiceRuleCount = multipleChoiceRuleInput.value.$el.value;
+  const trueFalseSignCount = trueFalseSignInput.value.$el.value;
+  const trueFalseRuleCount = trueFalseRuleInput.value.$el.value;
 
-  modal.value.$el.dismiss(null, 'confirm');
+    if(multipleChoiceSignCount != null && multipleChoiceSignCount != '' && multipleChoiceSignCount >= 1 && multipleChoiceSignCount <= dataSource.signs.length)
+      isValidCount++;
+    if(multipleChoiceRuleCount != null && multipleChoiceRuleCount != '' && multipleChoiceRuleCount >= 1 && multipleChoiceRuleCount <= dataSource.rules.length)
+      isValidCount++;
+    if(trueFalseSignCount != null && trueFalseSignCount != '' && trueFalseSignCount >= 1 && trueFalseSignCount <= dataSource.signs.length)
+      isValidCount++;
+    if(trueFalseRuleCount != null && trueFalseRuleCount != '' && trueFalseRuleCount >= 1 && trueFalseRuleCount <= dataSource.rules.length)
+      isValidCount++;
+
+  if(isValidCount === 4){
+    localStorage.setItem('multipleChoiceSignCount', multipleChoiceSignCount.toString());
+    localStorage.setItem('multipleChoiceRuleCount', multipleChoiceRuleCount.toString());
+    localStorage.setItem('trueFalseSignCount', trueFalseSignCount.toString());
+    localStorage.setItem('trueFalseRuleCount', trueFalseRuleCount.toString());
+    multipleChoiceSignDefaultCount.value = multipleChoiceSignCount;
+    multipleChoiceRuleDefaultCount.value = multipleChoiceRuleCount;
+    trueFalseSignDefaultCount.value = trueFalseSignCount;
+    trueFalseRuleDefaultCount.value = trueFalseRuleCount;
+    modal.value.$el.dismiss(null, 'confirm');
+  }
 };
 </script>
 
