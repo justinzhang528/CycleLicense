@@ -11,11 +11,11 @@
     </IonToolbar>
   </IonHeader>
   <IonContent>
-      <IonCard v-for="i in signImageCounts" :key="i">
+      <IonCard v-for="i in signCounts" :key="i">
         <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
-          <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signImageCounts }}</IonCardSubtitle>
+          <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'Q')"
@@ -59,7 +59,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {getImagePath, handleZeroPad, addOrRemoveFromArray, signImageCounts, getBookmarkedItems} = useImageData()
+const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useImageData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 
 const onClickBackButton = () => {

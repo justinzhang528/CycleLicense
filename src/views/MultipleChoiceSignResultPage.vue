@@ -34,9 +34,9 @@
         </IonItem>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ $t(item.ans) }}
-          ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ $t(chooseAns[index].toString()) }} )
-          <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" style="color: green"></IonIcon>
-          <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" style="color: red"></IonIcon>
+          ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ $t(chooseAns[index].toString()) }} )<br>
+          <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
+          <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
         </IonLabel>
       </IonCardContent>
 

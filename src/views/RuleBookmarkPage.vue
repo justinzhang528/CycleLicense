@@ -57,7 +57,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {getImagePath, handleZeroPad, addOrRemoveFromArray, ruleImageCounts, getBookmarkedItems} = useImageData()
+const {getImagePath, handleZeroPad, addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useImageData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 
 const onClickBackButton = () => {

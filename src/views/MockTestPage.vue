@@ -29,7 +29,7 @@
         <IonLabel style="padding-left: 10px">{{$t('trueFalseSign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px">
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseRulePage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="checkmarkDone"/>
         <IonLabel style="padding-left: 10px">{{$t('trueFalseRule')}}</IonLabel>
@@ -56,12 +56,12 @@ import {markRaw} from "vue";
 import MultiChoiceSignPage from "@/views/MultipleChoiceSignPage.vue";
 import MultiChoiceRulePage from "@/views/MultipleChoiceRulePage.vue";
 import TrueFalseSignPage from "@/views/TrueFalseSignPage.vue";
-// import TrueFalseRulePage from "@/views/MultipleChoiceSignPage.vue";
+import TrueFalseRulePage from "@/views/TrueFalseRulePage.vue";
 
 const multipleChoiceSignPage = markRaw(MultiChoiceSignPage);
 const multipleChoiceRulePage = markRaw(MultiChoiceRulePage);
 const trueFalseSignPage = markRaw(TrueFalseSignPage);
-// const trueFalseRulePage = markRaw(TrueFalseRulePage);
+const trueFalseRulePage = markRaw(TrueFalseRulePage);
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 import imageCounts from '@/json/imageData.json'
 
 export default function () {
-    const signImageCounts = imageCounts.signImageCounts
-    const ruleImageCounts = imageCounts.ruleImageCounts
+    const signCounts = imageCounts.signImageCounts
+    const ruleCounts = imageCounts.ruleImageCounts
     const getImagePath = (type: string, fileName: string, postFix: string = "") => {
         return "images/" + type + "/" + fileName + postFix + ".png";
     }
@@ -117,8 +117,8 @@ export default function () {
     }
 
     return {
-        signImageCounts,
-        ruleImageCounts,
+        signCounts,
+        ruleCounts,
         getImagePath,
         handleZeroPad,
         addOrRemoveFromArray,

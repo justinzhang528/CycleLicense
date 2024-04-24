@@ -109,9 +109,9 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateMultipleChoiceProblems, signImageCounts} = useImageData()
+const {generateMultipleChoiceProblems, signCounts} = useImageData()
 const problemCounts = 2;
-const problems = generateMultipleChoiceProblems(problemCounts, signImageCounts);
+const problems = generateMultipleChoiceProblems(problemCounts, signCounts);
 
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);

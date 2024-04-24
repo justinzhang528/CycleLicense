@@ -12,12 +12,17 @@
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
-    <IonItem color="transparent" lines="none">
-      <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
-    </IonItem>
-    <IonItem color="transparent" lines="none">
-      <IonImg :src="'images/sign/'+problems[currentProblemNum-1].trueFalse+'A.png'" class="center round-border-img" style="width: 90%"/>
-    </IonItem>
+    <IonCard>
+      <IonCardContent>
+        <IonItem color="transparent" lines="none">
+          <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
+        </IonItem>
+        <IonItem color="transparent" lines="none">
+          <IonImg :src="'images/sign/'+problems[currentProblemNum-1].trueFalse+'A.png'" class="center round-border-img" style="width: 90%"/>
+        </IonItem>
+      </IonCardContent>
+    </IonCard>
+
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
@@ -30,6 +35,7 @@
         </IonItem>
       </IonRadioGroup>
     </div>
+
     <IonButton :onClick="onClickNextButton" color="dark" shape="round">
       <IonIcon :icon="chevronForward"/>
     </IonButton>
@@ -53,6 +59,8 @@ import {
   IonItem,
   IonIcon,
   IonImg,
+  IonCard,
+  IonCardContent,
   toastController,
   alertController,
 } from "@ionic/vue";
@@ -100,9 +108,9 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateTrueFalseProblem, signImageCounts} = useImageData()
+const {generateTrueFalseProblem, signCounts} = useImageData()
 const problemCounts = 2;
-const problems = generateTrueFalseProblem(problemCounts, signImageCounts);
+const problems = generateTrueFalseProblem(problemCounts, signCounts);
 
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);

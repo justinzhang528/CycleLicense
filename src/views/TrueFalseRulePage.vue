@@ -6,41 +6,30 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        {{$t('multipleChoiceRule')}}
+        {{ $t('trueFalseRule') }}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
     <IonCard>
-      <IonCardContent>
-        <IonItem color="transparent" class="center" lines="none">
-          <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum-1].question)].Q}}</IonLabel>
-        </IonItem>
+      <IonCardContent align="left">
+        <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+        <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum - 1].question)].Q}}</IonLabel><br><br>
+        <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+        <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum - 1].trueFalse)].A}}</IonLabel>
       </IonCardContent>
     </IonCard>
 
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice1)].A}}</label>
+          <h5 class="center" style="width: 100%">{{ $t('true') }}</h5>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice2)].A}}</label>
-          <IonRadio mode="md" value="2"></IonRadio>
-        </IonItem>
-        <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice3)].A}}</label>
-          <IonRadio mode="md" value="3"></IonRadio>
-        </IonItem>
-        <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice4)].A}}</label>
-          <IonRadio mode="md" value="4"></IonRadio>
+          <h5 class="center" style="width: 100%">{{ $t('false') }}</h5>
+          <IonRadio mode="md" value="0"></IonRadio>
         </IonItem>
       </IonRadioGroup>
     </div>
@@ -48,7 +37,7 @@
     <IonButton :onClick="onClickNextButton" color="dark" shape="round">
       <IonIcon :icon="chevronForward"/>
     </IonButton>
-    <IonNavLink id='goToMultipleChoiceRuleResultPage' routerDirection="forward" :component="multipleChoiceRuleResultPage">
+    <IonNavLink id='goToTrueFalseRuleResultPage' routerDirection="forward" :component="trueFalseRuleResultPage">
     </IonNavLink>
   </IonContent>
 </template>
@@ -67,20 +56,21 @@ import {
   IonRadio,
   IonItem,
   IonIcon,
-  IonCard,
-  IonCardContent,
   toastController,
-  alertController, IonLabel,
+  alertController,
+  IonLabel,
+  IonCardContent,
+  IonCard,
 } from "@ionic/vue";
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
-import useImageData from '@/hooks/useImageData'
+import useImageData from '@/hooks/useImageData';
 import {useI18n} from "vue-i18n";
-import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.vue'
+import TrueFalseRuleResultPage from '@/views/TrueFalseRuleResultPage.vue'
 import rule from '@/json/rules.json'
 
 const {t} = useI18n();
-const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
+const trueFalseRuleResultPage = markRaw(TrueFalseRuleResultPage);
 
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
@@ -103,10 +93,10 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
         handler: () => {
           currentSelectedValue.value = '';
           currentProblemNum.value = 1;
-          localStorage.setItem('multipleChoiceRuleProblems',JSON.stringify(problems));
-          localStorage.setItem('userMultipleChoiceRuleValues',chooseAns.toString());
+          localStorage.setItem('trueFalseRuleProblems', JSON.stringify(problems));
+          localStorage.setItem('userTrueFalseRuleValues', chooseAns.toString());
           chooseAns.splice(0);
-          const navLink = document.querySelector('#goToMultipleChoiceRuleResultPage');
+          const navLink = document.querySelector('#goToTrueFalseRuleResultPage');
           (navLink as HTMLElement).click();
         },
       }
@@ -117,9 +107,9 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateMultipleChoiceProblems, ruleCounts} = useImageData()
+const {generateTrueFalseProblem, ruleCounts} = useImageData()
 const problemCounts = 2;
-const problems = generateMultipleChoiceProblems(problemCounts, ruleCounts);
+const problems = generateTrueFalseProblem(problemCounts, ruleCounts);
 
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);

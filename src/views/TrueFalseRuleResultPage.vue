@@ -17,12 +17,12 @@
         <IonCardSubtitle>{{ index + 1 }}/{{ problems.length }}</IonCardSubtitle>
       </IonCardHeader>
       <IonCardContent>
-        <IonItem color="transparent" lines="none">
-          <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
-        </IonItem>
-        <IonItem color="transparent" class="center" lines="none">
-          <IonImg :src="'images/sign/'+item.trueFalse+'A.png'" style="width: 90%"/>
-        </IonItem>
+        <div align="left">
+          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+          <IonLabel style="color: black;">{{rule.rules[Number(item.question)].Q}}</IonLabel><br><br>
+          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+          <IonLabel style="color: black;">{{rule.rules[Number(item.trueFalse)].A}}</IonLabel><br><br>
+        </div>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}
           ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ chooseAns[index] === 1 ? $t('true') : $t('false') }} )<br>
@@ -48,17 +48,16 @@ import {
   IonButtons,
   IonBackButton,
   IonIcon,
-  IonItem,
-  IonImg,
   IonLabel,
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useImageData from "@/hooks/useImageData";
+import rule from "@/json/rules.json";
 
 const {getProblems, getTotalScore, getChooseAns} = useImageData();
-const problems = getProblems('trueFalseSignProblems');
-const chooseAns = getChooseAns('userTrueFalseSignValues');
-const totalScore = getTotalScore('trueFalseSignProblems', 'userTrueFalseSignValues');
+const problems = getProblems('trueFalseRuleProblems');
+const chooseAns = getChooseAns('userTrueFalseRuleValues');
+const totalScore = getTotalScore('trueFalseRuleProblems', 'userTrueFalseRuleValues');
 
 </script>
 
