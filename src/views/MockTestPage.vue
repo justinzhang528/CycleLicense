@@ -4,6 +4,9 @@
       <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
+      <IonButtons slot="end">
+        <IonMenuButton></IonMenuButton>
+      </IonButtons>
       <IonTitle class="center">
         <IonLabel>{{$t('mockTest')}}</IonLabel>
       </IonTitle>
@@ -49,7 +52,7 @@ import {
   IonIcon,
   IonLabel,
   IonNavLink,
-  IonItem, IonImg
+  IonItem, IonImg, IonMenuButton
 } from "@ionic/vue";
 import {listCircle, checkmarkDone} from "ionicons/icons";
 import {markRaw} from "vue";

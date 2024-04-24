@@ -2,7 +2,7 @@
   <IonPage id="menu">
     <IonHeader :translucent="true">
       <IonToolbar>
-        <IonButtons slot="start">
+        <IonButtons slot="end">
           <IonMenuButton></IonMenuButton>
         </IonButtons>
         <IonTitle class="center">{{$t('drivingLicense')}}</IonTitle>

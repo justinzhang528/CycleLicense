@@ -5,7 +5,10 @@
     <IonMenu content-id="menu">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>{{ $t('settings') }}</IonTitle>
+          <IonItem>
+            <IonIcon :icon="settings"></IonIcon>
+            <IonTitle>{{ $t('settings') }}</IonTitle>
+          </IonItem>
         </IonToolbar>
       </IonHeader>
       <IonContent class="ion-padding">
@@ -15,7 +18,7 @@
               <IonImg src="images/lang.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
-            <IonSelect aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange" style="padding-right: 5px">
+            <IonSelect aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange" style="padding-left: 20px">
               <IonSelectOption value="en">English</IonSelectOption>
               <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
               <IonSelectOption value="zh_cn">简体中文</IonSelectOption>
@@ -26,7 +29,8 @@
             <IonThumbnail slot="start">
               <IonImg src="images/testing.png" alt="avatar"></IonImg>
             </IonThumbnail>
-            <IonLabel>{{ $t('language') }}</IonLabel>
+            <IonLabel>{{ $t('mockTest') }}</IonLabel>
+            <IonButton style="width: 40%;" shape="round" color="dark">{{$t('settings')}}</IonButton>
           </IonItem>
         </IonList>
       </IonContent>
@@ -51,9 +55,12 @@ import {
   IonList,
   IonItem,
   IonThumbnail,
+  IonButton,
+  IonIcon
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, ref} from "vue";import {useI18n} from "vue-i18n";
+import {settings} from "ionicons/icons";
 
 const {locale} = useI18n();
 
