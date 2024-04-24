@@ -15,7 +15,7 @@
     <IonCard>
       <IonCardContent>
         <IonItem color="transparent" class="center" lines="none">
-          <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum-1].question)].Q}}</IonLabel>
+          <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel>
         </IonItem>
       </IonCardContent>
     </IonCard>
@@ -24,22 +24,22 @@
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice1)].A}}</label>
+          <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice1)-1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice2)].A}}</label>
+          <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice2)-1].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice3)].A}}</label>
+          <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice3)-1].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice4)].A}}</label>
+          <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice4)-1].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
       </IonRadioGroup>
@@ -77,7 +77,7 @@ import {markRaw, ref} from "vue";
 import useImageData from '@/hooks/useImageData'
 import {useI18n} from "vue-i18n";
 import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.vue'
-import rule from '@/json/rules.json'
+import dataSource from '@/json/dataSource.json'
 
 const {t} = useI18n();
 const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);

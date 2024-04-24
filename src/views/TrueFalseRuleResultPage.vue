@@ -19,9 +19,9 @@
       <IonCardContent>
         <div align="left">
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-          <IonLabel style="color: black;">{{rule.rules[Number(item.question)].Q}}</IonLabel><br><br>
+          <IonLabel style="color: black;">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel><br><br>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-          <IonLabel style="color: black;">{{rule.rules[Number(item.trueFalse)].A}}</IonLabel><br><br>
+          <IonLabel style="color: black;">{{ dataSource.rules[Number(item.trueFalse)-1].A }}</IonLabel><br><br>
         </div>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}
@@ -52,7 +52,7 @@ import {
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useImageData from "@/hooks/useImageData";
-import rule from "@/json/rules.json";
+import dataSource from "@/json/dataSource.json";
 
 const {getProblems, getTotalScore, getChooseAns} = useImageData();
 const problems = getProblems('trueFalseRuleProblems');

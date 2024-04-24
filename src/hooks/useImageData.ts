@@ -1,8 +1,8 @@
-import imageCounts from '@/json/imageData.json'
+import dataSource from '@/json/dataSource.json'
 
 export default function () {
-    const signCounts = imageCounts.signImageCounts
-    const ruleCounts = imageCounts.ruleImageCounts
+    const signCounts = dataSource.signs.length
+    const ruleCounts = dataSource.rules.length
     const getImagePath = (type: string, fileName: string, postFix: string = "") => {
         return "images/" + type + "/" + fileName + postFix + ".png";
     }

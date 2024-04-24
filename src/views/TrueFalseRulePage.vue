@@ -15,9 +15,9 @@
     <IonCard>
       <IonCardContent align="left">
         <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-        <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum - 1].question)].Q}}</IonLabel><br><br>
+        <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel><br><br>
         <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-        <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum - 1].trueFalse)].A}}</IonLabel>
+        <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].trueFalse)-1].A }}</IonLabel>
       </IonCardContent>
     </IonCard>
 
@@ -67,7 +67,7 @@ import {markRaw, ref} from "vue";
 import useImageData from '@/hooks/useImageData';
 import {useI18n} from "vue-i18n";
 import TrueFalseRuleResultPage from '@/views/TrueFalseRuleResultPage.vue'
-import rule from '@/json/rules.json'
+import dataSource from '@/json/dataSource.json'
 
 const {t} = useI18n();
 const trueFalseRuleResultPage = markRaw(TrueFalseRuleResultPage);

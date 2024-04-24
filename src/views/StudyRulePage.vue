@@ -19,9 +19,9 @@
         </IonCardHeader>
         <IonCardContent>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-          <IonLabel style="color: black;">{{rule.rules[i].Q}}</IonLabel><br><br>
+          <IonLabel style="color: black;">{{ dataSource.rules[i-1].Q }}</IonLabel><br><br>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-          <IonLabel style="color: black;">{{rule.rules[i].A}}</IonLabel>
+          <IonLabel style="color: black;">{{ dataSource.rules[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -46,7 +46,7 @@ import {
 import {bookmark, bookmarkOutline, newspaper} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
-import rule from '@/json/rules.json'
+import dataSource from '@/json/dataSource.json'
 import {useI18n} from "vue-i18n";
 
 const {t} = useI18n();
@@ -59,7 +59,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {getImagePath, handleZeroPad, addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useImageData()
+const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useImageData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 
 const onClickBackButton = () => {

@@ -18,9 +18,9 @@
         </IonCardHeader>
         <IonCardContent>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-          <IonLabel style="color: black;">{{rule.rules[i].Q}}</IonLabel><br><br>
+          <IonLabel style="color: black;">{{ dataSource.rules[i-1].Q }}</IonLabel><br><br>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-          <IonLabel style="color: black;">{{rule.rules[i].A}}</IonLabel><br><br>
+          <IonLabel style="color: black;">{{ dataSource.rules[i-1].A }}</IonLabel><br><br>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -45,7 +45,7 @@ import {
 import {bookmark, trashBin} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
-import rule from "@/json/rules.json";
+import dataSource from "@/json/dataSource.json";
 import {useI18n} from "vue-i18n";
 
 const {t} = useI18n();
