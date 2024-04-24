@@ -118,7 +118,7 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
 };
 
 const {generateMultipleChoiceProblems, ruleCounts} = useImageData()
-const problemCounts = 2;
+const problemCounts = Number(localStorage.getItem('multipleChoiceRuleCount')) || 10;
 const problems = generateMultipleChoiceProblems(problemCounts, ruleCounts);
 
 let currentSelectedValue = ref('');

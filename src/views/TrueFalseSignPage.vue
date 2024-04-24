@@ -109,7 +109,7 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
 };
 
 const {generateTrueFalseProblem, signCounts} = useImageData()
-const problemCounts = 2;
+const problemCounts = Number(localStorage.getItem('trueFalseSignCount')) || 10;
 const problems = generateTrueFalseProblem(problemCounts, signCounts);
 
 let currentSelectedValue = ref('');
