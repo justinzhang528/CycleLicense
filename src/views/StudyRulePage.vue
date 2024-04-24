@@ -18,10 +18,10 @@
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ ruleImageCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-          <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'Q')"
-                  style="display: block; margin: 0 auto;"></IonImg>
-          <IonImg :src="getImagePath('rule', handleZeroPad(i,3), 'A')"
-                  style="display: block; margin: 0 auto;"></IonImg>
+          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+          <IonLabel style="color: black;">{{rule.rules[i].Q}}</IonLabel><br><br>
+          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+          <IonLabel style="color: black;">{{rule.rules[i].A}}</IonLabel>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -40,13 +40,13 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonTitle,
-  IonImg,
   IonLabel,
   toastController,
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, newspaper} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
+import rule from '@/json/rules.json'
 
 const showToast = async (msg: string) => {
   const toast = await toastController.create({

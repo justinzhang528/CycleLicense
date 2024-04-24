@@ -11,19 +11,19 @@
   </IonHeader>
   <IonContent class="ion-padding">
     <IonImg src="images/mockTest.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
-    <IonNavLink routerDirection="forward" :component="multiChoiceSign">
+    <IonNavLink routerDirection="forward" :component="multipleChoiceSignPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="listCircle"/>
         <IonLabel style="padding-left: 10px">{{$t('multipleChoiceSign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px">
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="multipleChoiceRulePage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="listCircle"/>
         <IonLabel style="padding-left: 10px">{{$t('multipleChoiceRule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSign">
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSignPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonIcon :icon="checkmarkDone"/>
         <IonLabel style="padding-left: 10px">{{$t('trueFalseSign')}}</IonLabel>
@@ -53,15 +53,15 @@ import {
 } from "@ionic/vue";
 import {listCircle, checkmarkDone} from "ionicons/icons";
 import {markRaw} from "vue";
-import MultiChoiceSign from "@/views/MultipleChoiceSignPage.vue";
-// import MultiChoiceRule from "@/views/MultipleChoiceSignPage.vue";
-import TrueFalseSign from "@/views/TrueFalseSignPage.vue";
-// import TrueFalseRule from "@/views/MultipleChoiceSignPage.vue";
+import MultiChoiceSignPage from "@/views/MultipleChoiceSignPage.vue";
+import MultiChoiceRulePage from "@/views/MultipleChoiceRulePage.vue";
+import TrueFalseSignPage from "@/views/TrueFalseSignPage.vue";
+// import TrueFalseRulePage from "@/views/MultipleChoiceSignPage.vue";
 
-const multiChoiceSign = markRaw(MultiChoiceSign);
-// const multiChoiceRule = markRaw(MultiChoiceRule);
-const trueFalseSign = markRaw(TrueFalseSign);
-// const trueFalseRule = markRaw(TrueFalseRule);
+const multipleChoiceSignPage = markRaw(MultiChoiceSignPage);
+const multipleChoiceRulePage = markRaw(MultiChoiceRulePage);
+const trueFalseSignPage = markRaw(TrueFalseSignPage);
+// const trueFalseRulePage = markRaw(TrueFalseRulePage);
 </script>
 
 <style scoped>

@@ -11,16 +11,16 @@
     </IonToolbar>
   </IonHeader>
   <IonContent>
-      <IonCard v-for="item in ruleBookmarkedItems" :key="item">
-        <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(item)"/>
+      <IonCard v-for="i in ruleBookmarkedItems" :key="i">
+        <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(i)"/>
         <IonCardHeader>
           <IonCardSubtitle class="center" style="padding-left: 40px"></IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-          <IonImg :src="getImagePath('rule', handleZeroPad(item,3), 'Q')"
-                  style="display: block; margin: 0 auto;"></IonImg>
-          <IonImg :src="getImagePath('rule', handleZeroPad(item,3), 'A')"
-                  style="display: block; margin: 0 auto;"></IonImg>
+          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+          <IonLabel style="color: black;">{{rule.rules[i].Q}}</IonLabel><br><br>
+          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+          <IonLabel style="color: black;">{{rule.rules[i].A}}</IonLabel><br><br>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -46,6 +46,7 @@ import {
 import {bookmark, trashBin} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
+import rule from "@/json/rules.json";
 
 const showToast = async (msg: string) => {
   const toast = await toastController.create({

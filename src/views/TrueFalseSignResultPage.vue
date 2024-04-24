@@ -11,21 +11,21 @@
     </IonToolbar>
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
-    <h5>{{$t('totalScore')}}: {{ totalScore }}</h5>
+    <h5>{{$t('totalScore')}} : {{ totalScore }}</h5>
     <IonCard v-for="(item,index) in problems" style="padding-bottom: 10px">
       <IonCardHeader>
         <IonCardSubtitle>{{ index + 1 }}/{{ problems.length }}</IonCardSubtitle>
       </IonCardHeader>
       <IonCardContent>
         <IonItem color="transparent" lines="none">
-          <IonImg class="center" :src="item.questionPath" style="width: 75%"/>
+          <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
         </IonItem>
         <IonItem color="transparent" class="center" lines="none">
-          <IonImg :src="item.trueFalsePath" style="width: 90%"/>
+          <IonImg :src="'images/sign/'+item.trueFalse+'A.png'" style="width: 90%"/>
         </IonItem>
         <IonLabel>
-          {{$t('answer')}}: {{ item.ans === 1 ? $t('true') : $t('false') }}
-          ( {{$t('your')}}{{$t('answer')}}: {{ chooseAns[index] === 1 ? $t('true') : $t('false') }} )
+          {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}
+          ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ chooseAns[index] === 1 ? $t('true') : $t('false') }} )
           <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" style="color: green"></IonIcon>
           <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" style="color: red"></IonIcon>
         </IonLabel>

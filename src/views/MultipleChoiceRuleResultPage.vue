@@ -17,20 +17,24 @@
         <IonCardSubtitle>{{ index + 1 }}/{{ problems.length }}</IonCardSubtitle>
       </IonCardHeader>
       <IonCardContent>
-        <IonItem color="transparent" lines="none">
-          <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
+        <IonItem color="transparent" class="center" lines="none">
+          <IonLabel style="color: black;">{{rule.rules[Number(item.question)].Q}}</IonLabel>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          1.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice1+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(item.choice1)].A}}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          2.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice2+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(item.choice2)].A}}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          3.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice3+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(item.choice3)].A}}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          4.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice4+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(item.choice4)].A}}</label>
         </IonItem>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ $t(item.ans) }}
@@ -63,11 +67,12 @@ import {
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useImageData from "@/hooks/useImageData";
+import rule from '@/json/rules.json'
 
 const {getProblems, getTotalScore, getChooseAns} = useImageData();
-const problems = getProblems('multipleChoiceSignProblems');
-const chooseAns = getChooseAns('userMultipleChoiceSignValues');
-const totalScore = getTotalScore('multipleChoiceSignProblems', 'userMultipleChoiceSignValues');
+const problems = getProblems('multipleChoiceRuleProblems');
+const chooseAns = getChooseAns('userMultipleChoiceRuleValues');
+const totalScore = getTotalScore('multipleChoiceRuleProblems', 'userMultipleChoiceRuleValues');
 
 </script>
 

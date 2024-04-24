@@ -6,34 +6,43 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        {{$t('trueFalseSign')}}
+        {{$t('multipleChoiceRule')}}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
-    <IonItem color="transparent" lines="none">
-      <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
-    </IonItem>
-    <IonItem color="transparent" lines="none">
-      <IonImg :src="'images/sign/'+problems[currentProblemNum-1].trueFalse+'A.png'" class="center round-border-img" style="width: 90%"/>
+    <IonItem color="transparent" class="center" lines="none">
+      <IonLabel style="color: black;">{{rule.rules[Number(problems[currentProblemNum-1].question)].Q}}</IonLabel>
     </IonItem>
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <h5 class="center" style="width: 100%">{{ $t('true') }}</h5>
+          <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice1)].A}}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <h5 class="center" style="width: 100%">{{ $t('false') }}</h5>
-          <IonRadio mode="md" value="0"></IonRadio>
+          <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice2)].A}}</label>
+          <IonRadio mode="md" value="2"></IonRadio>
+        </IonItem>
+        <IonItem color="transparent" class="center ion-item-border" lines="none">
+          <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice3)].A}}</label>
+          <IonRadio mode="md" value="3"></IonRadio>
+        </IonItem>
+        <IonItem color="transparent" class="center ion-item-border" lines="none">
+          <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{rule.rules[Number(problems[currentProblemNum-1].choice4)].A}}</label>
+          <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
       </IonRadioGroup>
     </div>
     <IonButton :onClick="onClickNextButton" color="dark" shape="round">
       <IonIcon :icon="chevronForward"/>
     </IonButton>
-    <IonNavLink id='goToTrueFalseSignResultPage' routerDirection="forward" :component="trueFalseSignResultPage">
+    <IonNavLink id='goToMultipleChoiceRuleResultPage' routerDirection="forward" :component="multipleChoiceRuleResultPage">
     </IonNavLink>
   </IonContent>
 </template>
@@ -54,16 +63,17 @@ import {
   IonIcon,
   IonImg,
   toastController,
-  alertController,
+  alertController, IonLabel,
 } from "@ionic/vue";
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
-import useImageData from '@/hooks/useImageData';
+import useImageData from '@/hooks/useImageData'
 import {useI18n} from "vue-i18n";
-import TrueFalseSignResultPage from '@/views/TrueFalseSignResultPage.vue'
+import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.vue'
+import rule from '@/json/rules.json'
 
 const {t} = useI18n();
-const trueFalseSignResultPage = markRaw(TrueFalseSignResultPage);
+const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
 
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
@@ -86,10 +96,10 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
         handler: () => {
           currentSelectedValue.value = '';
           currentProblemNum.value = 1;
-          localStorage.setItem('trueFalseSignProblems',JSON.stringify(problems));
-          localStorage.setItem('userTrueFalseSignValues',chooseAns.toString());
+          localStorage.setItem('multipleChoiceRuleProblems',JSON.stringify(problems));
+          localStorage.setItem('userMultipleChoiceRuleValues',chooseAns.toString());
           chooseAns.splice(0);
-          const navLink = document.querySelector('#goToTrueFalseSignResultPage');
+          const navLink = document.querySelector('#goToMultipleChoiceRuleResultPage');
           (navLink as HTMLElement).click();
         },
       }
@@ -100,9 +110,9 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateTrueFalseProblem, signImageCounts} = useImageData()
+const {generateMultipleChoiceProblems, ruleImageCounts} = useImageData()
 const problemCounts = 2;
-const problems = generateTrueFalseProblem(problemCounts, signImageCounts);
+const problems = generateMultipleChoiceProblems(problemCounts, ruleImageCounts);
 
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);

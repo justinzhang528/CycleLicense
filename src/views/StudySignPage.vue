@@ -22,6 +22,7 @@
                   style="width: 50%; display: block; margin: 0 auto;"></IonImg>
           <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'A')"
                   style="width: 75%; display: block; margin: 0 auto;"></IonImg>
+<!--          <IonLabel class="center" style="color: black; width: 75%; display: block; margin: 0 auto;">ဘေးအန္တရာယ်ကင်းရှင်းစွာ</IonLabel>-->
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -47,6 +48,7 @@ import {
 import {trailSign, bookmark, bookmarkOutline} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
+import rule from "@/json/rules.json";
 
 const showToast = async (msg: string) => {
   const toast = await toastController.create({

@@ -57,9 +57,8 @@ export default function () {
         return array.slice(0, count);
     }
 
-    const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
+    const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number) => {
         let result = [];
-        const mainDir = "images/";
         const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
         for(const [index, element] of shuffleOrderNumbers.entries()){
@@ -67,11 +66,11 @@ export default function () {
             let choiceArray = generateRandomNumbers(totalCounts, element, 4);
             const json = {
                 sn: index,
-                questionPath: mainDir + type + "/" + handleZeroPad(element, 3) + 'Q.png',
-                choice1Path: mainDir + type + "/" + handleZeroPad(choiceArray[0], 3) + 'A.png',
-                choice2Path: mainDir + type + "/" + handleZeroPad(choiceArray[1], 3) + 'A.png',
-                choice3Path: mainDir + type + "/" + handleZeroPad(choiceArray[2], 3) + 'A.png',
-                choice4Path: mainDir + type + "/" + handleZeroPad(choiceArray[3], 3) + 'A.png',
+                question: handleZeroPad(element, 3),
+                choice1: handleZeroPad(choiceArray[0], 3),
+                choice2: handleZeroPad(choiceArray[1], 3),
+                choice3: handleZeroPad(choiceArray[2], 3),
+                choice4: handleZeroPad(choiceArray[3], 3),
                 ans: choiceArray.indexOf(element) + 1
             }
             result.push(json);
@@ -79,9 +78,8 @@ export default function () {
         return result;
     }
 
-    const generateTrueFalseProblem = (problemCounts: number, totalCounts: number, type: string) => {
+    const generateTrueFalseProblem = (problemCounts: number, totalCounts: number) => {
         let result = [];
-        const mainDir = "images/";
         const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
         for(const [index, element] of shuffleOrderNumbers.entries()){
@@ -89,8 +87,8 @@ export default function () {
             let choiceArray = generateRandomNumbers(totalCounts, element, 2);
             const json = {
                 sn: index,
-                questionPath: mainDir + type + "/" + handleZeroPad(element, 3) + 'Q.png',
-                trueFalsePath: mainDir + type + "/" + handleZeroPad(choiceArray[0], 3) + 'A.png',
+                question: handleZeroPad(element, 3),
+                trueFalse: handleZeroPad(choiceArray[0], 3),
                 ans: choiceArray[0] === element ? 1 : 0
             }
             result.push(json);

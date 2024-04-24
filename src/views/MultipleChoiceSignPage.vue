@@ -13,27 +13,27 @@
   <IonContent className="ion-padding ion-text-center">
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
     <IonItem color="transparent" lines="none">
-      <IonImg :src="problems[currentProblemNum-1].questionPath" class="center round-border-img" style="width: 65%"/>
+      <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 65%"/>
     </IonItem>
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          1.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice1Path" class="center round-border-img"
+          {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;<IonImg :src="'images/sign/'+problems[currentProblemNum-1].choice1+'A.png'" class="center round-border-img"
                                 style="padding-right: 5px"/>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          2.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice2Path" class="center round-border-img"
+          {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;<IonImg :src="'images/sign/'+problems[currentProblemNum-1].choice2+'A.png'" class="center round-border-img"
                                 style="padding-right: 5px"/>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          3.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice3Path" class="center round-border-img"
+          {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;<IonImg :src="'images/sign/'+problems[currentProblemNum-1].choice3+'A.png'" class="center round-border-img"
                                 style="padding-right: 5px"/>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          4.&nbsp;&nbsp;<IonImg :src="problems[currentProblemNum-1].choice4Path" class="center round-border-img"
+          {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;<IonImg :src="'images/sign/'+problems[currentProblemNum-1].choice4+'A.png'" class="center round-border-img"
                                 style="padding-right: 5px"/>
           <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
@@ -111,7 +111,7 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
 
 const {generateMultipleChoiceProblems, signImageCounts} = useImageData()
 const problemCounts = 2;
-const problems = generateMultipleChoiceProblems(problemCounts, signImageCounts, 'sign');
+const problems = generateMultipleChoiceProblems(problemCounts, signImageCounts);
 
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
