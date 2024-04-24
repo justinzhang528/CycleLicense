@@ -48,8 +48,9 @@ import {
 import {trailSign, bookmark, bookmarkOutline} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
-import rule from "@/json/rules.json";
+import {useI18n} from "vue-i18n";
 
+const {t} = useI18n();
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
     message: msg,
@@ -68,9 +69,9 @@ const onClickBackButton = () => {
 
 const onClickBookmarkIcon = (n: number) => {
   if (signBookmarkedItems.includes(n)) {
-    showToast('Removed From Bookmark');
+    showToast(t('removedFromBookmark'));
   } else {
-    showToast('Added To Bookmark');
+    showToast(t('addedToBookmark'));
   }
   addOrRemoveFromArray(signBookmarkedItems,n);
 }

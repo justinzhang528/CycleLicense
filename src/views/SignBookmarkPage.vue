@@ -46,7 +46,9 @@ import {
 import {bookmark, trashBin} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
+import {useI18n} from "vue-i18n";
 
+const {t} = useI18n();
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
     message: msg,
@@ -65,7 +67,7 @@ const onClickBackButton = () => {
 
 const onClickTrashBinIcon = (n: number) => {
   addOrRemoveFromArray(signBookmarkedItems,n);
-  showToast('Removed From Bookmark');
+  showToast(t('removedFromBookmark'));
 }
 
 </script>

@@ -39,7 +39,6 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonTitle,
-  IonImg,
   IonLabel,
   toastController,
 } from "@ionic/vue";
@@ -47,7 +46,9 @@ import {bookmark, trashBin} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
 import rule from "@/json/rules.json";
+import {useI18n} from "vue-i18n";
 
+const {t} = useI18n();
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
     message: msg,
@@ -57,7 +58,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {getImagePath, handleZeroPad, addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useImageData()
+const {addOrRemoveFromArray, getBookmarkedItems} = useImageData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 
 const onClickBackButton = () => {
@@ -66,7 +67,7 @@ const onClickBackButton = () => {
 
 const onClickTrashBinIcon = (n: number) => {
   addOrRemoveFromArray(ruleBookmarkedItems,n);
-  showToast('Removed From Bookmark');
+  showToast(t('removedFromBookmark'));
 }
 
 </script>

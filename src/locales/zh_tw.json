@@ -23,6 +23,8 @@
   "true": "是",
   "false": "非",
   "question": "問題",
+  "removedFromBookmark": "已從收藏夾移除",
+  "addedToBookmark": "已添加到收藏夾",
   ":": ":",
   "1": "1",
   "2": "2",

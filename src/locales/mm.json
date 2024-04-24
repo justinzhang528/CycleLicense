@@ -23,6 +23,8 @@
   "true": "မှန်",
   "false": "မှား",
   "question": "မေးခွန်း",
+  "removedFromBookmark": "Bookmark မှဖယ်ထုတ်လိုက်ပြီ",
+  "addedToBookmark": "Bookmark သို့ထည့်လိုက်ပြီ",
   ":": "-",
   "1": "၁",
   "2": "၂",
