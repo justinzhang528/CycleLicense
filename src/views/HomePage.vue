@@ -1,14 +1,11 @@
 <template>
-  <IonPage>
+  <IonPage id="menu">
     <IonHeader :translucent="true">
       <IonToolbar>
+        <IonButtons slot="start">
+          <IonMenuButton></IonMenuButton>
+        </IonButtons>
         <IonTitle class="center">{{$t('drivingLicense')}}</IonTitle>
-        <IonSelect aria-label="Language" interface="popover" placeholder="English" slot="end" value="en" @ionChange="onSelectedChange" style="padding-right: 5px">
-          <IonSelectOption value="en">English</IonSelectOption>
-          <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
-          <IonSelectOption value="zh_cn">简体中文</IonSelectOption>
-          <IonSelectOption value="zh_tw">繁體中文</IonSelectOption>
-        </IonSelect>
       </IonToolbar>
     </IonHeader>
     <IonContent :fullscreen="true">
@@ -57,29 +54,14 @@ import {
   IonCardTitle,
   IonCardContent,
   IonNavLink,
-  IonSelect,
-  IonSelectOption,
+  IonMenuButton,
+  IonButtons,
 } from '@ionic/vue';
 import StudyPage from "@/views/StudyPage.vue";
-import {markRaw, ref} from "vue";
+import {markRaw} from "vue";
 import MockTestPage from "@/views/MockTestPage.vue";
-import {useI18n} from "vue-i18n";
-
-const {locale} = useI18n();
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
-const currentSelectedValue = ref('en');
-const onSelectedChange = (e: CustomEvent)=>{
-  currentSelectedValue.value = e.detail.value;
-  if(currentSelectedValue.value == 'en')
-    locale.value = 'en'
-  else if(currentSelectedValue.value == 'mm')
-    locale.value = 'mm';
-  else if(currentSelectedValue.value == 'zh_cn')
-    locale.value = 'zh_cn';
-  else if(currentSelectedValue.value == 'zh_tw')
-    locale.value = 'zh_tw';
-}
 </script>
 
 <style scoped>

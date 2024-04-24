@@ -2,7 +2,7 @@
   <IonHeader>
     <IonToolbar>
       <IonButtons slot="start">
-        <IonBackButton></IonBackButton>
+        <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="flask"></IonIcon>

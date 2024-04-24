@@ -2,7 +2,7 @@
   <IonHeader>
     <IonToolbar>
       <IonButtons slot="start" :onclick="onClickBackButton">
-        <IonBackButton></IonBackButton>
+        <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="trailSign" style="padding-right: 10px"/>
