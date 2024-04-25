@@ -11,14 +11,14 @@
           </IonItem>
         </IonToolbar>
       </IonHeader>
-      <IonContent class="ion-padding">
+      <IonContent>
         <IonList>
-          <IonItem>
+          <IonItem style="padding-top: 20px; padding-bottom: 20px">
             <IonThumbnail slot="start">
               <IonImg src="images/lang.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
-            <IonSelect aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange" style="padding-left: 25px">
+            <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
               <IonSelectOption value="en">English</IonSelectOption>
               <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
               <IonSelectOption value="zh_cn">简体中文</IonSelectOption>

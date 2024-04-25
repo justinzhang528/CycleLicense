@@ -5,8 +5,8 @@
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        {{ $t('trueFalseRule') }}
+        <IonIcon :icon="checkmarkDone" style="padding-right: 10px"/>
+        {{ $t('rule') }}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -62,7 +62,7 @@ import {
   IonCardContent,
   IonCard,
 } from "@ionic/vue";
-import {chevronForward, listCircle} from "ionicons/icons";
+import {checkmarkDone, chevronForward} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useImageData from '@/hooks/useImageData';
 import {useI18n} from "vue-i18n";

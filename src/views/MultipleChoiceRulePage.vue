@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        {{$t('multipleChoiceRule')}}
+        {{$t('rule')}}
       </IonTitle>
     </IonToolbar>
   </IonHeader>

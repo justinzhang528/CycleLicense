@@ -6,7 +6,7 @@
       </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="listCircle" style="padding-right: 10px"/>
-        {{$t('multipleChoiceSign')}}
+        {{$t('sign')}}
       </IonTitle>
     </IonToolbar>
   </IonHeader>
