@@ -40,6 +40,7 @@ import zh_cn from '@/locales/zh_cn.json'
 import zh_tw from '@/locales/zh_tw.json'
 import {createI18n} from "vue-i18n";
 import {ScreenOrientation} from "@capacitor/screen-orientation";
+import useAdmob from '@/hooks/useAdmob';
 
 const app = createApp(App)
     .use(IonicVue)
@@ -48,10 +49,11 @@ const app = createApp(App)
 router.isReady().then(() => {
     const i18n = createI18n({
         locale: navigator.language,
-        fallbackLocale: 'mm',
         messages: {en, mm, zh_cn, zh_tw},
         legacy: false
     })
+    const {initializeAdmob} = useAdmob();
+    initializeAdmob();
     ScreenOrientation.lock({orientation: 'portrait'});
     app.use(i18n);
     app.mount('#app');

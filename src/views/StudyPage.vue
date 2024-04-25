@@ -60,11 +60,14 @@ import StudySignPage from "@/views/StudySignPage.vue";
 import StudyRulePage from "@/views/StudyRulePage.vue";
 import SignBookmarkPage from "@/views/SignBookmarkPage.vue";
 import RuleBookmarkPage from "@/views/RuleBookmarkPage.vue";
+import useAdmob from "@/hooks/useAdmob";
 
 const studySignPage = markRaw(StudySignPage);
 const studyRulePage = markRaw(StudyRulePage);
 const signBookmarkPage = markRaw(SignBookmarkPage);
 const ruleBookmarkPage = markRaw(RuleBookmarkPage);
+const {showInterstitial} = useAdmob();
+showInterstitial();
 </script>
 
 <style scoped>

@@ -60,11 +60,14 @@ import MultiChoiceSignPage from "@/views/MultipleChoiceSignPage.vue";
 import MultiChoiceRulePage from "@/views/MultipleChoiceRulePage.vue";
 import TrueFalseSignPage from "@/views/TrueFalseSignPage.vue";
 import TrueFalseRulePage from "@/views/TrueFalseRulePage.vue";
+import useAdmob from "@/hooks/useAdmob";
 
 const multipleChoiceSignPage = markRaw(MultiChoiceSignPage);
 const multipleChoiceRulePage = markRaw(MultiChoiceRulePage);
 const trueFalseSignPage = markRaw(TrueFalseSignPage);
 const trueFalseRulePage = markRaw(TrueFalseRulePage);
+const {showRewardVideo} = useAdmob();
+showRewardVideo();
 </script>
 
 <style scoped>

@@ -80,3 +80,10 @@
   chmod -R 777 PROJECT_DIR
   ```
 
+### Admob:
+- For android:
+  - https://developers.google.com/admob/android/quick-start
+  - https://developers.google.com/admob/android/test-ads#enable_test_devices
+- For iOS:
+  - https://developers.google.com/admob/ios/quick-start
+  - https://developers.google.com/admob/ios/test-ads#enable_test_devices
