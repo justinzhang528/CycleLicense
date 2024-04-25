@@ -47,19 +47,19 @@
               <IonContent class="center ion-padding">
                 <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
                 <IonItem>
-                  <IonLabel>{{$t('multipleChoiceSign')}}</IonLabel>
+                  <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
                   <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" maxlength="2" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
                 </IonItem>
                 <IonItem>
-                  <IonLabel>{{$t('multipleChoiceRule')}}</IonLabel>
+                  <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
                   <IonInput style="width: 25%" ref="multipleChoiceRuleInput" type="number" :value="multipleChoiceRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
                 </IonItem>
                 <IonItem>
-                  <IonLabel>{{$t('trueFalseSign')}}</IonLabel>
+                  <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
                   <IonInput style="width: 25%" ref="trueFalseSignInput" type="number" :value="trueFalseSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
                 </IonItem>
                 <IonItem>
-                  <IonLabel>{{$t('trueFalseRule')}}</IonLabel>
+                  <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
                   <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" :value="trueFalseRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
                 </IonItem>
               </IonContent>
