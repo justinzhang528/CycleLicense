@@ -21,16 +21,20 @@
           <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          1.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice1+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice1)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          2.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice2+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice2)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          3.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice3+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice3)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          4.&nbsp;&nbsp;<IonImg :src="'images/sign/'+item.choice4+'A.png'" style="width: 90%"/>
+          <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice4)-1].A }}</label>
         </IonItem>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ $t(item.ans) }}
@@ -63,6 +67,7 @@ import {
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useImageData from "@/hooks/useImageData";
+import dataSource from "@/json/dataSource.json";
 
 const {getProblems, getTotalScore, getChooseAns} = useImageData();
 const problems = getProblems('multipleChoiceSignProblems');

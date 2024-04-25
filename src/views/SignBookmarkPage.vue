@@ -11,16 +11,15 @@
     </IonToolbar>
   </IonHeader>
   <IonContent>
-      <IonCard v-for="item in signBookmarkedItems" :key="item">
-        <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(item)"/>
+      <IonCard v-for="i in signBookmarkedItems" :key="i">
+        <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(i)"/>
         <IonCardHeader>
           <IonCardSubtitle class="center" style="padding-left: 40px"></IonCardSubtitle>
         </IonCardHeader>
-        <IonCardContent>
-          <IonImg :src="getImagePath('sign', handleZeroPad(item,3),'Q')"
+        <IonCardContent class="center">
+          <IonImg :src="getImagePath('sign', handleZeroPad(i,3),'Q')"
                   style="width: 50%; display: block; margin: 0 auto;"></IonImg>
-          <IonImg :src="getImagePath('sign', handleZeroPad(item,3), 'A')"
-                  style="width: 75%; display: block; margin: 0 auto;"></IonImg>
+          <IonLabel style="color: black; display: block; margin: 0 auto; padding-bottom: 20px">{{ dataSource.signs[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -47,6 +46,7 @@ import {bookmark, trashBin} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
 import {useI18n} from "vue-i18n";
+import dataSource from "@/json/dataSource.json";
 
 const {t} = useI18n();
 const showToast = async (msg: string) => {

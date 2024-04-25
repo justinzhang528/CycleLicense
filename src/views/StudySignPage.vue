@@ -17,12 +17,10 @@
         <IonCardHeader>
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signCounts }}</IonCardSubtitle>
         </IonCardHeader>
-        <IonCardContent>
+        <IonCardContent class="center">
           <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'Q')"
                   style="width: 50%; display: block; margin: 0 auto;"></IonImg>
-          <IonImg :src="getImagePath('sign', handleZeroPad(i,3), 'A')"
-                  style="width: 75%; display: block; margin: 0 auto;"></IonImg>
-<!--          <IonLabel class="center" style="color: black; width: 75%; display: block; margin: 0 auto;">ဘေးအန္တရာယ်ကင်းရှင်းစွာ</IonLabel>-->
+          <IonLabel style="color: black; display: block; margin: 0 auto; padding-bottom: 20px">{{ dataSource.signs[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -49,6 +47,7 @@ import {trailSign, bookmark, bookmarkOutline} from "ionicons/icons";
 import useImageData from '@/hooks/useImageData'
 import {reactive} from "vue";
 import {useI18n} from "vue-i18n";
+import dataSource from "@/json/dataSource.json";
 
 const {t} = useI18n();
 const showToast = async (msg: string) => {

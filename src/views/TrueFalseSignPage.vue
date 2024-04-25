@@ -17,8 +17,8 @@
         <IonItem color="transparent" lines="none">
           <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
         </IonItem>
-        <IonItem color="transparent" lines="none">
-          <IonImg :src="'images/sign/'+problems[currentProblemNum-1].trueFalse+'A.png'" class="center round-border-img" style="width: 90%"/>
+        <IonItem class="center" color="transparent" lines="none">
+          <IonLabel style="color: black; display: block; margin: 0 auto; padding-bottom: 5px">{{ dataSource.signs[Number(problems[currentProblemNum-1].trueFalse)-1].A }}</IonLabel>
         </IonItem>
       </IonCardContent>
     </IonCard>
@@ -62,13 +62,14 @@ import {
   IonCard,
   IonCardContent,
   toastController,
-  alertController,
+  alertController, IonLabel,
 } from "@ionic/vue";
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useImageData from '@/hooks/useImageData';
 import {useI18n} from "vue-i18n";
 import TrueFalseSignResultPage from '@/views/TrueFalseSignResultPage.vue'
+import dataSource from "@/json/dataSource.json";
 
 const {t} = useI18n();
 const trueFalseSignResultPage = markRaw(TrueFalseSignResultPage);

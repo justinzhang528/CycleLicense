@@ -21,7 +21,7 @@
           <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
         </IonItem>
         <IonItem color="transparent" class="center" lines="none">
-          <IonImg :src="'images/sign/'+item.trueFalse+'A.png'" style="width: 90%"/>
+          <IonLabel style="color: black; padding-bottom: 5px">{{ dataSource.signs[Number(item.trueFalse)-1].A }}</IonLabel>
         </IonItem>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}
@@ -54,6 +54,7 @@ import {
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useImageData from "@/hooks/useImageData";
+import dataSource from "@/json/dataSource.json";
 
 const {getProblems, getTotalScore, getChooseAns} = useImageData();
 const problems = getProblems('trueFalseSignProblems');
