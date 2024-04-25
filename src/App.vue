@@ -36,16 +36,16 @@
               <IonHeader>
                 <IonToolbar>
                   <IonButtons slot="start">
-                    <ion-button @click="onCancelModal()">Cancel</ion-button>
+                    <ion-button @click="onCancelModal()">{{$t('cancel')}}</ion-button>
                   </IonButtons>
                   <IonTitle>{{$t('mockTest')}} {{$t('settings')}}</IonTitle>
                   <IonButtons slot="end">
-                    <IonButton :strong="true" @click="onConfirmModal()">Confirm</IonButton>
+                    <IonButton :strong="true" @click="onConfirmModal()">{{$t('confirm')}}</IonButton>
                   </IonButtons>
                 </IonToolbar>
               </IonHeader>
               <IonContent class="center ion-padding">
-                <h5>{{$t('setTheNumberOfQuestions')}}</h5>
+                <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
                 <IonItem>
                   <IonLabel>{{$t('multipleChoiceSign')}}</IonLabel>
                   <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" maxlength="2" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
