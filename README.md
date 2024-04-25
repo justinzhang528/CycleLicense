@@ -84,6 +84,6 @@
 - For android:
   - https://developers.google.com/admob/android/quick-start
   - https://developers.google.com/admob/android/test-ads#enable_test_devices
-- For iOS:
+- For iOS (currently can only show ads under capacitor & admob <= 5.0.0):
   - https://developers.google.com/admob/ios/quick-start
   - https://developers.google.com/admob/ios/test-ads#enable_test_devices
