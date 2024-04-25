@@ -13,9 +13,6 @@ import {
 
 export default function () {
     const showBanner = async () => {
-        if (localStorage.getItem('isAdsFree') === 'true') {
-            return;
-        }
         const options: BannerAdOptions = {
             adId: FixedSizeBanner_Id, // demo ad unit id,
             adSize: BannerAdSize.BANNER,
@@ -23,36 +20,40 @@ export default function () {
             isTesting: true,
         };
         await AdMob.showBanner(options);
+        if (localStorage.getItem('isAdsFree') === 'true') {
+            await AdMob.hideBanner();
+        }
     };
 
     const showInterstitial = async () => {
-        if (localStorage.getItem('isAdsFree') === 'true') {
-            return;
-        }
-        AdMob.hideBanner();
         const options: AdOptions = {
             adId: Interstitial_Id, // demo ad unit id
             isTesting: true,
         };
         await AdMob.prepareInterstitial(options);
-        await AdMob.showInterstitial();
+
+        if (localStorage.getItem('isAdsFree') !== 'true') {
+            await AdMob.showInterstitial();
+        }
     };
 
     const showRewardVideo = async () => {
-        if (localStorage.getItem('isAdsFree') === 'true') {
-            return;
-        }
-        AdMob.hideBanner();
         const options: RewardAdOptions = {
             adId: Rewarded_Id, // demo ad unit id
             isTesting: true,
         };
         await AdMob.prepareRewardVideoAd(options);
-        await AdMob.showRewardVideoAd();
+        if (localStorage.getItem('isAdsFree') !== 'true') {
+            await AdMob.showRewardVideoAd();
+        }
     };
 
     const resumeBanner = () => {
         AdMob.resumeBanner();
+    }
+
+    const hideBanner = () => {
+        AdMob.hideBanner();
     }
 
     const initializeAdmob = async ()=> {
@@ -66,6 +67,7 @@ export default function () {
         showBanner,
         showInterstitial,
         showRewardVideo,
+        hideBanner,
         resumeBanner,
         initializeAdmob
     }

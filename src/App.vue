@@ -13,7 +13,7 @@
       </IonHeader>
       <IonContent>
         <IonList>
-          <IonItem style="padding-top: 20px; padding-bottom: 20px">
+          <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
               <IonImg src="images/lang.png" alt="avatar"></IonImg>
             </IonThumbnail>
@@ -25,48 +25,55 @@
               <IonSelectOption value="zh_tw">繁體中文</IonSelectOption>
             </IonSelect>
           </IonItem>
-          <IonItem>
+          <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
               <IonImg src="images/testing.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('mockTest') }}</IonLabel>
-            <IonButton style="width: 40%;" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
-
-            <IonModal ref="modal" trigger="openMockTestSetting">
-              <IonHeader>
-                <IonToolbar>
-                  <IonButtons slot="start">
-                    <ion-button @click="onCancelModal()">{{$t('cancel')}}</ion-button>
-                  </IonButtons>
-                  <IonTitle>{{$t('mockTest')}} {{$t('settings')}}</IonTitle>
-                  <IonButtons slot="end">
-                    <IonButton :strong="true" @click="onConfirmModal()">{{$t('confirm')}}</IonButton>
-                  </IonButtons>
-                </IonToolbar>
-              </IonHeader>
-              <IonContent class="center ion-padding">
-                <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
-                <IonItem>
-                  <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
-                  <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" maxlength="2" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
-                  <IonInput style="width: 25%" ref="multipleChoiceRuleInput" type="number" :value="multipleChoiceRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
-                  <IonInput style="width: 25%" ref="trueFalseSignInput" type="number" :value="trueFalseSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
-                </IonItem>
-                <IonItem>
-                  <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
-                  <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" :value="trueFalseRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
-                </IonItem>
-              </IonContent>
-            </IonModal>
-
+            <IonButton style="width: 40%; padding-right: 20px" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
+          </IonItem>
+          <IonItem style="padding-top: 10px; padding-bottom: 10px">
+            <IonThumbnail slot="start">
+              <IonImg src="images/noAds.png" alt="avatar"></IonImg>
+            </IonThumbnail>
+            <IonLabel>{{ $t('adsFree') }}</IonLabel>
+            <IonToggle style="width: 40%; padding-left: 40px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
           </IonItem>
         </IonList>
+
+        <IonModal ref="modal" trigger="openMockTestSetting">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <ion-button @click="onCancelModal()">{{$t('cancel')}}</ion-button>
+              </IonButtons>
+              <IonTitle>{{$t('mockTest')}} {{$t('settings')}}</IonTitle>
+              <IonButtons slot="end">
+                <IonButton :strong="true" @click="onConfirmModal()">{{$t('confirm')}}</IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent class="center ion-padding">
+            <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
+            <IonItem>
+              <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+              <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" maxlength="2" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+              <IonInput style="width: 25%" ref="multipleChoiceRuleInput" type="number" :value="multipleChoiceRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+              <IonInput style="width: 25%" ref="trueFalseSignInput" type="number" :value="trueFalseSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+              <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" :value="trueFalseRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
+            </IonItem>
+          </IonContent>
+        </IonModal>
+
       </IonContent>
     </IonMenu>
   </ion-app>
@@ -93,7 +100,8 @@ import {
   IonButtons,
   IonInput,
   IonModal,
-  IonIcon
+  IonIcon,
+  IonToggle,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, ref} from "vue";
@@ -101,11 +109,14 @@ import {useI18n} from "vue-i18n";
 import {settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
+import useAdmob from "@/hooks/useAdmob";
 
 const {locale} = useI18n();
 const {DEFAULT_PROBLEM_COUNT} = useData();
 
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
+const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isAdsFree') === 'true' || false);
+
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
   if(currentSelectedLanguageValue.value == 'en')
@@ -117,6 +128,15 @@ const onSelectedLanguageChange = (e: CustomEvent)=>{
   else if(currentSelectedLanguageValue.value == 'zh_tw')
     locale.value = 'zh_tw';
   localStorage.setItem('currentLanguage',currentSelectedLanguageValue.value);
+}
+
+const onToggleChanged=(event: CustomEvent)=>{
+  if(event.detail.checked){
+    useAdmob().hideBanner();
+  }else{
+    useAdmob().resumeBanner();
+  }
+  localStorage.setItem('isAdsFree',String(event.detail.checked));
 }
 
 const homePage = markRaw(HomePage)
