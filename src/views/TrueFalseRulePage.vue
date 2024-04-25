@@ -64,7 +64,7 @@ import {
 } from "@ionic/vue";
 import {checkmarkDone, chevronForward} from "ionicons/icons";
 import {markRaw, ref} from "vue";
-import useImageData from '@/hooks/useImageData';
+import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";
 import TrueFalseRuleResultPage from '@/views/TrueFalseRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
@@ -107,7 +107,7 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateTrueFalseProblem, ruleCounts, DEFAULT_PROBLEM_COUNT} = useImageData()
+const {generateTrueFalseProblem, ruleCounts, DEFAULT_PROBLEM_COUNT} = useData()
 const problemCounts = Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT;
 const problems = generateTrueFalseProblem(problemCounts, ruleCounts);
 

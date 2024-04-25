@@ -100,10 +100,10 @@ import {markRaw, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import {settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
-import useImageData from '@/hooks/useImageData'
+import useData from '@/hooks/useData'
 
 const {locale} = useI18n();
-const {DEFAULT_PROBLEM_COUNT} = useImageData();
+const {DEFAULT_PROBLEM_COUNT} = useData();
 
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 const onSelectedLanguageChange = (e: CustomEvent)=>{

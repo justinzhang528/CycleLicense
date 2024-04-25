@@ -74,7 +74,7 @@ import {
 } from "@ionic/vue";
 import {chevronForward, listCircle} from "ionicons/icons";
 import {markRaw, ref} from "vue";
-import useImageData from '@/hooks/useImageData'
+import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";
 import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
@@ -117,7 +117,7 @@ const showFinishAlert = async (header: string, subHeader: string, message: strin
   await alert.present();
 };
 
-const {generateMultipleChoiceProblems, ruleCounts, DEFAULT_PROBLEM_COUNT} = useImageData()
+const {generateMultipleChoiceProblems, ruleCounts, DEFAULT_PROBLEM_COUNT} = useData()
 const problemCounts = Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT;
 const problems = generateMultipleChoiceProblems(problemCounts, ruleCounts);
 

@@ -44,7 +44,7 @@ import {
   toastController,
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, newspaper} from "ionicons/icons";
-import useImageData from '@/hooks/useImageData'
+import useData from '@/hooks/useData'
 import {reactive} from "vue";
 import dataSource from '@/json/dataSource.json'
 import {useI18n} from "vue-i18n";
@@ -59,7 +59,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useImageData()
+const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 
 const onClickBackButton = () => {

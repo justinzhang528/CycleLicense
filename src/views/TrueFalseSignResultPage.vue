@@ -53,10 +53,10 @@ import {
   IonLabel,
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
-import useImageData from "@/hooks/useImageData";
+import useData from "@/hooks/useData";
 import dataSource from "@/json/dataSource.json";
 
-const {getProblems, getTotalScore, getChooseAns} = useImageData();
+const {getProblems, getTotalScore, getChooseAns} = useData();
 const problems = getProblems('trueFalseSignProblems');
 const chooseAns = getChooseAns('userTrueFalseSignValues');
 const totalScore = getTotalScore('trueFalseSignProblems', 'userTrueFalseSignValues');
