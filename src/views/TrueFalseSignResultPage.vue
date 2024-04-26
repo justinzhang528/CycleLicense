@@ -17,7 +17,6 @@
         <IonCardSubtitle>{{ index + 1 }}/{{ problems.length }}</IonCardSubtitle>
       </IonCardHeader>
       <IonCardContent>
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(item.trueFalse)-1)"/>
         <IonItem color="transparent" lines="none">
           <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
         </IonItem>
@@ -56,9 +55,7 @@ import {
 import {checkmark, close, flask, playCircleOutline} from "ionicons/icons";
 import useData from "@/hooks/useData";
 import dataSource from "@/json/dataSource.json";
-import useSound from "@/hooks/useSound";
 
-const {playSignSound} = useSound();
 const {getProblems, getTotalScore, getChooseAns} = useData();
 const problems = getProblems('trueFalseSignProblems');
 const chooseAns = getChooseAns('userTrueFalseSignValues');

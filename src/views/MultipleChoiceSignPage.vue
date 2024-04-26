@@ -18,25 +18,25 @@
     <div style="width: 95%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice1)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playSignSound(Number(problems[currentProblemNum - 1].choice1)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice1)-1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice2)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playSignSound(Number(problems[currentProblemNum - 1].choice2)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice2)-1].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice3)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playSignSound(Number(problems[currentProblemNum - 1].choice3)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice3)-1].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice4)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playSignSound(Number(problems[currentProblemNum - 1].choice4)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice4)-1].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>
