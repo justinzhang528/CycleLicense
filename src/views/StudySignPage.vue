@@ -12,6 +12,7 @@
   </IonHeader>
   <IonContent>
       <IonCard v-for="i in signCounts" :key="i">
+        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onPlayAudio(i-1)"/>
         <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
@@ -43,11 +44,18 @@ import {
   IonLabel,
   toastController,
 } from "@ionic/vue";
-import {trailSign, bookmark, bookmarkOutline} from "ionicons/icons";
+import {trailSign, bookmark, bookmarkOutline, playCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
 import {reactive} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
+import useSound from "@/hooks/useSound";
+
+const {signSounds} = useSound();
+const onPlayAudio = (index: number) =>{
+  const audio = new Audio(signSounds[index]) ;
+  audio.play();
+}
 
 const {t} = useI18n();
 const showToast = async (msg: string) => {
@@ -74,9 +82,7 @@ const onClickBookmarkIcon = (n: number) => {
   }
   addOrRemoveFromArray(signBookmarkedItems,n);
 }
-
 </script>
 
 <style scoped>
-
 </style>

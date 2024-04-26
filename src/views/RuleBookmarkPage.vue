@@ -12,6 +12,7 @@
   </IonHeader>
   <IonContent>
       <IonCard v-for="i in ruleBookmarkedItems" :key="i">
+        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onPlayAudio(i-1)"/>
         <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(i)"/>
         <IonCardHeader>
           <IonCardSubtitle class="center" style="padding-left: 40px"></IonCardSubtitle>
@@ -42,11 +43,18 @@ import {
   IonLabel,
   toastController,
 } from "@ionic/vue";
-import {bookmark, trashBin} from "ionicons/icons";
+import {bookmark, playCircleOutline, trashBin} from "ionicons/icons";
 import useData from '@/hooks/useData'
 import {reactive} from "vue";
 import dataSource from "@/json/dataSource.json";
 import {useI18n} from "vue-i18n";
+import useSound from "@/hooks/useSound";
+
+const {ruleSounds} = useSound();
+const onPlayAudio = (index: number) =>{
+  const audio = new Audio(ruleSounds[index]) ;
+  audio.play();
+}
 
 const {t} = useI18n();
 const showToast = async (msg: string) => {
