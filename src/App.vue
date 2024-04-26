@@ -30,14 +30,14 @@
               <IonImg src="images/testing.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('mockTest') }}</IonLabel>
-            <IonButton style="width: 40%; padding-right: 20px" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
+            <IonButton size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
               <IonImg src="images/noAds.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
-            <IonToggle style="width: 40%; padding-left: 40px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
+            <IonToggle style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
           </IonItem>
         </IonList>
 
@@ -45,9 +45,9 @@
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <ion-button @click="onCancelModal()">{{$t('cancel')}}</ion-button>
+                <IonButton @click="onCancelModal()">{{$t('cancel')}}</IonButton>
               </IonButtons>
-              <IonTitle>{{$t('mockTest')}} {{$t('settings')}}</IonTitle>
+              <IonTitle>{{$t('settings')}}</IonTitle>
               <IonButtons slot="end">
                 <IonButton :strong="true" @click="onConfirmModal()">{{$t('confirm')}}</IonButton>
               </IonButtons>

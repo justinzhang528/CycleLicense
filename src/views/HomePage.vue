@@ -12,25 +12,25 @@
       <IonImg src="images/main.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
       <IonList lines="inset">
         <IonItem style="display: flex">
-          <IonCard style="width: 75%; box-shadow: none">
+          <IonCard style="width: 65%; box-shadow: none">
             <IonCardHeader>
-              <IonCardTitle>{{$t('study')}}</IonCardTitle>
+              <IonCardTitle style="font-size: x-large">{{$t('study')}}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>{{$t('studyDescription')}}</IonCardContent>
           </IonCard>
           <IonNavLink router-direction="forward" :component="studyPage">
-            <IonButton shape="round" size="default" color="dark">{{$t('enter')}}</IonButton>
+            <IonButton shape="round" size="default" style="font-size: small" color="dark">{{$t('enter')}}</IonButton>
           </IonNavLink>
         </IonItem>
         <IonItem>
-          <IonCard style="width: 75%; box-shadow: none">
+          <IonCard style="width: 65%; box-shadow: none">
             <IonCardHeader>
-              <IonCardTitle>{{$t('mockTest')}}</IonCardTitle>
+              <IonCardTitle style="font-size: x-large">{{$t('mockTest')}}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>{{$t('mockTestDescription')}}</IonCardContent>
           </IonCard>
           <IonNavLink router-direction="forward" :component="mockTestPage">
-            <IonButton shape="round" size="default" color="dark">{{$t('enter')}}</IonButton>
+            <IonButton shape="round" size="default" style="font-size: small;" color="dark">{{$t('enter')}}</IonButton>
           </IonNavLink>
         </IonItem>
       </IonList>
