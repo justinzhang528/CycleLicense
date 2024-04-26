@@ -12,15 +12,16 @@
   </IonHeader>
   <IonContent>
       <IonCard v-for="i in ruleCounts" :key="i">
-        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onPlayAudio(i-1)"/>
         <IonIcon v-if="ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ ruleCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(i-1)"/>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
           <IonLabel style="color: black;">{{ dataSource.rules[i-1].Q }}</IonLabel><br><br>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(i-1)"/>
           <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
           <IonLabel style="color: black;">{{ dataSource.rules[i-1].A }}</IonLabel>
         </IonCardContent>
@@ -51,12 +52,7 @@ import dataSource from '@/json/dataSource.json'
 import {useI18n} from "vue-i18n";
 import useSound from "@/hooks/useSound";
 
-const {ruleSounds} = useSound();
-const onPlayAudio = (index: number) =>{
-  const audio = new Audio(ruleSounds[index]) ;
-  audio.play();
-}
-
+const {playRuleSound} = useSound();
 const {t} = useI18n();
 const showToast = async (msg: string) => {
   const toast = await toastController.create({

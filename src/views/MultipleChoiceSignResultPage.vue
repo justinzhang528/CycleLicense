@@ -21,19 +21,23 @@
           <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(item.choice1)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice1)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(item.choice2)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice2)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(item.choice3)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice3)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(item.choice4)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("4")}})&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(item.choice4)-1].A }}</label>
         </IonItem>
         <IonLabel>
@@ -65,10 +69,12 @@ import {
   IonImg,
   IonLabel,
 } from '@ionic/vue';
-import {checkmark, close, flask} from "ionicons/icons";
+import {checkmark, close, flask, playCircleOutline} from "ionicons/icons";
 import useData from "@/hooks/useData";
 import dataSource from "@/json/dataSource.json";
+import useSound from "@/hooks/useSound";
 
+const {playSignSound} = useSound();
 const {getProblems, getTotalScore, getChooseAns} = useData();
 const problems = getProblems('multipleChoiceSignProblems');
 const chooseAns = getChooseAns('userMultipleChoiceSignValues');

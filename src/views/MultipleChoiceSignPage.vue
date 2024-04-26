@@ -15,25 +15,29 @@
     <IonItem color="transparent" lines="none">
       <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 65%"/>
     </IonItem>
-    <div style="width: 90%" class="center">
+    <div style="width: 95%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("1")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice1)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice1)-1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("2")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice2)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice2)-1].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("3")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice3)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice3)-1].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> {{$t("4")}}{{$t(".")}}&nbsp;&nbsp;</label>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].choice4)-1)"/>
+          <label style="color: black; font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice4)-1].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
@@ -65,13 +69,15 @@ import {
   toastController,
   alertController,
 } from "@ionic/vue";
-import {chevronForward, listCircle} from "ionicons/icons";
+import {chevronForward, listCircle, playCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";
 import MultipleChoiceSignResultPage from '@/views/MultipleChoiceSignResultPage.vue'
 import dataSource from "@/json/dataSource.json"
+import useSound from "@/hooks/useSound";
 
+const {playSignSound} = useSound();
 const {t} = useI18n();
 const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 
