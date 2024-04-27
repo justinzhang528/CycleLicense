@@ -10,7 +10,7 @@
       </IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent>
+  <IonContent ref="contentRef" :scrollEvents="true" @ionScroll="onScroll">
       <IonCard v-for="i in signCounts" :key="i">
         <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignSound(i-1)"/>
         <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
@@ -42,11 +42,12 @@ import {
   IonTitle,
   IonImg,
   IonLabel,
+  IonButton,
   toastController,
 } from "@ionic/vue";
 import {trailSign, bookmark, bookmarkOutline, playCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
 import useSound from "@/hooks/useSound";
@@ -67,6 +68,8 @@ const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 
 const onClickBackButton = () => {
   localStorage.setItem('signBookmarkedItems', signBookmarkedItems.toString());
+  localStorage.setItem('signScrollPosition', previousPosition.value.toString());
+  console.log(previousPosition.value);
 }
 
 const onClickBookmarkIcon = (n: number) => {
@@ -77,6 +80,18 @@ const onClickBookmarkIcon = (n: number) => {
   }
   addOrRemoveFromArray(signBookmarkedItems,n);
 }
+
+const onScroll = (e: CustomEvent)=>{
+  previousPosition.value = e.detail.currentY.toString();
+}
+
+const contentRef = ref();
+const previousPosition = ref(parseInt(localStorage.getItem('signScrollPosition')) || 0);
+const scrollToPreviousPosition = () => {
+  console.log(previousPosition.value);
+  contentRef.value.$el.scrollToPoint(0, previousPosition.value,150);
+};
+
 </script>
 
 <style scoped>
