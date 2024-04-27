@@ -2,7 +2,7 @@
   <ion-app>
     <ion-router-outlet/>
     <ion-nav :root="homePage"></ion-nav>
-    <IonMenu content-id="menu">
+    <IonMenu side="end" content-id="menu">
       <IonHeader>
         <IonToolbar>
           <IonItem>
@@ -102,6 +102,7 @@ import {
   IonModal,
   IonIcon,
   IonToggle,
+  alertController,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, ref} from "vue";
@@ -111,7 +112,7 @@ import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
 
-const {locale} = useI18n();
+const {t,locale} = useI18n();
 const {DEFAULT_PROBLEM_COUNT} = useData();
 
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
@@ -180,8 +181,26 @@ const onConfirmModal = () => {
     trueFalseSignDefaultCount.value = trueFalseSignCount;
     trueFalseRuleDefaultCount.value = trueFalseRuleCount;
     modal.value.$el.dismiss(null, 'confirm');
+  }else{
+    showAlert(t('invalidInput'), '', t('pleaseCheckYourInput'), t('ok'));
   }
 };
+
+const showAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
+  const alert = await alertController.create({
+    header: header,
+    subHeader: subHeader,
+    message: message,
+    buttons: [
+      {
+        text: buttonText,
+        role: 'confirm',
+      }
+    ],
+    backdropDismiss: false,
+  });
+  await alert.present();
+}
 </script>
 
 <style>
