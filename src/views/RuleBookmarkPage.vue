@@ -14,7 +14,7 @@
       <IonCard v-for="i in ruleBookmarkedItems" :key="i">
         <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(i)"/>
         <IonCardHeader>
-          <IonCardSubtitle class="center" style="padding-left: 40px"></IonCardSubtitle>
+          <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ ruleCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(i-1)"/>
@@ -62,7 +62,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {addOrRemoveFromArray, getBookmarkedItems} = useData()
+const {addOrRemoveFromArray, getBookmarkedItems, ruleCounts} = useData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 
 const onClickBackButton = () => {

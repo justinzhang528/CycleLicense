@@ -25,10 +25,11 @@ export default function () {
     }
 
     const getBookmarkedItems = (type: string)=>{
-        const str = localStorage.getItem(type);
+        const str: string|null = localStorage.getItem(type);
         if(str === null || str === 'NaN' || str === '')
             return [];
-        return (str || '{}').split(',').map(Number);
+        const res: number[] =  (str || '{}').split(',').map(Number);
+        return res.sort((a, b) => a - b);
     }
 
     // generate shuffle order numbers ranging from 1~range

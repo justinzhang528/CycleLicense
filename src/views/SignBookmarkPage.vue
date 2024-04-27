@@ -15,7 +15,7 @@
         <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignSound(i-1)"/>
         <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(i)"/>
         <IonCardHeader>
-          <IonCardSubtitle class="center" style="padding-left: 40px"></IonCardSubtitle>
+          <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent class="center">
           <IonImg :src="getImagePath('sign', handleZeroPad(i,3),'Q')"
@@ -61,7 +61,7 @@ const showToast = async (msg: string) => {
   await toast.present();
 }
 
-const {getImagePath, handleZeroPad, addOrRemoveFromArray, getBookmarkedItems} = useData()
+const {getImagePath, handleZeroPad, addOrRemoveFromArray, getBookmarkedItems, signCounts} = useData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 
 const onClickBackButton = () => {
