@@ -117,6 +117,14 @@ export default function () {
         return score;
     }
 
+    function isInteger(input: any): boolean {
+        // Regular expression to match integer numbers
+        const integerRegex = /^-?\d+$/;
+
+        // Check if the input string matches the integer regular expression
+        return integerRegex.test(input);
+    }
+
     return {
         DEFAULT_PROBLEM_COUNT,
         signCounts,
@@ -130,5 +138,6 @@ export default function () {
         getProblems,
         getChooseAns,
         getTotalScore,
+        isInteger,
     }
 }

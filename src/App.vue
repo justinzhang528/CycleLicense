@@ -113,7 +113,7 @@ import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
 
 const {t,locale} = useI18n();
-const {DEFAULT_PROBLEM_COUNT} = useData();
+const {DEFAULT_PROBLEM_COUNT, isInteger} = useData();
 
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isAdsFree') === 'true' || false);
@@ -162,13 +162,13 @@ const onConfirmModal = () => {
   const trueFalseSignCount = trueFalseSignInput.value.$el.value;
   const trueFalseRuleCount = trueFalseRuleInput.value.$el.value;
 
-    if(multipleChoiceSignCount != null && multipleChoiceSignCount != '' && multipleChoiceSignCount >= 1 && multipleChoiceSignCount <= dataSource.signs.length)
+    if(isInteger(multipleChoiceSignCount) && multipleChoiceSignCount >= 1 && multipleChoiceSignCount <= dataSource.signs.length)
       isValidCount++;
-    if(multipleChoiceRuleCount != null && multipleChoiceRuleCount != '' && multipleChoiceRuleCount >= 1 && multipleChoiceRuleCount <= dataSource.rules.length)
+    if(isInteger(multipleChoiceRuleCount) && multipleChoiceRuleCount >= 1 && multipleChoiceRuleCount <= dataSource.rules.length)
       isValidCount++;
-    if(trueFalseSignCount != null && trueFalseSignCount != '' && trueFalseSignCount >= 1 && trueFalseSignCount <= dataSource.signs.length)
+    if(isInteger(trueFalseSignCount) && trueFalseSignCount <= dataSource.signs.length)
       isValidCount++;
-    if(trueFalseRuleCount != null && trueFalseRuleCount != '' && trueFalseRuleCount >= 1 && trueFalseRuleCount <= dataSource.rules.length)
+    if(isInteger(trueFalseRuleCount) && trueFalseRuleCount >= 1 && trueFalseRuleCount <= dataSource.rules.length)
       isValidCount++;
 
   if(isValidCount === 4){
