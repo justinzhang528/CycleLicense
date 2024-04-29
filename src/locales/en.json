@@ -36,6 +36,8 @@
   "ok": "OK",
   "invalidInput": "Invalid Input",
   "pleaseCheckYourInput": "Please check your input",
+  "noInternet": "No Internet",
+  "pleaseCheckYourInternetConnection": "Please check your internet connection",
   ":": ":",
   "1": "1",
   "2": "2",

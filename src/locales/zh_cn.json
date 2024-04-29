@@ -36,6 +36,8 @@
   "ok": "确定",
   "invalidInput": "输入错误",
   "pleaseCheckYourInput": "请检查您的输入",
+  "noInternet": "无网络",
+  "pleaseCheckYourInternetConnection": "请检查您的网络连接",
   ":": ":",
   "1": "1",
   "2": "2",

@@ -111,10 +111,11 @@ import {settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
+import useInternetConnection from "@/hooks/useInternetConnection";
 
+const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
 const {DEFAULT_PROBLEM_COUNT, isInteger} = useData();
-
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isAdsFree') === 'true' || false);
 
@@ -201,6 +202,13 @@ const showAlert = async (header: string, subHeader: string, message: string, but
   });
   await alert.present();
 }
+
+const checkInternetConnection = ()=> {
+  if(!isOnline.value){
+    showAlert(t('noInternet'),t('pleaseCheckYourInternetConnection'),'',t('ok'));
+  }
+}
+setInterval(checkInternetConnection, 5000);
 </script>
 
 <style>

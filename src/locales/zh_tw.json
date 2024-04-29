@@ -36,6 +36,8 @@
   "ok": "確定",
   "invalidInput": "輸入錯誤",
   "pleaseCheckYourInput": "請檢查您的輸入",
+  "noInternet": "無網路",
+  "pleaseCheckYourInternetConnection": "請檢查您的網路連接",
   ":": ":",
   "1": "1",
   "2": "2",
