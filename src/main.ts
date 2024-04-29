@@ -43,6 +43,7 @@ import {ScreenOrientation} from "@capacitor/screen-orientation";
 import useAdmob from '@/hooks/useAdmob';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 import VueVirtualScroller from 'vue-virtual-scroller';
+import useFireBase from "@/hooks/useFirebase";
 
 const app = createApp(App)
     .use(IonicVue)
@@ -56,6 +57,8 @@ router.isReady().then(() => {
     })
     const {initializeAdmob} = useAdmob();
     initializeAdmob();
+    const {initializeFirebase} = useFireBase();
+    initializeFirebase();
     ScreenOrientation.lock({orientation: 'portrait'});
     app.use(i18n);
     app.use(VueVirtualScroller);
