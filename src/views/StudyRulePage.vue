@@ -1,7 +1,7 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start" :onclick="onClickBackButton">
+      <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
@@ -10,7 +10,7 @@
       </IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent>
+  <IonContent ref="contentRef" :scrollEvents="true" @ionScroll="onScroll">
       <IonCard v-for="i in ruleCounts" :key="i">
         <IonIcon v-if="ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
@@ -47,13 +47,17 @@ import {
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, newspaper, playCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
-import {reactive} from "vue";
+import {onMounted, onUnmounted, reactive, ref} from "vue";
 import dataSource from '@/json/dataSource.json'
 import {useI18n} from "vue-i18n";
 import useSound from "@/hooks/useSound";
 
 const {playRuleSound} = useSound();
 const {t} = useI18n();
+const contentRef = ref();
+const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useData()
+const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
+
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
     message: msg,
@@ -61,13 +65,6 @@ const showToast = async (msg: string) => {
     position: 'bottom',
   });
   await toast.present();
-}
-
-const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useData()
-const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
-
-const onClickBackButton = () => {
-  localStorage.setItem('ruleBookmarkedItems', ruleBookmarkedItems.toString());
 }
 
 const onClickBookmarkIcon = (n: number) => {
@@ -78,6 +75,25 @@ const onClickBookmarkIcon = (n: number) => {
   }
   addOrRemoveFromArray(ruleBookmarkedItems,n);
 }
+
+const onScroll = (e: CustomEvent)=>{
+  previousPosition.value = e.detail.currentY.toString();
+}
+
+const previousPosition = ref(parseInt(localStorage.getItem('ruleScrollPosition')) || 0);
+const scrollToPreviousPosition = () => {
+  contentRef.value.$el.scrollToPoint(0, previousPosition.value,150);
+  console.log(previousPosition.value);
+};
+
+onMounted(()=>{
+  scrollToPreviousPosition();
+})
+
+onUnmounted(()=>{
+  localStorage.setItem('ruleBookmarkedItems', ruleBookmarkedItems.toString());
+  localStorage.setItem('ruleScrollPosition', previousPosition.value.toString());
+})
 
 </script>
 

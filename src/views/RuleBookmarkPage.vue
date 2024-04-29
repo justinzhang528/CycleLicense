@@ -1,7 +1,7 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start" :onclick="onClickBackButton">
+      <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
@@ -46,7 +46,7 @@ import {
 } from "@ionic/vue";
 import {bookmark, playCircleOutline, trashBin} from "ionicons/icons";
 import useData from '@/hooks/useData'
-import {reactive} from "vue";
+import {reactive, onUnmounted} from "vue";
 import dataSource from "@/json/dataSource.json";
 import {useI18n} from "vue-i18n";
 import useSound from "@/hooks/useSound";
@@ -65,14 +65,14 @@ const showToast = async (msg: string) => {
 const {addOrRemoveFromArray, getBookmarkedItems, ruleCounts} = useData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 
-const onClickBackButton = () => {
-  localStorage.setItem('ruleBookmarkedItems', ruleBookmarkedItems.toString());
-}
-
 const onClickTrashBinIcon = (n: number) => {
   addOrRemoveFromArray(ruleBookmarkedItems,n);
   showToast(t('removedFromBookmark'));
 }
+
+onUnmounted(()=>{
+  localStorage.setItem('ruleBookmarkedItems', ruleBookmarkedItems.toString());
+})
 
 </script>
 

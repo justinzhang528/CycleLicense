@@ -1,7 +1,7 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start" :onclick="onClickBackButton">
+      <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
@@ -45,7 +45,7 @@ import {
 } from "@ionic/vue";
 import {bookmark, playCircleOutline, trashBin} from "ionicons/icons";
 import useData from '@/hooks/useData'
-import {reactive} from "vue";
+import {reactive, onMounted, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
 import useSound from "@/hooks/useSound";
@@ -64,14 +64,14 @@ const showToast = async (msg: string) => {
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, getBookmarkedItems, signCounts} = useData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 
-const onClickBackButton = () => {
-  localStorage.setItem('signBookmarkedItems', signBookmarkedItems.toString());
-}
-
 const onClickTrashBinIcon = (n: number) => {
   addOrRemoveFromArray(signBookmarkedItems,n);
   showToast(t('removedFromBookmark'));
 }
+
+onUnmounted(()=>{
+  localStorage.setItem('signBookmarkedItems', signBookmarkedItems.toString());
+})
 
 </script>
 

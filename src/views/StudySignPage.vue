@@ -1,7 +1,7 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start" :onclick="onClickBackButton">
+      <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
@@ -47,13 +47,17 @@ import {
 } from "@ionic/vue";
 import {trailSign, bookmark, bookmarkOutline, playCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
-import {reactive, ref} from "vue";
+import {reactive, ref, onMounted, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
 import useSound from "@/hooks/useSound";
 
 const {playSignSound} = useSound();
 const {t} = useI18n();
+const contentRef = ref();
+const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()
+const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
+
 const showToast = async (msg: string) => {
   const toast = await toastController.create({
     message: msg,
@@ -61,15 +65,6 @@ const showToast = async (msg: string) => {
     position: 'bottom',
   });
   await toast.present();
-}
-
-const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()
-const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
-
-const onClickBackButton = () => {
-  localStorage.setItem('signBookmarkedItems', signBookmarkedItems.toString());
-  localStorage.setItem('signScrollPosition', previousPosition.value.toString());
-  console.log(previousPosition.value);
 }
 
 const onClickBookmarkIcon = (n: number) => {
@@ -85,13 +80,20 @@ const onScroll = (e: CustomEvent)=>{
   previousPosition.value = e.detail.currentY.toString();
 }
 
-const contentRef = ref();
 const previousPosition = ref(parseInt(localStorage.getItem('signScrollPosition')) || 0);
 const scrollToPreviousPosition = () => {
-  console.log(previousPosition.value);
   contentRef.value.$el.scrollToPoint(0, previousPosition.value,150);
+  console.log(previousPosition.value);
 };
 
+onMounted(()=>{
+  scrollToPreviousPosition();
+})
+
+onUnmounted(()=>{
+  localStorage.setItem('signBookmarkedItems', signBookmarkedItems.toString());
+  localStorage.setItem('signScrollPosition', previousPosition.value.toString());
+})
 </script>
 
 <style scoped>
