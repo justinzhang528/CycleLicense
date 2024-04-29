@@ -12,7 +12,7 @@
   </IonHeader>
   <IonContent ref="contentRef" :scrollEvents="true" @ionScroll="onScroll">
       <IonCard v-for="i in signCounts" :key="i">
-        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignSound(i-1)"/>
+        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignAudio(i-1)"/>
         <IonIcon v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
@@ -50,9 +50,9 @@ import useData from '@/hooks/useData'
 import {reactive, ref, onMounted, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
-import useSound from "@/hooks/useSound";
+import useAudio from "@/hooks/useAudio";
 
-const {playSignSound} = useSound();
+const {playSignAudio} = useAudio();
 const {t} = useI18n();
 const contentRef = ref();
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()

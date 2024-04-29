@@ -14,7 +14,7 @@
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
     <IonCard>
       <IonCardContent>
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignSound(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
+        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
         <IonItem color="transparent" lines="none">
           <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
         </IonItem>
@@ -71,9 +71,9 @@ import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";
 import TrueFalseSignResultPage from '@/views/TrueFalseSignResultPage.vue'
 import dataSource from "@/json/dataSource.json";
-import useSound from "@/hooks/useSound";
+import useAudio from "@/hooks/useAudio";
 
-const {playSignSound} = useSound();
+const {playSignAudio} = useAudio();
 const {t} = useI18n();
 const trueFalseSignResultPage = markRaw(TrueFalseSignResultPage);
 

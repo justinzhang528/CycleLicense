@@ -15,7 +15,7 @@
     <IonCard>
       <IonCardContent>
         <IonItem color="transparent" class="center" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].question)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].question)-1)"/>
           <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel>
         </IonItem>
       </IonCardContent>
@@ -24,25 +24,25 @@
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].choice1)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice1)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice1)-1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].choice2)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice2)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice2)-1].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].choice3)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice3)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice3)-1].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].choice4)-1)"/>
+          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice4)-1)"/>
           <label style="color: black; font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
           <label style="color: black; width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice4)-1].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>
@@ -83,9 +83,9 @@ import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";
 import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
-import useSound from "@/hooks/useSound";
+import useAudio from "@/hooks/useAudio";
 
-const {playRuleSound} = useSound();
+const {playRuleAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
 

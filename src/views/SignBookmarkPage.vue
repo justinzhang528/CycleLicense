@@ -12,7 +12,7 @@
   </IonHeader>
   <IonContent>
       <IonCard v-for="i in signBookmarkedItems" :key="i">
-        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignSound(i-1)"/>
+        <IonIcon class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignAudio(i-1)"/>
         <IonIcon size="large" style="float: right; margin: 4px" :icon="trashBin" @click="onClickTrashBinIcon(i)"/>
         <IonCardHeader>
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signCounts }}</IonCardSubtitle>
@@ -48,9 +48,9 @@ import useData from '@/hooks/useData'
 import {reactive, onMounted, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
-import useSound from "@/hooks/useSound";
+import useAudio from "@/hooks/useAudio";
 
-const {playSignSound} = useSound();
+const {playSignAudio} = useAudio();
 const {t} = useI18n();
 const showToast = async (msg: string) => {
   const toast = await toastController.create({

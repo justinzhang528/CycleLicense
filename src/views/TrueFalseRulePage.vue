@@ -14,10 +14,10 @@
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
     <IonCard>
       <IonCardContent align="left">
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].question)-1)"/>
+        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].question)-1)"/>
         <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
         <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel><br><br>
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
+        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
         <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
         <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].trueFalse)-1].A }}</IonLabel>
       </IonCardContent>
@@ -70,9 +70,9 @@ import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";
 import TrueFalseRuleResultPage from '@/views/TrueFalseRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
-import useSound from "@/hooks/useSound";
+import useAudio from "@/hooks/useAudio";
 
-const {playRuleSound} = useSound();
+const {playRuleAudio} = useAudio();
 const {t} = useI18n();
 const trueFalseRuleResultPage = markRaw(TrueFalseRuleResultPage);
 
