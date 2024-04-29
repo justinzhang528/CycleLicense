@@ -11,6 +11,25 @@
     </IonToolbar>
   </IonHeader>
   <IonContent ref="contentRef" :scrollEvents="true" @ionScroll="onScroll">
+<!--    <RecycleScroller class="scroller" :items="list" :item-size="300">-->
+<!--      <template #default="{ item }">-->
+<!--        <IonCard>-->
+<!--          <IonIcon v-if="ruleBookmarkedItems.includes(item)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(item)"/>-->
+<!--          <IonIcon v-if="!ruleBookmarkedItems.includes(item)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(item)"/>-->
+<!--          <IonCardHeader>-->
+<!--            <IonCardSubtitle class="center" style="padding-left: 40px">{{ item }}/{{ ruleCounts }}</IonCardSubtitle>-->
+<!--          </IonCardHeader>-->
+<!--          <IonCardContent>-->
+<!--            <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(item-1)"/>-->
+<!--            <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>-->
+<!--            <IonLabel style="color: black;">{{ dataSource.rules[item-1].Q }}</IonLabel><br><br>-->
+<!--            <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleSound(item-1)"/>-->
+<!--            <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>-->
+<!--            <IonLabel style="color: black;">{{ dataSource.rules[item-1].A }}</IonLabel>-->
+<!--          </IonCardContent>-->
+<!--        </IonCard>-->
+<!--      </template>-->
+<!--    </RecycleScroller>-->
       <IonCard v-for="i in ruleCounts" :key="i">
         <IonIcon v-if="ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
@@ -43,7 +62,7 @@ import {
   IonCardContent,
   IonTitle,
   IonLabel,
-  toastController,
+  toastController, IonItem,
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, newspaper, playCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
@@ -94,6 +113,8 @@ onUnmounted(()=>{
   localStorage.setItem('ruleBookmarkedItems', ruleBookmarkedItems.toString());
   localStorage.setItem('ruleScrollPosition', previousPosition.value.toString());
 })
+
+// const list = ref(Array.from({length: ruleCounts}, (_, i) => i + 1));
 
 </script>
 
