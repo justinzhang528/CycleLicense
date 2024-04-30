@@ -17,14 +17,17 @@
             <IonGrid>
               <IonRow class="ion-justify-content-center ion-padding" >
                 <IonAvatar style="width: 75px; height: 75px">
-                  <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg"></IonImg>
+                  <img v-if="userInfo.name" alt="avatar" :src="'images/avatar.png'">
+                  <img v-if="!userInfo.name" alt="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg">
                 </IonAvatar>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding">
+                <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
+                <IonLabel v-if="userInfo.name" style="padding: 0 5px 0 5px">{{userInfo.name}}</IonLabel>
+                <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
                 <span id="openLoginModal">
                   <IonButton v-if="!userInfo.name" color="dark" shape="round">{{$t('login')}}</IonButton>
                 </span>
-                <IonLabel v-if="userInfo.name">{{userInfo.name}}</IonLabel>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding" v-if="userInfo.name" >
                 <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline" @click="onLogoutClick">
@@ -188,7 +191,6 @@ import {
   IonSelectOption,
   IonSelect,
   IonLabel,
-  IonImg,
   IonList,
   IonItem,
   IonThumbnail,
@@ -207,7 +209,7 @@ import {
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {lockClosed, logOut, mail, person, personAdd, settings} from "ionicons/icons";
+import {diamond, lockClosed, logOut, mail, person, personAdd, settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
