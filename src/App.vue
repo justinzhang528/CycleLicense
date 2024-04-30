@@ -13,6 +13,31 @@
       </IonHeader>
       <IonContent>
         <IonList>
+          <IonItem lines="none">
+            <IonGrid>
+              <IonRow class="ion-justify-content-center ion-padding" >
+                <IonAvatar style="width: 75px; height: 75px">
+                  <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg"></IonImg>
+                </IonAvatar>
+              </IonRow>
+              <IonRow class="ion-justify-content-center ion-padding">
+                <IonButton v-if="!userInfo.name" color="dark" shape="round" @click="onLoginClick">{{$t('login')}}</IonButton>
+                <IonLabel v-if="userInfo.name">{{userInfo.name}}</IonLabel>
+              </IonRow>
+              <IonRow class="ion-justify-content-center ion-padding" v-if="userInfo.name" >
+                <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline" @click="onLogoutClick">
+                  <IonIcon color="dark" :icon="logOutOutline" style="padding-right: 5px"></IonIcon>
+                  {{$t('logout')}}
+                </IonButton>
+              </IonRow>
+              <IonRow class="ion-justify-content-center ion-padding-bottom" v-if="!userInfo.name" >
+                <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline">
+                  <IonIcon color="dark" :icon="personAddOutline" style="padding-right: 5px"></IonIcon>
+                  {{$t('register')}}
+                </IonButton>
+              </IonRow>
+            </IonGrid>
+          </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
               <IonImg src="images/lang.png" alt="avatar"></IonImg>
@@ -102,22 +127,40 @@ import {
   IonModal,
   IonIcon,
   IonToggle,
+  IonAvatar,
+  IonRow,
+  IonGrid,
   alertController,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
-import {markRaw, ref} from "vue";
+import {markRaw, onMounted, reactive, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {settings} from "ionicons/icons";
+import {logOut, logOutOutline, personAdd, personAddOutline, settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
 import useInternetConnection from "@/hooks/useInternetConnection";
+import useFirebase from "@/hooks/useFirebase";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
 const {DEFAULT_PROBLEM_COUNT, isInteger} = useData();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isAdsFree') === 'true' || false);
+const homePage = markRaw(HomePage)
+const modal = ref();
+const multipleChoiceSignInput = ref();
+const multipleChoiceRuleInput = ref();
+const trueFalseSignInput = ref();
+const trueFalseRuleInput = ref();
+const multipleChoiceSignDefaultCount = ref(Number(localStorage.getItem('multipleChoiceSignCount')) || DEFAULT_PROBLEM_COUNT);
+const multipleChoiceRuleDefaultCount = ref(Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT);
+const trueFalseSignDefaultCount = ref(Number(localStorage.getItem('trueFalseSignCount')) || DEFAULT_PROBLEM_COUNT);
+const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT);
+let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
+const {getUser} = useFirebase();
+
+const onCancelModal = () => modal.value.$el.dismiss(null, 'cancel');
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
@@ -140,20 +183,6 @@ const onToggleChanged=(event: CustomEvent)=>{
   }
   localStorage.setItem('isAdsFree',String(event.detail.checked));
 }
-
-const homePage = markRaw(HomePage)
-locale.value = localStorage.getItem("currentLanguage") || 'en';
-
-const modal = ref();
-const multipleChoiceSignInput = ref();
-const multipleChoiceRuleInput = ref();
-const trueFalseSignInput = ref();
-const trueFalseRuleInput = ref();
-const multipleChoiceSignDefaultCount = ref(Number(localStorage.getItem('multipleChoiceSignCount')) || DEFAULT_PROBLEM_COUNT);
-const multipleChoiceRuleDefaultCount = ref(Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT);
-const trueFalseSignDefaultCount = ref(Number(localStorage.getItem('trueFalseSignCount')) || DEFAULT_PROBLEM_COUNT);
-const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT);
-const onCancelModal = () => modal.value.$el.dismiss(null, 'cancel');
 
 const onConfirmModal = () => {
   let isValidCount: number = 0;
@@ -208,7 +237,26 @@ const checkInternetConnection = ()=> {
     showAlert(t('noInternet'),t('pleaseCheckYourInternetConnection'),'',t('ok'));
   }
 }
-setInterval(checkInternetConnection, 5000);
+
+const onLoginClick = ()=>{
+  getUser('justin').then((res)=>{
+    console.log(res.data);
+    localStorage.setItem('userInfo',JSON.stringify(res.data));
+    userInfo.value = res.data;
+  }).catch(()=>{
+    console.error('error');
+  })
+}
+
+const onLogoutClick = ()=>{
+  localStorage.removeItem('userInfo');
+  userInfo.value = {};
+}
+
+onMounted(()=> {
+  locale.value = localStorage.getItem("currentLanguage") || 'en';
+  setInterval(checkInternetConnection, 5000);
+});
 </script>
 
 <style>

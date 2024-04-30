@@ -20,6 +20,7 @@ export default function (){
     const upSertUser = (name: string, password: string, email: string)=> {
         const db = getDatabase();
         set(ref(db, 'Account/' + name), {
+            name: name,
             password : password,
             email: email,
             isUnlimited: false,
