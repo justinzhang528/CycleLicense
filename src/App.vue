@@ -124,7 +124,7 @@
             </IonItem>
             <IonItem>
               <IonInput :label="$t('password')" label-placement="stacked" ref="loginPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
-                <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
+                <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
               </IonInput>
             </IonItem>
@@ -152,13 +152,13 @@
             </IonItem>
             <IonItem>
               <IonInput :label="$t('password')" label-placement="stacked" ref="registerPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
-                <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
+                <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
               </IonInput>
             </IonItem>
             <IonItem>
               <IonInput :label="$t('confirmPassword')" label-placement="stacked" ref="registerConfirmPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPasswordAgain')" :clear-input="true">
-                <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
+                <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
               </IonInput>
             </IonItem>
