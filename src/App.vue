@@ -28,14 +28,14 @@
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding" v-if="userInfo.name" >
                 <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline" @click="onLogoutClick">
-                  <IonIcon color="dark" :icon="logOutOutline" style="padding-right: 5px"></IonIcon>
+                  <IonIcon color="dark" :icon="logOut" style="padding-right: 5px"></IonIcon>
                   {{$t('logout')}}
                 </IonButton>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding-bottom" >
                 <span id="openRegisterModal">
                   <IonButton v-if="!userInfo.name" fill="clear" color="dark" shape="round" style="text-decoration: underline">
-                    <IonIcon color="dark" :icon="personAddOutline" style="padding-right: 5px"></IonIcon>
+                    <IonIcon color="dark" :icon="personAdd" style="padding-right: 5px"></IonIcon>
                     {{$t('register')}}
                   </IonButton>
                 </span>
@@ -207,7 +207,7 @@ import {
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {lockClosed, logOutOutline, mail, person, personAddOutline, settings} from "ionicons/icons";
+import {lockClosed, logOut, mail, person, personAdd, settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
