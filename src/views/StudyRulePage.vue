@@ -37,12 +37,12 @@
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ ruleCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(i-1)"/>
-          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-          <IonLabel style="color: black;">{{ dataSource.rules[i-1].Q }}</IonLabel><br><br>
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(i-1)"/>
-          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-          <IonLabel style="color: black;">{{ dataSource.rules[i-1].A }}</IonLabel>
+          <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(i-1)"/>
+          <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+          <IonLabel color="dark">{{ dataSource.rules[i-1].Q }}</IonLabel><br><br>
+          <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(i-1)"/>
+          <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+          <IonLabel color="dark">{{ dataSource.rules[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
   </IonContent>

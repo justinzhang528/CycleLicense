@@ -18,23 +18,23 @@
       </IonCardHeader>
       <IonCardContent>
         <IonItem color="transparent" class="center" lines="none">
-          <IonLabel style="color: black;">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel>
+          <IonLabel color="dark">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{ dataSource.rules[Number(item.choice1)-1].A }}</label>
+          <label style="font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.choice1)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{ dataSource.rules[Number(item.choice2)-1].A }}</label>
+          <label style="font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.choice2)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{ dataSource.rules[Number(item.choice3)-1].A }}</label>
+          <label style="font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.choice3)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <label style="color: black; font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
-          <label style="color: black; width: 100%">{{ dataSource.rules[Number(item.choice4)-1].A }}</label>
+          <label style="font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.choice4)-1].A }}</label>
         </IonItem>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ $t(item.ans) }}

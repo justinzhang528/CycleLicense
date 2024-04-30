@@ -18,10 +18,10 @@
       </IonCardHeader>
       <IonCardContent>
         <div align="left">
-          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-          <IonLabel style="color: black;">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel><br><br>
-          <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-          <IonLabel style="color: black;">{{ dataSource.rules[Number(item.trueFalse)-1].A }}</IonLabel><br><br>
+          <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+          <IonLabel color="dark">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel><br><br>
+          <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+          <IonLabel color="dark">{{ dataSource.rules[Number(item.trueFalse)-1].A }}</IonLabel><br><br>
         </div>
         <IonLabel>
           {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}

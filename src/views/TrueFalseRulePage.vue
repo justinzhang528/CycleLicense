@@ -14,12 +14,12 @@
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
     <IonCard>
       <IonCardContent align="left">
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].question)-1)"/>
-        <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-        <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel><br><br>
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
-        <IonLabel style="color: black; font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-        <IonLabel style="color: black;">{{ dataSource.rules[Number(problems[currentProblemNum - 1].trueFalse)-1].A }}</IonLabel>
+        <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].question)-1)"/>
+        <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
+        <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel><br><br>
+        <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
+        <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
+        <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].trueFalse)-1].A }}</IonLabel>
       </IonCardContent>
     </IonCard>
 

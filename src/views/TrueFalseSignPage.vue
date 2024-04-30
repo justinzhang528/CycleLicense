@@ -14,12 +14,12 @@
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
     <IonCard>
       <IonCardContent>
-        <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
+        <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" style="float: left" @click="playSignAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
         <IonItem color="transparent" lines="none">
           <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
         </IonItem>
         <IonItem class="center" color="transparent" lines="none">
-          <IonLabel style="color: black; display: block; margin: 0 auto; padding-bottom: 5px">{{ dataSource.signs[Number(problems[currentProblemNum-1].trueFalse)-1].A }}</IonLabel>
+          <IonLabel color="dark" style="display: block; margin: 0 auto; padding-bottom: 5px">{{ dataSource.signs[Number(problems[currentProblemNum-1].trueFalse)-1].A }}</IonLabel>
         </IonItem>
       </IonCardContent>
     </IonCard>
