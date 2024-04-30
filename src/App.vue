@@ -43,7 +43,7 @@
               <IonImg src="images/lang.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
-            <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
+            <IonSelect :disabled="!userInfo.name" style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
               <IonSelectOption value="en">English</IonSelectOption>
               <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
               <IonSelectOption value="zh_cn">简体中文</IonSelectOption>
@@ -55,14 +55,14 @@
               <IonImg src="images/testing.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('mockTest') }}</IonLabel>
-            <IonButton size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
+            <IonButton :disabled="!userInfo.name" size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
               <IonImg src="images/noAds.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
-            <IonToggle style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
+            <IonToggle :disabled="!userInfo.isUnlimited" style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
           </IonItem>
         </IonList>
 
@@ -240,7 +240,6 @@ const checkInternetConnection = ()=> {
 
 const onLoginClick = ()=>{
   getUser('justin').then((res)=>{
-    console.log(res.data);
     localStorage.setItem('userInfo',JSON.stringify(res.data));
     userInfo.value = res.data;
   }).catch(()=>{
