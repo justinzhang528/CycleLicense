@@ -18,9 +18,9 @@
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ signCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent class="center">
-          <IonImg :src="getImagePath('sign', handleZeroPad(i,3),'Q')"
-                  style="width: 50%; display: block; margin: 0 auto;"></IonImg>
-          <IonLabel color="dark" style="display: block; margin: 0 auto; padding-bottom: 20px">{{ dataSource.signs[i-1].A }}</IonLabel>
+          <img :src="getImagePath('sign', handleZeroPad(i,3),'Q')"
+                  style="width: 50%; display: block; margin: 0 auto;" alt="signImg">
+          <IonLabel color="dark" style="display: block; margin: 0 auto; padding: 0 20px 20px 20px">{{ dataSource.signs[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
   </IonContent>
@@ -39,7 +39,6 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonTitle,
-  IonImg,
   IonLabel,
   toastController,
 } from "@ionic/vue";

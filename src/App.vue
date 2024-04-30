@@ -44,7 +44,7 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <IonImg src="images/lang.png" alt="avatar"></IonImg>
+              <img alt="language" :src="'images/lang.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
             <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
@@ -56,14 +56,14 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <IonImg src="images/testing.png" alt="avatar"></IonImg>
+              <img alt="testing" :src="'images/testing.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('mockTest') }}</IonLabel>
             <IonButton :disabled="!userInfo.name" size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSettingModal">{{$t('settings')}}</IonButton>
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <IonImg src="images/noAds.png" alt="avatar"></IonImg>
+              <img alt="noAds" :src="'images/noAds.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
             <IonToggle :disabled="!userInfo.isUnlimited" style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
@@ -116,7 +116,7 @@
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
-            <IonImg src="images/login.png"></IonImg>
+            <img alt="login" :src="'images/login.png'">
             <IonItem>
               <IonInput :label="$t('username')" label-placement="stacked" ref="loginUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
                 <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
@@ -144,7 +144,7 @@
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
-            <IonImg src="images/register.png"></IonImg>
+            <img alt="register" :src="'images/register.png'">
             <IonItem>
               <IonInput :label="$t('username')" label-placement="stacked" ref="registerUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
                 <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
