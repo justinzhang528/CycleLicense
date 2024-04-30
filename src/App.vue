@@ -21,7 +21,9 @@
                 </IonAvatar>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding">
-                <IonButton v-if="!userInfo.name" color="dark" shape="round" @click="onLoginClick">{{$t('login')}}</IonButton>
+                <span id="openLoginModal">
+                  <IonButton v-if="!userInfo.name" color="dark" shape="round">{{$t('login')}}</IonButton>
+                </span>
                 <IonLabel v-if="userInfo.name">{{userInfo.name}}</IonLabel>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding" v-if="userInfo.name" >
@@ -43,7 +45,7 @@
               <IonImg src="images/lang.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
-            <IonSelect :disabled="!userInfo.name" style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
+            <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
               <IonSelectOption value="en">English</IonSelectOption>
               <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
               <IonSelectOption value="zh_cn">简体中文</IonSelectOption>
@@ -55,7 +57,7 @@
               <IonImg src="images/testing.png" alt="avatar"></IonImg>
             </IonThumbnail>
             <IonLabel>{{ $t('mockTest') }}</IonLabel>
-            <IonButton :disabled="!userInfo.name" size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSetting">{{$t('settings')}}</IonButton>
+            <IonButton :disabled="!userInfo.name" size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSettingModal">{{$t('settings')}}</IonButton>
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
@@ -66,7 +68,7 @@
           </IonItem>
         </IonList>
 
-        <IonModal ref="mockTestSettingModal" trigger="openMockTestSetting">
+        <IonModal ref="mockTestSettingModal" trigger="openMockTestSettingModal">
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
@@ -82,7 +84,7 @@
             <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
             <IonItem>
               <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
-              <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" maxlength="2" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
+              <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
             </IonItem>
             <IonItem>
               <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
@@ -95,6 +97,33 @@
             <IonItem>
               <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
               <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" :value="trueFalseRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
+            </IonItem>
+          </IonContent>
+        </IonModal>
+
+        <IonModal ref="loginModal" trigger="openLoginModal">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton @click="onCancelLoginModal()">{{$t('cancel')}}</IonButton>
+              </IonButtons>
+              <IonTitle>{{$t('login')}}</IonTitle>
+              <IonButtons slot="end">
+                <IonButton :strong="true" @click="onConfirmLoginModal()">{{$t('confirm')}}</IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent class="center ion-padding">
+            <IonItem>
+              <IonInput :label="$t('username')" label-placement="stacked" ref="loginUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
+                <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
+              </IonInput>
+            </IonItem>
+            <IonItem>
+              <IonInput :label="$t('password')" label-placement="stacked" ref="loginPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
+                <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
+                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+              </IonInput>
             </IonItem>
           </IonContent>
         </IonModal>
@@ -130,17 +159,19 @@ import {
   IonAvatar,
   IonRow,
   IonGrid,
+  IonInputPasswordToggle,
   alertController,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, reactive, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {logOut, logOutOutline, personAdd, personAddOutline, settings} from "ionicons/icons";
+import {lockClosed, logOutOutline, person, personAddOutline, settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
 import useInternetConnection from "@/hooks/useInternetConnection";
 import useFirebase from "@/hooks/useFirebase";
+import {loginResponse} from "@/enum/enum";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
@@ -149,18 +180,19 @@ const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage')
 const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isRemoveAds') === 'true' || false);
 const homePage = markRaw(HomePage)
 const mockTestSettingModal = ref();
+const loginModal = ref();
 const multipleChoiceSignInput = ref();
 const multipleChoiceRuleInput = ref();
 const trueFalseSignInput = ref();
 const trueFalseRuleInput = ref();
+const loginUserNameInput = ref();
+const loginPasswordInput = ref();
 const multipleChoiceSignDefaultCount = ref(Number(localStorage.getItem('multipleChoiceSignCount')) || DEFAULT_PROBLEM_COUNT);
 const multipleChoiceRuleDefaultCount = ref(Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT);
 const trueFalseSignDefaultCount = ref(Number(localStorage.getItem('trueFalseSignCount')) || DEFAULT_PROBLEM_COUNT);
 const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT);
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {getUser} = useFirebase();
-
-const onCancelMockTestSettingModal = () => mockTestSettingModal.value.$el.dismiss(null, 'cancel');
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
@@ -183,6 +215,8 @@ const onToggleChanged=(event: CustomEvent)=>{
   }
   localStorage.setItem('isRemoveAds',String(event.detail.checked));
 }
+
+const onCancelMockTestSettingModal = () => mockTestSettingModal.value.$el.dismiss(null, 'cancel');
 
 const onConfirmMockTestSettingModal = () => {
   let isValidCount: number = 0;
@@ -216,6 +250,40 @@ const onConfirmMockTestSettingModal = () => {
   }
 };
 
+const onCancelLoginModal = () => loginModal.value.$el.dismiss(null, 'cancel');
+
+const onConfirmLoginModal = () => {
+  const loginUsername = loginUserNameInput.value.$el.value;
+  const loginPassword = loginPasswordInput.value.$el.value;
+
+  if(loginUsername === ''){
+    showAlert(t('error'), '', t('pleaseInputUsername'), t('ok'));
+    return;
+  }
+  if(loginPassword === ''){
+    showAlert(t('error'), '', t('pleaseInputPassword'), t('ok'));
+    return;
+  }
+
+  getUser(loginUsername).then((res)=>{
+    if(res.errorCode === loginResponse.SUCCESS){
+      if(res.data.password.toString() !== loginPassword.toString()){
+        showAlert(t('error'), '', t('passwordIncorrect'), t('ok'));
+        return;
+      }
+      localStorage.setItem('userInfo',JSON.stringify(res.data));
+      userInfo.value = res.data;
+      loginModal.value.$el.dismiss(null, 'confirm');
+    }else{
+      showAlert(t('error'), '', t('userNotFound'), t('ok'));
+      return;
+    }
+  }).catch(()=>{
+    showAlert(t('error'), '', t('somethingWrong'), t('ok'));
+  })
+};
+
+
 const showAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
   const alert = await alertController.create({
     header: header,
@@ -236,15 +304,6 @@ const checkInternetConnection = ()=> {
   if(!isOnline.value){
     showAlert(t('noInternet'),t('pleaseCheckYourInternetConnection'),'',t('ok'));
   }
-}
-
-const onLoginClick = ()=>{
-  getUser('justin').then((res)=>{
-    localStorage.setItem('userInfo',JSON.stringify(res.data));
-    userInfo.value = res.data;
-  }).catch(()=>{
-    console.error('error');
-  })
 }
 
 const onLogoutClick = ()=>{
