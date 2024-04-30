@@ -66,15 +66,15 @@
           </IonItem>
         </IonList>
 
-        <IonModal ref="modal" trigger="openMockTestSetting">
+        <IonModal ref="mockTestSettingModal" trigger="openMockTestSetting">
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonButton @click="onCancelModal()">{{$t('cancel')}}</IonButton>
+                <IonButton @click="onCancelMockTestSettingModal()">{{$t('cancel')}}</IonButton>
               </IonButtons>
               <IonTitle>{{$t('settings')}}</IonTitle>
               <IonButtons slot="end">
-                <IonButton :strong="true" @click="onConfirmModal()">{{$t('confirm')}}</IonButton>
+                <IonButton :strong="true" @click="onConfirmMockTestSettingModal()">{{$t('confirm')}}</IonButton>
               </IonButtons>
             </IonToolbar>
           </IonHeader>
@@ -146,9 +146,9 @@ const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
 const {DEFAULT_PROBLEM_COUNT, isInteger} = useData();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
-const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isAdsFree') === 'true' || false);
+const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isRemoveAds') === 'true' || false);
 const homePage = markRaw(HomePage)
-const modal = ref();
+const mockTestSettingModal = ref();
 const multipleChoiceSignInput = ref();
 const multipleChoiceRuleInput = ref();
 const trueFalseSignInput = ref();
@@ -160,7 +160,7 @@ const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRule
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {getUser} = useFirebase();
 
-const onCancelModal = () => modal.value.$el.dismiss(null, 'cancel');
+const onCancelMockTestSettingModal = () => mockTestSettingModal.value.$el.dismiss(null, 'cancel');
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
@@ -181,10 +181,10 @@ const onToggleChanged=(event: CustomEvent)=>{
   }else{
     useAdmob().resumeBanner();
   }
-  localStorage.setItem('isAdsFree',String(event.detail.checked));
+  localStorage.setItem('isRemoveAds',String(event.detail.checked));
 }
 
-const onConfirmModal = () => {
+const onConfirmMockTestSettingModal = () => {
   let isValidCount: number = 0;
 
   const multipleChoiceSignCount = multipleChoiceSignInput.value.$el.value;
@@ -210,7 +210,7 @@ const onConfirmModal = () => {
     multipleChoiceRuleDefaultCount.value = multipleChoiceRuleCount;
     trueFalseSignDefaultCount.value = trueFalseSignCount;
     trueFalseRuleDefaultCount.value = trueFalseRuleCount;
-    modal.value.$el.dismiss(null, 'confirm');
+    mockTestSettingModal.value.$el.dismiss(null, 'confirm');
   }else{
     showAlert(t('invalidInput'), '', t('pleaseCheckYourInput'), t('ok'));
   }

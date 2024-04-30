@@ -20,7 +20,7 @@ export default function () {
             isTesting: true,
         };
         await AdMob.showBanner(options);
-        if (localStorage.getItem('isAdsFree') === 'true') {
+        if (localStorage.getItem('isRemoveAds') === 'true') {
             await AdMob.hideBanner();
         }
     };
@@ -32,7 +32,7 @@ export default function () {
         };
         await AdMob.prepareInterstitial(options);
 
-        if (localStorage.getItem('isAdsFree') !== 'true') {
+        if (localStorage.getItem('isRemoveAds') !== 'true') {
             await AdMob.showInterstitial();
         }
     };
@@ -43,7 +43,7 @@ export default function () {
             isTesting: true,
         };
         await AdMob.prepareRewardVideoAd(options);
-        if (localStorage.getItem('isAdsFree') !== 'true') {
+        if (localStorage.getItem('isRemoveAds') !== 'true') {
             await AdMob.showRewardVideoAd();
         }
     };
