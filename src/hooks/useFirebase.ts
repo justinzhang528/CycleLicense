@@ -1,5 +1,5 @@
 import {getDatabase, ref, set, get, child} from "firebase/database";
-import {loginResponse} from "@/enum/enum";
+import {loginResponse,registerResponse} from "@/enum/enum";
 import {initializeApp} from "firebase/app";
 
 export default function (){
@@ -17,13 +17,25 @@ export default function (){
         initializeApp(firebaseConfig);
     }
 
-    const upSertUser = (name: string, password: string, email: string)=> {
-        const db = getDatabase();
-        set(ref(db, 'Account/' + name), {
-            name: name,
-            password : password,
-            email: email,
-            isUnlimited: false,
+    const upSertUser = (name: string, password: string, email: string): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            const db = getDatabase();
+            set(ref(db, 'Account/' + name), {
+                name: name,
+                password : password,
+                email: email,
+                isUnlimited: false,
+            }).then(() => {
+                resolve({
+                    errorCode: registerResponse.SUCCESS,
+                    data: null
+                });
+            }).catch((error) => {
+                reject({
+                    errorCode: registerResponse.ERROR,
+                    data: error
+                });
+            });
         });
     }
 

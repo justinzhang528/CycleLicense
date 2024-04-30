@@ -5,7 +5,7 @@
     <IonMenu side="end" content-id="menu">
       <IonHeader>
         <IonToolbar>
-          <IonItem>
+          <IonItem class="center">
             <IonIcon :icon="settings"></IonIcon>
             <IonTitle>{{ $t('settings') }}</IonTitle>
           </IonItem>
@@ -32,11 +32,13 @@
                   {{$t('logout')}}
                 </IonButton>
               </IonRow>
-              <IonRow class="ion-justify-content-center ion-padding-bottom" v-if="!userInfo.name" >
-                <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline">
-                  <IonIcon color="dark" :icon="personAddOutline" style="padding-right: 5px"></IonIcon>
-                  {{$t('register')}}
-                </IonButton>
+              <IonRow class="ion-justify-content-center ion-padding-bottom" >
+                <span id="openRegisterModal">
+                  <IonButton v-if="!userInfo.name" fill="clear" color="dark" shape="round" style="text-decoration: underline">
+                    <IonIcon color="dark" :icon="personAddOutline" style="padding-right: 5px"></IonIcon>
+                    {{$t('register')}}
+                  </IonButton>
+                </span>
               </IonRow>
             </IonGrid>
           </IonItem>
@@ -74,7 +76,7 @@
               <IonButtons slot="start">
                 <IonButton @click="onCancelMockTestSettingModal()">{{$t('cancel')}}</IonButton>
               </IonButtons>
-              <IonTitle>{{$t('settings')}}</IonTitle>
+              <IonTitle class="center">{{$t('settings')}}</IonTitle>
               <IonButtons slot="end">
                 <IonButton :strong="true" @click="onConfirmMockTestSettingModal()">{{$t('confirm')}}</IonButton>
               </IonButtons>
@@ -107,13 +109,14 @@
               <IonButtons slot="start">
                 <IonButton @click="onCancelLoginModal()">{{$t('cancel')}}</IonButton>
               </IonButtons>
-              <IonTitle>{{$t('login')}}</IonTitle>
+              <IonTitle class="center">{{$t('login')}}</IonTitle>
               <IonButtons slot="end">
                 <IonButton :strong="true" @click="onConfirmLoginModal()">{{$t('confirm')}}</IonButton>
               </IonButtons>
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
+            <IonImg src="images/login.png"></IonImg>
             <IonItem>
               <IonInput :label="$t('username')" label-placement="stacked" ref="loginUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
                 <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
@@ -123,6 +126,45 @@
               <IonInput :label="$t('password')" label-placement="stacked" ref="loginPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
                 <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+              </IonInput>
+            </IonItem>
+          </IonContent>
+        </IonModal>
+
+        <IonModal ref="registerModal" trigger="openRegisterModal">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton @click="onCancelRegisterModal()">{{$t('cancel')}}</IonButton>
+              </IonButtons>
+              <IonTitle class="center">{{$t('register')}}</IonTitle>
+              <IonButtons slot="end">
+                <IonButton :strong="true" @click="onConfirmRegisterModal()">{{$t('confirm')}}</IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent class="center ion-padding">
+            <IonImg src="images/register.png"></IonImg>
+            <IonItem>
+              <IonInput :label="$t('username')" label-placement="stacked" ref="registerUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
+                <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
+              </IonInput>
+            </IonItem>
+            <IonItem>
+              <IonInput :label="$t('password')" label-placement="stacked" ref="registerPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
+                <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
+                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+              </IonInput>
+            </IonItem>
+            <IonItem>
+              <IonInput :label="$t('confirmPassword')" label-placement="stacked" ref="registerConfirmPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPasswordAgain')" :clear-input="true">
+                <IonIcon size="" :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
+                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+              </IonInput>
+            </IonItem>
+            <IonItem>
+              <IonInput :label="$t('email')" label-placement="stacked" ref="registerEmailInput" type="text" :placeholder="$t('enterEmail')" :clear-input="true">
+                <IonIcon :icon="mail" aria-hidden="true" slot="start"></IonIcon>
               </IonInput>
             </IonItem>
           </IonContent>
@@ -163,15 +205,15 @@ import {
   alertController,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
-import {markRaw, onMounted, reactive, ref} from "vue";
+import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {lockClosed, logOutOutline, person, personAddOutline, settings} from "ionicons/icons";
+import {lockClosed, logOutOutline, mail, person, personAddOutline, settings} from "ionicons/icons";
 import dataSource from "@/json/dataSource.json"
 import useData from '@/hooks/useData'
 import useAdmob from "@/hooks/useAdmob";
 import useInternetConnection from "@/hooks/useInternetConnection";
 import useFirebase from "@/hooks/useFirebase";
-import {loginResponse} from "@/enum/enum";
+import {loginResponse,registerResponse} from "@/enum/enum";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
@@ -181,18 +223,23 @@ const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isRemoveAds')
 const homePage = markRaw(HomePage)
 const mockTestSettingModal = ref();
 const loginModal = ref();
+const registerModal = ref();
 const multipleChoiceSignInput = ref();
 const multipleChoiceRuleInput = ref();
 const trueFalseSignInput = ref();
 const trueFalseRuleInput = ref();
 const loginUserNameInput = ref();
 const loginPasswordInput = ref();
+const registerUserNameInput = ref();
+const registerPasswordInput = ref();
+const registerConfirmPasswordInput = ref();
+const registerEmailInput = ref();
 const multipleChoiceSignDefaultCount = ref(Number(localStorage.getItem('multipleChoiceSignCount')) || DEFAULT_PROBLEM_COUNT);
 const multipleChoiceRuleDefaultCount = ref(Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT);
 const trueFalseSignDefaultCount = ref(Number(localStorage.getItem('trueFalseSignCount')) || DEFAULT_PROBLEM_COUNT);
 const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT);
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
-const {getUser} = useFirebase();
+const {getUser,upSertUser} = useFirebase();
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
@@ -257,32 +304,98 @@ const onConfirmLoginModal = () => {
   const loginPassword = loginPasswordInput.value.$el.value;
 
   if(loginUsername === ''){
-    showAlert(t('error'), '', t('pleaseInputUsername'), t('ok'));
+    showAlert(t('warning'), '', t('pleaseInputUsername'), t('ok'));
     return;
   }
   if(loginPassword === ''){
-    showAlert(t('error'), '', t('pleaseInputPassword'), t('ok'));
+    showAlert(t('warning'), '', t('pleaseInputPassword'), t('ok'));
     return;
   }
 
   getUser(loginUsername).then((res)=>{
     if(res.errorCode === loginResponse.SUCCESS){
       if(res.data.password.toString() !== loginPassword.toString()){
-        showAlert(t('error'), '', t('passwordIncorrect'), t('ok'));
+        showAlert(t('warning'), '', t('passwordIncorrect'), t('ok'));
         return;
       }
       localStorage.setItem('userInfo',JSON.stringify(res.data));
       userInfo.value = res.data;
       loginModal.value.$el.dismiss(null, 'confirm');
     }else{
-      showAlert(t('error'), '', t('userNotFound'), t('ok'));
+      showAlert(t('warning'), '', t('userNotFound'), t('ok'));
       return;
     }
   }).catch(()=>{
-    showAlert(t('error'), '', t('somethingWrong'), t('ok'));
+    showAlert(t('error'), '', t('systemError'), t('ok'));
   })
 };
 
+const onCancelRegisterModal = () => registerModal.value.$el.dismiss(null, 'cancel');
+
+const onConfirmRegisterModal = ()=>{
+  const registerUsername = registerUserNameInput.value.$el.value;
+  const registerPassword = registerPasswordInput.value.$el.value;
+  const registerConfirmPassword = registerConfirmPasswordInput.value.$el.value;
+  const registerEmail = registerEmailInput.value.$el.value;
+
+  if(registerUsername === ''){
+    showAlert(t('warning'), '', t('pleaseInputUsername'), t('ok'));
+    return;
+  }
+  if(registerPassword === ''){
+    showAlert(t('warning'), '', t('pleaseInputPassword'), t('ok'));
+    return;
+  }
+  if(registerConfirmPassword === ''){
+    showAlert(t('warning'), '', t('pleaseInputConfirmPassword'), t('ok'));
+    return;
+  }
+  if(registerEmail === ''){
+    showAlert(t('warning'), '', t('pleaseInputEmail'), t('ok'));
+    return;
+  }
+  if(registerPassword !== registerConfirmPassword){
+    showAlert(t('warning'), '', t('passwordNotMatch'), t('ok'));
+    return;
+  }
+  if(!isValidEmail(registerEmail)){
+    showAlert(t('warning'), '', t('invalidEmailFormat'), t('ok'));
+    return;
+  }
+
+  // check if user already exist before insert new user
+  getUser(registerUsername).then((res)=>{
+    if(res.errorCode === loginResponse.SUCCESS){
+      showAlert(t('warning'), '', t('userAlreadyExist'), t('ok'));
+    }else{
+      // insert new user
+      upSertUser(registerUsername,registerPassword,registerEmail).then((res)=>{
+        if(res.errorCode === registerResponse.SUCCESS){
+          const data = {
+            name: registerUsername,
+            password: registerPassword,
+            email: registerEmail,
+            isUnlimited: false,
+          }
+          localStorage.setItem('userInfo',JSON.stringify(data));
+          userInfo.value = data;
+          registerModal.value.$el.dismiss(null, 'confirm');
+          showAlert(t('completed'), '', t('registrationSuccess'), t('ok'));
+          return;
+        }
+      }).catch(()=>{
+        showAlert(t('error'), '', t('systemError'), t('ok'));
+      })
+    }
+  }).catch(()=>{
+    showAlert(t('error'), '', t('systemError'), t('ok'));
+  })
+}
+
+const isValidEmail = (email: string): boolean => {
+  const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 const showAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
   const alert = await alertController.create({
