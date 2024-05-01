@@ -9,7 +9,7 @@
       </IonToolbar>
     </IonHeader>
     <IonContent :fullscreen="true">
-      <IonImg src="images/main.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
+      <img :src="'images/main.png'" alt="main" style="width: 75%; display: block; margin: 10px auto;">
       <IonList lines="inset">
         <IonItem style="display: flex">
           <IonCard style="width: 65%; box-shadow: none">
