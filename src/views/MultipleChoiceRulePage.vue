@@ -12,10 +12,18 @@
   </IonHeader>
   <IonContent className="ion-text-center">
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
+    <span hidden>
+      {{ question = Number(problems[currentProblemNum - 1].question)-1}}
+      {{ choice1 = Number(problems[currentProblemNum - 1].choice1)-1}}
+      {{ choice2 = Number(problems[currentProblemNum - 1].choice2)-1}}
+      {{ choice3 = Number(problems[currentProblemNum - 1].choice3)-1}}
+      {{ choice4 = Number(problems[currentProblemNum - 1].choice4)-1}}
+    </span>
     <IonCard>
       <IonCardContent>
         <IonItem color="transparent" class="center" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].question)-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
           <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel>
         </IonItem>
       </IonCardContent>
@@ -24,27 +32,31 @@
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice1)-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice1)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice1)"/>
           <label style="font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice1)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[choice1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice2)-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice2]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice2)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice2]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice2)"/>
           <label style="font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice2)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[choice2].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice3)-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice3]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice3)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice3]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice3)"/>
           <label style="font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice3)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[choice3].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].choice4)-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice4]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice4)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice4]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice4)"/>
           <label style="font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(problems[currentProblemNum - 1].choice4)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[choice4].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
       </IonRadioGroup>
@@ -77,7 +89,7 @@ import {
   toastController,
   alertController, IonLabel,
 } from "@ionic/vue";
-import {chevronForward, listCircle, playCircleOutline} from "ionicons/icons";
+import {chevronForward, listCircle, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";
@@ -85,7 +97,7 @@ import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.v
 import dataSource from '@/json/dataSource.json'
 import useAudio from "@/hooks/useAudio";
 
-const {playRuleAudio} = useAudio();
+const {playRuleAnswerAudio,playRuleQuestionAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
 
@@ -150,6 +162,41 @@ const onClickNextButton = () => {
   currentProblemNum.value += 1;
 }
 
+const onClickPlayQuestionAudio = (n: number) => {
+  if(!isPlayingRuleQuestionAudio.value[n]){
+    pauseAudio();
+    const currentAudio = playRuleQuestionAudio(n);
+    currentAudio.onended = () => {
+      isPlayingRuleQuestionAudio.value[n] = false;
+    }
+  } else {
+    pauseAudio();
+  }
+  for (let i = 0; i < ruleCounts; i++) {
+    isPlayingRuleAnswerAudio.value[i] = false;
+    if(i===n) continue;
+    isPlayingRuleQuestionAudio.value[i] = false;
+  }
+  isPlayingRuleQuestionAudio.value[n] = !isPlayingRuleQuestionAudio.value[n];
+}
+
+const onClickPlayAnswerAudio = (n: number) => {
+  if(!isPlayingRuleAnswerAudio.value[n]){
+    pauseAudio();
+    const currentAudio = playRuleAnswerAudio(n);
+    currentAudio.onended = () => {
+      isPlayingRuleAnswerAudio.value[n] = false;
+    }
+  } else {
+    pauseAudio();
+  }
+  for (let i = 0; i < ruleCounts; i++) {
+    isPlayingRuleQuestionAudio.value[i] = false;
+    if(i===n) continue;
+    isPlayingRuleAnswerAudio.value[i] = false;
+  }
+  isPlayingRuleAnswerAudio.value[n] = !isPlayingRuleAnswerAudio.value[n];
+}
 </script>
 
 <style scoped>

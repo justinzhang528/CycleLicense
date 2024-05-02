@@ -12,14 +12,20 @@
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
     <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
+    <span hidden>
+      {{ question = Number(problems[currentProblemNum - 1].question)-1}}
+      {{ trueFalse = Number(problems[currentProblemNum - 1].trueFalse)-1}}
+    </span>
     <IonCard>
       <IonCardContent align="left">
-        <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].question)-1)"/>
+        <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
+        <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
         <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-        <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel><br><br>
-        <IonIcon color="dark" class="iconBtn" size="large" :icon="playCircleOutline" @click="playRuleAudio(Number(problems[currentProblemNum - 1].trueFalse)-1)"/>
+        <IonLabel color="dark">{{ dataSource.rules[question].Q }}</IonLabel><br><br>
+        <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[trueFalse]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(trueFalse)"/>
+        <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[trueFalse]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(trueFalse)"/>
         <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-        <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].trueFalse)-1].A }}</IonLabel>
+        <IonLabel color="dark">{{ dataSource.rules[trueFalse].A }}</IonLabel>
       </IonCardContent>
     </IonCard>
 
@@ -64,7 +70,7 @@ import {
   IonCardContent,
   IonCard,
 } from "@ionic/vue";
-import {checkmarkDone, chevronForward, playCircleOutline} from "ionicons/icons";
+import {checkmarkDone, chevronForward, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";
@@ -72,7 +78,7 @@ import TrueFalseRuleResultPage from '@/views/TrueFalseRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
 import useAudio from "@/hooks/useAudio";
 
-const {playRuleAudio} = useAudio();
+const {playRuleQuestionAudio,playRuleAnswerAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
 const {t} = useI18n();
 const trueFalseRuleResultPage = markRaw(TrueFalseRuleResultPage);
 
@@ -135,6 +141,42 @@ const onClickNextButton = () => {
   }
   currentSelectedValue.value = '';
   currentProblemNum.value += 1;
+}
+
+const onClickPlayQuestionAudio = (n: number) => {
+  if(!isPlayingRuleQuestionAudio.value[n]){
+    pauseAudio();
+    const currentAudio = playRuleQuestionAudio(n);
+    currentAudio.onended = () => {
+      isPlayingRuleQuestionAudio.value[n] = false;
+    }
+  } else {
+    pauseAudio();
+  }
+  for (let i = 0; i < ruleCounts; i++) {
+    isPlayingRuleAnswerAudio.value[i] = false;
+    if(i===n) continue;
+    isPlayingRuleQuestionAudio.value[i] = false;
+  }
+  isPlayingRuleQuestionAudio.value[n] = !isPlayingRuleQuestionAudio.value[n];
+}
+
+const onClickPlayAnswerAudio = (n: number) => {
+  if(!isPlayingRuleAnswerAudio.value[n]){
+    pauseAudio();
+    const currentAudio = playRuleAnswerAudio(n);
+    currentAudio.onended = () => {
+      isPlayingRuleAnswerAudio.value[n] = false;
+    }
+  } else {
+    pauseAudio();
+  }
+  for (let i = 0; i < ruleCounts; i++) {
+    isPlayingRuleQuestionAudio.value[i] = false;
+    if(i===n) continue;
+    isPlayingRuleAnswerAudio.value[i] = false;
+  }
+  isPlayingRuleAnswerAudio.value[n] = !isPlayingRuleAnswerAudio.value[n];
 }
 
 </script>

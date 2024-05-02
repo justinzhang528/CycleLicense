@@ -145,14 +145,14 @@ const onClickPlayAudio = (n: number) => {
     pauseAudio();
     const currentAudio = playSignAudio(n);
     currentAudio.onended = () => {
-      isPlayingSignAudio.value[n] = 0;
+      isPlayingSignAudio.value[n] = false;
     }
   } else {
     pauseAudio();
   }
   for (let i = 0; i < signCounts; i++) {
     if(i===n) continue;
-    isPlayingSignAudio.value[i] = 0;
+    isPlayingSignAudio.value[i] = false;
   }
   isPlayingSignAudio.value[n] = !isPlayingSignAudio.value[n];
 }
