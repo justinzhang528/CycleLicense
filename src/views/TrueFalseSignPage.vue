@@ -15,8 +15,8 @@
     <IonCard>
       <IonCardContent>
         <span hidden>{{ trueFalse = Number(problems[currentProblemNum - 1].trueFalse)-1}}</span>
-        <IonIcon color="dark" v-if="!isPlayingSignAudio[trueFalse]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
-        <IonIcon color="dark" v-if="isPlayingSignAudio[trueFalse]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
+        <IonIcon color="dark" v-if="!isPlayingSignAudio[trueFalse]" size="large" style="float: left" :icon="playCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
+        <IonIcon color="dark" v-if="isPlayingSignAudio[trueFalse]" size="large" style="float: left" :icon="pauseCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
         <IonItem color="transparent" lines="none">
           <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
         </IonItem>

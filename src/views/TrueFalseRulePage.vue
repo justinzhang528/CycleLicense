@@ -18,12 +18,12 @@
     </span>
     <IonCard>
       <IonCardContent align="left">
-        <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
-        <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
+        <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
+        <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
         <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
         <IonLabel color="dark">{{ dataSource.rules[question].Q }}</IonLabel><br><br>
-        <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[trueFalse]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(trueFalse)"/>
-        <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[trueFalse]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(trueFalse)"/>
+        <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[trueFalse]" size="large" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(trueFalse)"/>
+        <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[trueFalse]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(trueFalse)"/>
         <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
         <IonLabel color="dark">{{ dataSource.rules[trueFalse].A }}</IonLabel>
       </IonCardContent>

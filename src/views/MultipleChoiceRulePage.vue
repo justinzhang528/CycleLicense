@@ -22,8 +22,8 @@
     <IonCard>
       <IonCardContent>
         <IonItem color="transparent" class="center" lines="none">
-          <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
           <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel>
         </IonItem>
       </IonCardContent>
@@ -32,29 +32,29 @@
     <div style="width: 90%" class="center">
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice1)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice1]" size="large" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice1)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice1]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice1)"/>
           <label style="font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
           <label style="width: 100%">{{ dataSource.rules[choice1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice2]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice2)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice2]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice2)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice2]" size="large" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice2)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice2]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice2)"/>
           <label style="font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
           <label style="width: 100%">{{ dataSource.rules[choice2].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice3]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice3)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice3]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice3)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice3]" size="large" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice3)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice3]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice3)"/>
           <label style="font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
           <label style="width: 100%">{{ dataSource.rules[choice3].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
-          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice4]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice4)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice4]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice4)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[choice4]" size="large" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(choice4)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[choice4]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(choice4)"/>
           <label style="font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
           <label style="width: 100%">{{ dataSource.rules[choice4].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>

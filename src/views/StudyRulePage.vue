@@ -37,12 +37,12 @@
           <IonCardSubtitle class="center" style="padding-left: 40px">{{ i }}/{{ ruleCounts }}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-          <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(i-1)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(i-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[i-1]" size="large" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(i-1)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[i-1]" size="large" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(i-1)"/>
           <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
           <IonLabel color="dark">{{ dataSource.rules[i-1].Q }}</IonLabel><br><br>
-          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(i-1)"/>
-          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(i-1)"/>
+          <IonIcon color="dark" v-if="!isPlayingRuleAnswerAudio[i-1]" size="large" :icon="playCircleOutline" @click="onClickPlayAnswerAudio(i-1)"/>
+          <IonIcon color="dark" v-if="isPlayingRuleAnswerAudio[i-1]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAnswerAudio(i-1)"/>
           <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
           <IonLabel color="dark">{{ dataSource.rules[i-1].A }}</IonLabel>
         </IonCardContent>
