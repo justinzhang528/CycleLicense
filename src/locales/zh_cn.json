@@ -62,6 +62,7 @@
   "passwordNotMatch": "密码不相符",
   "pleaseInputEmail": "请输入邮件地址",
   "invalidEmailFormat": "邮件地址格式错误",
+  "menu": "菜单",
   ":": ":",
   "1": "1",
   "2": "2",

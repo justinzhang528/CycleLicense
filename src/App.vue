@@ -6,8 +6,7 @@
       <IonHeader>
         <IonToolbar>
           <IonItem class="center">
-            <IonIcon :icon="settings"></IonIcon>
-            <IonTitle>{{ $t('settings') }}</IonTitle>
+            <IonTitle>{{ $t('menu') }}</IonTitle>
           </IonItem>
         </IonToolbar>
       </IonHeader>
@@ -59,13 +58,6 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <img alt="testing" :src="'images/testing.png'">
-            </IonThumbnail>
-            <IonLabel>{{ $t('mockTest') }}</IonLabel>
-            <IonButton :disabled="!userInfo.name" size="default" style="width: 40%; padding-right: 10px; font-size: x-small" shape="round" color="dark" id="openMockTestSettingModal">{{$t('settings')}}</IonButton>
-          </IonItem>
-          <IonItem style="padding-top: 10px; padding-bottom: 10px">
-            <IonThumbnail slot="start">
               <img alt="noAds" :src="'images/noAds.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
@@ -113,9 +105,6 @@
                 <IonButton @click="onCancelLoginModal()">{{$t('cancel')}}</IonButton>
               </IonButtons>
               <IonTitle class="center">{{$t('login')}}</IonTitle>
-              <IonButtons slot="end">
-                <IonButton :strong="true" @click="onConfirmLoginModal()">{{$t('confirm')}}</IonButton>
-              </IonButtons>
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
@@ -130,7 +119,8 @@
                 <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
               </IonInput>
-            </IonItem>
+            </IonItem><br>
+            <IonButton @click="onConfirmLoginModal()" shape="round" color="dark">{{ $t('login') }}</IonButton>
           </IonContent>
         </IonModal>
 
@@ -141,9 +131,6 @@
                 <IonButton @click="onCancelRegisterModal()">{{$t('cancel')}}</IonButton>
               </IonButtons>
               <IonTitle class="center">{{$t('register')}}</IonTitle>
-              <IonButtons slot="end">
-                <IonButton :strong="true" @click="onConfirmRegisterModal()">{{$t('confirm')}}</IonButton>
-              </IonButtons>
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
@@ -169,7 +156,8 @@
               <IonInput :label="$t('email')" label-placement="stacked" ref="registerEmailInput" type="text" :placeholder="$t('enterEmail')" :clear-input="true">
                 <IonIcon :icon="mail" aria-hidden="true" slot="start"></IonIcon>
               </IonInput>
-            </IonItem>
+            </IonItem><br>
+            <IonButton @click="onConfirmRegisterModal()" shape="round" color="dark">{{ $t('register') }}</IonButton>
           </IonContent>
         </IonModal>
 

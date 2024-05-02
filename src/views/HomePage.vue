@@ -45,7 +45,6 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonImg,
   IonItem,
   IonList,
   IonButton,
