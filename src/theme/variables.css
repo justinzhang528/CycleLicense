@@ -16,8 +16,3 @@ http://ionicframework.com/docs/theming/ */
     opacity: 1;
     font-size: 20px;
 }
-
-.iconBtn:active {
-    transform: scale(0.6);
-    color: black;
-}

@@ -12,7 +12,8 @@
   </IonHeader>
   <IonContent ref="contentRef" :scrollEvents="true" @ionScroll="onScroll">
       <IonCard v-for="i in signCounts" :key="i">
-        <IonIcon color="dark" class="iconBtn" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="playSignAudio(i-1)"/>
+        <IonIcon color="dark" v-if="!isPlayingSignAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(i-1)"/>
+        <IonIcon color="dark" v-if="isPlayingSignAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(i-1)"/>
         <IonIcon color="dark" v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon color="dark" v-if="!signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
@@ -43,14 +44,20 @@ import {
   IonLabel,
   toastController,
 } from "@ionic/vue";
-import {trailSign, bookmark, bookmarkOutline, playCircleOutline} from "ionicons/icons";
+import {
+  trailSign,
+  bookmark,
+  bookmarkOutline,
+  playCircleOutline,
+  pauseCircleOutline
+} from "ionicons/icons";
 import useData from '@/hooks/useData'
 import {reactive, ref, onMounted, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
 import useAudio from "@/hooks/useAudio";
 
-const {playSignAudio} = useAudio();
+const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
 const {t} = useI18n();
 const contentRef = ref();
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()
@@ -83,6 +90,23 @@ const scrollToPreviousPosition = () => {
   contentRef.value.$el.scrollToPoint(0, previousPosition.value,150);
   console.log(previousPosition.value);
 };
+
+const onClickPlayAudio = (n: number) => {
+  if(!isPlayingSignAudio.value[n]){
+    pauseAudio();
+    const currentAudio = playSignAudio(n);
+    currentAudio.onended = () => {
+      isPlayingSignAudio.value[n] = 0;
+    }
+  } else {
+    pauseAudio();
+  }
+  for (let i = 0; i < signCounts; i++) {
+    if(i===n) continue;
+    isPlayingSignAudio.value[i] = 0;
+  }
+  isPlayingSignAudio.value[n] = !isPlayingSignAudio.value[n];
+}
 
 onMounted(()=>{
   scrollToPreviousPosition();
