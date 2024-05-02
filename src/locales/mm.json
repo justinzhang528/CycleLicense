@@ -63,6 +63,8 @@
   "pleaseInputEmail": "အီးမေးလ်ရိုက်ထည့်ပါ",
   "invalidEmailFormat": "အီးမေးလ်ပုံစံမမှန်ပါ",
   "menu": "မီနူး",
+  "startTesting": "စတင်‌ဖြေဆိုမည်",
+  "invalidQuestionNumber": "မေးခွန်းအရေအတွက် မမှန်ပါ",
   ":": "-",
   "1": "၁",
   "2": "၂",

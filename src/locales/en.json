@@ -63,6 +63,8 @@
   "pleaseInputEmail": "Please input email",
   "invalidEmailFormat": "Invalid email format",
   "menu": "Menu",
+  "startTesting": "Start testing",
+  "invalidQuestionNumber": "Invalid question number",
   ":": ":",
   "1": "1",
   "2": "2",

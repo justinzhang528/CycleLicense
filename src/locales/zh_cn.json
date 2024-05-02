@@ -63,6 +63,8 @@
   "pleaseInputEmail": "请输入邮件地址",
   "invalidEmailFormat": "邮件地址格式错误",
   "menu": "菜单",
+  "startTesting": "开始测验",
+  "invalidQuestionNumber": "题数不正确",
   ":": ":",
   "1": "1",
   "2": "2",
