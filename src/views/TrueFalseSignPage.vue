@@ -5,7 +5,6 @@
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="checkmarkDone" style="padding-right: 10px"/>
         {{$t('sign')}}
       </IonTitle>
     </IonToolbar>
@@ -83,7 +82,7 @@ import {
   toastController,
   alertController, IonLabel, IonInput,
 } from "@ionic/vue";
-import {checkmarkDone, chevronForward, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
+import {chevronForward, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";

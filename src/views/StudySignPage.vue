@@ -5,7 +5,6 @@
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="trailSign" style="padding-right: 10px"/>
         <IonLabel>{{$t('sign')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
@@ -45,7 +44,6 @@ import {
   toastController,
 } from "@ionic/vue";
 import {
-  trailSign,
   bookmark,
   bookmarkOutline,
   playCircleOutline,

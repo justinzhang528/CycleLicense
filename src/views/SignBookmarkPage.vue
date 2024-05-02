@@ -5,7 +5,6 @@
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="bookmark" style="padding-right: 10px"/>
         <IonLabel>{{$t('sign')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
@@ -43,7 +42,7 @@ import {
   IonLabel,
   toastController,
 } from "@ionic/vue";
-import {bookmark, playCircleOutline, trashBin, pauseCircleOutline} from "ionicons/icons";
+import {playCircleOutline, trashBin, pauseCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
 import {reactive, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";

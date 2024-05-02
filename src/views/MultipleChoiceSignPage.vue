@@ -5,7 +5,6 @@
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="listCircle" style="padding-right: 10px"/>
         {{$t('sign')}}
       </IonTitle>
     </IonToolbar>
@@ -95,7 +94,7 @@ import {
   toastController,
   alertController, IonInput, IonLabel,
 } from "@ionic/vue";
-import {chevronForward, listCircle, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
+import {chevronForward, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";

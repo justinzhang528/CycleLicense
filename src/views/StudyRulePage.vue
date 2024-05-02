@@ -5,7 +5,6 @@
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="newspaper" style="padding-right: 10px"/>
         <IonLabel>{{$t('rule')}}</IonLabel>
       </IonTitle>
     </IonToolbar>
@@ -66,7 +65,7 @@ import {
   IonLabel,
   toastController,
 } from "@ionic/vue";
-import {bookmark, bookmarkOutline, newspaper, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
+import {bookmark, bookmarkOutline, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
 import {onMounted, onUnmounted, reactive, ref} from "vue";
 import dataSource from '@/json/dataSource.json'
