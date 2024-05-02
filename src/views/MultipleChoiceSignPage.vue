@@ -16,37 +16,39 @@
       <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 65%"/>
     </IonItem>
     <div style="width: 95%" class="center">
+      <span hidden>
       {{ choice1 = Number(problems[currentProblemNum - 1].choice1)-1}}
       {{ choice2 = Number(problems[currentProblemNum - 1].choice2)-1}}
       {{ choice3 = Number(problems[currentProblemNum - 1].choice3)-1}}
       {{ choice4 = Number(problems[currentProblemNum - 1].choice4)-1}}
+      </span>
       <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <IonIcon color="dark" v-if="!isPlayingSignAudio[choice1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(choice1)"/>
           <IonIcon color="dark" v-if="isPlayingSignAudio[choice1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice1)"/>
           <label style="font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice1)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.signs[choice1].A }}</label>
           <IonRadio mode="md" value="1"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <IonIcon color="dark" v-if="!isPlayingSignAudio[choice2]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(choice2)"/>
           <IonIcon color="dark" v-if="isPlayingSignAudio[choice2]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice2)"/>
           <label style="font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice2)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.signs[choice2].A }}</label>
           <IonRadio mode="md" value="2"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <IonIcon color="dark" v-if="!isPlayingSignAudio[choice3]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(choice3)"/>
           <IonIcon color="dark" v-if="isPlayingSignAudio[choice3]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice3)"/>
           <label style="font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice3)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.signs[choice3].A }}</label>
           <IonRadio mode="md" value="3"></IonRadio>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <IonIcon color="dark" v-if="!isPlayingSignAudio[choice4]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(choice4)"/>
           <IonIcon color="dark" v-if="isPlayingSignAudio[choice4]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice4)"/>
           <label style="font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.signs[Number(problems[currentProblemNum - 1].choice4)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.signs[choice4].A }}</label>
           <IonRadio mode="md" value="4"></IonRadio>
         </IonItem>
       </IonRadioGroup>
