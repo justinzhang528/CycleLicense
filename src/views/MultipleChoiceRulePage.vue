@@ -25,7 +25,7 @@
       </IonButton>
     </div>
 
-    <div v-if="!isShowSetting">
+    <div v-if="!isShowSetting" class="ion-padding">
       <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
       <span hidden>
         {{ question = Number(problems[currentProblemNum - 1].question)-1}}

@@ -10,7 +10,7 @@
       </IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent className="ion-padding ion-text-center">
+  <IonContent className="ion-text-center">
     <div v-if="isShowSetting">
       <img :src="'images/multipleChoice.png'" alt="multipleChoice" style="width: 75%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
@@ -25,7 +25,7 @@
       </IonButton>
     </div>
 
-    <div v-if="!isShowSetting">
+    <div v-if="!isShowSetting" class="ion-padding">
       <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
       <IonItem color="transparent" lines="none">
         <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 65%"/>
