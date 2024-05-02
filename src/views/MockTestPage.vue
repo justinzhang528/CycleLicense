@@ -16,26 +16,42 @@
     <IonImg src="images/mockTest.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
     <IonNavLink routerDirection="forward" :component="multipleChoiceSignPage">
       <IonItem button detail lines="none" class="ion-item-border">
-        <IonIcon :icon="listCircle"/>
+        <IonThumbnail slot="start">
+          <img alt="language" :src="'images/multipleChoiceIcon.png'">
+        </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('multipleChoiceSign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="multipleChoiceRulePage">
       <IonItem button detail lines="none" class="ion-item-border">
-        <IonIcon :icon="listCircle"/>
+        <IonThumbnail slot="start">
+          <img alt="language" :src="'images/multipleChoiceIcon.png'">
+        </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('multipleChoiceRule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSignPage">
       <IonItem button detail lines="none" class="ion-item-border">
-        <IonIcon :icon="checkmarkDone"/>
+        <IonThumbnail slot="start">
+          <img alt="language" :src="'images/trueFalseIcon.png'">
+        </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('trueFalseSign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseRulePage">
       <IonItem button detail lines="none" class="ion-item-border">
-        <IonIcon :icon="checkmarkDone"/>
+        <IonThumbnail slot="start">
+          <img alt="language" :src="'images/trueFalseIcon.png'">
+        </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('trueFalseRule')}}</IonLabel>
+      </IonItem>
+    </IonNavLink>
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseRulePage">
+      <IonItem button detail lines="none" class="ion-item-border">
+        <IonThumbnail slot="start">
+          <img alt="language" :src="'images/comprehensiveTestIcon.png'">
+        </IonThumbnail>
+        <IonLabel style="padding-left: 10px">{{$t('comprehensiveTest')}}</IonLabel>
       </IonItem>
     </IonNavLink>
   </IonContent>
@@ -49,12 +65,10 @@ import {
   IonBackButton,
   IonTitle,
   IonContent,
-  IonIcon,
   IonLabel,
   IonNavLink,
-  IonItem, IonImg, IonMenuButton
+  IonItem, IonImg, IonMenuButton, IonThumbnail
 } from "@ionic/vue";
-import {listCircle, checkmarkDone} from "ionicons/icons";
 import {markRaw} from "vue";
 import MultiChoiceSignPage from "@/views/MultipleChoiceSignPage.vue";
 import MultiChoiceRulePage from "@/views/MultipleChoiceRulePage.vue";

@@ -46,7 +46,7 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <img alt="language" :src="'images/lang.png'">
+              <img alt="language" :src="'images/languageIcon.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
             <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
@@ -58,7 +58,7 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <img alt="noAds" :src="'images/noAds.png'">
+              <img alt="noAds" :src="'images/noAdsIcon.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
             <IonToggle :disabled="!userInfo.isUnlimited" style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
