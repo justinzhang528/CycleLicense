@@ -160,7 +160,7 @@ const onClickPlayAudio = (n: number) => {
 const addLife = ()=>{
   life.value.currentLife++;
   localStorage.setItem('currentLife',(life.value.currentLife).toString());
-  alert(t('youGotOneLife'));
+  showAlert('','',t('youGotOneLife'),t('ok'));
 }
 
 const onClickStartTesting = ()=>{
