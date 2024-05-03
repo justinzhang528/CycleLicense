@@ -161,12 +161,18 @@
 
         <div style="width: 90%" class="center">
           <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
-            <IonItem color="transparent" class="center ion-item-border" lines="none">
-              <h5 class="center" style="width: 100%">{{ $t('true') }}</h5>
+            <IonItem color="transparent" class="center ion-item-border" lines="none"><span style="width: 100%" >
+              <IonThumbnail class="center">
+                <img alt="true" :src="'images/trueIcon.png'">
+              </IonThumbnail>
+            </span>
               <IonRadio mode="md" value="1"></IonRadio>
             </IonItem>
-            <IonItem color="transparent" class="center ion-item-border" lines="none">
-              <h5 class="center" style="width: 100%">{{ $t('false') }}</h5>
+            <IonItem color="transparent" class="center ion-item-border" lines="none"><span style="width: 100%" >
+              <IonThumbnail class="center">
+                <img alt="true" :src="'images/falseIcon.png'">
+              </IonThumbnail>
+            </span>
               <IonRadio mode="md" value="0"></IonRadio>
             </IonItem>
           </IonRadioGroup>
@@ -189,12 +195,18 @@
 
         <div style="width: 90%" class="center">
           <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
-            <IonItem color="transparent" class="center ion-item-border" lines="none">
-              <h5 class="center" style="width: 100%">{{ $t('true') }}</h5>
+            <IonItem color="transparent" class="center ion-item-border" lines="none"><span style="width: 100%" >
+              <IonThumbnail class="center">
+                <img alt="true" :src="'images/trueIcon.png'">
+              </IonThumbnail>
+            </span>
               <IonRadio mode="md" value="1"></IonRadio>
             </IonItem>
-            <IonItem color="transparent" class="center ion-item-border" lines="none">
-              <h5 class="center" style="width: 100%">{{ $t('false') }}</h5>
+            <IonItem color="transparent" class="center ion-item-border" lines="none"><span style="width: 100%" >
+              <IonThumbnail class="center">
+                <img alt="true" :src="'images/falseIcon.png'">
+              </IonThumbnail>
+            </span>
               <IonRadio mode="md" value="0"></IonRadio>
             </IonItem>
           </IonRadioGroup>
@@ -226,7 +238,7 @@ import {
   IonIcon,
   IonImg,
   IonInput,
-  IonLabel, IonCardContent, IonCard,
+  IonLabel, IonCardContent, IonCard, IonThumbnail,
 } from "@ionic/vue";
 import {chevronForward, heart, heartOutline, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
