@@ -323,6 +323,11 @@ const onLogoutClick = ()=>{
 onMounted(()=> {
   locale.value = localStorage.getItem("currentLanguage") || 'en';
   setInterval(checkInternetConnection, 5000);
+  setInterval(()=>{
+    if(localStorage.getItem('currentLife')){
+      life.value.currentLife = Number(localStorage.getItem('currentLife'));
+    }
+  }, 3000);
 });
 </script>
 
