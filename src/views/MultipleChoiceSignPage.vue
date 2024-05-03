@@ -91,8 +91,8 @@ import {
   IonItem,
   IonIcon,
   IonImg,
-  toastController,
-  alertController, IonInput, IonLabel,
+  IonInput,
+  IonLabel,
 } from "@ionic/vue";
 import {chevronForward, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
@@ -101,63 +101,13 @@ import {useI18n} from "vue-i18n";
 import MultipleChoiceSignResultPage from '@/views/MultipleChoiceSignResultPage.vue'
 import dataSource from "@/json/dataSource.json"
 import useAudio from "@/hooks/useAudio";
+import {showToast, showFinishAlert, showAlert} from "@/hooks/useUtils";
 
 const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 const isShowSetting = ref(true);
 const problemCounts = ref(10);
-
-const showToast = async (msg: string) => {
-  const toast = await toastController.create({
-    message: msg,
-    duration: 300,
-    position: 'bottom',
-  });
-  await toast.present();
-}
-
-const showFinishAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
-  const alert = await alertController.create({
-    header: header,
-    subHeader: subHeader,
-    message: message,
-    buttons: [
-      {
-        text: buttonText,
-        role: 'confirm',
-        handler: () => {
-          currentSelectedValue.value = '';
-          currentProblemNum.value = 1;
-          localStorage.setItem('multipleChoiceSignProblems',JSON.stringify(problems));
-          localStorage.setItem('userMultipleChoiceSignValues',chooseAns.toString());
-          chooseAns.splice(0);
-          const navLink = document.querySelector('#goToMultipleChoiceSignResultPage');
-          (navLink as HTMLElement).click();
-        },
-      }
-    ],
-    backdropDismiss: false,
-  });
-
-  await alert.present();
-};
-
-const showAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
-  const alert = await alertController.create({
-    header: header,
-    subHeader: subHeader,
-    message: message,
-    buttons: [
-      {
-        text: buttonText,
-        role: 'confirm',
-      }
-    ],
-    backdropDismiss: false,
-  });
-  await alert.present();
-}
 
 const {generateMultipleChoiceProblems, signCounts} = useData()
 let problems: any[] = [];
@@ -170,6 +120,16 @@ const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
 }
 
+const onClickFinishConfirm = ()=>{
+  currentSelectedValue.value = '';
+  currentProblemNum.value = 1;
+  localStorage.setItem('multipleChoiceSignProblems',JSON.stringify(problems));
+  localStorage.setItem('userMultipleChoiceSignValues',chooseAns.toString());
+  chooseAns.splice(0);
+  const navLink = document.querySelector('#goToMultipleChoiceSignResultPage');
+  (navLink as HTMLElement).click();
+}
+
 const onClickNextButton = () => {
   if (currentSelectedValue.value === '') {
     showToast(t('pleaseChooseAnswer'));
@@ -177,7 +137,7 @@ const onClickNextButton = () => {
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= problemCounts.value) {
-    showFinishAlert(t('testFinish'), "", "", t("viewResult"))
+    showFinishAlert(t('testFinish'), "", "", t("viewResult"), onClickFinishConfirm)
     return;
   }
   currentSelectedValue.value = '';

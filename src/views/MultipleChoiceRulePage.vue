@@ -101,8 +101,8 @@ import {
   IonIcon,
   IonCard,
   IonCardContent,
-  toastController,
-  alertController, IonLabel, IonInput,
+  IonLabel,
+  IonInput,
 } from "@ionic/vue";
 import {chevronForward, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
@@ -111,61 +111,11 @@ import {useI18n} from "vue-i18n";
 import MultipleChoiceRuleResultPage from '@/views/MultipleChoiceRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
 import useAudio from "@/hooks/useAudio";
+import {showToast, showAlert, showFinishAlert} from "@/hooks/useUtils";
 
 const {playRuleAnswerAudio,playRuleQuestionAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
-
-const showToast = async (msg: string) => {
-  const toast = await toastController.create({
-    message: msg,
-    duration: 300,
-    position: 'bottom',
-  });
-  await toast.present();
-}
-
-const showFinishAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
-  const alert = await alertController.create({
-    header: header,
-    subHeader: subHeader,
-    message: message,
-    buttons: [
-      {
-        text: buttonText,
-        role: 'confirm',
-        handler: () => {
-          currentSelectedValue.value = '';
-          currentProblemNum.value = 1;
-          localStorage.setItem('multipleChoiceRuleProblems',JSON.stringify(problems));
-          localStorage.setItem('userMultipleChoiceRuleValues',chooseAns.toString());
-          chooseAns.splice(0);
-          const navLink = document.querySelector('#goToMultipleChoiceRuleResultPage');
-          (navLink as HTMLElement).click();
-        },
-      }
-    ],
-    backdropDismiss: false,
-  });
-
-  await alert.present();
-};
-
-const showAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
-  const alert = await alertController.create({
-    header: header,
-    subHeader: subHeader,
-    message: message,
-    buttons: [
-      {
-        text: buttonText,
-        role: 'confirm',
-      }
-    ],
-    backdropDismiss: false,
-  });
-  await alert.present();
-}
 
 const {generateMultipleChoiceProblems, ruleCounts} = useData()
 const problemCounts = ref(10);
@@ -180,6 +130,16 @@ const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
 }
 
+const onClickFinishConfirm = () => {
+  currentSelectedValue.value = '';
+  currentProblemNum.value = 1;
+  localStorage.setItem('multipleChoiceRuleProblems',JSON.stringify(problems));
+  localStorage.setItem('userMultipleChoiceRuleValues',chooseAns.toString());
+  chooseAns.splice(0);
+  const navLink = document.querySelector('#goToMultipleChoiceRuleResultPage');
+  (navLink as HTMLElement).click();
+}
+
 const onClickNextButton = () => {
   if (currentSelectedValue.value === '') {
     showToast(t('pleaseChooseAnswer'));
@@ -187,7 +147,7 @@ const onClickNextButton = () => {
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= problemCounts.value) {
-    showFinishAlert(t('testFinish'), "", "", t("viewResult"))
+    showFinishAlert(t('testFinish'), "", "", t("viewResult"), onClickFinishConfirm)
     return;
   }
   currentSelectedValue.value = '';

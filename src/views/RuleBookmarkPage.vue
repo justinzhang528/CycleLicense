@@ -51,18 +51,10 @@ import {reactive, onUnmounted} from "vue";
 import dataSource from "@/json/dataSource.json";
 import {useI18n} from "vue-i18n";
 import useAudio from "@/hooks/useAudio";
+import {showToast} from "@/hooks/useUtils";
 
 const {playRuleQuestionAudio,playRuleAnswerAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
 const {t} = useI18n();
-const showToast = async (msg: string) => {
-  const toast = await toastController.create({
-    message: msg,
-    duration: 300,
-    position: 'bottom',
-  });
-  await toast.present();
-}
-
 const {addOrRemoveFromArray, getBookmarkedItems, ruleCounts} = useData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
 

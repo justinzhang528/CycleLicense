@@ -63,7 +63,6 @@ import {
   IonCardContent,
   IonTitle,
   IonLabel,
-  toastController,
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
@@ -71,21 +70,13 @@ import {onMounted, onUnmounted, reactive, ref} from "vue";
 import dataSource from '@/json/dataSource.json'
 import {useI18n} from "vue-i18n";
 import useAudio from "@/hooks/useAudio";
+import {showToast} from "@/hooks/useUtils";
 
 const {playRuleQuestionAudio, playRuleAnswerAudio, isPlayingRuleQuestionAudio, isPlayingRuleAnswerAudio, pauseAudio} = useAudio();
 const {t} = useI18n();
 const contentRef = ref();
 const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
-
-const showToast = async (msg: string) => {
-  const toast = await toastController.create({
-    message: msg,
-    duration: 300,
-    position: 'bottom',
-  });
-  await toast.present();
-}
 
 const onClickBookmarkIcon = (n: number) => {
   if (ruleBookmarkedItems.includes(n)) {

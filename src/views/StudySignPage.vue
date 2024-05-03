@@ -41,7 +41,6 @@ import {
   IonCardContent,
   IonTitle,
   IonLabel,
-  toastController,
 } from "@ionic/vue";
 import {
   bookmark,
@@ -54,6 +53,7 @@ import {reactive, ref, onMounted, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 import dataSource from "@/json/dataSource.json";
 import useAudio from "@/hooks/useAudio";
+import {showToast} from "@/hooks/useUtils";
 
 const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
 const {t} = useI18n();
@@ -61,14 +61,6 @@ const contentRef = ref();
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 
-const showToast = async (msg: string) => {
-  const toast = await toastController.create({
-    message: msg,
-    duration: 300,
-    position: 'bottom',
-  });
-  await toast.present();
-}
 
 const onClickBookmarkIcon = (n: number) => {
   if (signBookmarkedItems.includes(n)) {

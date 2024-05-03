@@ -65,39 +65,6 @@
           </IonItem>
         </IonList>
 
-        <IonModal ref="mockTestSettingModal" trigger="openMockTestSettingModal">
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton @click="onCancelMockTestSettingModal()">{{$t('cancel')}}</IonButton>
-              </IonButtons>
-              <IonTitle class="center">{{$t('settings')}}</IonTitle>
-              <IonButtons slot="end">
-                <IonButton :strong="true" @click="onConfirmMockTestSettingModal()">{{$t('confirm')}}</IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent class="center ion-padding">
-            <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
-            <IonItem>
-              <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
-              <IonInput style="width: 25%" ref="multipleChoiceSignInput" type="number" :value="multipleChoiceSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
-              <IonInput style="width: 25%" ref="multipleChoiceRuleInput" type="number" :value="multipleChoiceRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
-              <IonInput style="width: 25%" ref="trueFalseSignInput" type="number" :value="trueFalseSignDefaultCount" :placeholder="'1 ~ '+dataSource.signs.length"></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
-              <IonInput style="width: 25%" ref="trueFalseRuleInput" type="number" :value="trueFalseRuleDefaultCount" :placeholder="'1 ~ '+dataSource.rules.length"></IonInput>
-            </IonItem>
-          </IonContent>
-        </IonModal>
-
         <IonModal ref="loginModal" trigger="openLoginModal">
           <IonHeader>
             <IonToolbar>
@@ -197,37 +164,26 @@ import {
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {diamond, lockClosed, logOut, mail, person, personAdd, settings} from "ionicons/icons";
-import dataSource from "@/json/dataSource.json"
-import useData from '@/hooks/useData'
+import {diamond, lockClosed, logOut, mail, person, personAdd} from "ionicons/icons";
 import useAdmob from "@/hooks/useAdmob";
 import useInternetConnection from "@/hooks/useInternetConnection";
 import useFirebase from "@/hooks/useFirebase";
 import {loginResponse,registerResponse} from "@/enum/enum";
+import {isValidEmail, showAlert} from "@/hooks/useUtils";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
-const {DEFAULT_PROBLEM_COUNT, isInteger} = useData();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isRemoveAds') === 'true' || false);
 const homePage = markRaw(HomePage)
-const mockTestSettingModal = ref();
 const loginModal = ref();
 const registerModal = ref();
-const multipleChoiceSignInput = ref();
-const multipleChoiceRuleInput = ref();
-const trueFalseSignInput = ref();
-const trueFalseRuleInput = ref();
 const loginUserNameInput = ref();
 const loginPasswordInput = ref();
 const registerUserNameInput = ref();
 const registerPasswordInput = ref();
 const registerConfirmPasswordInput = ref();
 const registerEmailInput = ref();
-const multipleChoiceSignDefaultCount = ref(Number(localStorage.getItem('multipleChoiceSignCount')) || DEFAULT_PROBLEM_COUNT);
-const multipleChoiceRuleDefaultCount = ref(Number(localStorage.getItem('multipleChoiceRuleCount')) || DEFAULT_PROBLEM_COUNT);
-const trueFalseSignDefaultCount = ref(Number(localStorage.getItem('trueFalseSignCount')) || DEFAULT_PROBLEM_COUNT);
-const trueFalseRuleDefaultCount = ref(Number(localStorage.getItem('trueFalseRuleCount')) || DEFAULT_PROBLEM_COUNT);
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {getUser,upSertUser} = useFirebase();
 
@@ -252,41 +208,6 @@ const onToggleChanged=(event: CustomEvent)=>{
   }
   localStorage.setItem('isRemoveAds',String(event.detail.checked));
 }
-
-const onCancelMockTestSettingModal = () => mockTestSettingModal.value.$el.dismiss(null, 'cancel');
-
-const onConfirmMockTestSettingModal = () => {
-  let isValidCount: number = 0;
-
-  const multipleChoiceSignCount = multipleChoiceSignInput.value.$el.value;
-  const multipleChoiceRuleCount = multipleChoiceRuleInput.value.$el.value;
-  const trueFalseSignCount = trueFalseSignInput.value.$el.value;
-  const trueFalseRuleCount = trueFalseRuleInput.value.$el.value;
-
-    if(isInteger(multipleChoiceSignCount) && multipleChoiceSignCount >= 1 && multipleChoiceSignCount <= dataSource.signs.length)
-      isValidCount++;
-    if(isInteger(multipleChoiceRuleCount) && multipleChoiceRuleCount >= 1 && multipleChoiceRuleCount <= dataSource.rules.length)
-      isValidCount++;
-    if(isInteger(trueFalseSignCount) && trueFalseSignCount <= dataSource.signs.length)
-      isValidCount++;
-    if(isInteger(trueFalseRuleCount) && trueFalseRuleCount >= 1 && trueFalseRuleCount <= dataSource.rules.length)
-      isValidCount++;
-
-  if(isValidCount === 4){
-    localStorage.setItem('multipleChoiceSignCount', multipleChoiceSignCount.toString());
-    localStorage.setItem('multipleChoiceRuleCount', multipleChoiceRuleCount.toString());
-    localStorage.setItem('trueFalseSignCount', trueFalseSignCount.toString());
-    localStorage.setItem('trueFalseRuleCount', trueFalseRuleCount.toString());
-    multipleChoiceSignDefaultCount.value = multipleChoiceSignCount;
-    multipleChoiceRuleDefaultCount.value = multipleChoiceRuleCount;
-    trueFalseSignDefaultCount.value = trueFalseSignCount;
-    trueFalseRuleDefaultCount.value = trueFalseRuleCount;
-    mockTestSettingModal.value.$el.dismiss(null, 'confirm');
-  }else{
-    showAlert(t('invalidInput'), '', t('pleaseCheckYourInput'), t('ok'));
-  }
-};
-
 const onCancelLoginModal = () => loginModal.value.$el.dismiss(null, 'cancel');
 
 const onConfirmLoginModal = () => {
@@ -381,28 +302,6 @@ const onConfirmRegisterModal = ()=>{
     showAlert(t('error'), '', t('systemError'), t('ok'));
   })
 }
-
-const isValidEmail = (email: string): boolean => {
-  const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-const showAlert = async (header: string, subHeader: string, message: string, buttonText: string) => {
-  const alert = await alertController.create({
-    header: header,
-    subHeader: subHeader,
-    message: message,
-    buttons: [
-      {
-        text: buttonText,
-        role: 'confirm',
-      }
-    ],
-    backdropDismiss: false,
-  });
-  await alert.present();
-}
-
 const checkInternetConnection = ()=> {
   if(!isOnline.value){
     showAlert(t('noInternet'),t('pleaseCheckYourInternetConnection'),'',t('ok'));
