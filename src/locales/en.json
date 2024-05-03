@@ -31,7 +31,7 @@
   "setTheNumberOfQuestions": "Set the number of questions",
   "cancel": "Cancel",
   "confirm": "Confirm",
-  "rangeMustBe": "Range must be",
+  "rangeMustBe": "Range must between",
   "adsFree": "Remove Ads",
   "ok": "OK",
   "invalidInput": "Invalid Input",

@@ -192,7 +192,7 @@ const onClickPlayAnswerAudio = (n: number) => {
 
 const onClickStartTesting = ()=>{
   if(problemCounts.value < 1 || problemCounts.value > dataSource.rules.length){
-    showAlert(t('warning'), '', t('invalidQuestionNumber'), t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
   problems =  generateMultipleChoiceProblems(problemCounts.value, ruleCounts);
