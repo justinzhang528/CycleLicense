@@ -43,7 +43,6 @@ import {
   IonCardContent,
   IonTitle,
   IonLabel,
-  toastController,
 } from "@ionic/vue";
 import {pauseCircleOutline, playCircleOutline, trashBin} from "ionicons/icons";
 import useData from '@/hooks/useData'

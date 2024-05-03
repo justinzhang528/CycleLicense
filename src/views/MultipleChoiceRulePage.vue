@@ -116,11 +116,9 @@ import {showToast, showAlert, showFinishAlert} from "@/hooks/useUtils";
 const {playRuleAnswerAudio,playRuleQuestionAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
-
-const {generateMultipleChoiceProblems, ruleCounts} = useData()
-const problemCounts = ref(10);
+const {generateMultipleChoiceProblems, ruleCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT} = useData()
+const problemCounts = ref(DEFAULT_PROBLEM_COUNT);
 let problems: any[] = [];
-
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
@@ -200,13 +198,13 @@ const onClickStartTesting = ()=>{
 }
 
 const onClickDecrement = ()=>{
-  if(problemCounts.value > 5)
-    problemCounts.value-=5;
+  if(problemCounts.value > INCREMENT_PROBLEM_COUNT)
+    problemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrement = ()=>{
   if(problemCounts.value < dataSource.rules.length)
-    problemCounts.value+=5;
+    problemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
 </script>
 

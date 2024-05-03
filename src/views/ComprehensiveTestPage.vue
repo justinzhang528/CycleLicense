@@ -235,15 +235,13 @@ const {playSignAudio, playRuleQuestionAudio, playRuleAnswerAudio, pauseAudio, is
 const {t} = useI18n();
 const comprehensiveTestResultPage = markRaw(ComprehensiveTestResultPage);
 const isShowSetting = ref(true);
-const multipleChoiceSignProblemCounts = ref(10);
-const multipleChoiceRuleProblemCounts = ref(10);
-const trueFalseSignProblemCounts = ref(10);
-const trueFalseRuleProblemCounts = ref(10);
-const totalProblemCounts = ref(40);
-
-const {generateMultipleChoiceProblems, generateTrueFalseProblem, signCounts, ruleCounts} = useData()
+const {generateMultipleChoiceProblems, generateTrueFalseProblem, signCounts, ruleCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT} = useData()
+const multipleChoiceSignProblemCounts = ref(DEFAULT_PROBLEM_COUNT);
+const multipleChoiceRuleProblemCounts = ref(DEFAULT_PROBLEM_COUNT);
+const trueFalseSignProblemCounts = ref(DEFAULT_PROBLEM_COUNT);
+const trueFalseRuleProblemCounts = ref(DEFAULT_PROBLEM_COUNT);
+const totalProblemCounts = ref(DEFAULT_PROBLEM_COUNT*4);
 let problems: any[] = [];
-
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
@@ -274,7 +272,6 @@ const onClickNextButton = () => {
   }
   currentSelectedValue.value = '';
   currentProblemNum.value += 1;
-  console.log(chooseAns)
 }
 
 const onClickPlaySignAudio = (n: number) => {
@@ -366,48 +363,47 @@ const onClickStartTesting = ()=>{
   }
   problems = shuffleArray(problems);
   totalProblemCounts.value = multipleChoiceSignProblemCounts.value+multipleChoiceRuleProblemCounts.value+trueFalseSignProblemCounts.value+trueFalseRuleProblemCounts.value;
-  console.log(problems)
   isShowSetting.value = false;
 }
 
 const onClickDecrementMultipleChoiceSign = ()=>{
-  if(multipleChoiceSignProblemCounts.value > 5)
-    multipleChoiceSignProblemCounts.value-=5;
+  if(multipleChoiceSignProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+    multipleChoiceSignProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementMultipleChoiceSign = ()=>{
   if(multipleChoiceSignProblemCounts.value < dataSource.signs.length)
-    multipleChoiceSignProblemCounts.value+=5;
+    multipleChoiceSignProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickDecrementMultipleChoiceRule = ()=>{
-  if(multipleChoiceRuleProblemCounts.value > 5)
-    multipleChoiceRuleProblemCounts.value-=5;
+  if(multipleChoiceRuleProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+    multipleChoiceRuleProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementMultipleChoiceRule = ()=>{
   if(multipleChoiceRuleProblemCounts.value < dataSource.rules.length)
-    multipleChoiceRuleProblemCounts.value+=5;
+    multipleChoiceRuleProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickDecrementTrueFalseSign = ()=>{
-  if(trueFalseSignProblemCounts.value > 5)
-    trueFalseSignProblemCounts.value-=5;
+  if(trueFalseSignProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+    trueFalseSignProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementTrueFalseSign = ()=>{
   if(trueFalseSignProblemCounts.value < dataSource.signs.length)
-    trueFalseSignProblemCounts.value+=5;
+    trueFalseSignProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickDecrementTrueFalseRule = ()=>{
-  if(trueFalseRuleProblemCounts.value > 5)
-    trueFalseRuleProblemCounts.value-=5;
+  if(trueFalseRuleProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+    trueFalseRuleProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementTrueFalseRule = ()=>{
   if(trueFalseRuleProblemCounts.value < dataSource.rules.length)
-    trueFalseRuleProblemCounts.value+=5;
+    trueFalseRuleProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
 
 </script>

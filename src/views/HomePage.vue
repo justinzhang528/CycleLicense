@@ -57,17 +57,11 @@ import {
   IonButtons,
 } from '@ionic/vue';
 import StudyPage from "@/views/StudyPage.vue";
-import {markRaw, onMounted} from "vue";
+import {markRaw} from "vue";
 import MockTestPage from "@/views/MockTestPage.vue";
-import useAdmob from "@/hooks/useAdmob";
 
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
-const { showBanner } = useAdmob();
-
-onMounted(() => {
-  showBanner();
-});
 
 </script>
 

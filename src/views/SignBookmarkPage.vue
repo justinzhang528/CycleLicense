@@ -51,7 +51,6 @@ import {showToast} from "@/hooks/useUtils";
 
 const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
 const {t} = useI18n();
-
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, getBookmarkedItems, signCounts} = useData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 

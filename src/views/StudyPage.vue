@@ -14,7 +14,7 @@
   </IonHeader>
   <IonContent class="ion-padding">
     <IonImg src="images/study.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
-    <IonNavLink routerDirection="forward" :component="studySignPage">
+    <IonNavLink routerDirection="forward" :component="studySignPage"  @click="showInterstitial">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/signIcon.png'">
@@ -22,7 +22,7 @@
         <IonLabel style="padding-left: 10px">{{$t('sign')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" :component="studyRulePage" style="padding: 50px">
+    <IonNavLink routerDirection="forward" :component="studyRulePage" style="padding: 50px"  @click="showInterstitial">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/ruleIcon.png'">
@@ -30,7 +30,7 @@
         <IonLabel style="padding-left: 10px">{{$t('rule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" :component="signBookmarkPage" style="padding: 50px">
+    <IonNavLink routerDirection="forward" :component="signBookmarkPage" style="padding: 50px"  @click="showInterstitial">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/bookmarkIcon.png'">
@@ -38,7 +38,7 @@
         <IonLabel style="padding-left: 10px">{{$t('signBookmark')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" :component="ruleBookmarkPage" style="padding: 50px">
+    <IonNavLink routerDirection="forward" :component="ruleBookmarkPage" style="padding: 50px" @click="showInterstitial">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/bookmarkIcon.png'">
@@ -73,7 +73,6 @@ const studyRulePage = markRaw(StudyRulePage);
 const signBookmarkPage = markRaw(SignBookmarkPage);
 const ruleBookmarkPage = markRaw(RuleBookmarkPage);
 const {showInterstitial} = useAdmob();
-showInterstitial();
 </script>
 
 <style scoped>

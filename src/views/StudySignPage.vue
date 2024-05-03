@@ -61,7 +61,6 @@ const contentRef = ref();
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
 
-
 const onClickBookmarkIcon = (n: number) => {
   if (signBookmarkedItems.includes(n)) {
     showToast(t('removedFromBookmark'));
@@ -78,7 +77,6 @@ const onScroll = (e: CustomEvent)=>{
 const previousPosition = ref(parseInt(localStorage.getItem('signScrollPosition')) || 0);
 const scrollToPreviousPosition = () => {
   contentRef.value.$el.scrollToPoint(0, previousPosition.value,150);
-  console.log(previousPosition.value);
 };
 
 const onClickPlayAudio = (n: number) => {

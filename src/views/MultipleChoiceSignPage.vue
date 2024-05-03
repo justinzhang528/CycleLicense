@@ -107,11 +107,9 @@ const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 const isShowSetting = ref(true);
-const problemCounts = ref(10);
-
-const {generateMultipleChoiceProblems, signCounts} = useData()
+const {generateMultipleChoiceProblems, signCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT} = useData()
+const problemCounts = ref(DEFAULT_PROBLEM_COUNT);
 let problems: any[] = [];
-
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
@@ -171,13 +169,13 @@ const onClickStartTesting = ()=>{
 }
 
 const onClickDecrement = ()=>{
-  if(problemCounts.value > 5)
-    problemCounts.value-=5;
+  if(problemCounts.value > INCREMENT_PROBLEM_COUNT)
+    problemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrement = ()=>{
   if(problemCounts.value < dataSource.signs.length)
-    problemCounts.value+=5;
+    problemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
 
 </script>

@@ -2,6 +2,7 @@ import dataSource from '@/json/dataSource.json'
 
 export default function () {
     const DEFAULT_PROBLEM_COUNT = 10
+    const INCREMENT_PROBLEM_COUNT = 5
     const signCounts = dataSource.signs.length
     const ruleCounts = dataSource.rules.length
     const getImagePath = (type: string, fileName: string, postFix: string = "") => {
@@ -127,6 +128,7 @@ export default function () {
     }
 
     return {
+        INCREMENT_PROBLEM_COUNT,
         DEFAULT_PROBLEM_COUNT,
         signCounts,
         ruleCounts,

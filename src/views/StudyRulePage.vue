@@ -94,7 +94,6 @@ const onScroll = (e: CustomEvent)=>{
 const previousPosition = ref(parseInt(localStorage.getItem('ruleScrollPosition')) || 0);
 const scrollToPreviousPosition = () => {
   contentRef.value.$el.scrollToPoint(0, previousPosition.value,150);
-  console.log(previousPosition.value);
 };
 
 const onClickPlayQuestionAudio = (n: number) => {
