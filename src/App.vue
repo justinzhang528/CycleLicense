@@ -14,7 +14,13 @@
         <IonList>
           <IonItem lines="none">
             <IonGrid>
-              <IonRow class="ion-justify-content-center ion-padding" >
+              <IonRow class="ion-justify-content-center ion-padding">
+                <span v-for="i in life.totalLife">
+                  <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
+                  <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px"></IonIcon>
+                </span>
+              </IonRow>
+              <IonRow class="ion-justify-content-center ion-padding">
                 <IonAvatar style="width: 75px; height: 75px">
                   <img v-if="userInfo.name" alt="avatar" :src="'images/avatar.png'">
                   <img v-if="!userInfo.name" alt="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg">
@@ -159,17 +165,17 @@ import {
   IonRow,
   IonGrid,
   IonInputPasswordToggle,
-  alertController,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {diamond, lockClosed, logOut, mail, person, personAdd} from "ionicons/icons";
+import {diamond, heart, heartOutline, lockClosed, logOut, mail, person, personAdd} from "ionicons/icons";
 import useAdmob from "@/hooks/useAdmob";
 import useInternetConnection from "@/hooks/useInternetConnection";
 import useFirebase from "@/hooks/useFirebase";
 import {loginResponse,registerResponse} from "@/enum/enum";
 import {isValidEmail, showAlert} from "@/hooks/useUtils";
+import useData from "@/hooks/useData";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
@@ -186,6 +192,7 @@ const registerConfirmPasswordInput = ref();
 const registerEmailInput = ref();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {getUser,upSertUser} = useFirebase();
+const {life} = useData();
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;

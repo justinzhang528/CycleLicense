@@ -29,6 +29,29 @@ export async function showAlert (header: string, subHeader: string, message: str
     await alert.present();
 }
 
+export async function showAlertWithAction (header: string, subHeader: string, message: string, confirmButtonText: string, cancelButtonText: string, func: any, subFunc: any){
+    const alert = await alertController.create({
+        header: header,
+        subHeader: subHeader,
+        message: message,
+        buttons: [
+            {
+                text: cancelButtonText,
+                role: 'cancel'
+            },
+            {
+                text: confirmButtonText,
+                role: 'confirm',
+                handler: ()=>{
+                    func(subFunc);
+                }
+            },
+        ],
+        backdropDismiss: false,
+    });
+    await alert.present();
+}
+
 export async function showFinishAlert(header: string, subHeader: string, message: string, buttonText: string, handler: any) {
     const alert = await alertController.create({
         header: header,

@@ -1,8 +1,11 @@
 import dataSource from '@/json/dataSource.json'
+import {ref} from "vue";
 
 export default function () {
     const DEFAULT_PROBLEM_COUNT = 10
     const INCREMENT_PROBLEM_COUNT = 5
+    const DEFAULT_LIFE = 5
+    const life = ref({"totalLife": DEFAULT_LIFE,"currentLife": localStorage.getItem('currentLife') ? Number(localStorage.getItem('currentLife')) : DEFAULT_LIFE})
     const signCounts = dataSource.signs.length
     const ruleCounts = dataSource.rules.length
     const getImagePath = (type: string, fileName: string, postFix: string = "") => {
@@ -25,18 +28,18 @@ export default function () {
         return arr;
     }
 
-    const getBookmarkedItems = (type: string)=>{
-        const str: string|null = localStorage.getItem(type);
-        if(str === null || str === 'NaN' || str === '')
+    const getBookmarkedItems = (type: string) => {
+        const str: string | null = localStorage.getItem(type);
+        if (str === null || str === 'NaN' || str === '')
             return [];
-        const res: number[] =  (str || '{}').split(',').map(Number);
+        const res: number[] = (str || '{}').split(',').map(Number);
         return res.sort((a, b) => a - b);
     }
 
     // generate shuffle order numbers ranging from 1~range
     const generateShuffleOrderNumbers = (range: number): number[] => {
         // Initialize array with numbers from 1 to n
-        const numbers = Array.from({ length: range }, (_, index) => index + 1);
+        const numbers = Array.from({length: range}, (_, index) => index + 1);
 
         // Fisher-Yates shuffle algorithm
         for (let i = numbers.length - 1; i > 0; i--) {
@@ -64,7 +67,7 @@ export default function () {
         let result = [];
         const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
-        for(const [index, element] of shuffleOrderNumbers.entries()){
+        for (const [index, element] of shuffleOrderNumbers.entries()) {
 
             let choiceArray = generateRandomNumbers(totalCounts, element, 4);
             const json = {
@@ -85,7 +88,7 @@ export default function () {
         let result = [];
         const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
-        for(const [index, element] of shuffleOrderNumbers.entries()){
+        for (const [index, element] of shuffleOrderNumbers.entries()) {
 
             let choiceArray = generateRandomNumbers(totalCounts, element, 2);
             const json = {
@@ -99,19 +102,19 @@ export default function () {
         return result;
     }
 
-    const getProblems  = (type: string)=>{
+    const getProblems = (type: string) => {
         return JSON.parse(localStorage.getItem(type) || '{}');
     }
 
-    const getChooseAns = (type: string)=>{
-        return (localStorage.getItem(type)  || '{}').split(',').map(Number)
+    const getChooseAns = (type: string) => {
+        return (localStorage.getItem(type) || '{}').split(',').map(Number)
     }
 
     const getTotalScore = (problemType: string, chooseAnsType: string) => {
         let score = 0;
         let n = 0;
         for (const problem of getProblems(problemType)) {
-            if(problem.data.ans === getChooseAns(chooseAnsType)[n]){
+            if (problem.data.ans === getChooseAns(chooseAnsType)[n]) {
                 score += 1;
             }
             n += 1;
@@ -128,8 +131,9 @@ export default function () {
     }
 
     return {
-        INCREMENT_PROBLEM_COUNT,
         DEFAULT_PROBLEM_COUNT,
+        INCREMENT_PROBLEM_COUNT,
+        life,
         signCounts,
         ruleCounts,
         getImagePath,

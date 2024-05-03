@@ -11,7 +11,13 @@
   </IonHeader>
   <IonContent className="ion-text-center">
     <div v-if="isShowSetting">
-      <img :src="'images/trueFalse.png'" alt="trueFalse" style="width: 75%"/>
+      <div class="ion-padding">
+        <span v-for="i in life.totalLife">
+          <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 26px" color="warning"></IonIcon>
+          <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px"></IonIcon>
+        </span>
+      </div>
+      <img :src="'images/trueFalse.png'" alt="trueFalse" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
         <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
@@ -83,31 +89,34 @@ import {
   IonCardContent,
   IonCard, IonInput,
 } from "@ionic/vue";
-import {chevronForward, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
+import {chevronForward, playCircleOutline, pauseCircleOutline, heart, heartOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";
 import TrueFalseRuleResultPage from '@/views/TrueFalseRuleResultPage.vue'
 import dataSource from '@/json/dataSource.json'
 import useAudio from "@/hooks/useAudio";
-import {showToast, showAlert, showFinishAlert} from "@/hooks/useUtils";
+import {showToast, showAlert, showFinishAlert, showAlertWithAction} from "@/hooks/useUtils";
+import useAdmob from "@/hooks/useAdmob";
 
 const {playRuleQuestionAudio,playRuleAnswerAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
 const {t} = useI18n();
 const trueFalseRuleResultPage = markRaw(TrueFalseRuleResultPage);
-const {generateTrueFalseProblem, ruleCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT} = useData()
+const {generateTrueFalseProblem, ruleCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT, life} = useData()
 const problemCounts = ref(DEFAULT_PROBLEM_COUNT);
 let problems: any[] = [];
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
 const isShowSetting = ref(true);
+const {showInterstitial,showRewardVideo} = useAdmob();
 
 const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
 }
 
 const onClickFinishConfirm = () => {
+  isShowSetting.value = true;
   currentSelectedValue.value = '';
   currentProblemNum.value = 1;
   localStorage.setItem('trueFalseRuleProblems', JSON.stringify(problems));
@@ -115,6 +124,7 @@ const onClickFinishConfirm = () => {
   chooseAns.splice(0);
   const navLink = document.querySelector('#goToTrueFalseRuleResultPage');
   (navLink as HTMLElement).click();
+  showInterstitial();
 }
 
 const onClickNextButton = () => {
@@ -167,7 +177,19 @@ const onClickPlayAnswerAudio = (n: number) => {
   isPlayingRuleAnswerAudio.value[n] = !isPlayingRuleAnswerAudio.value[n];
 }
 
+const addLife = ()=>{
+  life.value.currentLife++;
+  localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  alert(t('youGotOneLife'));
+}
+
 const onClickStartTesting = ()=>{
+  if(life.value.currentLife<=0){
+    showAlertWithAction(t('warning'), t('noLife'), t('watchVideoToGetLife'), t('confirm'), t("cancel"), showRewardVideo, addLife);
+    return;
+  }
+  life.value.currentLife--;
+  localStorage.setItem('currentLife',(life.value.currentLife).toString());
   if(problemCounts.value < 1 || problemCounts.value > dataSource.rules.length){
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
     return;

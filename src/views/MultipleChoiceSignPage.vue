@@ -11,7 +11,13 @@
   </IonHeader>
   <IonContent className="ion-text-center">
     <div v-if="isShowSetting">
-      <img :src="'images/multipleChoice.png'" alt="multipleChoice" style="width: 75%"/>
+      <div class="ion-padding">
+        <span v-for="i in life.totalLife">
+          <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 26px" color="warning"></IonIcon>
+          <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px"></IonIcon>
+        </span>
+      </div>
+      <img :src="'images/multipleChoice.png'" alt="multipleChoice" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
         <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
@@ -94,31 +100,34 @@ import {
   IonInput,
   IonLabel,
 } from "@ionic/vue";
-import {chevronForward, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
+import {chevronForward, heart, heartOutline, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";
 import MultipleChoiceSignResultPage from '@/views/MultipleChoiceSignResultPage.vue'
 import dataSource from "@/json/dataSource.json"
 import useAudio from "@/hooks/useAudio";
-import {showToast, showFinishAlert, showAlert} from "@/hooks/useUtils";
+import {showToast, showFinishAlert, showAlert, showAlertWithAction} from "@/hooks/useUtils";
+import useAdmob from "@/hooks/useAdmob";
 
 const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 const isShowSetting = ref(true);
-const {generateMultipleChoiceProblems, signCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT} = useData()
+const {generateMultipleChoiceProblems, signCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT, life} = useData()
 const problemCounts = ref(DEFAULT_PROBLEM_COUNT);
 let problems: any[] = [];
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
+const {showInterstitial,showRewardVideo} = useAdmob();
 
 const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
 }
 
 const onClickFinishConfirm = ()=>{
+  isShowSetting.value = true;
   currentSelectedValue.value = '';
   currentProblemNum.value = 1;
   localStorage.setItem('multipleChoiceSignProblems',JSON.stringify(problems));
@@ -126,6 +135,7 @@ const onClickFinishConfirm = ()=>{
   chooseAns.splice(0);
   const navLink = document.querySelector('#goToMultipleChoiceSignResultPage');
   (navLink as HTMLElement).click();
+  showInterstitial();
 }
 
 const onClickNextButton = () => {
@@ -159,7 +169,19 @@ const onClickPlayAudio = (n: number) => {
   isPlayingSignAudio.value[n] = !isPlayingSignAudio.value[n];
 }
 
+const addLife = ()=>{
+  life.value.currentLife++;
+  localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  alert(t('youGotOneLife'));
+}
+
 const onClickStartTesting = ()=>{
+  if(life.value.currentLife<=0){
+    showAlertWithAction(t('warning'), t('noLife'), t('watchVideoToGetLife'), t('confirm'), t("cancel"), showRewardVideo, addLife);
+    return;
+  }
+  life.value.currentLife--;
+  localStorage.setItem('currentLife',(life.value.currentLife).toString());
   if(problemCounts.value < 1 || problemCounts.value > dataSource.signs.length){
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
     return;

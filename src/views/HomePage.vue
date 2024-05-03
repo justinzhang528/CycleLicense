@@ -62,7 +62,6 @@ import MockTestPage from "@/views/MockTestPage.vue";
 
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
-
 </script>
 
 <style scoped>

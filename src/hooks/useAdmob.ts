@@ -8,8 +8,11 @@ import {
     RewardAdOptions,
     BannerAdOptions,
     BannerAdPosition,
-    BannerAdSize,
+    BannerAdSize, RewardAdPluginEvents,
 } from '@capacitor-community/admob';
+import useData from "@/hooks/useData";
+
+const {life} = useData();
 
 export default function () {
     const showBanner = async () => {
@@ -37,7 +40,11 @@ export default function () {
         }
     };
 
-    const showRewardVideo = async () => {
+    const showRewardVideo = async (func: any) => {
+        AdMob.addListener(RewardAdPluginEvents.Rewarded, () => {
+            // Subscribe user rewarded
+            func();
+        });
         const options: RewardAdOptions = {
             adId: Rewarded_Id, // demo ad unit id
             isTesting: true,
