@@ -27,8 +27,8 @@
     <div v-if="!isShowSetting" class="ion-padding">
       <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
       <span hidden>
-      {{ question = Number(problems[currentProblemNum - 1].question)-1}}
-      {{ trueFalse = Number(problems[currentProblemNum - 1].trueFalse)-1}}
+      {{ question = Number(problems[currentProblemNum - 1].data.question)-1}}
+      {{ trueFalse = Number(problems[currentProblemNum - 1].data.trueFalse)-1}}
       </span>
       <IonCard>
         <IonCardContent align="left">
@@ -174,7 +174,7 @@ const onClickStartTesting = ()=>{
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
-  problems =  generateTrueFalseProblem(problemCounts.value, ruleCounts);
+  problems =  generateTrueFalseProblem(problemCounts.value, ruleCounts, "trueFalseRule");
   isShowSetting.value = false;
 }
 

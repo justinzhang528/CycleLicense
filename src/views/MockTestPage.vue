@@ -46,7 +46,7 @@
         <IonLabel style="padding-left: 10px">{{$t('trueFalseRule')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseRulePage">
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="comprehensiveTestPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/comprehensiveTestIcon.png'">
@@ -74,12 +74,14 @@ import MultiChoiceSignPage from "@/views/MultipleChoiceSignPage.vue";
 import MultiChoiceRulePage from "@/views/MultipleChoiceRulePage.vue";
 import TrueFalseSignPage from "@/views/TrueFalseSignPage.vue";
 import TrueFalseRulePage from "@/views/TrueFalseRulePage.vue";
+import ComprehensiveTestPage from "@/views/ComprehensiveTestPage.vue";
 import useAdmob from "@/hooks/useAdmob";
 
 const multipleChoiceSignPage = markRaw(MultiChoiceSignPage);
 const multipleChoiceRulePage = markRaw(MultiChoiceRulePage);
 const trueFalseSignPage = markRaw(TrueFalseSignPage);
 const trueFalseRulePage = markRaw(TrueFalseRulePage);
+const comprehensiveTestPage = markRaw(ComprehensiveTestPage);
 const {showRewardVideo} = useAdmob();
 showRewardVideo();
 </script>

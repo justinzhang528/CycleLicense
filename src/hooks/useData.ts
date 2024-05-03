@@ -59,7 +59,7 @@ export default function () {
         return array.slice(0, count);
     }
 
-    const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number) => {
+    const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
         const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
@@ -75,12 +75,12 @@ export default function () {
                 choice4: handleZeroPad(choiceArray[3], 3),
                 ans: choiceArray.indexOf(element) + 1
             }
-            result.push(json);
+            result.push({'type': type, 'data': json});
         }
         return result;
     }
 
-    const generateTrueFalseProblem = (problemCounts: number, totalCounts: number) => {
+    const generateTrueFalseProblem = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
         const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
 
@@ -93,7 +93,7 @@ export default function () {
                 trueFalse: handleZeroPad(choiceArray[0], 3),
                 ans: choiceArray[0] === element ? 1 : 0
             }
-            result.push(json);
+            result.push({'type': type, 'data': json});
         }
         return result;
     }
@@ -110,7 +110,7 @@ export default function () {
         let score = 0;
         let n = 0;
         for (const problem of getProblems(problemType)) {
-            if(problem.ans === getChooseAns(chooseAnsType)[n]){
+            if(problem.data.ans === getChooseAns(chooseAnsType)[n]){
                 score += 1;
             }
             n += 1;

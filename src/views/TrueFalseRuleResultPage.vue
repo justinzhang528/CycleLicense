@@ -19,15 +19,15 @@
       <IonCardContent>
         <div align="left">
           <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('question')}} {{$t(':')}}</IonLabel>
-          <IonLabel color="dark">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel><br><br>
+          <IonLabel color="dark">{{ dataSource.rules[Number(item.data.question)-1].Q }}</IonLabel><br><br>
           <IonLabel color="dark" style="font-weight: bold; padding-right: 5px">{{$t('answer')}} {{$t(':')}} </IonLabel>
-          <IonLabel color="dark">{{ dataSource.rules[Number(item.trueFalse)-1].A }}</IonLabel><br><br>
+          <IonLabel color="dark">{{ dataSource.rules[Number(item.data.trueFalse)-1].A }}</IonLabel><br><br>
         </div>
         <IonLabel>
-          {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}
+          {{$t('answer')}} {{$t(':')}} {{ item.data.ans === 1 ? $t('true') : $t('false') }}
           ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ chooseAns[index] === 1 ? $t('true') : $t('false') }} )<br>
-          <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
-          <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
+          <IonIcon v-if="item.data.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
+          <IonIcon v-if="item.data.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
         </IonLabel>
       </IonCardContent>
 

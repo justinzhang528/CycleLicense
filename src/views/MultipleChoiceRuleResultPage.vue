@@ -18,29 +18,29 @@
       </IonCardHeader>
       <IonCardContent>
         <IonItem color="transparent" class="center" lines="none">
-          <IonLabel color="dark">{{ dataSource.rules[Number(item.question)-1].Q }}</IonLabel>
+          <IonLabel color="dark">{{ dataSource.rules[Number(item.data.question)-1].Q }}</IonLabel>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(item.choice1)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.data.choice1)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(item.choice2)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.data.choice2)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(item.choice3)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.data.choice3)-1].A }}</label>
         </IonItem>
         <IonItem color="transparent" class="center ion-item-border" lines="none">
           <label style="font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
-          <label style="width: 100%">{{ dataSource.rules[Number(item.choice4)-1].A }}</label>
+          <label style="width: 100%">{{ dataSource.rules[Number(item.data.choice4)-1].A }}</label>
         </IonItem>
         <IonLabel>
-          {{$t('answer')}} {{$t(':')}} {{ $t(item.ans) }}
+          {{$t('answer')}} {{$t(':')}} {{ $t(item.data.ans) }}
           ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ $t(chooseAns[index].toString()) }} )<br>
-          <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
-          <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
+          <IonIcon v-if="item.data.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
+          <IonIcon v-if="item.data.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
         </IonLabel>
       </IonCardContent>
 

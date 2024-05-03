@@ -28,11 +28,11 @@
       <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
       <IonCard>
         <IonCardContent>
-          <span hidden>{{ trueFalse = Number(problems[currentProblemNum - 1].trueFalse)-1}}</span>
+          <span hidden>{{ trueFalse = Number(problems[currentProblemNum - 1].data.trueFalse)-1}}</span>
           <IonIcon color="dark" v-if="!isPlayingSignAudio[trueFalse]" size="large" style="float: left" :icon="playCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
           <IonIcon color="dark" v-if="isPlayingSignAudio[trueFalse]" size="large" style="float: left" :icon="pauseCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
           <IonItem color="transparent" lines="none">
-            <IonImg :src="'images/sign/'+problems[currentProblemNum-1].question+'Q.png'" class="center round-border-img" style="width: 70%"/>
+            <IonImg :src="'images/sign/'+problems[currentProblemNum-1].data.question+'Q.png'" class="center round-border-img" style="width: 70%"/>
           </IonItem>
           <IonItem class="center" color="transparent" lines="none">
             <IonLabel color="dark" style="display: block; margin: 0 auto; padding-bottom: 5px">{{ dataSource.signs[trueFalse].A }}</IonLabel>
@@ -154,7 +154,7 @@ const onClickStartTesting = ()=>{
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
     return;
   }
-  problems =  generateTrueFalseProblem(problemCounts.value, signCounts);
+  problems =  generateTrueFalseProblem(problemCounts.value, signCounts, "trueFalseSign");
   isShowSetting.value = false;
 }
 

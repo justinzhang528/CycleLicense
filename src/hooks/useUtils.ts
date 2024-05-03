@@ -5,6 +5,14 @@ export function isValidEmail (email: string): boolean {
     return emailRegex.test(email);
 }
 
+export function shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 export async function showAlert (header: string, subHeader: string, message: string, buttonText: string){
     const alert = await alertController.create({
         header: header,

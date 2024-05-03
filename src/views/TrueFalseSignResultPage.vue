@@ -18,16 +18,16 @@
       </IonCardHeader>
       <IonCardContent>
         <IonItem color="transparent" lines="none">
-          <IonImg class="center" :src="'images/sign/'+item.question+'Q.png'" style="width: 75%"/>
+          <IonImg class="center" :src="'images/sign/'+item.data.question+'Q.png'" style="width: 75%"/>
         </IonItem>
         <IonItem color="transparent" class="center" lines="none">
-          <IonLabel color="dark" style="padding-bottom: 5px">{{ dataSource.signs[Number(item.trueFalse)-1].A }}</IonLabel>
+          <IonLabel color="dark" style="padding-bottom: 5px">{{ dataSource.signs[Number(item.data.trueFalse)-1].A }}</IonLabel>
         </IonItem>
         <IonLabel>
-          {{$t('answer')}} {{$t(':')}} {{ item.ans === 1 ? $t('true') : $t('false') }}
+          {{$t('answer')}} {{$t(':')}} {{ item.data.ans === 1 ? $t('true') : $t('false') }}
           ( {{$t('your')}}{{$t('answer')}} {{$t(':')}} {{ chooseAns[index] === 1 ? $t('true') : $t('false') }} )<br>
-          <IonIcon v-if="item.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
-          <IonIcon v-if="item.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
+          <IonIcon v-if="item.data.ans === chooseAns[index]" :icon="checkmark" size="large" style="color: green"></IonIcon>
+          <IonIcon v-if="item.data.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
         </IonLabel>
       </IonCardContent>
 

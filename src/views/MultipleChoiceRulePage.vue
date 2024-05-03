@@ -27,18 +27,18 @@
     <div v-if="!isShowSetting" class="ion-padding">
       <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
       <span hidden>
-        {{ question = Number(problems[currentProblemNum - 1].question)-1}}
-        {{ choice1 = Number(problems[currentProblemNum - 1].choice1)-1}}
-        {{ choice2 = Number(problems[currentProblemNum - 1].choice2)-1}}
-        {{ choice3 = Number(problems[currentProblemNum - 1].choice3)-1}}
-        {{ choice4 = Number(problems[currentProblemNum - 1].choice4)-1}}
+        {{ question = Number(problems[currentProblemNum - 1].data.question)-1}}
+        {{ choice1 = Number(problems[currentProblemNum - 1].data.choice1)-1}}
+        {{ choice2 = Number(problems[currentProblemNum - 1].data.choice2)-1}}
+        {{ choice3 = Number(problems[currentProblemNum - 1].data.choice3)-1}}
+        {{ choice4 = Number(problems[currentProblemNum - 1].data.choice4)-1}}
       </span>
       <IonCard>
         <IonCardContent>
           <IonItem color="transparent" class="center" lines="none">
             <IonIcon color="dark" v-if="!isPlayingRuleQuestionAudio[question]" size="large" :icon="playCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
             <IonIcon color="dark" v-if="isPlayingRuleQuestionAudio[question]" size="large" :icon="pauseCircleOutline" @click="onClickPlayQuestionAudio(question)"/>
-            <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].question)-1].Q }}</IonLabel>
+            <IonLabel color="dark">{{ dataSource.rules[Number(problems[currentProblemNum - 1].data.question)-1].Q }}</IonLabel>
           </IonItem>
         </IonCardContent>
       </IonCard>
@@ -195,7 +195,7 @@ const onClickStartTesting = ()=>{
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
-  problems =  generateMultipleChoiceProblems(problemCounts.value, ruleCounts);
+  problems =  generateMultipleChoiceProblems(problemCounts.value, ruleCounts, "multipleChoiceRule");
   isShowSetting.value = false;
 }
 
