@@ -77,7 +77,7 @@ router.isReady().then(() => {
             const latestIncreaseLifeTime = parseInt(localStorage.getItem('latestIncreaseLifeTime') || '0');
             if(currentTime - latestIncreaseLifeTime >= UseData().DEFAULT_LIFE_INCREASE_INTERVAL){
                 const currentLife = parseInt(localStorage.getItem('currentLife') || '0');
-                if(currentLife < 10){
+                if(currentLife < UseData().DEFAULT_LIFE){
                     localStorage.setItem('currentLife', (currentLife + 1).toString());
                 }
                 localStorage.setItem('latestIncreaseLifeTime', currentTime.toString());
