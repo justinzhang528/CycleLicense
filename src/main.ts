@@ -82,7 +82,7 @@ router.isReady().then(() => {
                 }
                 localStorage.setItem('latestIncreaseLifeTime', currentTime.toString());
             }
-        }, 300000);
+        }, 60000);
     }
 
     increaseLife();
