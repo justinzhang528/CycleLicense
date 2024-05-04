@@ -44,6 +44,8 @@ import useAdmob from '@/hooks/useAdmob';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 import VueVirtualScroller from 'vue-virtual-scroller';
 import useFireBase from "@/hooks/useFirebase";
+import UseData from "@/hooks/useData";
+import useData from "@/hooks/useData";
 
 const app = createApp(App)
     .use(IonicVue)
@@ -57,9 +59,36 @@ router.isReady().then(() => {
     })
     const {initializeAdmob} = useAdmob();
     initializeAdmob();
+
     const {initializeFirebase} = useFireBase();
     initializeFirebase();
+
+    // initialize local storage:
+    if(!localStorage.getItem('currentLife')){
+        localStorage.setItem('currentLife', UseData().DEFAULT_LIFE.toString());
+    }
+    if(!localStorage.getItem('latestIncreaseLifeTime')){
+        localStorage.setItem('latestIncreaseLifeTime', new Date().getTime().toString())
+    }
+
+    const increaseLife = ()=>{
+        setInterval(()=>{
+            const currentTime = new Date().getTime();
+            const latestIncreaseLifeTime = parseInt(localStorage.getItem('latestIncreaseLifeTime') || '0');
+            if(currentTime - latestIncreaseLifeTime >= UseData().DEFAULT_LIFE_INCREASE_INTERVAL){
+                const currentLife = parseInt(localStorage.getItem('currentLife') || '0');
+                if(currentLife < 10){
+                    localStorage.setItem('currentLife', (currentLife + 1).toString());
+                }
+                localStorage.setItem('latestIncreaseLifeTime', currentTime.toString());
+            }
+        }, 300000);
+    }
+
+    increaseLife();
+
     ScreenOrientation.lock({orientation: 'portrait'});
+
     app.use(i18n);
     app.use(VueVirtualScroller);
     app.mount('#app');
