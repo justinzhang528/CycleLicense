@@ -36,18 +36,26 @@ export default function () {
         return res.sort((a, b) => a - b);
     }
 
-    // generate shuffle order numbers ranging from 1~range
-    const generateShuffleOrderNumbers = (range: number): number[] => {
-        // Initialize array with numbers from 1 to n
-        const numbers = Array.from({length: range}, (_, index) => index + 1);
-
-        // Fisher-Yates shuffle algorithm
-        for (let i = numbers.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    // generates an array of unrepeated random numbers ranging from 1 to the specified 'range', with a length of 'count':
+    function generateUniqueRandomNumbers(range: number, count: number): number[] {
+        if (count > range) {
+            throw new Error("Count cannot be greater than range.");
         }
 
-        return numbers;
+        const numbers: number[] = [];
+        for (let i = 1; i <= range; i++) {
+            numbers.push(i);
+        }
+
+        const result: number[] = [];
+        for (let i = 0; i < count; i++) {
+            const randomIndex = Math.floor(Math.random() * numbers.length);
+            const randomNumber = numbers[randomIndex];
+            result.push(randomNumber);
+            numbers.splice(randomIndex, 1);
+        }
+
+        return result;
     }
 
     // generate a random array of 4 numbers, ranging from 0 to 'count', 'exist' must exist in array
@@ -65,7 +73,8 @@ export default function () {
 
     const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
-        const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
+        const shuffleOrderNumbers = generateUniqueRandomNumbers(totalCounts, problemCounts);
+        console.log(shuffleOrderNumbers)
 
         for (const [index, element] of shuffleOrderNumbers.entries()) {
 
@@ -86,7 +95,8 @@ export default function () {
 
     const generateTrueFalseProblem = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
-        const shuffleOrderNumbers = generateShuffleOrderNumbers(problemCounts);
+        const shuffleOrderNumbers = generateUniqueRandomNumbers(totalCounts, problemCounts);
+        console.log(shuffleOrderNumbers)
 
         for (const [index, element] of shuffleOrderNumbers.entries()) {
 
