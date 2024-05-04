@@ -4,6 +4,9 @@
       <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
+      <IonButtons slot="end">
+        <IonMenuButton></IonMenuButton>
+      </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="flask"></IonIcon>
         {{$t('result')}}
@@ -139,7 +142,7 @@ import {
   IonIcon,
   IonItem,
   IonImg,
-  IonLabel,
+  IonLabel, IonMenuButton,
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useData from "@/hooks/useData";

@@ -4,6 +4,9 @@
       <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
+      <IonButtons slot="end">
+        <IonMenuButton></IonMenuButton>
+      </IonButtons>
       <IonTitle class="center">
         <IonIcon :icon="flask"></IonIcon>
         {{$t('result')}}
@@ -11,7 +14,6 @@
     </IonToolbar>
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
-    <h5>{{$t('totalScore')}} : {{ totalScore }}</h5>
     <IonCard v-for="(item,index) in problems" style="padding-bottom: 10px">
       <IonCardHeader>
         <IonCardSubtitle>{{ index + 1 }}/{{ problems.length }}</IonCardSubtitle>
@@ -30,8 +32,8 @@
           <IonIcon v-if="item.data.ans !== chooseAns[index]" :icon="close" size="large" style="color: red"></IonIcon>
         </IonLabel>
       </IonCardContent>
-
     </IonCard>
+    <h5>{{$t('totalScore')}} : {{ totalScore }}</h5>
   </IonContent>
 </template>
 
@@ -50,7 +52,7 @@ import {
   IonIcon,
   IonItem,
   IonImg,
-  IonLabel,
+  IonLabel, IonMenuButton,
 } from '@ionic/vue';
 import {checkmark, close, flask} from "ionicons/icons";
 import useData from "@/hooks/useData";

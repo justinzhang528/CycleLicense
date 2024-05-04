@@ -4,6 +4,9 @@
       <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
+      <IonButtons slot="end">
+        <IonMenuButton></IonMenuButton>
+      </IonButtons>
       <IonTitle class="center">
         <IonLabel>{{$t('rule')}}</IonLabel>
       </IonTitle>
@@ -62,7 +65,7 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonTitle,
-  IonLabel,
+  IonLabel, IonMenuButton,
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'

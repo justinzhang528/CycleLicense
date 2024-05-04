@@ -4,6 +4,9 @@
       <IonButtons slot="start">
         <IonBackButton :text="$t('back')"></IonBackButton>
       </IonButtons>
+      <IonButtons slot="end">
+        <IonMenuButton></IonMenuButton>
+      </IonButtons>
       <IonTitle class="center">
         {{$t('rule')}}
       </IonTitle>
@@ -108,7 +111,7 @@ import {
   IonCard,
   IonCardContent,
   IonLabel,
-  IonInput,
+  IonInput, IonMenuButton,
 } from "@ionic/vue";
 import {chevronForward, playCircleOutline, pauseCircleOutline, heart, heartOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
