@@ -81,7 +81,7 @@
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
-            <img alt="login" :src="'images/login.png'">
+            <img alt="login" :src="'images/login.png'" style="width: 80%">
             <IonItem>
               <IonInput :label="$t('username')" label-placement="stacked" ref="loginUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
                 <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
@@ -107,7 +107,7 @@
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
-            <img alt="register" :src="'images/register.png'">
+            <img alt="register" :src="'images/register.png'" style="width: 80%">
             <IonItem>
               <IonInput :label="$t('username')" label-placement="stacked" ref="registerUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
                 <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>

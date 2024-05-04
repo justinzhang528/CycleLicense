@@ -14,7 +14,6 @@
     </IonToolbar>
   </IonHeader>
   <IonContent className="ion-padding ion-text-center">
-    <h5>{{$t('totalScore')}} : {{ totalScore }}</h5>
     <IonCard v-for="(item,index) in problems" style="padding-bottom: 10px">
 
       <div v-if="item.type === 'multipleChoiceSign'">
@@ -124,6 +123,7 @@
       </div>
 
     </IonCard>
+    <h5>{{$t('totalScore')}} : {{ totalScore }}</h5>
   </IonContent>
 </template>
 
