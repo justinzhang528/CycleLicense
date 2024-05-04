@@ -84,7 +84,7 @@ router.isReady().then(() => {
                     currentLife = UseData().DEFAULT_LIFE;
                 }
                 localStorage.setItem('currentLife', currentLife.toString());
-                localStorage.setItem('latestIncreaseLifeTime', (currentTime+(diff%UseData().DEFAULT_LIFE_INCREASE_INTERVAL)).toString());
+                localStorage.setItem('latestIncreaseLifeTime', (currentTime-(diff%UseData().DEFAULT_LIFE_INCREASE_INTERVAL)).toString());
             }
         }, 60000);
     }
