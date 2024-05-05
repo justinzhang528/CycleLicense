@@ -124,6 +124,7 @@
 
     </IonCard>
     <h5>{{$t('totalScore')}} : {{ totalScore }}</h5>
+    <h5>{{$t('correctRate')}} : {{ Math.ceil((totalScore/problems.length)*100) }}%</h5>
   </IonContent>
 </template>
 

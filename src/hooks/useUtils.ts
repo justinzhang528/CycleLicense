@@ -70,10 +70,10 @@ export async function showFinishAlert(header: string, subHeader: string, message
     await alert.present();
 }
 
-export async function showToast (msg: string) {
+export async function showToast (msg: string, duration: number = 300) {
     const toast = await toastController.create({
         message: msg,
-        duration: 300,
+        duration: duration,
         position: 'bottom',
     });
     await toast.present();
