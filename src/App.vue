@@ -69,6 +69,27 @@
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
             <IonToggle :disabled="!userInfo.isUnlimited" style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
           </IonItem>
+          <IonItem class="center">
+            <IonThumbnail slot="start">
+              <img alt="notice" :src="'images/noticeIcon.png'">
+            </IonThumbnail>
+            <span style="width: 100%; padding-bottom: 10px">
+              <IonButton size="default" fill="clear" color="dark" style="text-decoration: underline">
+                {{ $t('noticeInformation') }}
+              </IonButton>
+            </span>
+          </IonItem>
+          <IonItem class="center">
+            <IonThumbnail slot="start">
+              <img alt="donate" :src="'images/donate.png'">
+            </IonThumbnail>
+            <span style="width: 100%; padding-bottom: 10px">
+              <IonButton size="default" fill="clear" color="dark" style="text-decoration: underline">
+                {{ $t('donate') }}
+              </IonButton><br>
+              <IonLabel>({{$t('unlockUnlimitedFeature')}})</IonLabel>
+            </span>
+          </IonItem>
         </IonList>
 
         <IonModal ref="loginModal" trigger="openLoginModal">
