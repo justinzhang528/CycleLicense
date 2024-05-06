@@ -26,7 +26,6 @@ import '@ionic/vue/css/display.css';
  * For more info, please see:
  * https://ionicframework.com/docs/theming/dark-mode
  */
-
 /* @import '@ionic/vue/css/palettes/dark.always.css'; */
 /* @import '@ionic/vue/css/palettes/dark.class.css'; */
 import '@ionic/vue/css/palettes/dark.system.css';
@@ -44,8 +43,7 @@ import useAdmob from '@/hooks/useAdmob';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 import VueVirtualScroller from 'vue-virtual-scroller';
 import useFireBase from "@/hooks/useFirebase";
-import UseData from "@/hooks/useData";
-import useData from "@/hooks/useData";
+import increaseLife from "@/hooks/useLife";
 
 const app = createApp(App)
     .use(IonicVue)
@@ -62,32 +60,6 @@ router.isReady().then(() => {
 
     const {initializeFirebase} = useFireBase();
     initializeFirebase();
-
-    // initialize local storage:
-    if(!localStorage.getItem('currentLife')){
-        localStorage.setItem('currentLife', UseData().DEFAULT_LIFE.toString());
-    }
-    if(!localStorage.getItem('latestIncreaseLifeTime')){
-        localStorage.setItem('latestIncreaseLifeTime', new Date().getTime().toString())
-    }
-
-    const increaseLife = ()=>{
-        setInterval(()=>{
-            const currentTime = new Date().getTime();
-            const latestIncreaseLifeTime = parseInt(localStorage.getItem('latestIncreaseLifeTime') || '0');
-            const diff = currentTime - latestIncreaseLifeTime;
-            if(diff >= UseData().DEFAULT_LIFE_INCREASE_INTERVAL){
-                const increaseLifeCount = Math.trunc(diff / UseData().DEFAULT_LIFE_INCREASE_INTERVAL);
-                let currentLife = parseInt(localStorage.getItem('currentLife') || '0');
-                currentLife += increaseLifeCount;
-                if(currentLife > UseData().DEFAULT_LIFE){
-                    currentLife = UseData().DEFAULT_LIFE;
-                }
-                localStorage.setItem('currentLife', currentLife.toString());
-                localStorage.setItem('latestIncreaseLifeTime', (currentTime-(diff%UseData().DEFAULT_LIFE_INCREASE_INTERVAL)).toString());
-            }
-        }, 10000);
-    }
 
     increaseLife();
 

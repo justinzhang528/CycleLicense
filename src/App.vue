@@ -235,6 +235,7 @@ import useFirebase from "@/hooks/useFirebase";
 import {loginResponse,registerResponse} from "@/enum/enum";
 import {isValidEmail, showAlert} from "@/hooks/useUtils";
 import useData from "@/hooks/useData";
+import scheduleNotification from "@/hooks/useLocalNotification";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
@@ -267,6 +268,7 @@ const onSelectedLanguageChange = (e: CustomEvent)=>{
   else if(currentSelectedLanguageValue.value == 'zh_tw')
     locale.value = 'zh_tw';
   localStorage.setItem('currentLanguage',currentSelectedLanguageValue.value);
+  scheduleNotification(t('drivingLicense'),t('timeToStudy'));
 }
 
 const onToggleChanged=(event: CustomEvent)=>{
@@ -394,6 +396,7 @@ const onCancelDonateModal = ()=>{
 onMounted(()=> {
   locale.value = localStorage.getItem("currentLanguage") || 'en';
   setInterval(checkInternetConnection, 5000);
+  scheduleNotification(t('drivingLicense'),t('timeToStudy'));
   setInterval(()=>{
     if(localStorage.getItem('currentLife')){
       life.value.currentLife = Number(localStorage.getItem('currentLife'));

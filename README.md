@@ -87,3 +87,6 @@
 - For iOS (currently can only show ads under capacitor & admob <= 5.0.0):
   - https://developers.google.com/admob/ios/quick-start
   - https://developers.google.com/admob/ios/test-ads#enable_test_devices
+
+### Local Notification (version 5):
+ - https://capacitorjs.com/docs/v5/apis/local-notifications
