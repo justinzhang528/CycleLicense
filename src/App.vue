@@ -253,7 +253,7 @@ const registerPasswordInput = ref();
 const registerConfirmPasswordInput = ref();
 const registerEmailInput = ref();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
-const {getUser,upSertUser} = useFirebase();
+const {getUser,upSertUser, listStorage} = useFirebase();
 const {life} = useData();
 const nav = ref();
 
@@ -404,6 +404,7 @@ onMounted(()=> {
       life.value.currentLife = Number(localStorage.getItem('currentLife'));
     }
   }, 3000);
+  listStorage();
 });
 </script>
 
