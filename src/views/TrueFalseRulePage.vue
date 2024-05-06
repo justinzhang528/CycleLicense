@@ -207,8 +207,10 @@ const onClickStartTesting = ()=>{
   }
   problems =  generateTrueFalseProblem(problemCounts.value, ruleCounts, "trueFalseRule");
   isShowSetting.value = false;
-  life.value.currentLife--;
-  localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  if(!userInfo.value.isUnlimited){
+    life.value.currentLife--;
+    localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  }
 }
 
 const onClickDecrement = ()=>{

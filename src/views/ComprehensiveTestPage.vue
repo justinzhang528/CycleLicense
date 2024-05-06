@@ -403,8 +403,10 @@ const onClickStartTesting = ()=>{
   problems = shuffleArray(problems);
   totalProblemCounts.value = multipleChoiceSignProblemCounts.value+multipleChoiceRuleProblemCounts.value+trueFalseSignProblemCounts.value+trueFalseRuleProblemCounts.value;
   isShowSetting.value = false;
-  life.value.currentLife--;
-  localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  if(!userInfo.value.isUnlimited){
+    life.value.currentLife--;
+    localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  }
 }
 
 const onClickDecrementMultipleChoiceSign = ()=>{

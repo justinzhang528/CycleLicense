@@ -222,8 +222,10 @@ const onClickStartTesting = ()=>{
   }
   problems =  generateMultipleChoiceProblems(problemCounts.value, ruleCounts, "multipleChoiceRule");
   isShowSetting.value = false;
-  life.value.currentLife--;
-  localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  if(!userInfo.value.isUnlimited){
+    life.value.currentLife--;
+    localStorage.setItem('currentLife',(life.value.currentLife).toString());
+  }
 }
 
 const onClickDecrement = ()=>{
