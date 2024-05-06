@@ -17,7 +17,7 @@
     <IonNavLink routerDirection="forward" :component="multipleChoiceSignPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
-          <img alt="language" :src="'images/multipleChoiceIcon.png'">
+          <img alt="language" :src="'images/icon/multipleChoiceIcon.png'">
         </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('multipleChoiceSign')}}</IonLabel>
       </IonItem>
@@ -25,7 +25,7 @@
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="multipleChoiceRulePage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
-          <img alt="language" :src="'images/multipleChoiceIcon.png'">
+          <img alt="language" :src="'images/icon/multipleChoiceIcon.png'">
         </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('multipleChoiceRule')}}</IonLabel>
       </IonItem>
@@ -33,7 +33,7 @@
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSignPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
-          <img alt="language" :src="'images/trueFalseIcon.png'">
+          <img alt="language" :src="'images/icon/trueFalseIcon.png'">
         </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('trueFalseSign')}}</IonLabel>
       </IonItem>
@@ -41,7 +41,7 @@
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseRulePage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
-          <img alt="language" :src="'images/trueFalseIcon.png'">
+          <img alt="language" :src="'images/icon/trueFalseIcon.png'">
         </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('trueFalseRule')}}</IonLabel>
       </IonItem>
@@ -49,7 +49,7 @@
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="comprehensiveTestPage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
-          <img alt="language" :src="'images/comprehensiveTestIcon.png'">
+          <img alt="language" :src="'images/icon/comprehensiveTestIcon.png'">
         </IonThumbnail>
         <IonLabel style="padding-left: 10px">{{$t('comprehensiveTest')}}</IonLabel>
       </IonItem>

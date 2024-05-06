@@ -1,4 +1,4 @@
-import {alertController, toastController} from "@ionic/vue";
+import {alertController, toastController, loadingController} from "@ionic/vue";
 
 export function isValidEmail (email: string): boolean {
     const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,4 +77,13 @@ export async function showToast (msg: string, duration: number = 300) {
         position: 'bottom',
     });
     await toast.present();
+}
+
+export async function showLoading (msg: string, duration: number = 3000) {
+    const loading = await loadingController.create({
+        message: msg,
+        duration: duration,
+        spinner: "circles",
+    });
+    loading.present();
 }

@@ -75,7 +75,6 @@ export default function () {
     const generateMultipleChoiceProblems = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
         const shuffleOrderNumbers = generateUniqueRandomNumbers(totalCounts, problemCounts);
-        console.log(shuffleOrderNumbers)
 
         for (const [index, element] of shuffleOrderNumbers.entries()) {
 
@@ -97,7 +96,6 @@ export default function () {
     const generateTrueFalseProblem = (problemCounts: number, totalCounts: number, type: string) => {
         let result = [];
         const shuffleOrderNumbers = generateUniqueRandomNumbers(totalCounts, problemCounts);
-        console.log(shuffleOrderNumbers)
 
         for (const [index, element] of shuffleOrderNumbers.entries()) {
 

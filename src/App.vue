@@ -52,7 +52,7 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <img alt="language" :src="'images/languageIcon.png'">
+              <img alt="language" :src="'images/icon/languageIcon.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('language') }}</IonLabel>
             <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
@@ -64,27 +64,27 @@
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px">
             <IonThumbnail slot="start">
-              <img alt="noAds" :src="'images/noAdsIcon.png'">
+              <img alt="noAds" :src="'images/icon/noAdsIcon.png'">
             </IonThumbnail>
             <IonLabel>{{ $t('adsFree') }}</IonLabel>
             <IonToggle :disabled="!userInfo.isUnlimited" style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
           </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px" class="center">
             <IonThumbnail slot="start">
-              <img alt="notice" :src="'images/noticeIcon.png'">
+              <img alt="notice" :src="'images/icon/noticeIcon.png'">
             </IonThumbnail>
             <span style="width: 100%;">
-              <IonButton size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton id="openNoticeInformationModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
                 {{ $t('noticeInformation') }}
               </IonButton>
             </span>
           </IonItem>
           <IonItem class="center">
             <IonThumbnail slot="start">
-              <img alt="donate" :src="'images/donate.png'">
+              <img alt="donate" :src="'images/icon/donateIcon.png'">
             </IonThumbnail>
             <span style="width: 100%; padding-bottom: 10px">
-              <IonButton size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton id="openDonateModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
                 {{ $t('donate') }}
               </IonButton><br>
               <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>
@@ -155,6 +155,40 @@
           </IonContent>
         </IonModal>
 
+        <IonModal ref="noticeInformationModal" trigger="openNoticeInformationModal">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton @click="onCancelNoticeInformationModal">{{$t('cancel')}}</IonButton>
+              </IonButtons>
+              <IonTitle class="center">{{$t('noticeInformation')}}</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent class="center ion-padding">
+            <img alt="notice" :src="'images/noticeInformation.png'" style="width: 80%">
+            <IonItem>
+
+            </IonItem>
+          </IonContent>
+        </IonModal>
+
+        <IonModal ref="donateModal" trigger="openDonateModal">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton @click="onCancelDonateModal">{{$t('cancel')}}</IonButton>
+              </IonButtons>
+              <IonTitle class="center">{{$t('donate')}}</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent class="center ion-padding">
+            <img alt="donate" :src="'images/donate.png'" style="width: 80%">
+            <IonItem>
+
+            </IonItem>
+          </IonContent>
+        </IonModal>
+
       </IonContent>
     </IonMenu>
   </ion-app>
@@ -205,6 +239,8 @@ const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isRemoveAds')
 const homePage = markRaw(HomePage)
 const loginModal = ref();
 const registerModal = ref();
+const noticeInformationModal = ref();
+const donateModal = ref();
 const loginUserNameInput = ref();
 const loginPasswordInput = ref();
 const registerUserNameInput = ref();
@@ -339,6 +375,14 @@ const checkInternetConnection = ()=> {
 const onLogoutClick = ()=>{
   localStorage.removeItem('userInfo');
   userInfo.value = {};
+}
+
+const onCancelNoticeInformationModal = ()=>{
+  noticeInformationModal.value.$el.dismiss(null, 'cancel');
+}
+
+const onCancelDonateModal = ()=>{
+  donateModal.value.$el.dismiss(null, 'cancel');
 }
 
 onMounted(()=> {

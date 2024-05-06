@@ -54,7 +54,7 @@
           <IonItem color="transparent" class="center ion-item-border" lines="none">
             <span style="width: 100%" >
               <IonThumbnail class="center">
-                <img alt="true" :src="'images/trueIcon.png'">
+                <img alt="true" :src="'images/icon/trueIcon.png'">
               </IonThumbnail>
             </span>
             <IonRadio mode="md" value="1"></IonRadio>
@@ -62,7 +62,7 @@
           <IonItem color="transparent" class="center ion-item-border" lines="none">
             <span style="width: 100%" >
               <IonThumbnail class="center">
-                <img alt="true" :src="'images/falseIcon.png'">
+                <img alt="true" :src="'images/icon/falseIcon.png'">
               </IonThumbnail>
             </span>
             <IonRadio mode="md" value="0"></IonRadio>
