@@ -233,7 +233,7 @@ import useAdmob from "@/hooks/useAdmob";
 import useInternetConnection from "@/hooks/useInternetConnection";
 import useFirebase from "@/hooks/useFirebase";
 import {loginResponse,registerResponse} from "@/enum/enum";
-import {isValidEmail, showAlert} from "@/hooks/useUtils";
+import {isValidEmail, showAlert, showAlertWithAction} from "@/hooks/useUtils";
 import useData from "@/hooks/useData";
 import scheduleNotification from "@/hooks/useLocalNotification";
 
@@ -380,9 +380,11 @@ const checkInternetConnection = ()=> {
 }
 
 const onLogoutClick = ()=>{
-  localStorage.removeItem('userInfo');
-  userInfo.value = {};
-  nav.value.$el.popToRoot();
+  showAlertWithAction(t('warning'), '', t('areYouSureToLogout'), t('confirm'), t("cancel"), ()=>{
+    localStorage.removeItem('userInfo');
+    userInfo.value = {};
+    nav.value.$el.popToRoot();
+  });
 }
 
 const onCancelNoticeInformationModal = ()=>{

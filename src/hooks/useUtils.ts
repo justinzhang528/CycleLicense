@@ -30,7 +30,7 @@ export async function showAlert (header: string, subHeader: string, message: str
     await alert.present();
 }
 
-export async function showAlertWithAction (header: string, subHeader: string, message: string, confirmButtonText: string, cancelButtonText: string, func: any, subFunc: any){
+export async function showAlertWithAction (header: string, subHeader: string, message: string, confirmButtonText: string, cancelButtonText: string, func: any, subFunc: any = null){
     const alert = await alertController.create({
         header: header,
         subHeader: subHeader,
