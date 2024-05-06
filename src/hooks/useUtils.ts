@@ -13,7 +13,7 @@ export function shuffleArray(array: any[]) {
     return array;
 }
 
-export async function showAlert (header: string, subHeader: string, message: string, buttonText: string){
+export async function showAlert (header: string, subHeader: string, message: string, buttonText: string, func: any = null){
     const alert = await alertController.create({
         header: header,
         subHeader: subHeader,
@@ -22,6 +22,7 @@ export async function showAlert (header: string, subHeader: string, message: str
             {
                 text: buttonText,
                 role: 'confirm',
+                handler: func,
             }
         ],
         backdropDismiss: false,

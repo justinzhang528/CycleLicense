@@ -15,7 +15,10 @@
   <IonContent className="ion-text-center">
     <div v-if="isShowSetting">
       <div class="ion-padding">
-        <span v-for="i in life.totalLife">
+        <span class="center" v-if="userInfo.isUnlimited">
+          <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 10%"/>
+        </span>
+        <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
           <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 26px" color="warning"></IonIcon>
           <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px"></IonIcon>
         </span>
@@ -111,7 +114,7 @@ import {
   IonCard,
   IonCardContent,
   IonLabel,
-  IonInput, IonMenuButton,
+  IonInput, IonMenuButton, IonRow,
 } from "@ionic/vue";
 import {chevronForward, playCircleOutline, pauseCircleOutline, heart, heartOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
@@ -134,6 +137,7 @@ let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
 const isShowSetting = ref(true);
 const {showInterstitial,showRewardVideo} = useAdmob();
+let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 
 const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
@@ -208,18 +212,18 @@ const addLife = ()=>{
 }
 
 const onClickStartTesting = ()=>{
-  if(life.value.currentLife<=0){
+  if(life.value.currentLife<=0 && !userInfo.value.isUnlimited){
     showAlertWithAction(t('warning'), t('noLife'), t('watchVideoToGetLife'), t('confirm'), t("cancel"), showRewardVideo, addLife);
     return;
   }
-  life.value.currentLife--;
-  localStorage.setItem('currentLife',(life.value.currentLife).toString());
   if(problemCounts.value < 1 || problemCounts.value > dataSource.rules.length){
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
   problems =  generateMultipleChoiceProblems(problemCounts.value, ruleCounts, "multipleChoiceRule");
   isShowSetting.value = false;
+  life.value.currentLife--;
+  localStorage.setItem('currentLife',(life.value.currentLife).toString());
 }
 
 const onClickDecrement = ()=>{

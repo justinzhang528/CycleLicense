@@ -16,7 +16,10 @@
 
     <div v-if="isShowSetting">
       <div class="ion-padding">
-        <span v-for="i in life.totalLife">
+        <span class="center" v-if="userInfo.isUnlimited">
+          <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 10%"/>
+        </span>
+        <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
           <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 26px" color="warning"></IonIcon>
           <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px"></IonIcon>
         </span>
@@ -268,6 +271,7 @@ let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
 const {showInterstitial,showRewardVideo} = useAdmob();
+let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 
 const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
@@ -359,12 +363,10 @@ const addLife = ()=>{
 }
 
 const onClickStartTesting = ()=>{
-  if(life.value.currentLife<=0){
+  if(life.value.currentLife<=0 && !userInfo.value.isUnlimited){
     showAlertWithAction(t('warning'), t('noLife'), t('watchVideoToGetLife'), t('confirm'), t("cancel"), showRewardVideo, addLife);
     return;
   }
-  life.value.currentLife--;
-  localStorage.setItem('currentLife',(life.value.currentLife).toString());
   if(multipleChoiceSignProblemCounts.value < 1 || multipleChoiceSignProblemCounts.value > dataSource.signs.length){
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
     return;
@@ -401,6 +403,8 @@ const onClickStartTesting = ()=>{
   problems = shuffleArray(problems);
   totalProblemCounts.value = multipleChoiceSignProblemCounts.value+multipleChoiceRuleProblemCounts.value+trueFalseSignProblemCounts.value+trueFalseRuleProblemCounts.value;
   isShowSetting.value = false;
+  life.value.currentLife--;
+  localStorage.setItem('currentLife',(life.value.currentLife).toString());
 }
 
 const onClickDecrementMultipleChoiceSign = ()=>{

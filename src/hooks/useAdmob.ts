@@ -23,7 +23,7 @@ export default function () {
             isTesting: true,
         };
         await AdMob.showBanner(options);
-        if (localStorage.getItem('isRemoveAds') === 'true') {
+        if (localStorage.getItem('isUnlimited') === 'true') {
             await AdMob.hideBanner();
         }
     };
@@ -35,7 +35,7 @@ export default function () {
         };
         await AdMob.prepareInterstitial(options);
 
-        if (localStorage.getItem('isRemoveAds') !== 'true') {
+        if (localStorage.getItem('isUnlimited') !== 'true') {
             await AdMob.showInterstitial();
         }
     };
@@ -50,7 +50,7 @@ export default function () {
             isTesting: true,
         };
         await AdMob.prepareRewardVideoAd(options);
-        if (localStorage.getItem('isRemoveAds') !== 'true') {
+        if (localStorage.getItem('isUnlimited') !== 'true') {
             await AdMob.showRewardVideoAd();
         }
     };

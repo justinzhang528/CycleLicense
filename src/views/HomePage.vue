@@ -18,9 +18,7 @@
             </IonCardHeader>
             <IonCardContent>{{$t('studyDescription')}}</IonCardContent>
           </IonCard>
-          <IonNavLink router-direction="forward" :component="studyPage">
-            <IonButton shape="round" size="default" style="font-size: small" color="dark">{{$t('enter')}}</IonButton>
-          </IonNavLink>
+          <IonButton @click="checkLoginStatus(studyPage)" shape="round" size="default" style="font-size: small" color="dark">{{$t('enter')}}</IonButton>
         </IonItem>
         <IonItem>
           <IonCard style="width: 65%; box-shadow: none">
@@ -29,9 +27,7 @@
             </IonCardHeader>
             <IonCardContent>{{$t('mockTestDescription')}}</IonCardContent>
           </IonCard>
-          <IonNavLink router-direction="forward" :component="mockTestPage">
-            <IonButton shape="round" size="default" style="font-size: small;" color="dark">{{$t('enter')}}</IonButton>
-          </IonNavLink>
+          <IonButton @click="checkLoginStatus(mockTestPage)" shape="round" size="default" style="font-size: small;" color="dark">{{$t('enter')}}</IonButton>
         </IonItem>
       </IonList>
     </IonContent>
@@ -52,16 +48,30 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonNavLink,
   IonMenuButton,
   IonButtons,
+  menuController,
 } from '@ionic/vue';
 import StudyPage from "@/views/StudyPage.vue";
 import {markRaw} from "vue";
 import MockTestPage from "@/views/MockTestPage.vue";
+import {showToast} from "@/hooks/useUtils";
+import {useI18n} from "vue-i18n";
 
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
+const { t } = useI18n();
+
+const checkLoginStatus = (page: any) => {
+  const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  if (!userInfo.name) {
+    showToast(t('pleaseLoginFirst'),1500);
+    menuController.open('menu');
+  }else {
+    const nav = document.querySelector('ion-nav');
+    nav?.push(page);
+  }
+}
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 <template>
   <ion-app>
     <ion-router-outlet/>
-    <ion-nav :root="homePage"></ion-nav>
-    <IonMenu side="end" content-id="menu">
+    <ion-nav ref="nav" :root="homePage"></ion-nav>
+    <IonMenu side="end" content-id="menu" menu-id="menu">
       <IonHeader>
         <IonToolbar>
           <IonItem class="center">
@@ -15,7 +15,10 @@
           <IonItem lines="none">
             <IonGrid>
               <IonRow class="ion-justify-content-center ion-padding">
-                <span v-for="i in life.totalLife">
+                <span class="center" v-if="userInfo.isUnlimited">
+                  <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
+                </span>
+                <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
                   <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
                   <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px"></IonIcon>
                 </span>
@@ -74,7 +77,7 @@
               <img alt="notice" :src="'images/icon/noticeIcon.png'">
             </IonThumbnail>
             <span style="width: 100%;">
-              <IonButton id="openNoticeInformationModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton :disabled="!userInfo.name" id="openNoticeInformationModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
                 {{ $t('noticeInformation') }}
               </IonButton>
             </span>
@@ -84,7 +87,7 @@
               <img alt="donate" :src="'images/icon/donateIcon.png'">
             </IonThumbnail>
             <span style="width: 100%; padding-bottom: 10px">
-              <IonButton id="openDonateModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton :disabled="!userInfo.name" id="openDonateModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
                 {{ $t('donate') }}
               </IonButton><br>
               <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>
@@ -182,7 +185,7 @@
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
-            <img alt="donate" :src="'images/donate.png'" style="width: 80%">
+            <img alt="donate" :src="'images/donate.png'" style="width: 60%">
             <IonItem>
 
             </IonItem>
@@ -220,6 +223,7 @@ import {
   IonRow,
   IonGrid,
   IonInputPasswordToggle,
+  useIonRouter,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
@@ -235,7 +239,7 @@ import useData from "@/hooks/useData";
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
-const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isRemoveAds') === 'true' || false);
+const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isUnlimited') === 'true' || false);
 const homePage = markRaw(HomePage)
 const loginModal = ref();
 const registerModal = ref();
@@ -250,6 +254,7 @@ const registerEmailInput = ref();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {getUser,upSertUser} = useFirebase();
 const {life} = useData();
+const nav = ref();
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
@@ -270,7 +275,7 @@ const onToggleChanged=(event: CustomEvent)=>{
   }else{
     useAdmob().resumeBanner();
   }
-  localStorage.setItem('isRemoveAds',String(event.detail.checked));
+  localStorage.setItem('isUnlimited',String(event.detail.checked));
 }
 const onCancelLoginModal = () => loginModal.value.$el.dismiss(null, 'cancel');
 
@@ -375,6 +380,7 @@ const checkInternetConnection = ()=> {
 const onLogoutClick = ()=>{
   localStorage.removeItem('userInfo');
   userInfo.value = {};
+  nav.value.$el.popToRoot();
 }
 
 const onCancelNoticeInformationModal = ()=>{
