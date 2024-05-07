@@ -21,7 +21,7 @@
                 <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
                 <IonLabel v-if="userInfo.name" style="padding: 0 5px 0 5px">{{userInfo.name}}</IonLabel>
                 <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
-                <span id="openLoginModal">
+                <span @click="openLoginModal">
                   <IonButton v-if="!userInfo.name" color="dark" shape="round">{{$t('login')}}</IonButton>
                 </span>
               </IonRow>
@@ -41,7 +41,7 @@
                 </IonButton>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding-bottom" >
-                <span id="openRegisterModal">
+                <span @click="openRegisterModal">
                   <IonButton v-if="!userInfo.name" fill="clear" color="dark" shape="round" style="text-decoration: underline">
                     <IonIcon color="dark" :icon="personAdd" style="padding-right: 5px"></IonIcon>
                     {{$t('register')}}
@@ -67,7 +67,7 @@
               <img alt="notice" :src="'images/icon/taiwanMyanmarFlagIcon.png'">
             </IonThumbnail>
             <span style="width: 100%;">
-              <IonButton :disabled="!userInfo.name" id="openAboutTaiwanModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton :disabled="!userInfo.name" @click="openAboutTaiwanModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
                 {{ $t('aboutTaiwan') }}
               </IonButton>
             </span>
@@ -77,110 +77,13 @@
               <img alt="donate" :src="'images/icon/donateIcon.png'">
             </IonThumbnail>
             <span style="width: 100%; padding-bottom: 10px">
-              <IonButton :disabled="!userInfo.name" id="openDonateModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton :disabled="!userInfo.name" @click="openDonateModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
                 {{ $t('donate') }}
               </IonButton><br>
               <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>
             </span>
           </IonItem>
         </IonList>
-
-        <IonModal ref="loginModal" trigger="openLoginModal">
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton @click="onCancelLoginModal()">{{$t('cancel')}}</IonButton>
-              </IonButtons>
-              <IonTitle class="center">{{$t('login')}}</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent class="center ion-padding">
-            <img alt="login" :src="'images/login.png'" style="width: 80%">
-            <IonItem>
-              <IonInput :label="$t('username')" label-placement="stacked" ref="loginUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
-                <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
-              </IonInput>
-            </IonItem>
-            <IonItem>
-              <IonInput :label="$t('password')" label-placement="stacked" ref="loginPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
-                <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
-                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-              </IonInput>
-            </IonItem><br>
-            <IonButton @click="onConfirmLoginModal()" shape="round" color="dark">{{ $t('login') }}</IonButton>
-          </IonContent>
-        </IonModal>
-
-        <IonModal ref="registerModal" trigger="openRegisterModal">
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton @click="onCancelRegisterModal()">{{$t('cancel')}}</IonButton>
-              </IonButtons>
-              <IonTitle class="center">{{$t('register')}}</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent class="center ion-padding">
-            <img alt="register" :src="'images/register.png'" style="width: 80%">
-            <IonItem>
-              <IonInput :label="$t('username')" label-placement="stacked" ref="registerUserNameInput" type="text" maxlength="15" :placeholder="$t('enterUserName')" :clear-input="true">
-                <IonIcon :icon="person" aria-hidden="true" slot="start"></IonIcon>
-              </IonInput>
-            </IonItem>
-            <IonItem>
-              <IonInput :label="$t('password')" label-placement="stacked" ref="registerPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPassword')" :clear-input="true">
-                <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
-                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-              </IonInput>
-            </IonItem>
-            <IonItem>
-              <IonInput :label="$t('confirmPassword')" label-placement="stacked" ref="registerConfirmPasswordInput" type="password" maxlength="15" :placeholder="$t('enterPasswordAgain')" :clear-input="true">
-                <IonIcon :icon="lockClosed" aria-hidden="true" slot="start"></IonIcon>
-                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-              </IonInput>
-            </IonItem>
-            <IonItem>
-              <IonInput :label="$t('email')" label-placement="stacked" ref="registerEmailInput" type="text" :placeholder="$t('enterEmail')" :clear-input="true">
-                <IonIcon :icon="mail" aria-hidden="true" slot="start"></IonIcon>
-              </IonInput>
-            </IonItem><br>
-            <IonButton @click="onConfirmRegisterModal()" shape="round" color="dark">{{ $t('register') }}</IonButton>
-          </IonContent>
-        </IonModal>
-
-        <IonModal ref="aboutTaiwanModal" trigger="openAboutTaiwanModal">
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton @click="onCancelAboutTaiwanModal">{{$t('cancel')}}</IonButton>
-              </IonButtons>
-              <IonTitle class="center">{{$t('aboutTaiwan')}}</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent class="center ion-padding">
-            <img alt="notice" :src="'images/noticeInformation.png'" style="width: 80%">
-            <IonItem>
-
-            </IonItem>
-          </IonContent>
-        </IonModal>
-
-        <IonModal ref="donateModal" trigger="openDonateModal">
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton @click="onCancelDonateModal">{{$t('cancel')}}</IonButton>
-              </IonButtons>
-              <IonTitle class="center">{{$t('donate')}}</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent class="center ion-padding">
-            <img alt="donate" :src="'images/donate.png'" style="width: 60%">
-            <IonItem>
-            <IonButton href="https://www.facebook.com/">test</IonButton>
-            </IonItem>
-          </IonContent>
-        </IonModal>
 
       </IonContent>
     </IonMenu>
@@ -193,7 +96,6 @@ import {
   IonRouterOutlet,
   IonNav,
   IonContent,
-  IonTitle,
   IonMenu,
   IonHeader,
   IonToolbar,
@@ -204,45 +106,30 @@ import {
   IonItem,
   IonThumbnail,
   IonButton,
-  IonButtons,
-  IonInput,
-  IonModal,
   IonIcon,
-  IonToggle,
   IonAvatar,
   IonRow,
   IonGrid,
-  IonInputPasswordToggle,
+  modalController,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {diamond, heart, heartOutline, lockClosed, logOut, mail, person, personAdd} from "ionicons/icons";
-import useAdmob from "@/hooks/useAdmob";
+import {diamond, heart, heartOutline, logOut, personAdd} from "ionicons/icons";
 import useInternetConnection from "@/hooks/useInternetConnection";
-import useFirebase from "@/hooks/useFirebase";
-import {loginResponse,registerResponse} from "@/enum/enum";
-import {isValidEmail, showAlert, showAlertWithAction} from "@/hooks/useUtils";
+import {showAlert, showAlertWithAction} from "@/hooks/useUtils";
 import useData from "@/hooks/useData";
 import scheduleNotification from "@/hooks/useLocalNotification";
+import LoginModal from "@/views/Modal/LoginModal.vue";
+import RegisterModal from "@/views/Modal/RegisterModal.vue";
+import AboutTaiwanModal from "@/views/Modal/AboutTaiwanModal.vue";
+import DonateModal from "@/views/Modal/DonateModal.vue";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
-const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isUnlimited') === 'true' || false);
 const homePage = markRaw(HomePage)
-const loginModal = ref();
-const registerModal = ref();
-const aboutTaiwanModal = ref();
-const donateModal = ref();
-const loginUserNameInput = ref();
-const loginPasswordInput = ref();
-const registerUserNameInput = ref();
-const registerPasswordInput = ref();
-const registerConfirmPasswordInput = ref();
-const registerEmailInput = ref();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
-const {getUser,upSertUser, listStorage} = useFirebase();
 const {life} = useData();
 const nav = ref();
 
@@ -260,108 +147,6 @@ const onSelectedLanguageChange = (e: CustomEvent)=>{
   scheduleNotification(t('drivingLicense'),t('timeToStudy'));
 }
 
-const onToggleChanged=(event: CustomEvent)=>{
-  if(event.detail.checked){
-    useAdmob().hideBanner();
-  }else{
-    useAdmob().resumeBanner();
-  }
-  localStorage.setItem('isUnlimited',String(event.detail.checked));
-}
-const onCancelLoginModal = () => loginModal.value.$el.dismiss(null, 'cancel');
-
-const onConfirmLoginModal = () => {
-  const loginUsername = loginUserNameInput.value.$el.value;
-  const loginPassword = loginPasswordInput.value.$el.value;
-
-  if(loginUsername === ''){
-    showAlert(t('warning'), '', t('pleaseInputUsername'), t('ok'));
-    return;
-  }
-  if(loginPassword === ''){
-    showAlert(t('warning'), '', t('pleaseInputPassword'), t('ok'));
-    return;
-  }
-
-  getUser(loginUsername).then((res)=>{
-    if(res.errorCode === loginResponse.SUCCESS){
-      if(res.data.password.toString() !== loginPassword.toString()){
-        showAlert(t('warning'), '', t('passwordIncorrect'), t('ok'));
-        return;
-      }
-      localStorage.setItem('userInfo',JSON.stringify(res.data));
-      userInfo.value = res.data;
-      loginModal.value.$el.dismiss(null, 'confirm');
-    }else{
-      showAlert(t('warning'), '', t('userNotFound'), t('ok'));
-      return;
-    }
-  }).catch(()=>{
-    showAlert(t('error'), '', t('systemError'), t('ok'));
-  })
-};
-
-const onCancelRegisterModal = () => registerModal.value.$el.dismiss(null, 'cancel');
-
-const onConfirmRegisterModal = ()=>{
-  const registerUsername = registerUserNameInput.value.$el.value;
-  const registerPassword = registerPasswordInput.value.$el.value;
-  const registerConfirmPassword = registerConfirmPasswordInput.value.$el.value;
-  const registerEmail = registerEmailInput.value.$el.value;
-
-  if(registerUsername === ''){
-    showAlert(t('warning'), '', t('pleaseInputUsername'), t('ok'));
-    return;
-  }
-  if(registerPassword === ''){
-    showAlert(t('warning'), '', t('pleaseInputPassword'), t('ok'));
-    return;
-  }
-  if(registerConfirmPassword === ''){
-    showAlert(t('warning'), '', t('pleaseInputConfirmPassword'), t('ok'));
-    return;
-  }
-  if(registerEmail === ''){
-    showAlert(t('warning'), '', t('pleaseInputEmail'), t('ok'));
-    return;
-  }
-  if(registerPassword !== registerConfirmPassword){
-    showAlert(t('warning'), '', t('passwordNotMatch'), t('ok'));
-    return;
-  }
-  if(!isValidEmail(registerEmail)){
-    showAlert(t('warning'), '', t('invalidEmailFormat'), t('ok'));
-    return;
-  }
-
-  // check if user already exist before insert new user
-  getUser(registerUsername).then((res)=>{
-    if(res.errorCode === loginResponse.SUCCESS){
-      showAlert(t('warning'), '', t('userAlreadyExist'), t('ok'));
-    }else{
-      // insert new user
-      upSertUser(registerUsername,registerPassword,registerEmail).then((res)=>{
-        if(res.errorCode === registerResponse.SUCCESS){
-          const data = {
-            name: registerUsername,
-            password: registerPassword,
-            email: registerEmail,
-            isUnlimited: false,
-          }
-          localStorage.setItem('userInfo',JSON.stringify(data));
-          userInfo.value = data;
-          registerModal.value.$el.dismiss(null, 'confirm');
-          showAlert(t('completed'), '', t('registrationSuccess'), t('ok'));
-          return;
-        }
-      }).catch(()=>{
-        showAlert(t('error'), '', t('systemError'), t('ok'));
-      })
-    }
-  }).catch(()=>{
-    showAlert(t('error'), '', t('systemError'), t('ok'));
-  })
-}
 const checkInternetConnection = ()=> {
   if(!isOnline.value){
     showAlert(t('noInternet'),t('pleaseCheckYourInternetConnection'),'',t('ok'));
@@ -376,13 +161,49 @@ const onLogoutClick = ()=>{
   });
 }
 
-const onCancelAboutTaiwanModal = ()=>{
-  aboutTaiwanModal.value.$el.dismiss(null, 'cancel');
-}
+const openLoginModal = async () => {
+  const modal = await modalController.create({
+    component: LoginModal,
+  });
 
-const onCancelDonateModal = ()=>{
-  donateModal.value.$el.dismiss(null, 'cancel');
-}
+  modal.present();
+
+  const { data, role } = await modal.onWillDismiss();
+
+  if (role === 'confirm') {
+    userInfo.value = data;
+  }
+};
+
+const openRegisterModal = async () => {
+  const modal = await modalController.create({
+    component: RegisterModal,
+  });
+
+  modal.present();
+
+  const { data, role } = await modal.onWillDismiss();
+
+  if (role === 'confirm') {
+    userInfo.value = data;
+  }
+};
+
+const openAboutTaiwanModal = async () => {
+  const modal = await modalController.create({
+    component: AboutTaiwanModal,
+  });
+
+  modal.present();
+};
+
+const openDonateModal = async () => {
+  const modal = await modalController.create({
+    component: DonateModal,
+  });
+
+  modal.present();
+};
 
 onMounted(()=> {
   locale.value = localStorage.getItem("currentLanguage") || 'en';
@@ -393,7 +214,6 @@ onMounted(()=> {
       life.value.currentLife = Number(localStorage.getItem('currentLife'));
     }
   }, 3000);
-  listStorage();
 });
 </script>
 
