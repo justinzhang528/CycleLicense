@@ -20,7 +20,7 @@
         </span>
         <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
           <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 26px" color="warning"></IonIcon>
-          <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px"></IonIcon>
+          <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px" color="warning"></IonIcon>
         </span>
       </div>
       <img :src="'images/trueFalse.png'" alt="trueFalse" style="width: 60%"/>

@@ -23,5 +23,5 @@ export default function increaseLife(){
             localStorage.setItem('currentLife', currentLife.toString());
             localStorage.setItem('latestIncreaseLifeTime', (currentTime-(diff%UseData().DEFAULT_LIFE_INCREASE_INTERVAL)).toString());
         }
-    }, 10000);
+    }, 5000);
 }

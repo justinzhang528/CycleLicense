@@ -28,7 +28,7 @@
               <IonRow class="ion-justify-content-center">
                 <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
                   <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
-                  <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px"></IonIcon>
+                  <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px" color="warning"></IonIcon>
                 </span>
                 <span class="center" v-if="userInfo.isUnlimited">
                   <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
@@ -177,7 +177,7 @@
           <IonContent class="center ion-padding">
             <img alt="donate" :src="'images/donate.png'" style="width: 60%">
             <IonItem>
-
+            <IonButton href="https://www.facebook.com/">test</IonButton>
             </IonItem>
           </IonContent>
         </IonModal>
