@@ -14,36 +14,20 @@
   </IonHeader>
   <IonContent class="ion-padding">
     <IonImg src="images/mockTest.png" style="width: 75%; display: block; margin: 10px auto;"></IonImg>
-    <IonNavLink routerDirection="forward" :component="multipleChoiceSignPage">
+    <IonNavLink routerDirection="forward" :component="multipleChoicePage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/icon/multipleChoiceIcon.png'">
         </IonThumbnail>
-        <IonLabel style="padding-left: 10px">{{$t('multipleChoiceSign')}}</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('multipleChoice')}}</IonLabel>
       </IonItem>
     </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px" :component="multipleChoiceRulePage">
-      <IonItem button detail lines="none" class="ion-item-border">
-        <IonThumbnail slot="start">
-          <img alt="language" :src="'images/icon/multipleChoiceIcon.png'">
-        </IonThumbnail>
-        <IonLabel style="padding-left: 10px">{{$t('multipleChoiceRule')}}</IonLabel>
-      </IonItem>
-    </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseSignPage">
+    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalsePage">
       <IonItem button detail lines="none" class="ion-item-border">
         <IonThumbnail slot="start">
           <img alt="language" :src="'images/icon/trueFalseIcon.png'">
         </IonThumbnail>
-        <IonLabel style="padding-left: 10px">{{$t('trueFalseSign')}}</IonLabel>
-      </IonItem>
-    </IonNavLink>
-    <IonNavLink routerDirection="forward" style="padding: 50px" :component="trueFalseRulePage">
-      <IonItem button detail lines="none" class="ion-item-border">
-        <IonThumbnail slot="start">
-          <img alt="language" :src="'images/icon/trueFalseIcon.png'">
-        </IonThumbnail>
-        <IonLabel style="padding-left: 10px">{{$t('trueFalseRule')}}</IonLabel>
+        <IonLabel style="padding-left: 10px">{{$t('trueFalse')}}</IonLabel>
       </IonItem>
     </IonNavLink>
     <IonNavLink routerDirection="forward" style="padding: 50px" :component="comprehensiveTestPage">
@@ -70,16 +54,12 @@ import {
   IonItem, IonImg, IonMenuButton, IonThumbnail
 } from "@ionic/vue";
 import {markRaw} from "vue";
-import MultiChoiceSignPage from "@/views/Page/MultipleChoiceSignPage.vue";
-import MultiChoiceRulePage from "@/views/Page/MultipleChoiceRulePage.vue";
-import TrueFalseSignPage from "@/views/Page/TrueFalseSignPage.vue";
-import TrueFalseRulePage from "@/views/Page/TrueFalseRulePage.vue";
+import MultipleChoicePage from "@/views/Page/MultipleChoicePage.vue";
+import TrueFalsePage from "@/views/Page/TrueFalsePage.vue";
 import ComprehensiveTestPage from "@/views/Page/ComprehensiveTestPage.vue";
 
-const multipleChoiceSignPage = markRaw(MultiChoiceSignPage);
-const multipleChoiceRulePage = markRaw(MultiChoiceRulePage);
-const trueFalseSignPage = markRaw(TrueFalseSignPage);
-const trueFalseRulePage = markRaw(TrueFalseRulePage);
+const multipleChoicePage = markRaw(MultipleChoicePage);
+const trueFalsePage = markRaw(TrueFalsePage);
 const comprehensiveTestPage = markRaw(ComprehensiveTestPage);
 </script>
 

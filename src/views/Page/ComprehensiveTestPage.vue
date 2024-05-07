@@ -27,25 +27,25 @@
       <img :src="'images/comprehensiveTest.png'" alt="multipleChoice" style="width: 55%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('multipleChoice')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementMultipleChoiceSign">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="multipleChoiceSignProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementMultipleChoiceSign">+</IonButton>
       </IonItem>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+        <IonLabel>{{$t('multipleChoice')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementMultipleChoiceRule">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="multipleChoiceRuleProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementMultipleChoiceRule">+</IonButton>
       </IonItem>
       <IonItem class="center">
-        <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalse')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementTrueFalseSign">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="trueFalseSignProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementTrueFalseSign">+</IonButton>
       </IonItem>
       <IonItem class="center">
-        <IonLabel>{{$t('trueFalseRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalse')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementTrueFalseRule">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="trueFalseRuleProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementTrueFalseRule">+</IonButton>

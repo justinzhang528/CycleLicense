@@ -26,7 +26,7 @@
       <img :src="'images/multipleChoice.png'" alt="multipleChoice" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoiceRule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+        <IonLabel>{{$t('multipleChoice')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrement">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="problemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrement">+</IonButton>

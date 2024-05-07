@@ -8,7 +8,6 @@
         <IonMenuButton></IonMenuButton>
       </IonButtons>
       <IonTitle class="center">
-        <IonIcon :icon="flask"></IonIcon>
         {{$t('result')}}
       </IonTitle>
     </IonToolbar>
@@ -53,7 +52,7 @@ import {
   IonIcon,
   IonLabel, IonMenuButton,
 } from '@ionic/vue';
-import {checkmark, close, flask} from "ionicons/icons";
+import {checkmark, close} from "ionicons/icons";
 import useData from "@/hooks/useData";
 import dataSource from "@/json/dataSource.json";
 

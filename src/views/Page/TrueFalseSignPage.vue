@@ -26,7 +26,7 @@
       <img :src="'images/trueFalse.png'" alt="trueFalse" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalse')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrement">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="problemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrement">+</IonButton>
