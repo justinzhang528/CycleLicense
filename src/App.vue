@@ -5,24 +5,12 @@
     <IonMenu side="end" content-id="menu" menu-id="menu">
       <IonHeader>
         <IonToolbar>
-          <IonItem class="center">
-            <IonTitle>{{ $t('menu') }}</IonTitle>
-          </IonItem>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonList>
           <IonItem lines="none">
             <IonGrid>
-              <IonRow class="ion-justify-content-center ion-padding">
-                <span class="center" v-if="userInfo.isUnlimited">
-                  <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
-                </span>
-                <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
-                  <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
-                  <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px"></IonIcon>
-                </span>
-              </IonRow>
               <IonRow class="ion-justify-content-center ion-padding">
                 <IonAvatar style="width: 75px; height: 75px">
                   <img v-if="userInfo.name" alt="avatar" :src="'images/avatar.png'">
@@ -35,6 +23,15 @@
                 <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
                 <span id="openLoginModal">
                   <IonButton v-if="!userInfo.name" color="dark" shape="round">{{$t('login')}}</IonButton>
+                </span>
+              </IonRow>
+              <IonRow class="ion-justify-content-center">
+                <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
+                  <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
+                  <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px"></IonIcon>
+                </span>
+                <span class="center" v-if="userInfo.isUnlimited">
+                  <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
                 </span>
               </IonRow>
               <IonRow class="ion-justify-content-center ion-padding" v-if="userInfo.name" >
@@ -65,20 +62,13 @@
               <IonSelectOption value="zh_tw">繁體中文</IonSelectOption>
             </IonSelect>
           </IonItem>
-          <IonItem style="padding-top: 10px; padding-bottom: 10px">
-            <IonThumbnail slot="start">
-              <img alt="noAds" :src="'images/icon/noAdsIcon.png'">
-            </IonThumbnail>
-            <IonLabel>{{ $t('adsFree') }}</IonLabel>
-            <IonToggle :disabled="!userInfo.isUnlimited" style="padding-left: 60px" :onIonChange="onToggleChanged" :checked="adsFreeToggleCheckedDefaultValue" color="dark"></IonToggle>
-          </IonItem>
           <IonItem style="padding-top: 10px; padding-bottom: 10px" class="center">
             <IonThumbnail slot="start">
-              <img alt="notice" :src="'images/icon/noticeIcon.png'">
+              <img alt="notice" :src="'images/icon/taiwanMyanmarFlagIcon.png'">
             </IonThumbnail>
             <span style="width: 100%;">
-              <IonButton :disabled="!userInfo.name" id="openNoticeInformationModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
-                {{ $t('noticeInformation') }}
+              <IonButton :disabled="!userInfo.name" id="openAboutTaiwanModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+                {{ $t('aboutTaiwan') }}
               </IonButton>
             </span>
           </IonItem>
@@ -158,13 +148,13 @@
           </IonContent>
         </IonModal>
 
-        <IonModal ref="noticeInformationModal" trigger="openNoticeInformationModal">
+        <IonModal ref="aboutTaiwanModal" trigger="openAboutTaiwanModal">
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonButton @click="onCancelNoticeInformationModal">{{$t('cancel')}}</IonButton>
+                <IonButton @click="onCancelAboutTaiwanModal">{{$t('cancel')}}</IonButton>
               </IonButtons>
-              <IonTitle class="center">{{$t('noticeInformation')}}</IonTitle>
+              <IonTitle class="center">{{$t('aboutTaiwan')}}</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent class="center ion-padding">
@@ -223,7 +213,6 @@ import {
   IonRow,
   IonGrid,
   IonInputPasswordToggle,
-  useIonRouter,
 } from '@ionic/vue';
 import HomePage from "@/views/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
@@ -244,7 +233,7 @@ const adsFreeToggleCheckedDefaultValue = ref(localStorage.getItem('isUnlimited')
 const homePage = markRaw(HomePage)
 const loginModal = ref();
 const registerModal = ref();
-const noticeInformationModal = ref();
+const aboutTaiwanModal = ref();
 const donateModal = ref();
 const loginUserNameInput = ref();
 const loginPasswordInput = ref();
@@ -387,8 +376,8 @@ const onLogoutClick = ()=>{
   });
 }
 
-const onCancelNoticeInformationModal = ()=>{
-  noticeInformationModal.value.$el.dismiss(null, 'cancel');
+const onCancelAboutTaiwanModal = ()=>{
+  aboutTaiwanModal.value.$el.dismiss(null, 'cancel');
 }
 
 const onCancelDonateModal = ()=>{
