@@ -12,13 +12,13 @@ import {
   IonRouterOutlet,
   IonNav,
 } from '@ionic/vue';
-import HomePage from "@/views/HomePage.vue";
+import HomePage from "@/views/Page/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import useInternetConnection from "@/hooks/useInternetConnection";
 import {showAlert} from "@/hooks/useUtils";
 import scheduleNotification from "@/hooks/useLocalNotification";
-import SideMenu from "@/views/SideMenu.vue";
+import SideMenu from "@/views/SideMenu/SideMenu.vue";
 
 const {isOnline} = useInternetConnection();
 const {t,locale} = useI18n();

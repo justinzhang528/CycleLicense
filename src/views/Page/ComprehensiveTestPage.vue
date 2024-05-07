@@ -250,7 +250,7 @@ import {chevronForward, heart, heartOutline, pauseCircleOutline, playCircleOutli
 import {markRaw, ref} from "vue";
 import useData from '@/hooks/useData'
 import {useI18n} from "vue-i18n";
-import ComprehensiveTestResultPage from '@/views/ComprehensiveTestResultPage.vue'
+import ComprehensiveTestResultPage from '@/views/Page/ComprehensiveTestResultPage.vue'
 import dataSource from "@/json/dataSource.json"
 import useAudio from "@/hooks/useAudio";
 import {showToast, showFinishAlert, showAlert, shuffleArray, showAlertWithAction} from "@/hooks/useUtils";

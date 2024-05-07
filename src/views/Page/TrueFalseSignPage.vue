@@ -23,10 +23,10 @@
           <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 26px" color="warning"></IonIcon>
         </span>
       </div>
-      <img :src="'images/multipleChoice.png'" alt="multipleChoice" style="width: 60%"/>
+      <img :src="'images/trueFalse.png'" alt="trueFalse" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoiceSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalseSign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrement">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="problemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrement">+</IonButton>
@@ -38,51 +38,45 @@
 
     <div v-if="!isShowSetting" class="ion-padding">
       <h3>{{ currentProblemNum }}/{{ problemCounts }}</h3>
-      <IonItem color="transparent" lines="none">
-        <IonImg :src="'images/sign/'+problems[currentProblemNum-1].data.question+'Q.png'" class="center round-border-img" style="width: 65%"/>
-      </IonItem>
-      <div style="width: 95%" class="center">
-        <span hidden>
-        {{ choice1 = Number(problems[currentProblemNum - 1].data.choice1)-1}}
-        {{ choice2 = Number(problems[currentProblemNum - 1].data.choice2)-1}}
-        {{ choice3 = Number(problems[currentProblemNum - 1].data.choice3)-1}}
-        {{ choice4 = Number(problems[currentProblemNum - 1].data.choice4)-1}}
-        </span>
+      <IonCard>
+        <IonCardContent>
+          <span hidden>{{ trueFalse = Number(problems[currentProblemNum - 1].data.trueFalse)-1}}</span>
+          <IonIcon color="dark" v-if="!isPlayingSignAudio[trueFalse]" size="large" style="float: left" :icon="playCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
+          <IonIcon color="dark" v-if="isPlayingSignAudio[trueFalse]" size="large" style="float: left" :icon="pauseCircleOutline" @click="onClickPlayAudio(trueFalse)"/>
+          <IonItem color="transparent" lines="none">
+            <IonImg :src="'images/sign/'+problems[currentProblemNum-1].data.question+'Q.png'" class="center round-border-img" style="width: 70%"/>
+          </IonItem>
+          <IonItem class="center" color="transparent" lines="none">
+            <IonLabel color="dark" style="display: block; margin: 0 auto; padding-bottom: 5px">{{ dataSource.signs[trueFalse].A }}</IonLabel>
+          </IonItem>
+        </IonCardContent>
+      </IonCard>
+
+      <div style="width: 90%" class="center">
         <IonRadioGroup class='content-center' :value="currentSelectedValue" @ionChange="onRadioSelectedChange">
           <IonItem color="transparent" class="center ion-item-border" lines="none">
-            <IonIcon color="dark" v-if="!isPlayingSignAudio[choice1]" size="large" :icon="playCircleOutline" @click="onClickPlayAudio(choice1)"/>
-            <IonIcon color="dark" v-if="isPlayingSignAudio[choice1]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice1)"/>
-            <label style="font-weight: bold"> ({{$t("1")}})&nbsp;&nbsp;</label>
-            <label style="width: 100%">{{ dataSource.signs[choice1].A }}</label>
+            <span style="width: 100%" >
+              <IonThumbnail class="center">
+                <img alt="true" :src="'images/icon/trueIcon.png'">
+              </IonThumbnail>
+            </span>
             <IonRadio mode="md" value="1"></IonRadio>
           </IonItem>
           <IonItem color="transparent" class="center ion-item-border" lines="none">
-            <IonIcon color="dark" v-if="!isPlayingSignAudio[choice2]" size="large" :icon="playCircleOutline" @click="onClickPlayAudio(choice2)"/>
-            <IonIcon color="dark" v-if="isPlayingSignAudio[choice2]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice2)"/>
-            <label style="font-weight: bold"> ({{$t("2")}})&nbsp;&nbsp;</label>
-            <label style="width: 100%">{{ dataSource.signs[choice2].A }}</label>
-            <IonRadio mode="md" value="2"></IonRadio>
-          </IonItem>
-          <IonItem color="transparent" class="center ion-item-border" lines="none">
-            <IonIcon color="dark" v-if="!isPlayingSignAudio[choice3]" size="large" :icon="playCircleOutline" @click="onClickPlayAudio(choice3)"/>
-            <IonIcon color="dark" v-if="isPlayingSignAudio[choice3]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice3)"/>
-            <label style="font-weight: bold"> ({{$t("3")}})&nbsp;&nbsp;</label>
-            <label style="width: 100%">{{ dataSource.signs[choice3].A }}</label>
-            <IonRadio mode="md" value="3"></IonRadio>
-          </IonItem>
-          <IonItem color="transparent" class="center ion-item-border" lines="none">
-            <IonIcon color="dark" v-if="!isPlayingSignAudio[choice4]" size="large" :icon="playCircleOutline" @click="onClickPlayAudio(choice4)"/>
-            <IonIcon color="dark" v-if="isPlayingSignAudio[choice4]" size="large" :icon="pauseCircleOutline" @click="onClickPlayAudio(choice4)"/>
-            <label style="font-weight: bold"> ({{$t("4")}})&nbsp;&nbsp;</label>
-            <label style="width: 100%">{{ dataSource.signs[choice4].A }}</label>
-            <IonRadio mode="md" value="4"></IonRadio>
+            <span style="width: 100%" >
+              <IonThumbnail class="center">
+                <img alt="true" :src="'images/icon/falseIcon.png'">
+              </IonThumbnail>
+            </span>
+            <IonRadio mode="md" value="0"></IonRadio>
           </IonItem>
         </IonRadioGroup>
       </div>
+
       <IonButton :onClick="onClickNextButton" color="dark" shape="round">
         <IonIcon :icon="chevronForward"/>
       </IonButton>
-      <IonNavLink id='goToMultipleChoiceSignResultPage' routerDirection="forward" :component="multipleChoiceSignResultPage">
+      <IonNavLink id='goToTrueFalseSignResultPage' routerDirection="forward" :component="trueFalseSignResultPage">
       </IonNavLink>
     </div>
   </IonContent>
@@ -103,29 +97,32 @@ import {
   IonItem,
   IonIcon,
   IonImg,
+  IonCard,
+  IonCardContent,
+  IonLabel,
   IonInput,
-  IonLabel, IonMenuButton, IonRow,
+  IonThumbnail, IonMenuButton, IonRow,
 } from "@ionic/vue";
-import {chevronForward, heart, heartOutline, pauseCircleOutline, playCircleOutline} from "ionicons/icons";
+import {chevronForward, playCircleOutline, pauseCircleOutline, heart, heartOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
-import useData from '@/hooks/useData'
+import useData from '@/hooks/useData';
 import {useI18n} from "vue-i18n";
-import MultipleChoiceSignResultPage from '@/views/MultipleChoiceSignResultPage.vue'
-import dataSource from "@/json/dataSource.json"
+import TrueFalseSignResultPage from '@/views/Page/TrueFalseSignResultPage.vue'
+import dataSource from "@/json/dataSource.json";
 import useAudio from "@/hooks/useAudio";
-import {showToast, showFinishAlert, showAlert, showAlertWithAction} from "@/hooks/useUtils";
+import {showToast, showAlert, showFinishAlert, showAlertWithAction} from "@/hooks/useUtils";
 import useAdmob from "@/hooks/useAdmob";
 
-const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
+const {playSignAudio, isPlayingSignAudio, pauseAudio} = useAudio();
 const {t} = useI18n();
-const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
-const isShowSetting = ref(true);
-const {generateMultipleChoiceProblems, signCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT, life} = useData()
+const trueFalseSignResultPage = markRaw(TrueFalseSignResultPage);
+const {generateTrueFalseProblem, signCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT, life} = useData()
 const problemCounts = ref(DEFAULT_PROBLEM_COUNT);
 let problems: any[] = [];
 let currentSelectedValue = ref('');
 let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
+const isShowSetting = ref(true);
 const {showInterstitial,showRewardVideo} = useAdmob();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 
@@ -133,14 +130,14 @@ const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
 }
 
-const onClickFinishConfirm = ()=>{
+const onClickFinishConfirm = () => {
   isShowSetting.value = true;
   currentSelectedValue.value = '';
   currentProblemNum.value = 1;
-  localStorage.setItem('multipleChoiceSignProblems',JSON.stringify(problems));
-  localStorage.setItem('userMultipleChoiceSignValues',chooseAns.toString());
+  localStorage.setItem('trueFalseSignProblems',JSON.stringify(problems));
+  localStorage.setItem('userTrueFalseSignValues',chooseAns.toString());
   chooseAns.splice(0);
-  const navLink = document.querySelector('#goToMultipleChoiceSignResultPage');
+  const navLink = document.querySelector('#goToTrueFalseSignResultPage');
   (navLink as HTMLElement).click();
   showInterstitial();
 }
@@ -191,7 +188,7 @@ const onClickStartTesting = ()=>{
     showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
     return;
   }
-  problems =  generateMultipleChoiceProblems(problemCounts.value, signCounts, 'multipleChoiceSign');
+  problems =  generateTrueFalseProblem(problemCounts.value, signCounts, "trueFalseSign");
   isShowSetting.value = false;
   if(!userInfo.value.isUnlimited){
     life.value.currentLife--;
@@ -208,7 +205,6 @@ const onClickIncrement = ()=>{
   if(problemCounts.value < dataSource.signs.length)
     problemCounts.value+=INCREMENT_PROBLEM_COUNT;
 }
-
 </script>
 
 <style scoped>

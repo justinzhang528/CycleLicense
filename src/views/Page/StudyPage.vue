@@ -62,10 +62,10 @@ import {
   IonItem, IonImg, IonMenuButton, IonThumbnail
 } from "@ionic/vue";
 import {markRaw} from "vue";
-import StudySignPage from "@/views/StudySignPage.vue";
-import StudyRulePage from "@/views/StudyRulePage.vue";
-import SignBookmarkPage from "@/views/SignBookmarkPage.vue";
-import RuleBookmarkPage from "@/views/RuleBookmarkPage.vue";
+import StudySignPage from "@/views/Page/StudySignPage.vue";
+import StudyRulePage from "@/views/Page/StudyRulePage.vue";
+import SignBookmarkPage from "@/views/Page/SignBookmarkPage.vue";
+import RuleBookmarkPage from "@/views/Page/RuleBookmarkPage.vue";
 import useAdmob from "@/hooks/useAdmob";
 
 const studySignPage = markRaw(StudySignPage);

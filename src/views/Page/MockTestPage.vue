@@ -70,11 +70,11 @@ import {
   IonItem, IonImg, IonMenuButton, IonThumbnail
 } from "@ionic/vue";
 import {markRaw} from "vue";
-import MultiChoiceSignPage from "@/views/MultipleChoiceSignPage.vue";
-import MultiChoiceRulePage from "@/views/MultipleChoiceRulePage.vue";
-import TrueFalseSignPage from "@/views/TrueFalseSignPage.vue";
-import TrueFalseRulePage from "@/views/TrueFalseRulePage.vue";
-import ComprehensiveTestPage from "@/views/ComprehensiveTestPage.vue";
+import MultiChoiceSignPage from "@/views/Page/MultipleChoiceSignPage.vue";
+import MultiChoiceRulePage from "@/views/Page/MultipleChoiceRulePage.vue";
+import TrueFalseSignPage from "@/views/Page/TrueFalseSignPage.vue";
+import TrueFalseRulePage from "@/views/Page/TrueFalseRulePage.vue";
+import ComprehensiveTestPage from "@/views/Page/ComprehensiveTestPage.vue";
 
 const multipleChoiceSignPage = markRaw(MultiChoiceSignPage);
 const multipleChoiceRulePage = markRaw(MultiChoiceRulePage);

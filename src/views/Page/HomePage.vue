@@ -52,9 +52,9 @@ import {
   IonButtons,
   menuController,
 } from '@ionic/vue';
-import StudyPage from "@/views/StudyPage.vue";
+import StudyPage from "@/views/Page/StudyPage.vue";
 import {markRaw} from "vue";
-import MockTestPage from "@/views/MockTestPage.vue";
+import MockTestPage from "@/views/Page/MockTestPage.vue";
 import {showToast} from "@/hooks/useUtils";
 import {useI18n} from "vue-i18n";
 
