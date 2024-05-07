@@ -51,7 +51,7 @@ import {
   IonToolbar,
   modalController,
 } from "@ionic/vue";
-import {isValidEmail, showAlert} from "@/hooks/useUtils";
+import {isValidEmail, showAlert, showLoading} from "@/hooks/useUtils";
 import {loginResponse, registerResponse} from "@/enum/enum";
 import {useI18n} from "vue-i18n";
 import {ref} from "vue";
@@ -116,9 +116,10 @@ const onConfirmRegisterModal = ()=>{
           }
           localStorage.setItem('userInfo',JSON.stringify(data));
           userInfo.value = data;
-          modalController.dismiss(data, 'confirm');
-          showAlert(t('completed'), '', t('registrationSuccess'), t('ok'));
-          return;
+          showLoading(t('pleaseWait'),()=>{
+            modalController.dismiss(userInfo.value, 'confirm');
+            showAlert(t('completed'), '', t('registrationSuccess'), t('ok'));
+          }, 1500);
         }
       }).catch(()=>{
         showAlert(t('error'), '', t('systemError'), t('ok'));

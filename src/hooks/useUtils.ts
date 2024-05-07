@@ -80,11 +80,15 @@ export async function showToast (msg: string, duration: number = 300) {
     await toast.present();
 }
 
-export async function showLoading (msg: string, duration: number = 3000) {
+export async function showLoading (msg: string,  func: any, duration: number = 3000) {
     const loading = await loadingController.create({
         message: msg,
         duration: duration,
         spinner: "circles",
     });
     loading.present();
+
+    loading.onWillDismiss().then(() => {
+        func();
+    })
 }

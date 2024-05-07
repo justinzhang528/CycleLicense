@@ -43,7 +43,7 @@ import {
   IonToolbar,
   modalController,
 } from "@ionic/vue";
-import {showAlert} from "@/hooks/useUtils";
+import {showAlert, showLoading} from "@/hooks/useUtils";
 import {loginResponse} from "@/enum/enum";
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
@@ -81,7 +81,9 @@ const onConfirmLoginModal = () => {
       }
       localStorage.setItem('userInfo', JSON.stringify(res.data));
       userInfo.value = res.data;
-      modalController.dismiss(userInfo.value, 'confirm');
+      showLoading(t('pleaseWait'),()=>{
+        modalController.dismiss(userInfo.value, 'confirm');
+      }, 1500);
     } else {
       showAlert(t('warning'), '', t('userNotFound'), t('ok'));
       return;
