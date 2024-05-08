@@ -1,9 +1,6 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start">
-        <IonButton @click="onCancelDonateModal">{{ $t('cancel') }}</IonButton>
-      </IonButtons>
       <IonTitle class="center">{{ $t('donate') }}</IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -13,6 +10,7 @@
       <IonButton href="https://www.facebook.com/">test</IonButton>
     </IonItem>
   </IonContent>
+  <IonButton class="ion-padding ion-align-self-center" @click="onCancelDonateModal" color="dark" size="small" shape="round">{{$t('close')}}</IonButton>
 </template>
 
 <script setup lang="ts">

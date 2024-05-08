@@ -1,9 +1,6 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start">
-        <IonButton @click="onCancelAboutTaiwanModal">{{ $t('close') }}</IonButton>
-      </IonButtons>
       <IonTitle class="center">{{ $t('aboutTaiwan') }}</IonTitle>
     </IonToolbar>
   </IonHeader>
@@ -16,6 +13,7 @@
       <IonLabel style="padding-left: 10px">{{$t('testRules')}}</IonLabel>
     </IonItem>
   </IonContent>
+  <IonButton class="ion-padding ion-align-self-center" @click="onCancelAboutTaiwanModal" color="dark" size="small" shape="round">{{$t('close')}}</IonButton>
 </template>
 
 <script setup lang="ts">

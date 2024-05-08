@@ -78,6 +78,8 @@
   "userAlreadyExist": "用戶已存在",
   "pleaseWait": "請稍等...",
   "testRules": "考試規則",
+  "changePassword": "Change Password",
+  "changeUnlimited": "Change Unlimited",
   "notification": "注意事項",
   "testRules-1": "交通規則：考試時間為「30」分鐘；機械常識：考試時間為「20」分鐘。兩者皆考者合計「50」分鐘。",
   "testRules-2": "於完成考試前，答案可更改。",

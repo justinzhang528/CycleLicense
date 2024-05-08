@@ -1,9 +1,7 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start">
-        <IonButton @click="onCancelDonateModal">{{ $t('close') }}</IonButton>
-      </IonButtons>
+      <IonTitle class="center">{{ $t('testRules') }}</IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent class="center ion-padding">
@@ -61,12 +59,13 @@
       </IonRow>
     </IonGrid>
   </IonContent>
+  <IonButton class="ion-padding ion-align-self-center" @click="onCancelTestRulesModal" color="dark" size="small" shape="round">{{$t('close')}}</IonButton>
 </template>
 
 <script setup lang="ts">
 import {IonButton, IonButtons, IonContent, IonHeader, IonItem, IonTitle, IonToolbar, modalController, IonGrid, IonRow, IonCol, IonLabel} from "@ionic/vue"
 
-const onCancelDonateModal = () => {
+const onCancelTestRulesModal = () => {
   modalController.dismiss(null, 'cancel')
 }
 </script>

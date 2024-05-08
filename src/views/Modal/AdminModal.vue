@@ -1,10 +1,7 @@
 <template>
   <IonHeader>
     <IonToolbar>
-      <IonButtons slot="start">
-        <IonButton @click="onCancelAdminModal">{{ $t('cancel') }}</IonButton>
-      </IonButtons>
-      <IonTitle class="center">User Management</IonTitle>
+      <IonTitle class="center">Admin</IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent class="ion-padding">
@@ -19,6 +16,7 @@
       </IonItem>
     </IonList>
   </IonContent>
+  <IonButton class="ion-padding ion-align-self-center" @click="onCancelAdminModal" color="dark" size="small" shape="round">{{$t('close')}}</IonButton>
 </template>
 
 <script setup lang="ts">
@@ -26,7 +24,9 @@ import useFirebase from "@/hooks/useFirebase";
 import {IonButton, IonButtons, IonContent, IonHeader, IonLabel, IonTitle, IonToolbar, modalController, IonList, IonItem} from "@ionic/vue";
 import {onMounted, ref} from "vue";
 import {showInputAlert} from "@/hooks/useUtils";
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n();
 const {getUser,upSertUser} = useFirebase();
 const users = ref([]);
 
@@ -48,7 +48,7 @@ const onClickPassword = (index: number) => {
     value: users.value[index].password,
     placeholder: 'Password'
   }]
-  showInputAlert('Change password','',`Username: ${users.value[index].name}`,'Ok','Cancel',inputs,(data:any)=>{
+  showInputAlert(t('changePassword'),'',`${t('username')}: ${users.value[index].name}`,t('ok'),t('cancel'),inputs,(data:any)=>{
     upSertUser(users.value[index].name,data.password,users.value[index].email,users.value[index].isUnlimited,users.value[index].unlimitedExpiredDate).then(()=>{
       users.value[index].password = data.password;
     });
@@ -63,7 +63,7 @@ const onClickUnlimited = (index: number) => {
     value: true,
     checked: users.value[index].isUnlimited,
   }]
-  showInputAlert('Change unlimited','',`Username: ${users.value[index].name}`,'Ok','Cancel',inputs,(data:any)=>{
+  showInputAlert(t('changeUnlimited'),'',`${t('username')}: ${users.value[index].name}`,t('ok'),t('cancel'),inputs,(data:any)=>{
     upSertUser(users.value[index].name,users.value[index].password,users.value[index].email,data.length > 0,users.value[index].unlimitedExpiredDate).then(()=>{
       users.value[index].isUnlimited = data.length > 0;
     });

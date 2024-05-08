@@ -78,6 +78,8 @@
   "userAlreadyExist": "User already exist",
   "pleaseWait": "Please wait...",
   "testRules": "Test Rules",
+  "changePassword": "Change Password",
+  "changeUnlimited": "Change Unlimited",
   "notification": "Notification",
   "testRules-1": "Traffic Laws: Test time is \"30\" minutes; Mechanical Knowledge: Test time is \"20\" minutes. For test takers that have both tests, the total time is \"50\" minutes.",
   "testRules-2": "Answers can be revised before the test is finished.",
