@@ -22,17 +22,17 @@
               <IonLabel v-if="userInfo.name" style="padding: 0 5px 0 5px">{{userInfo.name}}</IonLabel>
               <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
               <span @click="openLoginModal">
-                  <IonButton v-if="!userInfo.name" color="dark" shape="round">{{$t('login')}}</IonButton>
-                </span>
+                <IonButton v-if="!userInfo.name" color="dark" shape="round">{{$t('login')}}</IonButton>
+              </span>
             </IonRow>
             <IonRow class="ion-justify-content-center">
-                <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
-                  <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
-                  <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px" color="warning"></IonIcon>
-                </span>
+              <span v-for="i in life.totalLife" v-if="userInfo.name && !userInfo.isUnlimited">
+                <IonIcon v-if="life.currentLife>=i" :icon="heart" style="font-size: 22px" color="warning"></IonIcon>
+                <IonIcon v-if="life.currentLife<i" :icon="heartOutline" style="font-size: 22px" color="warning"></IonIcon>
+              </span>
               <span class="center" v-if="userInfo.isUnlimited">
-                  <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
-                </span>
+                <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
+              </span>
             </IonRow>
             <IonRow class="ion-justify-content-center ion-padding-top" v-if="userInfo.name" >
               <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline" @click="onLogoutClick">
@@ -83,6 +83,16 @@
               <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>
             </span>
         </IonItem>
+        <IonItem class="center" v-if="userInfo.name === 'admin'">
+          <IonThumbnail slot="start">
+            <img alt="admin" :src="'images/icon/adminIcon.png'">
+          </IonThumbnail>
+          <span style="width: 100%; padding-bottom: 10px">
+              <IonButton @click="openAdminModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+                Admin
+              </IonButton>
+            </span>
+        </IonItem>
       </IonList>
 
     </IonContent>
@@ -118,6 +128,7 @@ import LoginModal from "@/views/Modal/LoginModal.vue";
 import RegisterModal from "@/views/Modal/RegisterModal.vue";
 import AboutTaiwanModal from "@/views/Modal/AboutTaiwanModal.vue";
 import DonateModal from "@/views/Modal/DonateModal.vue";
+import AdminModal from "@/views/Modal/AdminModal.vue";
 import useFirebase from "@/hooks/useFirebase";
 
 const {t,locale} = useI18n();
@@ -218,6 +229,14 @@ const openAboutTaiwanModal = async () => {
 const openDonateModal = async () => {
   const modal = await modalController.create({
     component: DonateModal,
+  });
+
+  modal.present();
+};
+
+const openAdminModal = async () => {
+  const modal = await modalController.create({
+    component: AdminModal,
   });
 
   modal.present();

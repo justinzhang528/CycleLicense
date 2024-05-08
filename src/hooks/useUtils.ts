@@ -71,6 +71,29 @@ export async function showFinishAlert(header: string, subHeader: string, message
     await alert.present();
 }
 
+export async function showInputAlert(header: string, subHeader: string, message: string, confirmButtonText: string, cancelButtonText: string, inputs: any[] = [], confirmHandler: any) {
+    const alert = await alertController.create({
+        header: header,
+        subHeader: subHeader,
+        message: message,
+        buttons: [
+            {
+                text: cancelButtonText,
+                role: 'cancel',
+            },
+            {
+                text: confirmButtonText,
+                role: 'confirm',
+                handler: confirmHandler,
+            }
+        ],
+        backdropDismiss: false,
+        inputs: inputs
+    });
+
+    await alert.present();
+}
+
 export async function showToast (msg: string, duration: number = 300) {
     const toast = await toastController.create({
         message: msg,
