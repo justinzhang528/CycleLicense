@@ -2,7 +2,7 @@
   <IonHeader>
     <IonToolbar>
       <IonButtons slot="start">
-        <IonButton @click="onCancelAboutTaiwanModal">{{ $t('cancel') }}</IonButton>
+        <IonButton @click="onCancelAboutTaiwanModal">{{ $t('close') }}</IonButton>
       </IonButtons>
       <IonTitle class="center">{{ $t('aboutTaiwan') }}</IonTitle>
     </IonToolbar>

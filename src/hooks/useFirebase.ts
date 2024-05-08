@@ -18,14 +18,15 @@ export default function (){
         initializeApp(firebaseConfig);
     }
 
-    const upSertUser = (name: string, password: string, email: string): Promise<any> => {
+    const upSertUser = (name: string, password: string, email: string, isUnlimited: boolean = false, unlimitedExpiredDate: number = 0): Promise<any> => {
         return new Promise((resolve, reject) => {
             const db = getDatabase();
             set(databaseRef(db, 'Account/' + name), {
                 name: name,
                 password : password,
                 email: email,
-                isUnlimited: false,
+                isUnlimited: isUnlimited,
+                unlimitedExpiredDate: unlimitedExpiredDate,
             }).then(() => {
                 resolve({
                     errorCode: registerResponse.SUCCESS,

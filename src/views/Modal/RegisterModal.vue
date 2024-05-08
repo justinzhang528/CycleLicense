@@ -63,7 +63,6 @@ const registerUserNameInput = ref();
 const registerPasswordInput = ref();
 const registerConfirmPasswordInput = ref();
 const registerEmailInput = ref();
-let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 
 const onCancelRegisterModal = ()=>{
   modalController.dismiss(null, 'cancel')
@@ -115,11 +114,10 @@ const onConfirmRegisterModal = ()=>{
             isUnlimited: false,
           }
           localStorage.setItem('userInfo',JSON.stringify(data));
-          userInfo.value = data;
           showLoading(t('pleaseWait'),()=>{
-            modalController.dismiss(userInfo.value, 'confirm');
+            modalController.dismiss(data, 'confirm');
             showAlert(t('completed'), '', t('registrationSuccess'), t('ok'));
-          }, 1500);
+          }, 1000);
         }
       }).catch(()=>{
         showAlert(t('error'), '', t('systemError'), t('ok'));

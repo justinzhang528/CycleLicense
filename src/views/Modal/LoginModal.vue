@@ -48,9 +48,9 @@ import {loginResponse} from "@/enum/enum";
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 import useFirebase from "@/hooks/useFirebase";
+import useData from "@/hooks/useData";
 
-const {getUser} = useFirebase();
-let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
+const {getUser,upSertUser} = useFirebase();
 
 const {t} = useI18n();
 const loginUserNameInput = ref();
@@ -79,11 +79,21 @@ const onConfirmLoginModal = () => {
         showAlert(t('warning'), '', t('passwordIncorrect'), t('ok'));
         return;
       }
+      if(res.data.isUnlimited){
+        if(res.data.unlimitedExpiredDate === 0){
+          res.data.unlimitedExpiredDate = new Date().getTime() + useData().DEFAULT_UNLIMITED_VALID_TIME;
+          upSertUser(res.data.name, res.data.password, res.data.email, res.data.isUnlimited, res.data.unlimitedExpiredDate);
+        }
+        else if(res.data.unlimitedExpiredDate < new Date().getTime()){
+          res.data.isUnlimited = false;
+          res.data.unlimitedExpiredDate = 0;
+          upSertUser(res.data.name, res.data.password, res.data.email, res.data.isUnlimited, res.data.unlimitedExpiredDate);
+        }
+      }
       localStorage.setItem('userInfo', JSON.stringify(res.data));
-      userInfo.value = res.data;
       showLoading(t('pleaseWait'),()=>{
-        modalController.dismiss(userInfo.value, 'confirm');
-      }, 1500);
+        modalController.dismiss(res.data, 'confirm');
+      }, 1000);
     } else {
       showAlert(t('warning'), '', t('userNotFound'), t('ok'));
       return;

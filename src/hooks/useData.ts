@@ -5,7 +5,8 @@ export default function () {
     const DEFAULT_PROBLEM_COUNT = 10
     const INCREMENT_PROBLEM_COUNT = 5
     const DEFAULT_LIFE = 5
-    const DEFAULT_LIFE_INCREASE_INTERVAL = 3600000 // in millisecond
+    const DEFAULT_LIFE_INCREASE_INTERVAL = 1000 * 60 * 60 // in milliseconds
+    const DEFAULT_UNLIMITED_VALID_TIME = 1000 * 60 * 60 * 24 * 365 // in milliseconds
     const life = ref({"totalLife": DEFAULT_LIFE,"currentLife": localStorage.getItem('currentLife') ? Number(localStorage.getItem('currentLife')) : DEFAULT_LIFE})
     const signCounts = dataSource.signs.length
     const ruleCounts = dataSource.rules.length
@@ -144,6 +145,7 @@ export default function () {
         INCREMENT_PROBLEM_COUNT,
         DEFAULT_LIFE,
         DEFAULT_LIFE_INCREASE_INTERVAL,
+        DEFAULT_UNLIMITED_VALID_TIME,
         life,
         signCounts,
         ruleCounts,

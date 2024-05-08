@@ -6,15 +6,18 @@
     </IonHeader>
     <IonContent>
       <IonList>
-        <IonItem lines="none">
+        <IonItem lines="full">
           <IonGrid>
+            <IonRow v-if="userInfo.name" class="ion-justify-content-center">
+              <IonIcon @click="onClickRefreshUserInfo" :icon="refresh" :class="{ 'rotate': isRotating }"></IonIcon>
+            </IonRow>
             <IonRow class="ion-justify-content-center ion-padding">
               <IonAvatar style="width: 75px; height: 75px">
                 <img v-if="userInfo.name" alt="avatar" :src="'images/avatar.png'">
                 <img v-if="!userInfo.name" alt="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg">
               </IonAvatar>
             </IonRow>
-            <IonRow class="ion-justify-content-center ion-padding">
+            <IonRow class="ion-justify-content-center ion-padding-bottom">
               <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
               <IonLabel v-if="userInfo.name" style="padding: 0 5px 0 5px">{{userInfo.name}}</IonLabel>
               <IonIcon v-if="userInfo.isUnlimited" color="warning" :icon="diamond"></IonIcon>
@@ -31,13 +34,13 @@
                   <img :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 15%"/>
                 </span>
             </IonRow>
-            <IonRow class="ion-justify-content-center ion-padding" v-if="userInfo.name" >
+            <IonRow class="ion-justify-content-center ion-padding-top" v-if="userInfo.name" >
               <IonButton fill="clear" color="dark" shape="round" style="text-decoration: underline" @click="onLogoutClick">
                 <IonIcon color="dark" :icon="logOut" style="padding-right: 5px"></IonIcon>
                 {{$t('logout')}}
               </IonButton>
             </IonRow>
-            <IonRow class="ion-justify-content-center ion-padding-bottom" >
+            <IonRow class="ion-justify-content-center" >
                 <span @click="openRegisterModal">
                   <IonButton v-if="!userInfo.name" fill="clear" color="dark" shape="round" style="text-decoration: underline">
                     <IonIcon color="dark" :icon="personAdd" style="padding-right: 5px"></IonIcon>
@@ -107,7 +110,7 @@ import {
 } from '@ionic/vue';
 import {onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {diamond, heart, heartOutline, logOut, personAdd} from "ionicons/icons";
+import {diamond, heart, heartOutline, logOut, personAdd, refresh} from "ionicons/icons";
 import {showAlertWithAction} from "@/hooks/useUtils";
 import useData from "@/hooks/useData";
 import scheduleNotification from "@/hooks/useLocalNotification";
@@ -115,11 +118,41 @@ import LoginModal from "@/views/Modal/LoginModal.vue";
 import RegisterModal from "@/views/Modal/RegisterModal.vue";
 import AboutTaiwanModal from "@/views/Modal/AboutTaiwanModal.vue";
 import DonateModal from "@/views/Modal/DonateModal.vue";
+import useFirebase from "@/hooks/useFirebase";
 
 const {t,locale} = useI18n();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {life} = useData();
+const isRotating = ref(false);
+const {getUser,upSertUser} = useFirebase();
+
+const rotateIcon = () => {
+  isRotating.value = true;
+  setTimeout(() => {
+    isRotating.value = false;
+  }, 500);
+};
+
+const onClickRefreshUserInfo = () => {
+  rotateIcon();
+  getUser(userInfo.value.name).then((res) => {
+    if(res.data.isUnlimited){
+      if(res.data.unlimitedExpiredDate === 0){
+        res.data.unlimitedExpiredDate = new Date().getTime() + useData().DEFAULT_UNLIMITED_VALID_TIME;
+        upSertUser(res.data.name, res.data.password, res.data.email, res.data.isUnlimited, res.data.unlimitedExpiredDate);
+      }
+      else if(res.data.unlimitedExpiredDate < new Date().getTime()){
+        res.data.isUnlimited = false;
+        res.data.unlimitedExpiredDate = 0;
+        upSertUser(res.data.name, res.data.password, res.data.email, res.data.isUnlimited, res.data.unlimitedExpiredDate);
+      }
+    }
+    userInfo.value = res.data;
+    localStorage.setItem('userInfo', JSON.stringify(res.data));
+  });
+  life.value.currentLife = Number(localStorage.getItem('currentLife'));
+};
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{
   currentSelectedLanguageValue.value = e.detail.value;
@@ -138,6 +171,7 @@ const onSelectedLanguageChange = (e: CustomEvent)=>{
 const onLogoutClick = ()=>{
   showAlertWithAction(t('warning'), '', t('areYouSureToLogout'), t('confirm'), t("cancel"), ()=>{
     localStorage.removeItem('userInfo');
+    localStorage.setItem('isUnlimited','false');
     userInfo.value = {};
     const nav = document.querySelector('ion-nav');
     nav?.popToRoot();
@@ -155,6 +189,7 @@ const openLoginModal = async () => {
 
   if (role === 'confirm') {
     userInfo.value = data;
+    localStorage.setItem('isUnlimited', data.isUnlimited ? 'true' : 'false');
   }
 };
 
@@ -200,5 +235,18 @@ onMounted(()=> {
 <style>
 ion-thumbnail {
   --size: 40px;
+}
+
+.rotate {
+  animation: rotateAnimation 0.5s infinite linear;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

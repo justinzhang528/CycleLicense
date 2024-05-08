@@ -16,7 +16,7 @@ import HomePage from "@/views/Page/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import useInternetConnection from "@/hooks/useInternetConnection";
-import {showAlert} from "@/hooks/useUtils";
+import {showLoading} from "@/hooks/useUtils";
 import scheduleNotification from "@/hooks/useLocalNotification";
 import SideMenu from "@/views/SideMenu/SideMenu.vue";
 
@@ -25,8 +25,8 @@ const {t,locale} = useI18n();
 const homePage = markRaw(HomePage)
 
 const checkInternetConnection = ()=> {
-  if(!isOnline.value){
-    showAlert(t('noInternet'),t('pleaseCheckYourInternetConnection'),'',t('ok'));
+  if(!isOnline.value) {
+    showLoading(t('noInternet'), ()=>{}, 5000);
   }
 }
 

@@ -2,9 +2,8 @@
   <IonHeader>
     <IonToolbar>
       <IonButtons slot="start">
-        <IonButton @click="onCancelDonateModal">{{ $t('cancel') }}</IonButton>
+        <IonButton @click="onCancelDonateModal">{{ $t('close') }}</IonButton>
       </IonButtons>
-      <IonTitle class="center">{{ $t('testRules') }}</IonTitle>
     </IonToolbar>
   </IonHeader>
   <IonContent class="center ion-padding">
@@ -16,7 +15,7 @@
         <IonCol size="1">
           <IonLabel>{{$t('1')}}{{$t('.')}}</IonLabel>
         </IonCol>
-        <IonCol size="11">
+        <IonCol size="9">
           <IonLabel>{{$t('testRules-1')}}</IonLabel>
         </IonCol>
       </IonRow>
@@ -24,7 +23,7 @@
         <IonCol size="1">
           <IonLabel>{{$t('2')}}{{$t('.')}}</IonLabel>
         </IonCol>
-        <IonCol size="11">
+        <IonCol size="9">
           <IonLabel>{{$t('testRules-2')}}</IonLabel>
         </IonCol>
       </IonRow>
@@ -32,7 +31,7 @@
         <IonCol size="1">
           <IonLabel>{{$t('3')}}{{$t('.')}}</IonLabel>
         </IonCol>
-        <IonCol size="11">
+        <IonCol size="9">
           <IonLabel>{{$t('testRules-3')}}</IonLabel>
         </IonCol>
       </IonRow>
@@ -40,7 +39,7 @@
         <IonCol size="1">
           <IonLabel>{{$t('4')}}{{$t('.')}}</IonLabel>
         </IonCol>
-        <IonCol size="11">
+        <IonCol size="9">
           <IonLabel>{{$t('testRules-4')}}</IonLabel>
         </IonCol>
       </IonRow>
@@ -48,7 +47,7 @@
         <IonCol size="1">
           <IonLabel>{{$t('5')}}{{$t('.')}}</IonLabel>
         </IonCol>
-        <IonCol size="11">
+        <IonCol size="9">
           <IonLabel>{{$t('testRules-5')}}</IonLabel>
         </IonCol>
       </IonRow>
@@ -56,7 +55,7 @@
         <IonCol size="1">
           <IonLabel>{{$t('6')}}{{$t('.')}}</IonLabel>
         </IonCol>
-        <IonCol size="11">
+        <IonCol size="9">
           <IonLabel>{{$t('testRules-6')}}</IonLabel>
         </IonCol>
       </IonRow>
@@ -74,6 +73,6 @@ const onCancelDonateModal = () => {
 
 <style scoped>
 ion-grid {
-  --ion-grid-columns: 12;
+  --ion-grid-columns: 10;
 }
 </style>
