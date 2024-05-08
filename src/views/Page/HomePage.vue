@@ -29,6 +29,11 @@
           </IonCard>
           <IonButton @click="checkLoginStatus(mockTestPage)" shape="round" size="default" style="font-size: small;" color="dark">{{$t('enter')}}</IonButton>
         </IonItem>
+        <IonItem class="image-container" lines="none" style="width: 80%; display: block; margin: 10px auto;">
+          <a href="https://www.purebread.com.tw/">
+            <img class="auto-zoom-image" src="https://static.vecteezy.com/system/resources/previews/016/937/046/original/bakery-shop-web-banner-free-vector.jpg" alt="banner">
+          </a>
+        </IonItem>
       </IonList>
     </IonContent>
   </IonPage>
@@ -57,6 +62,7 @@ import {markRaw} from "vue";
 import MockTestPage from "@/views/Page/MockTestPage.vue";
 import {showToast} from "@/hooks/useUtils";
 import {useI18n} from "vue-i18n";
+import '@ionic/core/css/ionic.bundle.css';
 
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
@@ -75,5 +81,17 @@ const checkLoginStatus = (page: any) => {
 </script>
 
 <style scoped>
+.auto-zoom-image {
+  width: 100%;
+  animation: zoom 1s infinite alternate; /* 定义动画效果 */
+}
 
+@keyframes zoom {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>
