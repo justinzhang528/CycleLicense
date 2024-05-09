@@ -18,6 +18,7 @@
     "@capacitor/ios": "^5.0.0",
     "@capacitor/local-notifications": "^5.0.7",
     "@capacitor/screen-orientation": "^5.0.0",
+    "@capacitor/splash-screen": "^5.0.7",
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
     "firebase": "^10.11.1",
