@@ -52,7 +52,7 @@ import {
   modalController,
 } from "@ionic/vue";
 import {isValidEmail, showAlert, showLoading} from "@/hooks/useUtils";
-import {loginResponse, registerResponse} from "@/enum/enum";
+import {dataResponse} from "@/enum/enum";
 import {useI18n} from "vue-i18n";
 import {ref} from "vue";
 import useFirebase from "@/hooks/useFirebase";
@@ -101,12 +101,12 @@ const onConfirmRegisterModal = ()=>{
 
   // check if user already exist before insert new user
   getUser(registerUsername).then((res)=>{
-    if(res.errorCode === loginResponse.SUCCESS){
+    if(res.errorCode === dataResponse.SUCCESS){
       showAlert(t('warning'), '', t('userAlreadyExist'), t('ok'));
     }else{
       // insert new user
       upSertUser(registerUsername,registerPassword,registerEmail).then((res)=>{
-        if(res.errorCode === registerResponse.SUCCESS){
+        if(res.errorCode === dataResponse.SUCCESS){
           const data = {
             name: registerUsername,
             password: registerPassword,
@@ -117,7 +117,7 @@ const onConfirmRegisterModal = ()=>{
           showLoading(t('pleaseWait'),()=>{
             modalController.dismiss(data, 'confirm');
             showAlert(t('completed'), '', t('registrationSuccess'), t('ok'));
-          }, 1000);
+          }, 750);
         }
       }).catch(()=>{
         showAlert(t('error'), '', t('systemError'), t('ok'));

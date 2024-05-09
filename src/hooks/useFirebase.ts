@@ -1,9 +1,9 @@
-import {getDatabase, ref as databaseRef, set, get, child} from "firebase/database";
-import {loginResponse,registerResponse} from "@/enum/enum";
+import {getDatabase, ref as databaseRef, set, get, child, remove} from "firebase/database";
+import {dataResponse} from "@/enum/enum";
 import {initializeApp, getApp} from "firebase/app";
-import { getStorage, ref as storageRef, listAll, getDownloadURL } from "firebase/storage";
+import {getStorage, ref as storageRef, listAll, getDownloadURL} from "firebase/storage";
 
-export default function (){
+export default function () {
     const initializeFirebase = () => {
         const firebaseConfig = {
             apiKey: "AIzaSyBQy-DZkRDAx-u7GG3_h3RmsNGAm6fT-Cs",
@@ -23,18 +23,18 @@ export default function (){
             const db = getDatabase();
             set(databaseRef(db, 'Account/' + name), {
                 name: name,
-                password : password,
+                password: password,
                 email: email,
                 isUnlimited: isUnlimited,
                 unlimitedExpiredDate: unlimitedExpiredDate,
             }).then(() => {
                 resolve({
-                    errorCode: registerResponse.SUCCESS,
+                    errorCode: dataResponse.SUCCESS,
                     data: null
                 });
             }).catch((error) => {
                 reject({
-                    errorCode: registerResponse.ERROR,
+                    errorCode: dataResponse.ERROR,
                     data: error
                 });
             });
@@ -48,26 +48,107 @@ export default function (){
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         resolve({
-                            errorCode: loginResponse.SUCCESS,
+                            errorCode: dataResponse.SUCCESS,
                             data: snapshot.val()
                         });
                     } else {
                         resolve({
-                            errorCode: loginResponse.NO_DATA,
+                            errorCode: dataResponse.NO_DATA,
                             data: null
                         });
                     }
                 })
                 .catch((error) => {
                     reject({
-                        errorCode: loginResponse.ERROR,
+                        errorCode: dataResponse.ERROR,
                         data: error
                     });
                 });
         });
     }
 
-    const listStorage = ()=>{
+    const removeUser = (name: string): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            const db = getDatabase();
+            remove(databaseRef(db, `Account/${name}`)).then(() => {
+                resolve({
+                    errorCode: dataResponse.SUCCESS,
+                    data: null
+                });
+            }).catch((error) => {
+                reject({
+                    errorCode: dataResponse.ERROR,
+                    data: error
+                });
+            });
+        });
+    }
+
+    const getAds = (name: string): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            const dbRef = databaseRef(getDatabase());
+            get(child(dbRef, `Ads/${name}`))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        resolve({
+                            errorCode: dataResponse.SUCCESS,
+                            data: snapshot.val()
+                        });
+                    } else {
+                        resolve({
+                            errorCode: dataResponse.NO_DATA,
+                            data: null
+                        });
+                    }
+                })
+                .catch((error) => {
+                    reject({
+                        errorCode: dataResponse.ERROR,
+                        data: error
+                    });
+                });
+        });
+    }
+
+    const upSertAds = (name: string, url: string, description: string): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            const db = getDatabase();
+            set(databaseRef(db, `Ads/${name}`), {
+                name: name,
+                url: url,
+                description: description,
+            }).then(() => {
+                resolve({
+                    errorCode: dataResponse.SUCCESS,
+                    data: null
+                });
+            }).catch((error) => {
+                reject({
+                    errorCode: dataResponse.ERROR,
+                    data: error
+                });
+            });
+        });
+    }
+
+    const removeAds = (name: string): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            const db = getDatabase();
+            remove(databaseRef(db, `Ads/${name}`)).then(() => {
+                resolve({
+                    errorCode: dataResponse.SUCCESS,
+                    data: null
+                });
+            }).catch((error) => {
+                reject({
+                    errorCode: dataResponse.ERROR,
+                    data: error
+                });
+            });
+        });
+    }
+
+    const listStorage = () => {
         const firebaseApp = getApp();
         const storage = getStorage(firebaseApp, "gs://drivinglicense-10d0e.appspot.com");
         const ref = storageRef(storage, 'DrivingLicense/image/');
@@ -103,17 +184,21 @@ export default function (){
                                     break;
                             }
                         });
-                    
+
                 });
             }).catch((error) => {
             // Uh-oh, an error occurred!
         });
     }
 
-    return{
+    return {
         initializeFirebase,
         upSertUser,
         getUser,
+        removeUser,
+        getAds,
+        upSertAds,
+        removeAds,
         listStorage
     }
 }

@@ -89,7 +89,7 @@
           </IonThumbnail>
           <span style="width: 100%; padding-bottom: 10px">
               <IonButton @click="openAdminModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
-                Admin
+                {{ $t('admin') }}
               </IonButton>
             </span>
         </IonItem>

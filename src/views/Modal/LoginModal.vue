@@ -44,7 +44,7 @@ import {
   modalController,
 } from "@ionic/vue";
 import {showAlert, showLoading} from "@/hooks/useUtils";
-import {loginResponse} from "@/enum/enum";
+import {dataResponse} from "@/enum/enum";
 import {ref} from "vue";
 import {useI18n} from "vue-i18n";
 import useFirebase from "@/hooks/useFirebase";
@@ -74,7 +74,7 @@ const onConfirmLoginModal = () => {
   }
 
   getUser(loginUsername).then((res) => {
-    if (res.errorCode === loginResponse.SUCCESS) {
+    if (res.errorCode === dataResponse.SUCCESS) {
       if (res.data.password.toString() !== loginPassword.toString()) {
         showAlert(t('warning'), '', t('passwordIncorrect'), t('ok'));
         return;
@@ -93,7 +93,7 @@ const onConfirmLoginModal = () => {
       localStorage.setItem('userInfo', JSON.stringify(res.data));
       showLoading(t('pleaseWait'),()=>{
         modalController.dismiss(res.data, 'confirm');
-      }, 1000);
+      }, 750);
     } else {
       showAlert(t('warning'), '', t('userNotFound'), t('ok'));
       return;
