@@ -4,29 +4,63 @@
       <IonTitle class="center">{{ $t('ads') }}</IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent class="center ion-padding">
+  <IonContent class="center">
+    <IonRefresher slot="fixed" :pull-factor="0.5" :pull-min="100" :pull-max="200" @ionRefresh="handleRefresh($event)">
+      <IonRefresherContent>
+      </IonRefresherContent>
+    </IonRefresher>
     <IonGrid>
-      <IonRow class="ion-padding">
-        <a href="https://neilpatel.com/blog/banner-advertising/">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn1L_ruDNpPrMHUG--qitWcSH_xsUFjJUprQ&s" alt="banner1">
-        </a>
-      </IonRow>
-      <IonRow class="ion-padding">
-        <a href="https://smartblogger.com/banner-ads/">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLetqlty-nvFnM5TSMyFB58pyQ_nzm-Phnng&s" alt="banner2">
-        </a>
-      </IonRow>
+      <IonItem v-for="(ad,index) in ads" lines="full">
+        <IonRow class="ion-padding">
+          <IonLabel class="ion-padding-bottom" style="font-weight: bold;text-decoration: underline">{{ad.name}}</IonLabel>
+          <a :href="ad.link">
+            <img :src="ad.imgUrl" alt="banner1">
+          </a>
+          <IonLabel>{{ad.description}}</IonLabel>
+        </IonRow>
+      </IonItem>
     </IonGrid>
   </IonContent>
   <IonButton class="ion-padding ion-align-self-center" @click="onCancelAdsModal" color="dark" size="small" shape="round">{{$t('close')}}</IonButton>
 </template>
 
 <script setup lang="ts">
-import {IonButton, IonContent, IonHeader, IonTitle, IonToolbar, modalController, IonGrid, IonRow} from "@ionic/vue"
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  modalController,
+  IonGrid,
+  IonRow,
+  IonLabel,
+  IonItem,
+  IonRefresher, IonRefresherContent
+} from "@ionic/vue"
+import useFirebase from "@/hooks/useFirebase";
+import {onMounted, ref} from "vue";
 
+const {getAds} = useFirebase();
+const ads = ref({});
 const onCancelAdsModal = () => {
   modalController.dismiss(null, 'cancel')
 }
+
+const handleRefresh = (event: CustomEvent) => {
+  getAds('').then((res) => {
+    ads.value = res.data;
+    setTimeout(() => {
+      event.detail.complete();
+    }, 300);
+  });
+};
+
+onMounted(()=>{
+  getAds('').then((res) => {
+    ads.value = res.data;
+  });
+});
 </script>
 
 <style scoped>

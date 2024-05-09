@@ -44,16 +44,20 @@ const onClickCreate = () => {
     type: 'text',
     placeholder: t('name')
   },{
-    name:'url',
-    type: 'text',
-    placeholder: t('url')
+    name:'imgUrl',
+    type: 'textarea',
+    placeholder: t('imgUrl')
+  },{
+    name:'link',
+    type: 'textarea',
+    placeholder: t('link')
   },{
     name:'description',
-    type: 'text',
+    type: 'textarea',
     placeholder: t('description')
   }]
   showInputAlert(t('createAds'),'','',t('ok'),t('cancel'),inputs,(data:any)=>{
-    if(data.name === '' || data.url === '' || data.description === ''){
+    if(data.name === '' || data.imgUrl === '' || data.description === ''){
       showToast(t('pleaseFillAllFields'),1500);
       return;
     }
@@ -61,10 +65,11 @@ const onClickCreate = () => {
       showToast(t('alreadyExist'),1500);
       return;
     }
-    upSertAds(data.name,data.url,data.description).then(()=>{
+    upSertAds(data.name,data.imgUrl,data.link,data.description).then(()=>{
       ads.value = {...ads.value, [data.name]: {
           name: data.name,
-          url: data.url,
+          imgUrl: data.imgUrl,
+          link: data.link,
           description: data.description
         }};
       showToast(t('successfullyCreated'),1500);
@@ -80,24 +85,30 @@ const onClickEdit = (index: number) => {
     placeholder: t('name'),
     disabled: true
   },{
-    name:'url',
-    type: 'text',
-    value: ads.value[index].url,
-    placeholder: t('url')
+    name:'imgUrl',
+    type: 'textarea',
+    value: ads.value[index].imgUrl,
+    placeholder: t('imgUrl')
+  },{
+    name:'link',
+    type: 'textarea',
+    value: ads.value[index].link,
+    placeholder: t('link')
   },{
     name:'description',
-    type: 'text',
+    type: 'textarea',
     value: ads.value[index].description,
     placeholder: t('description')
   }]
   showInputAlert(t('updateAds'),'','',t('ok'),t('cancel'),inputs,(data:any)=>{
-    if(data.url === '' || data.description === ''){
+    if(data.imgUrl === '' || data.link ==='' || data.description === ''){
       showToast(t('pleaseFillAllFields'),1500);
       return;
     }
-    upSertAds(data.name,data.url,data.description).then(()=>{
+    upSertAds(data.name,data.imgUrl,data.link,data.description).then(()=>{
       ads.value[index].name = data.name;
-      ads.value[index].url = data.url;
+      ads.value[index].imgUrl = data.imgUrl;
+      ads.value[index].link = data.link;
       ads.value[index].description = data.description;
       showToast(t('successfullyUpdated'),1500);
     });

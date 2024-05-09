@@ -5,6 +5,10 @@
       </IonToolbar>
     </IonHeader>
     <IonContent>
+      <IonRefresher slot="fixed" :pull-factor="0.5" :pull-min="100" :pull-max="200" @ionRefresh="handleRefresh($event)">
+        <IonRefresherContent>
+        </IonRefresherContent>
+      </IonRefresher>
       <IonList>
         <IonItem lines="full">
           <IonGrid>
@@ -116,7 +120,7 @@ import {
   IonAvatar,
   IonRow,
   IonGrid,
-  modalController,
+  modalController, IonRefresher, IonRefresherContent,
 } from '@ionic/vue';
 import {onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
@@ -163,6 +167,13 @@ const onClickRefreshUserInfo = () => {
     localStorage.setItem('userInfo', JSON.stringify(res.data));
   });
   life.value.currentLife = Number(localStorage.getItem('currentLife'));
+};
+
+const handleRefresh = (event: CustomEvent) => {
+  setTimeout(() => {
+    onClickRefreshUserInfo();
+    event.target.complete();
+  }, 300);
 };
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{

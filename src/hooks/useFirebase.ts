@@ -110,12 +110,13 @@ export default function () {
         });
     }
 
-    const upSertAds = (name: string, url: string, description: string): Promise<any> => {
+    const upSertAds = (name: string, imgUrl: string, link: string, description: string): Promise<any> => {
         return new Promise((resolve, reject) => {
             const db = getDatabase();
             set(databaseRef(db, `Ads/${name}`), {
                 name: name,
-                url: url,
+                imgUrl: imgUrl,
+                link: link,
                 description: description,
             }).then(() => {
                 resolve({
