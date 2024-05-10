@@ -10,7 +10,7 @@
         </IonRefresherContent>
       </IonRefresher>
       <IonList>
-        <IonItem lines="full">
+        <IonItem lines="none">
           <IonGrid>
             <IonRow v-if="userInfo.name" class="ion-justify-content-center">
               <IonIcon @click="onClickRefreshUserInfo" :icon="refresh" :class="{ 'rotate': isRotating }"></IonIcon>
@@ -58,13 +58,14 @@
           <IonThumbnail slot="start">
             <img alt="language" :src="'images/icon/languageIcon.png'">
           </IonThumbnail>
-          <IonLabel>{{ $t('language') }}</IonLabel>
+          <span class="center">
           <IonSelect style="font-weight: bold" aria-label="Language" interface="popover" :value="currentSelectedLanguageValue" @ionChange="onSelectedLanguageChange">
             <IonSelectOption value="en">English</IonSelectOption>
             <IonSelectOption value="mm">မြန်မာ</IonSelectOption>
             <IonSelectOption value="zh_cn">简体中文</IonSelectOption>
             <IonSelectOption value="zh_tw">繁體中文</IonSelectOption>
           </IonSelect>
+          </span>
         </IonItem>
         <IonItem style="padding-top: 10px; padding-bottom: 10px" class="center">
           <IonThumbnail slot="start">
@@ -97,8 +98,37 @@
               </IonButton>
             </span>
         </IonItem>
+        <IonItem lines="none" class="ion-padding-top">
+          <IonGrid>
+            <IonRow class="ion-justify-content-center">
+              <IonLabel>{{$t('contactUsOn')}}</IonLabel>
+            </IonRow>
+            <IonRow class="ion-justify-content-center ion-text-center">
+              <IonCol size="auto">
+                <IonButton fill="clear" href="https://m.me/100010139531439?hash=AbbqmXBPU56TvjwQ">
+                  <IonThumbnail>
+                    <img alt="messenger" :src="'images/icon/messengerIcon.png'">
+                  </IonThumbnail>
+                </IonButton>
+              </IonCol>
+              <IonCol size="auto">
+                <IonButton fill="clear" href="mailto:someone@example.com">
+                  <IonThumbnail>
+                    <img alt="email" :src="'images/icon/emailIcon.png'">
+                  </IonThumbnail>
+                </IonButton>
+              </IonCol>
+              <IonCol size="auto">
+                <IonButton fill="clear" href="https://line.me/ti/p/e7T1R-XuQa">
+                  <IonThumbnail>
+                    <img alt="line" :src="'images/icon/lineIcon.png'">
+                  </IonThumbnail>
+                </IonButton>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </IonItem>
       </IonList>
-
     </IonContent>
   </IonMenu>
 </template>
@@ -120,6 +150,7 @@ import {
   IonAvatar,
   IonRow,
   IonGrid,
+  IonCol,
   modalController, IonRefresher, IonRefresherContent,
 } from '@ionic/vue';
 import {onMounted, ref} from "vue";
@@ -173,7 +204,7 @@ const handleRefresh = (event: CustomEvent) => {
   setTimeout(() => {
     onClickRefreshUserInfo();
     event.target.complete();
-  }, 300);
+  }, 500);
 };
 
 const onSelectedLanguageChange = (e: CustomEvent)=>{

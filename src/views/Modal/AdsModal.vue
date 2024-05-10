@@ -52,7 +52,7 @@ const handleRefresh = (event: CustomEvent) => {
     ads.value = res.data;
     setTimeout(() => {
       event.detail.complete();
-    }, 300);
+    }, 500);
   });
 };
 
