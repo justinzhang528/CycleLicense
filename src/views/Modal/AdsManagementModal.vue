@@ -97,7 +97,7 @@ const onClickAddToHomePage = (key: string) => {
   showAlertWithAction(t('warning'),'',t('addToHomePage'),t('ok'),t('cancel'),()=>{
     removeAds('HomeAds','');
     upSertAds('HomeAds',ads.value[key].name,ads.value[key].imgUrl,ads.value[key].link,ads.value[key].description,ads.value[key].createdOn).then(()=>{
-      showToast(t('successfullyAddToHomePage'),1500);
+      showToast(t('addedToHomePage'),1500);
       getHomeAds();
     });
   });
