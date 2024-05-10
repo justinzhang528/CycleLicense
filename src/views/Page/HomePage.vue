@@ -29,9 +29,9 @@
           </IonCard>
           <IonButton @click="checkLoginStatus(mockTestPage)" shape="round" size="default" style="font-size: small;" color="dark">{{$t('enter')}}</IonButton>
         </IonItem>
-        <IonItem class="image-container" lines="none" style="width: 80%; display: block; margin: 10px auto;">
-          <a href="https://www.purebread.com.tw/">
-            <img class="auto-zoom-image" src="https://static.vecteezy.com/system/resources/previews/016/937/046/original/bakery-shop-web-banner-free-vector.jpg" alt="banner">
+        <IonItem v-for="ad in ads" class="image-container" lines="none" style="width: 90%; display: block; margin: 10px auto;">
+          <a :href="ad.link">
+            <img class="auto-zoom-image" :src="ad.imgUrl" alt="banner">
           </a>
         </IonItem>
       </IonList>
@@ -58,15 +58,18 @@ import {
   menuController,
 } from '@ionic/vue';
 import StudyPage from "@/views/Page/StudyPage.vue";
-import {markRaw} from "vue";
+import {markRaw, onMounted, ref} from "vue";
 import MockTestPage from "@/views/Page/MockTestPage.vue";
 import {showToast} from "@/hooks/useUtils";
 import {useI18n} from "vue-i18n";
 import '@ionic/core/css/ionic.bundle.css';
+import useFirebase from "@/hooks/useFirebase";
 
+const { t } = useI18n();
+const {getAds} = useFirebase();
+const ads = ref({});
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
-const { t } = useI18n();
 
 const checkLoginStatus = (page: any) => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
@@ -78,6 +81,19 @@ const checkLoginStatus = (page: any) => {
     nav?.push(page);
   }
 }
+
+const getHomeAds = () => {
+  getAds('HomeAds','').then((res) => {
+    ads.value = res.data;
+  });
+}
+
+onMounted(()=>{
+  getHomeAds();
+  setInterval(() => {
+    getHomeAds();
+  }, 5000);
+});
 </script>
 
 <style scoped>

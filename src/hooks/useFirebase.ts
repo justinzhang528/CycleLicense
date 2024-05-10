@@ -18,7 +18,7 @@ export default function () {
         initializeApp(firebaseConfig);
     }
 
-    const upSertUser = (name: string, password: string, email: string, isUnlimited: boolean = false, unlimitedExpiredDate: number = 0): Promise<any> => {
+    const upSertUser = (name: string, password: string, email: string, isUnlimited: boolean = false, unlimitedExpiredDate: number = 0, createOn: number = new Date().getTime()): Promise<any> => {
         return new Promise((resolve, reject) => {
             const db = getDatabase();
             set(databaseRef(db, 'Account/' + name), {
@@ -27,6 +27,7 @@ export default function () {
                 email: email,
                 isUnlimited: isUnlimited,
                 unlimitedExpiredDate: unlimitedExpiredDate,
+                createdOn: createOn,
             }).then(() => {
                 resolve({
                     errorCode: dataResponse.SUCCESS,
@@ -84,10 +85,10 @@ export default function () {
         });
     }
 
-    const getAds = (name: string): Promise<any> => {
+    const getAds = (dbPath: string, name: string): Promise<any> => {
         return new Promise((resolve, reject) => {
             const dbRef = databaseRef(getDatabase());
-            get(child(dbRef, `Ads/${name}`))
+            get(child(dbRef, `${dbPath}/${name}`))
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         resolve({
@@ -110,14 +111,15 @@ export default function () {
         });
     }
 
-    const upSertAds = (name: string, imgUrl: string, link: string, description: string): Promise<any> => {
+    const upSertAds = (dbPath: string, name: string, imgUrl: string, link: string, description: string, createdOn: number = new Date().getTime()): Promise<any> => {
         return new Promise((resolve, reject) => {
             const db = getDatabase();
-            set(databaseRef(db, `Ads/${name}`), {
+            set(databaseRef(db, `${dbPath}/${name}`), {
                 name: name,
                 imgUrl: imgUrl,
                 link: link,
                 description: description,
+                createdOn: createdOn
             }).then(() => {
                 resolve({
                     errorCode: dataResponse.SUCCESS,
@@ -132,10 +134,10 @@ export default function () {
         });
     }
 
-    const removeAds = (name: string): Promise<any> => {
+    const removeAds = (dbPath: string, name: string): Promise<any> => {
         return new Promise((resolve, reject) => {
             const db = getDatabase();
-            remove(databaseRef(db, `Ads/${name}`)).then(() => {
+            remove(databaseRef(db, `${dbPath}/${name}`)).then(() => {
                 resolve({
                     errorCode: dataResponse.SUCCESS,
                     data: null

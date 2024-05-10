@@ -6,15 +6,15 @@
   </IonHeader>
   <IonContent class="ion-padding">
     <IonButton @click="onClickCreate" fill="clear" style="text-decoration: underline">{{ $t('create') }}</IonButton>
-    <IonList v-for="(user,index) in users" class="ion-padding-bottom">
+    <IonList v-for="(user,key) in users" class="ion-padding-bottom">
       <IonItem v-if="user.name !=='admin'">
         <IonLabel>
           {{user.name}}
           <img v-if="user.isUnlimited" :src="'images/icon/unlimitedIcon.png'" alt="unlimited" style="width: 20px"/>
         </IonLabel>
-        <IonButton @click="onClickPassword(index)" fill="clear" style="text-decoration: underline">{{ $t('password') }}</IonButton>
-        <IonButton @click="onClickUnlimited(index)" fill="clear" style="text-decoration: underline">{{ $t('unlimited') }}</IonButton>
-        <IonButton @click="onClickDelete(index)" fill="clear" style="text-decoration: underline">{{ $t('delete') }}</IonButton>
+        <IonButton @click="onClickPassword(key)" fill="clear" style="text-decoration: underline">{{ $t('password') }}</IonButton>
+        <IonButton @click="onClickUnlimited(key)" fill="clear" style="text-decoration: underline">{{ $t('unlimited') }}</IonButton>
+        <IonButton @click="onClickDelete(key)" fill="clear" style="text-decoration: underline">{{ $t('delete') }}</IonButton>
       </IonItem>
     </IonList>
   </IonContent>
@@ -25,7 +25,7 @@
 import useFirebase from "@/hooks/useFirebase";
 import {IonButton, IonContent, IonHeader, IonLabel, IonTitle, IonToolbar, modalController, IonList, IonItem} from "@ionic/vue";
 import {onMounted, ref} from "vue";
-import {showInputAlert, showToast} from "@/hooks/useUtils";
+import {showInputAlert, showToast, showAlertWithAction} from "@/hooks/useUtils";
 import {useI18n} from "vue-i18n";
 
 const { t } = useI18n();
@@ -73,45 +73,45 @@ const onClickCreate = () => {
 
 }
 
-const onClickPassword = (index: number) => {
+const onClickPassword = (key: string) => {
   const inputs = [{
     name:'password',
     label: 'Password',
     type: 'text',
-    value: users.value[index].password,
+    value: users.value[key].password,
     placeholder: t('password')
   }]
-  showInputAlert(t('changePassword'),'',`${t('username')}: ${users.value[index].name}`,t('ok'),t('cancel'),inputs,(data:any)=>{
+  showInputAlert(t('changePassword'),'',`${t('username')}: ${users.value[key].name}`,t('ok'),t('cancel'),inputs,(data:any)=>{
     if(data.password === ''){
       showToast(t('pleaseFillAllFields'),1500);
       return;
     }
-    upSertUser(users.value[index].name,data.password,users.value[index].email,users.value[index].isUnlimited,users.value[index].unlimitedExpiredDate).then(()=>{
-      users.value[index].password = data.password;
+    upSertUser(users.value[key].name,data.password,users.value[key].email,users.value[key].isUnlimited,users.value[key].unlimitedExpiredDate,users.value[key].createdOn).then(()=>{
+      users.value[key].password = data.password;
       showToast(t('successfullyUpdated'),1500);
     });
   });
 }
 
-const onClickUnlimited = (index: number) => {
+const onClickUnlimited = (key: string) => {
   const inputs = [{
     name:'unlimited',
     label: t('unlimited'),
     type: 'checkbox',
     value: true,
-    checked: users.value[index].isUnlimited,
+    checked: users.value[key].isUnlimited,
   }]
-  showInputAlert(t('changeUnlimited'),'',`${t('username')}: ${users.value[index].name}`,t('ok'),t('cancel'),inputs,(data:any)=>{
-    upSertUser(users.value[index].name,users.value[index].password,users.value[index].email,data.length > 0,users.value[index].unlimitedExpiredDate).then(()=>{
-      users.value[index].isUnlimited = data.length > 0;
+  showInputAlert(t('changeUnlimited'),'',`${t('username')}: ${users.value[key].name}`,t('ok'),t('cancel'),inputs,(data:any)=>{
+    upSertUser(users.value[key].name,users.value[key].password,users.value[key].email,data.length > 0,users.value[key].unlimitedExpiredDate,users.value[key].createdOn).then(()=>{
+      users.value[key].isUnlimited = data.length > 0;
       showToast(t('successfullyUpdated'),1500);
     });
   });
 }
 
-const onClickDelete = (index: number) => {
-  showInputAlert(t('deleteUser'), '', `${t('username')}: ${users.value[index].name}`, t('ok'), t('cancel'), [], () => {
-    const name = users.value[index].name;
+const onClickDelete = (key: string) => {
+  showAlertWithAction(t('deleteUser'), '', `${t('username')}: ${users.value[key].name}`, t('ok'), t('cancel'), () => {
+    const name = users.value[key].name;
     removeUser(name).then(() => {
       delete users.value[name];
       showToast(t('successfullyDeleted'), 1500);

@@ -10,7 +10,7 @@
       </IonRefresherContent>
     </IonRefresher>
     <IonGrid>
-      <IonItem v-for="(ad,index) in ads" lines="full">
+      <IonItem v-for="ad in ads" lines="full">
         <IonRow class="ion-padding">
           <IonLabel class="ion-padding-bottom" style="font-weight: bold;text-decoration: underline">{{ad.name}}</IonLabel>
           <a :href="ad.link">
@@ -48,7 +48,7 @@ const onCancelAdsModal = () => {
 }
 
 const handleRefresh = (event: CustomEvent) => {
-  getAds('').then((res) => {
+  getAds('Ads', '').then((res) => {
     ads.value = res.data;
     setTimeout(() => {
       event.detail.complete();
@@ -57,7 +57,7 @@ const handleRefresh = (event: CustomEvent) => {
 };
 
 onMounted(()=>{
-  getAds('').then((res) => {
+  getAds('Ads','').then((res) => {
     ads.value = res.data;
   });
 });
