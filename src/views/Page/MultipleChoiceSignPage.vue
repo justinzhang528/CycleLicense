@@ -26,7 +26,7 @@
       <img :src="'images/multipleChoice.png'" alt="multipleChoice" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoice')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('multipleChoice')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'5 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrement">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="problemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrement">+</IonButton>
@@ -188,7 +188,7 @@ const onClickStartTesting = ()=>{
     return;
   }
   if(problemCounts.value < 1 || problemCounts.value > dataSource.signs.length){
-    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 5 ~ '+dataSource.signs.length, t('confirm'));
     return;
   }
   problems =  generateMultipleChoiceProblems(problemCounts.value, signCounts, 'multipleChoiceSign');
@@ -200,13 +200,17 @@ const onClickStartTesting = ()=>{
 }
 
 const onClickDecrement = ()=>{
-  if(problemCounts.value > INCREMENT_PROBLEM_COUNT)
+  if(problemCounts.value === dataSource.signs.length && dataSource.signs.length % INCREMENT_PROBLEM_COUNT !== 0)
+    problemCounts.value -= dataSource.signs.length % INCREMENT_PROBLEM_COUNT;
+  else if(problemCounts.value > INCREMENT_PROBLEM_COUNT)
     problemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrement = ()=>{
   if(problemCounts.value < dataSource.signs.length)
     problemCounts.value+=INCREMENT_PROBLEM_COUNT;
+  if(problemCounts.value > dataSource.signs.length)
+    problemCounts.value = dataSource.signs.length;
 }
 
 </script>

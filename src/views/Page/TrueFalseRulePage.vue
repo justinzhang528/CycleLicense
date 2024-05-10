@@ -26,7 +26,7 @@
       <img :src="'images/trueFalse.png'" alt="trueFalse" style="width: 60%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('trueFalse')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalse')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'5 ~ '+dataSource.rules.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrement">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="problemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrement">+</IonButton>
@@ -202,7 +202,7 @@ const onClickStartTesting = ()=>{
     return;
   }
   if(problemCounts.value < 1 || problemCounts.value > dataSource.rules.length){
-    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 5 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
   problems =  generateTrueFalseProblem(problemCounts.value, ruleCounts, "trueFalseRule");
@@ -214,13 +214,17 @@ const onClickStartTesting = ()=>{
 }
 
 const onClickDecrement = ()=>{
-  if(problemCounts.value > INCREMENT_PROBLEM_COUNT)
+  if(problemCounts.value === dataSource.rules.length && dataSource.rules.length % INCREMENT_PROBLEM_COUNT !== 0)
+    problemCounts.value -= dataSource.rules.length % INCREMENT_PROBLEM_COUNT;
+  else if(problemCounts.value > INCREMENT_PROBLEM_COUNT)
     problemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrement = ()=>{
   if(problemCounts.value < dataSource.rules.length)
     problemCounts.value+=INCREMENT_PROBLEM_COUNT;
+  if(problemCounts.value > dataSource.rules.length)
+    problemCounts.value = dataSource.rules.length;
 }
 
 </script>

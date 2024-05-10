@@ -27,25 +27,25 @@
       <img :src="'images/comprehensiveTest.png'" alt="multipleChoice" style="width: 55%"/>
       <h5 style="padding-bottom: 15px">{{$t('setTheNumberOfQuestions')}}</h5>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoice')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('multipleChoice')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'5 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementMultipleChoiceSign">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="multipleChoiceSignProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementMultipleChoiceSign">+</IonButton>
       </IonItem>
       <IonItem class="center">
-        <IonLabel>{{$t('multipleChoice')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+        <IonLabel>{{$t('multipleChoice')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'5 ~ '+dataSource.rules.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementMultipleChoiceRule">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="multipleChoiceRuleProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementMultipleChoiceRule">+</IonButton>
       </IonItem>
       <IonItem class="center">
-        <IonLabel>{{$t('trueFalse')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.signs.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalse')}} - {{t('sign')}}<br><p>({{$t('rangeMustBe')}} {{'5 ~ '+dataSource.signs.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementTrueFalseSign">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="trueFalseSignProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementTrueFalseSign">+</IonButton>
       </IonItem>
       <IonItem class="center">
-        <IonLabel>{{$t('trueFalse')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'1 ~ '+dataSource.rules.length}})</p></IonLabel>
+        <IonLabel>{{$t('trueFalse')}} - {{t('rule')}}<br><p>({{$t('rangeMustBe')}} {{'5 ~ '+dataSource.rules.length}})</p></IonLabel>
         <IonButton color="dark" @click="onClickDecrementTrueFalseRule">-</IonButton>
         <IonInput style="width: 25%" type="number" :readonly="true" v-model="trueFalseRuleProblemCounts"></IonInput>
         <IonButton color="dark" @click="onClickIncrementTrueFalseRule">+</IonButton>
@@ -368,19 +368,19 @@ const onClickStartTesting = ()=>{
     return;
   }
   if(multipleChoiceSignProblemCounts.value < 1 || multipleChoiceSignProblemCounts.value > dataSource.signs.length){
-    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 5 ~ '+dataSource.signs.length, t('confirm'));
     return;
   }
   if(multipleChoiceRuleProblemCounts.value < 1 || multipleChoiceRuleProblemCounts.value > dataSource.rules.length){
-    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 5 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
   if(trueFalseSignProblemCounts.value < 1 || trueFalseSignProblemCounts.value > dataSource.signs.length){
-    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.signs.length, t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 5 ~ '+dataSource.signs.length, t('confirm'));
     return;
   }
   if(trueFalseRuleProblemCounts.value < 1 || trueFalseRuleProblemCounts.value > dataSource.rules.length){
-    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 1 ~ '+dataSource.rules.length, t('confirm'));
+    showAlert(t('warning'), t('invalidQuestionNumber'), t('rangeMustBe')+' 5 ~ '+dataSource.rules.length, t('confirm'));
     return;
   }
 
@@ -410,43 +410,59 @@ const onClickStartTesting = ()=>{
 }
 
 const onClickDecrementMultipleChoiceSign = ()=>{
-  if(multipleChoiceSignProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+  if(multipleChoiceSignProblemCounts.value === dataSource.signs.length && dataSource.signs.length % INCREMENT_PROBLEM_COUNT !== 0)
+    multipleChoiceSignProblemCounts.value -= dataSource.signs.length % INCREMENT_PROBLEM_COUNT;
+  else if(multipleChoiceSignProblemCounts.value > INCREMENT_PROBLEM_COUNT)
     multipleChoiceSignProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementMultipleChoiceSign = ()=>{
   if(multipleChoiceSignProblemCounts.value < dataSource.signs.length)
     multipleChoiceSignProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
+  if(multipleChoiceSignProblemCounts.value > dataSource.signs.length)
+    multipleChoiceSignProblemCounts.value = dataSource.signs.length;
 }
 
 const onClickDecrementMultipleChoiceRule = ()=>{
-  if(multipleChoiceRuleProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+  if(multipleChoiceRuleProblemCounts.value === dataSource.rules.length && dataSource.rules.length % INCREMENT_PROBLEM_COUNT !== 0)
+    multipleChoiceRuleProblemCounts.value -= dataSource.rules.length % INCREMENT_PROBLEM_COUNT;
+  else if(multipleChoiceRuleProblemCounts.value > INCREMENT_PROBLEM_COUNT)
     multipleChoiceRuleProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementMultipleChoiceRule = ()=>{
   if(multipleChoiceRuleProblemCounts.value < dataSource.rules.length)
     multipleChoiceRuleProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
+  if(multipleChoiceRuleProblemCounts.value > dataSource.rules.length)
+    multipleChoiceRuleProblemCounts.value = dataSource.rules.length;
 }
 
 const onClickDecrementTrueFalseSign = ()=>{
-  if(trueFalseSignProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+  if(trueFalseSignProblemCounts.value === dataSource.signs.length && dataSource.signs.length % INCREMENT_PROBLEM_COUNT !== 0)
+    trueFalseSignProblemCounts.value -= dataSource.signs.length % INCREMENT_PROBLEM_COUNT;
+  else if(trueFalseSignProblemCounts.value > INCREMENT_PROBLEM_COUNT)
     trueFalseSignProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementTrueFalseSign = ()=>{
   if(trueFalseSignProblemCounts.value < dataSource.signs.length)
     trueFalseSignProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
+  if(trueFalseSignProblemCounts.value > dataSource.signs.length)
+    trueFalseSignProblemCounts.value = dataSource.signs.length;
 }
 
 const onClickDecrementTrueFalseRule = ()=>{
-  if(trueFalseRuleProblemCounts.value > INCREMENT_PROBLEM_COUNT)
+  if(trueFalseRuleProblemCounts.value === dataSource.rules.length && dataSource.rules.length % INCREMENT_PROBLEM_COUNT !== 0)
+    trueFalseRuleProblemCounts.value -= dataSource.rules.length % INCREMENT_PROBLEM_COUNT;
+  else if(trueFalseRuleProblemCounts.value > INCREMENT_PROBLEM_COUNT)
     trueFalseRuleProblemCounts.value-=INCREMENT_PROBLEM_COUNT;
 }
 
 const onClickIncrementTrueFalseRule = ()=>{
   if(trueFalseRuleProblemCounts.value < dataSource.rules.length)
     trueFalseRuleProblemCounts.value+=INCREMENT_PROBLEM_COUNT;
+  if(trueFalseRuleProblemCounts.value > dataSource.rules.length)
+    trueFalseRuleProblemCounts.value = dataSource.rules.length;
 }
 
 </script>
