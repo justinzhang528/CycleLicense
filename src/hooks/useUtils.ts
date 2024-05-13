@@ -1,4 +1,5 @@
 import {alertController, toastController, loadingController} from "@ionic/vue";
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 export function isValidEmail (email: string): boolean {
     const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -114,4 +115,8 @@ export async function showLoading (msg: string,  func: any, duration: number = 3
     loading.onWillDismiss().then(() => {
         func();
     })
+}
+
+export async function hapticsImpactMedium () {
+    await Haptics.impact({ style: ImpactStyle.Medium });
 }

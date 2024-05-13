@@ -39,6 +39,7 @@ import {
 import useFirebase from "@/hooks/useFirebase";
 import {onMounted, ref} from "vue";
 import useAdmob from "@/hooks/useAdmob";
+import {hapticsImpactMedium} from "@/hooks/useUtils";
 
 const {getAds} = useFirebase();
 const ads = ref({});
@@ -47,6 +48,7 @@ const onCancelAdsModal = () => {
 }
 
 const handleRefresh = (event: CustomEvent) => {
+  hapticsImpactMedium();
   getAds('Ads', '').then((res) => {
     ads.value = res.data;
     setTimeout(() => {

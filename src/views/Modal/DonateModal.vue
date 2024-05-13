@@ -11,10 +11,10 @@
         <IonLabel>{{$t('donate-1')}}</IonLabel>
       </IonRow>
       <IonRow>
-        <IonLabel style="font-weight: bold; padding-left: 10px" color="warning">{{$t('donate-2')}}</IonLabel>
+        <IonLabel style="font-weight: bold; padding-left: 10px" color="danger">{{$t('donate-2')}}</IonLabel>
       </IonRow>
       <IonRow>
-        <IonLabel  style="font-weight: bold; padding-left: 10px" color="warning">{{$t('donate-3')}}</IonLabel>
+        <IonLabel  style="font-weight: bold; padding-left: 10px" color="danger">{{$t('donate-3')}}</IonLabel>
       </IonRow><br>
       <IonRow>
         <IonLabel>{{$t('donate-4')}}</IonLabel>
@@ -41,10 +41,10 @@
         </span>
       </IonRow>
       <IonRow>
-        <IonLabel style="font-weight: bold; text-decoration: underline;">{{$t('donate-7')}}</IonLabel>
+        <IonLabel style="text-decoration: underline;">{{$t('donate-7')}}</IonLabel>
       </IonRow><br>
       <IonRow class="ion-justify-content-center">
-        <IonLabel color="warning" style="font-weight: bold; font-size: large">{{$t('donate-8')}}</IonLabel>
+        <IonLabel color="danger" style="font-weight: bold; font-size: larger">{{$t('donate-8')}}</IonLabel>
       </IonRow>
     </IonGrid>
   </IonContent>

@@ -156,7 +156,7 @@ import {
 import {onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import {diamond, heart, heartOutline, logOut, personAdd, refresh} from "ionicons/icons";
-import {showAlertWithAction} from "@/hooks/useUtils";
+import {hapticsImpactMedium, showAlertWithAction} from "@/hooks/useUtils";
 import useData from "@/hooks/useData";
 import scheduleNotification from "@/hooks/useLocalNotification";
 import LoginModal from "@/views/Modal/LoginModal.vue";
@@ -181,6 +181,7 @@ const rotateIcon = () => {
 };
 
 const onClickRefreshUserInfo = () => {
+  hapticsImpactMedium();
   rotateIcon();
   getUser(userInfo.value.name).then((res) => {
     if(res.data.isUnlimited){
@@ -201,6 +202,7 @@ const onClickRefreshUserInfo = () => {
 };
 
 const handleRefresh = (event: CustomEvent) => {
+  hapticsImpactMedium();
   setTimeout(() => {
     onClickRefreshUserInfo();
     event.target.complete();
