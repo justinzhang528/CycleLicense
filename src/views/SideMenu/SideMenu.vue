@@ -101,7 +101,7 @@
         <IonItem lines="none" class="ion-padding-top">
           <IonGrid>
             <IonRow class="ion-justify-content-center">
-              <IonLabel>{{$t('contactUsOn')}}</IonLabel>
+              <IonLabel color="secondary">{{$t('contactUsOn')}}</IonLabel>
             </IonRow>
             <IonRow class="ion-justify-content-center ion-text-center">
               <IonCol size="auto">

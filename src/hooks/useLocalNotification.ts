@@ -14,7 +14,7 @@ const scheduleNotificationEveryDay = async (everydayAt: number, holidayAt: numbe
                 title: title,
                 body: body,
                 id: 1,
-                schedule: { at: everydayNotificationTime, repeats: true},
+                schedule: { on: {hour: everydayAt, minute: 0}, allowWhileIdle: true},
             }
         ]
     });
