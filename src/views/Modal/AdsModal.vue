@@ -13,9 +13,7 @@
       <IonItem v-for="ad in ads" lines="full">
         <IonRow class="ion-padding">
           <IonLabel class="ion-padding-bottom" style="font-weight: bold;text-decoration: underline">{{ad.name}}</IonLabel>
-          <a :href="ad.link">
-            <img :src="ad.imgUrl" alt="banner1">
-          </a>
+            <img :src="ad.imgUrl" alt="banner1" @click="onClickAdsBanner(ad.link)">
           <IonLabel>{{ad.description}}</IonLabel>
         </IonRow>
       </IonItem>
@@ -40,6 +38,7 @@ import {
 } from "@ionic/vue"
 import useFirebase from "@/hooks/useFirebase";
 import {onMounted, ref} from "vue";
+import useAdmob from "@/hooks/useAdmob";
 
 const {getAds} = useFirebase();
 const ads = ref({});
@@ -55,6 +54,16 @@ const handleRefresh = (event: CustomEvent) => {
     }, 500);
   });
 };
+
+const onClickAdsBanner = (link: string) => {
+  const openLink = ()=>{
+    window.open(link);
+  }
+  if (localStorage.getItem('isUnlimited') !== 'true')
+    useAdmob().showRewardVideo(openLink);
+  else
+    openLink();
+}
 
 onMounted(()=>{
   getAds('Ads','').then((res) => {

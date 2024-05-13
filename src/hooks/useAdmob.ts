@@ -8,11 +8,10 @@ import {
     RewardAdOptions,
     BannerAdOptions,
     BannerAdPosition,
-    BannerAdSize, RewardAdPluginEvents,
+    BannerAdSize, RewardAdPluginEvents, AdMobRewardItem,
 } from '@capacitor-community/admob';
-import useData from "@/hooks/useData";
 
-const {life} = useData();
+let listener =  AdMob.addListener(RewardAdPluginEvents.Rewarded, ()=>{});
 
 export default function () {
     const showBanner = async () => {
@@ -41,10 +40,9 @@ export default function () {
     };
 
     const showRewardVideo = async (func: any) => {
-        AdMob.addListener(RewardAdPluginEvents.Rewarded, () => {
-            // Subscribe user rewarded
-            func();
-        });
+        await listener.remove();
+        listener = AdMob.addListener(RewardAdPluginEvents.Rewarded, func);
+
         const options: RewardAdOptions = {
             adId: Rewarded_Id, // demo ad unit id
             isTesting: true,
@@ -54,6 +52,10 @@ export default function () {
             await AdMob.showRewardVideoAd();
         }
     };
+
+    const addListenerForRewarded = (func: any) => {
+        AdMob.addListener(RewardAdPluginEvents.Rewarded, func);
+    }
 
     const resumeBanner = () => {
         AdMob.resumeBanner();

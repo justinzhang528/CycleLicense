@@ -30,9 +30,7 @@
           <IonButton @click="checkLoginStatus(mockTestPage)" shape="round" size="default" style="font-size: small;" color="dark">{{$t('enter')}}</IonButton>
         </IonItem>
         <IonItem v-for="ad in ads" class="image-container" lines="none" style="width: 90%; display: block; margin: 10px auto;">
-          <a :href="ad.link">
-            <img class="auto-zoom-image" :src="ad.imgUrl" alt="banner">
-          </a>
+          <img class="auto-zoom-image" :src="ad.imgUrl" alt="banner" @click="onClickAdsBanner(ad.link)">
         </IonItem>
       </IonList>
     </IonContent>
@@ -64,6 +62,7 @@ import {showToast} from "@/hooks/useUtils";
 import {useI18n} from "vue-i18n";
 import '@ionic/core/css/ionic.bundle.css';
 import useFirebase from "@/hooks/useFirebase";
+import useAdmob from "@/hooks/useAdmob";
 
 const { t } = useI18n();
 const {getAds} = useFirebase();
@@ -86,6 +85,16 @@ const getHomeAds = () => {
   getAds('HomeAds','').then((res) => {
     ads.value = res.data;
   });
+}
+
+const onClickAdsBanner = (link: string) => {
+  const openLink = ()=>{
+    window.open(link);
+  }
+  if (localStorage.getItem('isUnlimited') !== 'true')
+    useAdmob().showRewardVideo(openLink);
+  else
+    openLink();
 }
 
 onMounted(()=>{
