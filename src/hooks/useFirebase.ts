@@ -151,6 +151,32 @@ export default function () {
         });
     }
 
+    const getAppSetting = (name: string): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            const dbRef = databaseRef(getDatabase());
+            get(child(dbRef, `AppSetting/${name}`))
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        resolve({
+                            errorCode: dataResponse.SUCCESS,
+                            data: snapshot.val()
+                        });
+                    } else {
+                        resolve({
+                            errorCode: dataResponse.NO_DATA,
+                            data: null
+                        });
+                    }
+                })
+                .catch((error) => {
+                    reject({
+                        errorCode: dataResponse.ERROR,
+                        data: error
+                    });
+                });
+        });
+    }
+
     const listStorage = () => {
         const firebaseApp = getApp();
         const storage = getStorage(firebaseApp, "gs://drivinglicense-10d0e.appspot.com");
@@ -202,6 +228,7 @@ export default function () {
         getAds,
         upSertAds,
         removeAds,
+        getAppSetting,
         listStorage
     }
 }

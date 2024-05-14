@@ -105,21 +105,21 @@
             </IonRow>
             <IonRow class="ion-justify-content-center ion-text-center">
               <IonCol size="auto">
-                <IonButton fill="clear" href="https://m.me/100010139531439?hash=AbbqmXBPU56TvjwQ">
+                <IonButton fill="clear" :href="messenger.link">
                   <IonThumbnail>
                     <img alt="messenger" :src="'images/icon/messengerIcon.png'">
                   </IonThumbnail>
                 </IonButton>
               </IonCol>
               <IonCol size="auto">
-                <IonButton fill="clear" href="mailto:someone@example.com">
+                <IonButton fill="clear" :href="mail.link">
                   <IonThumbnail>
                     <img alt="email" :src="'images/icon/emailIcon.png'">
                   </IonThumbnail>
                 </IonButton>
               </IonCol>
               <IonCol size="auto">
-                <IonButton fill="clear" href="https://line.me/ti/p/e7T1R-XuQa">
+                <IonButton fill="clear" :href="line.link">
                   <IonThumbnail>
                     <img alt="line" :src="'images/icon/lineIcon.png'">
                   </IonThumbnail>
@@ -168,10 +168,13 @@ import useFirebase from "@/hooks/useFirebase";
 
 const {t,locale} = useI18n();
 const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage') || 'en');
-let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
+const userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {life} = useData();
 const isRotating = ref(false);
-const {getUser,upSertUser} = useFirebase();
+const {getUser,upSertUser,getAppSetting} = useFirebase();
+const line = ref({});
+const mail = ref({});
+const messenger = ref({});
 
 const rotateIcon = () => {
   isRotating.value = true;
@@ -292,6 +295,11 @@ onMounted(()=> {
       life.value.currentLife = Number(localStorage.getItem('currentLife'));
     }
   }, 3000);
+  getAppSetting('').then((res)=>{
+    line.value = res.data.line;
+    mail.value = res.data.mail;
+    messenger.value = res.data.messenger;
+  })
 });
 </script>
 

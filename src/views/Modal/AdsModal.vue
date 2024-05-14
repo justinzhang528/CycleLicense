@@ -11,9 +11,12 @@
     </IonRefresher>
     <IonGrid>
       <IonItem v-for="ad in ads" lines="full">
-        <IonRow class="ion-padding">
-          <IonLabel class="ion-padding-bottom" style="font-weight: bold;text-decoration: underline">{{ad.name}}</IonLabel>
-            <img :src="ad.imgUrl" alt="banner1" @click="onClickAdsBanner(ad.link)">
+        <IonRow class="ion-padding ion-justify-content-center">
+          <IonLabel class="ion-padding-bottom" style="font-weight: bold;text-decoration: underline">{{ad.name}}</IonLabel><br>
+          <span style="position: relative;justify-content: center;align-items: center;display: flex">
+            <img :src="ad.imgUrl" alt="banner1" style="position: relative;z-index: 1;opacity: 0.75">
+            <IonButton color="dark" style="position: absolute;z-index: 2;opacity: 0.85;" @click="onClickAdsBanner(ad.link)">{{$t('readMore')}}<IonIcon :icon="chevronForwardOutline" slot="end" class="ion-no-padding"></IonIcon></IonButton>
+          </span>
           <IonLabel>{{ad.description}}</IonLabel>
         </IonRow>
       </IonItem>
@@ -34,12 +37,14 @@ import {
   IonRow,
   IonLabel,
   IonItem,
-  IonRefresher, IonRefresherContent
+  IonRefresher, IonRefresherContent,
+  IonIcon,
 } from "@ionic/vue"
 import useFirebase from "@/hooks/useFirebase";
 import {onMounted, ref} from "vue";
 import useAdmob from "@/hooks/useAdmob";
 import {hapticsImpactMedium} from "@/hooks/useUtils";
+import {chevronForwardOutline} from "ionicons/icons";
 
 const {getAds} = useFirebase();
 const ads = ref({});

@@ -5,7 +5,6 @@
     </IonToolbar>
   </IonHeader>
   <IonContent class="center ion-padding">
-<!--    <img alt="donate" :src="'images/donate.png'" style="width: 40%">-->
     <IonGrid class="ion-text-left">
       <IonRow>
         <IonLabel>{{$t('donate-1')}}</IonLabel>
@@ -22,18 +21,18 @@
       <IonRow>
         <IonLabel style="font-weight: bold; padding-left: 10px">{{$t('donate-5')}}</IonLabel>
         <span class="ion-text-center ion-padding">
-          <img alt="messenger" src="https://hackmd.io/_uploads/BJBuh71mC.png" style="width: 40%">
+          <img alt="messenger" :src="line.qrCodeImgUrl" style="width: 40%">
         </span>
       </IonRow>
       <IonRow>
         <IonLabel style="font-weight: bold; padding-left: 10px">{{$t('donate-6')}}</IonLabel>
         <span class="center">
-          <IonButton fill="clear" href="https://m.me/100010139531439?hash=AbbqmXBPU56TvjwQ">
+          <IonButton fill="clear" :href="messenger.link">
             <IonThumbnail>
               <img alt="messenger" :src="'images/icon/messengerIcon.png'">
             </IonThumbnail>
           </IonButton>
-          <IonButton fill="clear" href="https://line.me/ti/p/e7T1R-XuQa">
+          <IonButton fill="clear" :href="line.link">
             <IonThumbnail>
               <img alt="line" :src="'images/icon/lineIcon.png'">
             </IonThumbnail>
@@ -56,18 +55,27 @@ import {
   IonButton,
   IonContent,
   IonHeader,
-  IonItem,
   IonTitle,
   IonToolbar,
   modalController,
-  IonIcon,
-  IonThumbnail, IonLabel, IonRow, IonGrid, IonCol
+  IonThumbnail, IonLabel, IonRow, IonGrid
 } from "@ionic/vue"
-import {logoFacebook} from "ionicons/icons";
+import {onMounted, ref} from "vue";
+import useFirebase from "@/hooks/useFirebase";
 
+const {getAppSetting} = useFirebase();
+const line = ref({});
+const messenger = ref({});
 const onCancelDonateModal = () => {
   modalController.dismiss(null, 'cancel')
 }
+
+onMounted(()=>{
+  getAppSetting('').then((res)=>{
+    line.value = res.data.line;
+    messenger.value = res.data.messenger;
+  })
+})
 </script>
 
 <style scoped>
