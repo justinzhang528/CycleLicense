@@ -112,7 +112,7 @@
                 </IonButton>
               </IonCol>
               <IonCol size="auto">
-                <IonButton fill="clear" :href="mail.link">
+                <IonButton fill="clear" :href="`mailto:${mail.link}`">
                   <IonThumbnail>
                     <img alt="email" :src="'images/icon/emailIcon.png'">
                   </IonThumbnail>
