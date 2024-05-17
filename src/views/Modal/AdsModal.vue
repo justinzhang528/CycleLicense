@@ -46,7 +46,7 @@ import useAdmob from "@/hooks/useAdmob";
 import {hapticsImpactMedium} from "@/hooks/useUtils";
 import {chevronForwardOutline} from "ionicons/icons";
 
-const {getAds} = useFirebase();
+const {getAds, handleOnDBValueChange} = useFirebase();
 const ads = ref({});
 const onCancelAdsModal = () => {
   modalController.dismiss(null, 'cancel')
@@ -72,10 +72,14 @@ const onClickAdsBanner = (link: string) => {
     openLink();
 }
 
-onMounted(()=>{
+const getAllAds = () => {
   getAds('Ads','').then((res) => {
     ads.value = res.data;
   });
+}
+
+onMounted(()=>{
+  handleOnDBValueChange('Ads', getAllAds);
 });
 </script>
 

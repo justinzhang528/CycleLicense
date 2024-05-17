@@ -1,7 +1,6 @@
-import {getDatabase, ref as databaseRef, set, get, child, remove} from "firebase/database";
+import {getDatabase, ref as databaseRef, set, get, child, remove, onValue} from "firebase/database";
 import {dataResponse} from "@/enum/enum";
-import {initializeApp, getApp} from "firebase/app";
-import {getStorage, ref as storageRef, listAll, getDownloadURL} from "firebase/storage";
+import {initializeApp} from "firebase/app";
 
 export default function () {
     const initializeFirebase = () => {
@@ -177,46 +176,10 @@ export default function () {
         });
     }
 
-    const listStorage = () => {
-        const firebaseApp = getApp();
-        const storage = getStorage(firebaseApp, "gs://drivinglicense-10d0e.appspot.com");
-        const ref = storageRef(storage, 'DrivingLicense/image/');
-        // Find all the prefixes and items.
-        listAll(ref)
-            .then((res) => {
-                res.items.forEach((itemRef) => {
-
-                    const localRef = storageRef(storage, itemRef.fullPath);
-                    // Get the download URL
-                    getDownloadURL(localRef)
-                        .then((url) => {
-                            console.log(url);
-                        })
-                        .catch((error) => {
-                            // A full list of error codes is available at
-                            // https://firebase.google.com/docs/storage/web/handle-errors
-                            switch (error.code) {
-                                case 'storage/object-not-found':
-                                    // File doesn't exist
-                                    break;
-                                case 'storage/unauthorized':
-                                    // User doesn't have permission to access the object
-                                    break;
-                                case 'storage/canceled':
-                                    // User canceled the upload
-                                    break;
-
-                                // ...
-
-                                case 'storage/unknown':
-                                    // Unknown error occurred, inspect the server response
-                                    break;
-                            }
-                        });
-
-                });
-            }).catch((error) => {
-            // Uh-oh, an error occurred!
+    const handleOnDBValueChange = (path: string = '',func: any) => {
+        const db = getDatabase();
+        return onValue(databaseRef(db, path), (snapshot) => {
+            func();
         });
     }
 
@@ -229,6 +192,6 @@ export default function () {
         upSertAds,
         removeAds,
         getAppSetting,
-        listStorage
+        handleOnDBValueChange,
     }
 }

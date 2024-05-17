@@ -65,7 +65,7 @@ import useFirebase from "@/hooks/useFirebase";
 import useAdmob from "@/hooks/useAdmob";
 
 const { t } = useI18n();
-const {getAds} = useFirebase();
+const {handleOnDBValueChange, getAds} = useFirebase();
 const ads = ref({});
 const studyPage = markRaw(StudyPage)
 const mockTestPage = markRaw(MockTestPage)
@@ -81,12 +81,6 @@ const checkLoginStatus = (page: any) => {
   }
 }
 
-const getHomeAds = () => {
-  getAds('HomeAds','').then((res) => {
-    ads.value = res.data;
-  });
-}
-
 const onClickAdsBanner = (link: string) => {
   const openLink = ()=>{
     window.open(link);
@@ -97,11 +91,14 @@ const onClickAdsBanner = (link: string) => {
     openLink();
 }
 
+const getHomeAds = () => {
+  getAds('HomeAds','').then((res) => {
+    ads.value = res.data;
+  });
+}
+
 onMounted(()=>{
-  getHomeAds();
-  setInterval(() => {
-    getHomeAds();
-  }, 5000);
+  handleOnDBValueChange('HomeAds', getHomeAds);
 });
 </script>
 
