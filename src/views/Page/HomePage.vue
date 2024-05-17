@@ -5,7 +5,7 @@
         <IonButtons slot="end">
           <IonMenuButton></IonMenuButton>
         </IonButtons>
-        <IonTitle class="center">{{$t('drivingLicense')}}</IonTitle>
+        <IonTitle class="center">{{$t('cycleLicense')}}</IonTitle>
       </IonToolbar>
     </IonHeader>
     <IonContent :fullscreen="true">

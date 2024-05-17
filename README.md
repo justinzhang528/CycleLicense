@@ -1,4 +1,4 @@
-# DrivingLicense Mock Test
+# CycleLicense Mock Test
 - You can also follow [Ionic](https://ionicframework.com/) Website to setup environment
 - Source: https://drive.google.com/drive/folders/1GUUKQv9yciQUmfEv_qAPgvNbHjUST--p
 

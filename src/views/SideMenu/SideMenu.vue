@@ -223,7 +223,7 @@ const onSelectedLanguageChange = (e: CustomEvent)=>{
   else if(currentSelectedLanguageValue.value == 'zh_tw')
     locale.value = 'zh_tw';
   localStorage.setItem('currentLanguage',currentSelectedLanguageValue.value);
-  scheduleNotification(t('drivingLicense'),t('timeToStudy'));
+  scheduleNotification(t('cycleLicense'),t('timeToStudy'));
 }
 
 const onLogoutClick = ()=>{

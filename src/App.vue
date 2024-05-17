@@ -33,7 +33,7 @@ const checkInternetConnection = ()=> {
 onMounted(()=> {
   locale.value = localStorage.getItem("currentLanguage") || 'en';
   setInterval(checkInternetConnection, 5000);
-  scheduleNotification(t('drivingLicense'),t('timeToStudy'));
+  scheduleNotification(t('cycleLicense'),t('timeToStudy'));
 });
 </script>
 
