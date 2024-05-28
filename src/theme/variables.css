@@ -1,6 +1,18 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
 /** my CSS Variables **/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
 .center {
     text-align: center;
     margin: auto;
