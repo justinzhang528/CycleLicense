@@ -32,7 +32,7 @@
 <!--        </IonCard>-->
 <!--      </template>-->
 <!--    </RecycleScroller>-->
-      <IonCard v-for="i in itemCounts" :key="i">
+      <IonCard v-for="i in ruleCounts" :key="i">
         <IonIcon v-if="ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
         <IonIcon v-if="!ruleBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmarkOutline" @click="onClickBookmarkIcon(i)"/>
         <IonCardHeader>
@@ -49,9 +49,6 @@
           <IonLabel color="dark">{{ dataSource.rules[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
-      <ion-infinite-scroll @ionInfinite="ionInfinite">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
   </IonContent>
 </template>
 
@@ -68,7 +65,7 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonTitle,
-  IonLabel, IonMenuButton, IonInfiniteScrollContent, IonInfiniteScroll, InfiniteScrollCustomEvent,
+  IonLabel, IonMenuButton,
 } from "@ionic/vue";
 import {bookmark, bookmarkOutline, playCircleOutline, pauseCircleOutline} from "ionicons/icons";
 import useData from '@/hooks/useData'
@@ -83,7 +80,6 @@ const {t} = useI18n();
 const contentRef = ref();
 const {addOrRemoveFromArray, ruleCounts, getBookmarkedItems} = useData()
 const ruleBookmarkedItems = reactive(getBookmarkedItems('ruleBookmarkedItems'))
-const itemCounts = ref(100);
 
 const onClickBookmarkIcon = (n: number) => {
   if (ruleBookmarkedItems.includes(n)) {
@@ -138,14 +134,6 @@ const onClickPlayAnswerAudio = (n: number) => {
   }
   isPlayingRuleAnswerAudio.value[n] = !isPlayingRuleAnswerAudio.value[n];
 }
-
-const ionInfinite = (ev: InfiniteScrollCustomEvent) => {
-  itemCounts.value += 500;
-  if(itemCounts.value >= ruleCounts){
-    itemCounts.value = ruleCounts;
-  }
-  ev.target.complete();
-};
 
 onMounted(()=>{
   scrollToPreviousPosition();

@@ -13,7 +13,7 @@
     </IonToolbar>
   </IonHeader>
   <IonContent ref="contentRef" :scrollEvents="true" @ionScroll="onScroll">
-      <IonCard v-for="i in itemCounts" :key="i">
+      <IonCard v-for="i in signCounts" :key="i">
         <IonIcon color="dark" v-if="!isPlayingSignAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="playCircleOutline" @click="onClickPlayAudio(i-1)"/>
         <IonIcon color="dark" v-if="isPlayingSignAudio[i-1]" size="large" style="float: left; margin: 5px;" :icon="pauseCircleOutline" @click="onClickPlayAudio(i-1)"/>
         <IonIcon color="dark" v-if="signBookmarkedItems.includes(i)" size="large" style="float: right; margin: 4px" :icon="bookmark" @click="onClickBookmarkIcon(i)"/>
@@ -27,9 +27,6 @@
           <IonLabel color="dark" style="display: block; margin: 0 auto; padding: 0 20px 20px 20px">{{ dataSource.signs[i-1].A }}</IonLabel>
         </IonCardContent>
       </IonCard>
-      <ion-infinite-scroll @ionInfinite="ionInfinite">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
   </IonContent>
 </template>
 
@@ -47,8 +44,6 @@ import {
   IonCardContent,
   IonTitle,
   IonLabel, IonMenuButton,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent, InfiniteScrollCustomEvent,
 } from "@ionic/vue";
 import {
   bookmark,
@@ -68,7 +63,6 @@ const {t} = useI18n();
 const contentRef = ref();
 const {getImagePath, handleZeroPad, addOrRemoveFromArray, signCounts, getBookmarkedItems} = useData()
 const signBookmarkedItems = reactive(getBookmarkedItems('signBookmarkedItems'))
-const itemCounts = ref(100);
 
 const onClickBookmarkIcon = (n: number) => {
   if (signBookmarkedItems.includes(n)) {
@@ -104,14 +98,6 @@ const onClickPlayAudio = (n: number) => {
   }
   isPlayingSignAudio.value[n] = !isPlayingSignAudio.value[n];
 }
-
-const ionInfinite = (ev: InfiniteScrollCustomEvent) => {
-  itemCounts.value += 200;
-  if(itemCounts.value >= signCounts){
-    itemCounts.value = signCounts;
-  }
-  ev.target.complete();
-};
 
 onMounted(()=>{
   scrollToPreviousPosition();
