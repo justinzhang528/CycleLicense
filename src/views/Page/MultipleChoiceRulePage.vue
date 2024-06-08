@@ -126,7 +126,7 @@ import useAudio from "@/hooks/useAudio";
 import {showToast, showAlert, showFinishAlert, showAlertWithAction} from "@/hooks/useUtils";
 import useAdmob from "@/hooks/useAdmob";
 
-const {playRuleAnswerAudio,playRuleQuestionAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio} = useAudio();
+const {playRuleAnswerAudio,playRuleQuestionAudio,isPlayingRuleAnswerAudio,isPlayingRuleQuestionAudio,pauseAudio,playTestEndingAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceRuleResultPage = markRaw(MultipleChoiceRuleResultPage);
 const {generateMultipleChoiceProblems, ruleCounts, DEFAULT_PROBLEM_COUNT, INCREMENT_PROBLEM_COUNT, life} = useData()
@@ -162,6 +162,7 @@ const onClickNextButton = () => {
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= problemCounts.value) {
+    playTestEndingAudio();
     showFinishAlert(t('testFinish'), "", "", t("viewResult"), onClickFinishConfirm)
     return;
   }

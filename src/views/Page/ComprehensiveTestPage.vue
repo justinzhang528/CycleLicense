@@ -256,7 +256,7 @@ import useAudio from "@/hooks/useAudio";
 import {showToast, showFinishAlert, showAlert, shuffleArray, showAlertWithAction} from "@/hooks/useUtils";
 import useAdmob from "@/hooks/useAdmob";
 
-const {playSignAudio, playRuleQuestionAudio, playRuleAnswerAudio, pauseAudio, isPlayingSignAudio, isPlayingRuleAnswerAudio, isPlayingRuleQuestionAudio} = useAudio();
+const {playSignAudio, playRuleQuestionAudio, playRuleAnswerAudio, pauseAudio, isPlayingSignAudio, isPlayingRuleAnswerAudio, isPlayingRuleQuestionAudio, playTestEndingAudio} = useAudio();
 const {t} = useI18n();
 const comprehensiveTestResultPage = markRaw(ComprehensiveTestResultPage);
 const isShowSetting = ref(true);
@@ -296,6 +296,7 @@ const onClickNextButton = () => {
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= totalProblemCounts.value) {
+    playTestEndingAudio();
     showFinishAlert(t('testFinish'), "", "", t("viewResult"), onClickFinishConfirm)
     return;
   }

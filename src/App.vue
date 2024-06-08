@@ -11,6 +11,7 @@ import {
   IonApp,
   IonRouterOutlet,
   IonNav,
+  useBackButton,
 } from '@ionic/vue';
 import HomePage from "@/views/Page/HomePage.vue";
 import {markRaw, onMounted, ref} from "vue";
@@ -29,6 +30,11 @@ const checkInternetConnection = ()=> {
     showLoading(t('noInternet'), ()=>{}, 5000);
   }
 }
+
+useBackButton(-1, () => {
+  const nav = document.querySelector('ion-nav');
+  nav?.pop();
+});
 
 onMounted(()=> {
   locale.value = localStorage.getItem("currentLanguage") || 'en';

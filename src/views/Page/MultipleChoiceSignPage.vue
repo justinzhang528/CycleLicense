@@ -116,7 +116,7 @@ import useAudio from "@/hooks/useAudio";
 import {showToast, showFinishAlert, showAlert, showAlertWithAction} from "@/hooks/useUtils";
 import useAdmob from "@/hooks/useAdmob";
 
-const {playSignAudio, pauseAudio, isPlayingSignAudio} = useAudio();
+const {playSignAudio, pauseAudio, isPlayingSignAudio, playTestEndingAudio} = useAudio();
 const {t} = useI18n();
 const multipleChoiceSignResultPage = markRaw(MultipleChoiceSignResultPage);
 const isShowSetting = ref(true);
@@ -152,6 +152,7 @@ const onClickNextButton = () => {
   }
   chooseAns.push(currentSelectedValue.value);
   if (currentProblemNum.value >= problemCounts.value) {
+    playTestEndingAudio();
     showFinishAlert(t('testFinish'), "", "", t("viewResult"), onClickFinishConfirm)
     return;
   }
