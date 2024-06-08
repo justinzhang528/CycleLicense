@@ -72,7 +72,7 @@
             <img alt="notice" :src="'images/icon/taiwanMyanmarFlagIcon.png'">
           </IonThumbnail>
           <span style="width: 100%;">
-              <IonButton :disabled="!userInfo.name" @click="openAboutTaiwanModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton :disabled="!userInfo.name" @click="openAboutTaiwanModal" size="default" fill="clear" color="dark" style="font-weight: bold">
                 {{ $t('aboutTaiwan') }}
               </IonButton>
             </span>
@@ -82,7 +82,7 @@
             <img alt="donate" :src="'images/icon/donateIcon.png'">
           </IonThumbnail>
           <span style="width: 100%; padding-bottom: 10px">
-              <IonButton :disabled="!userInfo.name" @click="openDonateModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton :disabled="!userInfo.name" @click="openDonateModal" size="default" fill="clear" color="dark" style="font-weight: bold">
                 {{ $t('donate') }}
               </IonButton><br>
               <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>
@@ -93,7 +93,7 @@
             <img alt="admin" :src="'images/icon/adminIcon.png'">
           </IonThumbnail>
           <span style="width: 100%; padding-bottom: 10px">
-              <IonButton @click="openAdminModal" size="default" fill="clear" color="dark" style="text-decoration: underline;">
+              <IonButton @click="openAdminModal" size="default" fill="clear" color="dark" style="font-weight: bold">
                 {{ $t('admin') }}
               </IonButton>
             </span>

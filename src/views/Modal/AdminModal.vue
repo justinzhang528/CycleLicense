@@ -9,13 +9,13 @@
       <IonThumbnail slot="start">
         <img alt="testRules" :src="'images/icon/userManagementIcon.png'">
       </IonThumbnail>
-      <IonButton @click="onClickUserManagement" fill="clear" color="dark" size="default" style="text-decoration: underline">{{$t('userManagement')}}</IonButton>
+      <IonButton @click="onClickUserManagement" fill="clear" color="dark" size="default">{{$t('userManagement')}}</IonButton>
     </IonItem>
     <IonItem>
       <IonThumbnail slot="start">
         <img alt="ads" :src="'images/icon/adsManagementIcon.png'">
       </IonThumbnail>
-      <IonButton @click="onClickAdsManagement" fill="clear" color="dark" size="default" style="text-decoration: underline">{{$t('adsManagement')}}</IonButton>
+      <IonButton @click="onClickAdsManagement" fill="clear" color="dark" size="default">{{$t('adsManagement')}}</IonButton>
     </IonItem>
   </IonContent>
   <IonButton class="ion-padding ion-align-self-center" @click="onCancelAdminModal" color="dark" size="small" shape="round">{{$t('close')}}</IonButton>

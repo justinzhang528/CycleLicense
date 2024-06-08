@@ -1267,7 +1267,7 @@ import ra530 from '@/assets/sounds/rule/answer/530.mp3'
 import ra531 from '@/assets/sounds/rule/answer/531.mp3'
 import ra532 from '@/assets/sounds/rule/answer/532.mp3'
 
-import testEnding from '@/assets/sounds/testEnding.mp3'
+import testEnding from '@/assets/sounds/TestEnding.mp3'
 
 import {Ref, ref} from 'vue';
 import useData from '@/hooks/useData';
