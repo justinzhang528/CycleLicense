@@ -12,7 +12,7 @@
       </IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent className="ion-text-center">
+  <IonContent ref="contentRef" :scrollEvents="true" className="ion-text-center">
 
     <div v-if="isShowSetting">
       <div class="ion-padding">
@@ -272,6 +272,7 @@ let currentProblemNum = ref(1);
 let chooseAns: string[] = [];
 const {showInterstitial,showRewardVideo} = useAdmob();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
+const contentRef = ref();
 
 const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
@@ -302,6 +303,7 @@ const onClickNextButton = () => {
   }
   currentSelectedValue.value = '';
   currentProblemNum.value += 1;
+  contentRef.value.$el.scrollToPoint(0, 0,150);
 }
 
 const onClickPlaySignAudio = (n: number) => {

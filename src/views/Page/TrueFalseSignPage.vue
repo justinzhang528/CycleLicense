@@ -12,7 +12,7 @@
       </IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent className="ion-text-center">
+  <IonContent ref="contentRef" :scrollEvents="true" className="ion-text-center">
     <div v-if="isShowSetting">
       <div class="ion-padding">
         <span class="center" v-if="userInfo.isUnlimited">
@@ -101,7 +101,7 @@ import {
   IonCardContent,
   IonLabel,
   IonInput,
-  IonThumbnail, IonMenuButton, IonRow,
+  IonThumbnail, IonMenuButton
 } from "@ionic/vue";
 import {chevronForward, playCircleOutline, pauseCircleOutline, heart, heartOutline} from "ionicons/icons";
 import {markRaw, ref} from "vue";
@@ -125,6 +125,7 @@ let chooseAns: string[] = [];
 const isShowSetting = ref(true);
 const {showInterstitial,showRewardVideo} = useAdmob();
 let userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
+const contentRef = ref();
 
 const onRadioSelectedChange = (e: CustomEvent) => {
   currentSelectedValue.value = e.detail.value;
@@ -155,6 +156,7 @@ const onClickNextButton = () => {
   }
   currentSelectedValue.value = '';
   currentProblemNum.value += 1;
+  contentRef.value.$el.scrollToPoint(0, 0,150);
 }
 
 const onClickPlayAudio = (n: number) => {
