@@ -38,7 +38,7 @@ export default function () {
 
     const showInterstitial = async () => {
         const options: AdOptions = {
-            adId: isTesting ? FixedSizeBanner_Id_testing : isPlatform('ios') ? Interstitial_Id_ios : Interstitial_Id_android,
+            adId: isTesting ? Interstitial_Id_testing : isPlatform('ios') ? Interstitial_Id_ios : Interstitial_Id_android,
             isTesting: isTesting,
         };
         await AdMob.prepareInterstitial(options);
@@ -53,7 +53,7 @@ export default function () {
         listener = AdMob.addListener(RewardAdPluginEvents.Rewarded, func);
 
         const options: RewardAdOptions = {
-            adId: isTesting ? FixedSizeBanner_Id_testing : isPlatform('ios') ? Rewarded_Id_ios : Rewarded_Id_android,
+            adId: isTesting ? Rewarded_Id_testing : isPlatform('ios') ? Rewarded_Id_ios : Rewarded_Id_android,
             isTesting: isTesting,
         };
         await AdMob.prepareRewardVideoAd(options);
