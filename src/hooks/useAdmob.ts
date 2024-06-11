@@ -1,9 +1,14 @@
 const Interstitial_Id_ios = 'ca-app-pub-1270058413624237/7646744397';
 const Interstitial_Id_android = 'ca-app-pub-1270058413624237/3308243822';
+const Interstitial_Id_testing = 'ca-app-pub-3940256099942544/1033173712';
 const Rewarded_Id_ios= 'ca-app-pub-1270058413624237/8311877231';
 const Rewarded_Id_android= 'ca-app-pub-1270058413624237/8503448927';
+const Rewarded_Id_testing= 'ca-app-pub-3940256099942544/5224354917';
 const FixedSizeBanner_Id_ios =	'';
 const FixedSizeBanner_Id_android =	'';
+const FixedSizeBanner_Id_testing =	'ca-app-pub-3940256099942544/6300978111';
+
+const isTesting = true;
 
 import {isPlatform} from "@ionic/vue";
 import {
@@ -20,10 +25,10 @@ let listener =  AdMob.addListener(RewardAdPluginEvents.Rewarded, ()=>{});
 export default function () {
     const showBanner = async () => {
         const options: BannerAdOptions = {
-            adId: isPlatform('ios') ? FixedSizeBanner_Id_ios : FixedSizeBanner_Id_android,
+            adId: isTesting ? FixedSizeBanner_Id_testing : isPlatform('ios') ? FixedSizeBanner_Id_ios : FixedSizeBanner_Id_android,
             adSize: BannerAdSize.BANNER,
             position: BannerAdPosition.BOTTOM_CENTER,
-            isTesting: false,
+            isTesting: isTesting,
         };
         await AdMob.showBanner(options);
         if (localStorage.getItem('isUnlimited') === 'true') {
@@ -33,8 +38,8 @@ export default function () {
 
     const showInterstitial = async () => {
         const options: AdOptions = {
-            adId: isPlatform('ios') ? Interstitial_Id_ios : Interstitial_Id_android,
-            isTesting: false,
+            adId: isTesting ? FixedSizeBanner_Id_testing : isPlatform('ios') ? Interstitial_Id_ios : Interstitial_Id_android,
+            isTesting: isTesting,
         };
         await AdMob.prepareInterstitial(options);
 
@@ -48,8 +53,8 @@ export default function () {
         listener = AdMob.addListener(RewardAdPluginEvents.Rewarded, func);
 
         const options: RewardAdOptions = {
-            adId: isPlatform('ios') ? Rewarded_Id_ios : Rewarded_Id_android,
-            isTesting: false,
+            adId: isTesting ? FixedSizeBanner_Id_testing : isPlatform('ios') ? Rewarded_Id_ios : Rewarded_Id_android,
+            isTesting: isTesting,
         };
         await AdMob.prepareRewardVideoAd(options);
         if (localStorage.getItem('isUnlimited') !== 'true') {
