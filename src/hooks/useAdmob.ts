@@ -1,14 +1,20 @@
 const Interstitial_Id_ios = 'ca-app-pub-1270058413624237/7646744397';
 const Interstitial_Id_android = 'ca-app-pub-1270058413624237/3308243822';
 const Interstitial_Id_testing = 'ca-app-pub-3940256099942544/1033173712';
+
 const Rewarded_Id_ios= 'ca-app-pub-1270058413624237/8311877231';
 const Rewarded_Id_android= 'ca-app-pub-1270058413624237/8503448927';
 const Rewarded_Id_testing= 'ca-app-pub-3940256099942544/5224354917';
+
 const FixedSizeBanner_Id_ios =	'';
 const FixedSizeBanner_Id_android =	'';
 const FixedSizeBanner_Id_testing =	'ca-app-pub-3940256099942544/6300978111';
 
-const isTesting = true;
+const AppOpenAd_Id_ios = 'ca-app-pub-1270058413624237~2662011025';
+const AppOpenAd_Id_android = 'ca-app-pub-1270058413624237~9801499989';
+const AppOpenAd_Id_testing = 'ca-app-pub-3940256099942544/9257395921';
+
+const isTesting = false;
 
 import {isPlatform} from "@ionic/vue";
 import {
@@ -77,7 +83,7 @@ export default function () {
     const initializeAdmob = async ()=> {
         await AdMob.initialize({
             requestTrackingAuthorization: true,
-            initializeForTesting: true,
+            initializeForTesting: isTesting,
         });
     }
 
