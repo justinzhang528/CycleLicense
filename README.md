@@ -88,10 +88,10 @@
   - https://developers.google.com/admob/ios/quick-start
   - https://developers.google.com/admob/ios/test-ads#enable_test_devices
 
- **Remark** 
- For adding app-ads.txt, please refer here:
- https://www.app-ads-txt.com/
- https://developers.google.com/admob/android/app-ads
+ ### Remark
+ - For adding app-ads.txt, please refer here:
+   - https://www.app-ads-txt.com/
+   - https://developers.google.com/admob/android/app-ads
 
 ### Local Notification (version 5):
  - https://capacitorjs.com/docs/v5/apis/local-notifications
