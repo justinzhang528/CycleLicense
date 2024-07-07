@@ -44,6 +44,11 @@
                 {{$t('logout')}}
               </IonButton>
             </IonRow>
+            <IonRow class="ion-justify-content-center ion-padding-top" v-if="userInfo.name && userInfo.name !== 'admin'" >
+              <IonButton fill="clear" color="dark" size="small" shape="round" style="text-decoration: underline" @click="onDeleteThisAccountClick">
+                {{$t('deleteThisAccount')}}
+              </IonButton>
+            </IonRow>
             <IonRow class="ion-justify-content-center" >
                 <span @click="openRegisterModal">
                   <IonButton v-if="!userInfo.name" fill="clear" color="dark" shape="round" style="text-decoration: underline">
@@ -155,8 +160,8 @@ import {
 } from '@ionic/vue';
 import {onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
-import {diamond, heart, heartOutline, logOut, personAdd, refresh} from "ionicons/icons";
-import {hapticsImpactMedium, showAlertWithAction} from "@/hooks/useUtils";
+import {diamond, heart, heartOutline, logOut, personAdd, refresh, trashBin} from "ionicons/icons";
+import {hapticsImpactMedium, showAlertWithAction, showToast} from "@/hooks/useUtils";
 import useData from "@/hooks/useData";
 import scheduleNotification from "@/hooks/useLocalNotification";
 import LoginModal from "@/views/Modal/LoginModal.vue";
@@ -171,7 +176,7 @@ const currentSelectedLanguageValue = ref(localStorage.getItem('currentLanguage')
 const userInfo = ref(JSON.parse(localStorage.getItem('userInfo') || '{}'));
 const {life} = useData();
 const isRotating = ref(false);
-const {getUser,upSertUser,getAppSetting} = useFirebase();
+const {getUser,upSertUser,getAppSetting,removeUser} = useFirebase();
 const line = ref({});
 const mail = ref({});
 const messenger = ref({});
@@ -233,6 +238,20 @@ const onLogoutClick = ()=>{
     userInfo.value = {};
     const nav = document.querySelector('ion-nav');
     nav?.popToRoot();
+  });
+}
+
+const onDeleteThisAccountClick = ()=>{
+  showAlertWithAction(t('warning'), '', t('areYouSureToDelete'), t('confirm'), t("cancel"), ()=>{
+    const name = userInfo.value.name;
+    removeUser(name).then(() => {
+      localStorage.removeItem('userInfo');
+      localStorage.setItem('isUnlimited','false');
+      userInfo.value = {};
+      const nav = document.querySelector('ion-nav');
+      nav?.popToRoot();
+      showToast(t('deleted'),10000);
+    });
   });
 }
 
