@@ -74,25 +74,25 @@
         </IonItem>
         <IonItem style="padding-top: 10px; padding-bottom: 10px" class="center">
           <IonThumbnail slot="start">
-            <img alt="notice" :src="'images/icon/taiwanMyanmarFlagIcon.png'">
+            <img alt="notice" :src="'images/icon/motorService.png'">
           </IonThumbnail>
           <span style="width: 100%;">
-              <IonButton :disabled="!userInfo.name" @click="openAboutTaiwanModal" size="default" fill="clear" color="dark" style="font-weight: bold">
-                {{ $t('aboutTaiwan') }}
+              <IonButton :disabled="!userInfo.name" @click="openAboutLicenseTestModal" size="default" fill="clear" color="dark" style="font-weight: bold">
+                {{ $t('aboutLicenseTest') }}
               </IonButton>
             </span>
         </IonItem>
-        <IonItem class="center">
-          <IonThumbnail slot="start">
-            <img alt="donate" :src="'images/icon/donateIcon.png'">
-          </IonThumbnail>
-          <span style="width: 100%; padding-bottom: 10px">
-              <IonButton :disabled="!userInfo.name" @click="openDonateModal" size="default" fill="clear" color="dark" style="font-weight: bold">
-                {{ $t('donate') }}
-              </IonButton><br>
-              <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>
-            </span>
-        </IonItem>
+<!--        <IonItem class="center">-->
+<!--          <IonThumbnail slot="start">-->
+<!--            <img alt="donate" :src="'images/icon/donateIcon.png'">-->
+<!--          </IonThumbnail>-->
+<!--          <span style="width: 100%; padding-bottom: 10px">-->
+<!--              <IonButton :disabled="!userInfo.name" @click="openDonateModal" size="default" fill="clear" color="dark" style="font-weight: bold">-->
+<!--                {{ $t('donate') }}-->
+<!--              </IonButton><br>-->
+<!--              <IonLabel color="medium">({{$t('unlockUnlimitedFeature')}})</IonLabel>-->
+<!--            </span>-->
+<!--        </IonItem>-->
         <IonItem class="center" v-if="userInfo.name === 'admin'">
           <IonThumbnail slot="start">
             <img alt="admin" :src="'images/icon/adminIcon.png'">
@@ -166,7 +166,7 @@ import useData from "@/hooks/useData";
 import scheduleNotification from "@/hooks/useLocalNotification";
 import LoginModal from "@/views/Modal/LoginModal.vue";
 import RegisterModal from "@/views/Modal/RegisterModal.vue";
-import AboutTaiwanModal from "@/views/Modal/AboutTaiwanModal.vue";
+import AboutLicenseTestModal from "@/views/Modal/AboutLicenseTestModal.vue";
 import DonateModal from "@/views/Modal/DonateModal.vue";
 import AdminModal from "@/views/Modal/AdminModal.vue";
 import useFirebase from "@/hooks/useFirebase";
@@ -284,9 +284,9 @@ const openRegisterModal = async () => {
   }
 };
 
-const openAboutTaiwanModal = async () => {
+const openAboutLicenseTestModal = async () => {
   const modal = await modalController.create({
-    component: AboutTaiwanModal,
+    component: AboutLicenseTestModal,
   });
 
   modal.present();
