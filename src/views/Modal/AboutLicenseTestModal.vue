@@ -28,7 +28,7 @@
       <IonThumbnail slot="start">
         <img alt="testRules" style="height: 80%;width: 80%" :src="'images/icon/youtube.png'">
       </IonThumbnail>
-      <IonButton @click="onClickOpenLink('youtube.com/watch?v=Xg3Ahg6qH10&t')" fill="clear" color="dark" size="default">{{$t('tutorialVideo')}}</IonButton>
+      <IonButton @click="onClickOpenLink('https://www.youtube.com/watch?v=Xg3Ahg6qH10&t')" fill="clear" color="dark" size="default">{{$t('tutorialVideo')}}</IonButton>
     </IonItem>
 <!--    <IonItem>-->
 <!--      <IonThumbnail slot="start">-->
